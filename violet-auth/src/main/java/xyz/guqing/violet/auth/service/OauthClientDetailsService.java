@@ -2,7 +2,7 @@ package xyz.guqing.violet.auth.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import xyz.guqing.violet.auth.entity.OauthClientDetails;
+import xyz.guqing.violet.auth.model.entity.OauthClientDetails;
 import xyz.guqing.violet.common.core.entity.QueryRequest;
 
 /**

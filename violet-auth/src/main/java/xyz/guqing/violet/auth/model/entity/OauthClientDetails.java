@@ -1,4 +1,4 @@
-package xyz.guqing.violet.auth.entity;
+package xyz.guqing.violet.auth.model.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;

@@ -2,13 +2,13 @@ spring:
   main:
     allow-bean-definition-overriding: true
   application:
-    name: FEBS-Gateway
+    name: Violet-Gateway
   cloud:
     nacos:
       config:
         server-addr: ${nacos.url}:8001
         group: DEFAULT_GROUP
-        prefix: febs-gateway
+        prefix: violet-gateway
         file-extension: yaml
       discovery:
         server-addr: ${nacos.url}:8001

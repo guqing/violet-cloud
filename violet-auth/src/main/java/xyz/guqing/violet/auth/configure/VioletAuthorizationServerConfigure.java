@@ -35,7 +35,7 @@ import java.util.UUID;
 @Configuration
 @EnableAuthorizationServer
 @RequiredArgsConstructor
-public class FebsAuthorizationServerConfigure extends AuthorizationServerConfigurerAdapter {
+public class VioletAuthorizationServerConfigure extends AuthorizationServerConfigurerAdapter {
 
     private final AuthenticationManager authenticationManager;
     private final UserDetailsService userDetailService;

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import xyz.guqing.violet.common.core.handler.BaseExceptionHandler;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @RestControllerAdvice
 @Order(value = Ordered.HIGHEST_PRECEDENCE)

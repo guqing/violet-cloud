@@ -2,7 +2,7 @@ package xyz.guqing.violet.auth.service;
 
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import xyz.guqing.violet.auth.entity.UserConnection;
+import xyz.guqing.violet.auth.model.entity.UserConnection;
 
 import java.util.List;
 

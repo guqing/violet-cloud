@@ -6,12 +6,12 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @Data
 @SpringBootConfiguration
-@PropertySource(value = {"classpath:febs-auth.properties"})
-@ConfigurationProperties(prefix = "febs.auth")
+@PropertySource(value = {"classpath:violet-auth.properties"})
+@ConfigurationProperties(prefix = "violet.auth")
 public class FebsAuthProperties {
     /**
      * 验证码配置

@@ -1,12 +1,12 @@
 spring:
   application:
-    name: FEBS-Auth
+    name: Violet-Auth
   cloud:
     nacos:
       config:
         server-addr: ${nacos.url}:8001
         group: DEFAULT_GROUP
-        prefix: febs-auth
+        prefix: violet-auth
         file-extension: yaml
       discovery:
         server-addr: ${nacos.url}:8001

@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.guqing.violet.auth.entity.UserConnection;
+import xyz.guqing.violet.auth.model.entity.UserConnection;
 import xyz.guqing.violet.auth.mapper.UserConnectionMapper;
 import xyz.guqing.violet.auth.service.UserConnectionService;
 

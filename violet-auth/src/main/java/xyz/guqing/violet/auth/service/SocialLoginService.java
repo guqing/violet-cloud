@@ -4,10 +4,9 @@ import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
-import xyz.guqing.violet.auth.entity.BindUser;
-import xyz.guqing.violet.auth.entity.UserConnection;
+import xyz.guqing.violet.auth.model.params.BindUserParam;
+import xyz.guqing.violet.auth.model.entity.UserConnection;
 import xyz.guqing.violet.common.core.entity.auth.UserTokenDTO;
-import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
 import java.util.List;
 
@@ -48,7 +47,7 @@ public interface SocialLoginService {
      * @param authUser 第三方平台对象
      * @return OAuth2AccessToken 令牌对象
      */
-    OAuth2AccessToken bindLogin(BindUser bindUser, AuthUser authUser);
+    OAuth2AccessToken bindLogin(BindUserParam bindUser, AuthUser authUser);
 
     /**
      * 注册并登录
@@ -57,7 +56,7 @@ public interface SocialLoginService {
      * @param authUser   第三方平台对象
      * @return OAuth2AccessToken 令牌对象
      */
-    OAuth2AccessToken signLogin(BindUser registUser, AuthUser authUser);
+    OAuth2AccessToken signLogin(BindUserParam registUser, AuthUser authUser);
 
     /**
      * 绑定
@@ -65,7 +64,7 @@ public interface SocialLoginService {
      * @param bindUser 绑定对象
      * @param authUser 第三方平台对象
      */
-    void bind(BindUser bindUser, AuthUser authUser);
+    void bind(BindUserParam bindUser, AuthUser authUser);
 
     /**
      * 解绑
@@ -73,7 +72,7 @@ public interface SocialLoginService {
      * @param bindUser  绑定对象
      * @param oauthType 第三方平台对象
      */
-    void unbind(BindUser bindUser, String oauthType);
+    void unbind(BindUserParam bindUser, String oauthType);
 
     /**
      * 根据用户名获取绑定关系

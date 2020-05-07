@@ -11,13 +11,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import xyz.guqing.violet.auth.entity.BindUser;
-import xyz.guqing.violet.auth.entity.UserConnection;
+import org.springframework.web.servlet.ModelAndView;
+import xyz.guqing.violet.auth.model.params.BindUserParam;
+import xyz.guqing.violet.auth.model.entity.UserConnection;
 import xyz.guqing.violet.auth.service.SocialLoginService;
 import xyz.guqing.violet.common.core.entity.auth.UserTokenDTO;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
+import xyz.guqing.violet.common.core.utils.FebsUtil;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -63,17 +64,31 @@ public class SocialLoginController {
      * @return String
      */
     @GetMapping("/{oauthType}/callback")
-    public ResultEntity<String> login(@PathVariable String oauthType, AuthCallback callback, String state, Model model) {
-        String type = StringUtils.substringAfterLast(state, "::");
-        if (StringUtils.equals(type, TYPE_BIND)) {
-            Object object = socialLoginService.resolveBind(oauthType, callback);
-            System.out.println("callback TYPE_BIND---->" + JSONObject.toJSONString(object));
-        } else {
-            UserTokenDTO userTokenDTO = socialLoginService.resolveLogin(oauthType, callback);
-            System.out.println("callback TYPE_BIND---->" + JSONObject.toJSONString(userTokenDTO));
+    public ModelAndView login(@PathVariable String oauthType,
+                              AuthCallback callback, String state,
+                              ModelAndView modelAndView) {
+        try {
+            String type = StringUtils.substringAfterLast(state, "::");
+
+            modelAndView.addObject("frontUrl", frontUrl);
+
+            if (StringUtils.equals(type, TYPE_BIND)) {
+                Object object = socialLoginService.resolveBind(oauthType, callback);
+                modelAndView.addObject("response", object);
+                System.out.println("callback TYPE_BIND---->" + JSONObject.toJSONString(object));
+            } else {
+                UserTokenDTO userTokenDTO = socialLoginService.resolveLogin(oauthType, callback);
+                modelAndView.addObject("response", userTokenDTO);
+                System.out.println("callback TYPE_BIND---->" + JSONObject.toJSONString(userTokenDTO));
+            }
+            modelAndView.setViewName("result");
+            return modelAndView;
+        } catch (Exception e) {
+            String errorMessage = FebsUtil.containChinese(e.getMessage()) ? e.getMessage() : "第三方登录失败";
+            modelAndView.addObject("error", errorMessage);
+            modelAndView.setViewName("error");
+            return modelAndView;
         }
-//        model.addAttribute("frontUrl", frontUrl);
-        return ResultEntity.ok();
     }
 
     /**
@@ -85,7 +100,7 @@ public class SocialLoginController {
      */
     @ResponseBody
     @PostMapping("bind/login")
-    public ResultEntity<OAuth2AccessToken> bindLogin(@Valid BindUser bindUser, AuthUser authUser) {
+    public ResultEntity<OAuth2AccessToken> bindLogin(@Valid BindUserParam bindUser, AuthUser authUser) {
         OAuth2AccessToken oAuth2AccessToken = this.socialLoginService.bindLogin(bindUser, authUser);
         return ResultEntity.ok(oAuth2AccessToken);
     }
@@ -99,7 +114,7 @@ public class SocialLoginController {
      */
     @ResponseBody
     @PostMapping("sign/login")
-    public ResultEntity<OAuth2AccessToken> signLogin(@Valid BindUser registUser, AuthUser authUser) {
+    public ResultEntity<OAuth2AccessToken> signLogin(@Valid BindUserParam registUser, AuthUser authUser) {
         OAuth2AccessToken oAuth2AccessToken = this.socialLoginService.signLogin(registUser, authUser);
         return ResultEntity.ok(oAuth2AccessToken);
     }
@@ -112,7 +127,7 @@ public class SocialLoginController {
      */
     @ResponseBody
     @PostMapping("bind")
-    public void bind(BindUser bindUser, AuthUser authUser) {
+    public void bind(BindUserParam bindUser, AuthUser authUser) {
         this.socialLoginService.bind(bindUser, authUser);
     }
 
@@ -124,7 +139,7 @@ public class SocialLoginController {
      */
     @ResponseBody
     @DeleteMapping("unbind")
-    public void unbind(BindUser bindUser, String oauthType) {
+    public void unbind(BindUserParam bindUser, String oauthType) {
         this.socialLoginService.unbind(bindUser, oauthType);
     }
 

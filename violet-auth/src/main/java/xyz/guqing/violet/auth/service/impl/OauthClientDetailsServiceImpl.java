@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.guqing.violet.auth.entity.OauthClientDetails;
+import xyz.guqing.violet.auth.model.entity.OauthClientDetails;
 import xyz.guqing.violet.auth.mapper.OauthClientDetailsMapper;
 import xyz.guqing.violet.auth.service.OauthClientDetailsService;
 import xyz.guqing.violet.common.core.entity.QueryRequest;

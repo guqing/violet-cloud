@@ -1,7 +1,7 @@
 package xyz.guqing.violet.auth.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import xyz.guqing.violet.auth.entity.OauthClientDetails;
+import xyz.guqing.violet.auth.model.entity.OauthClientDetails;
 
 /**
  * @author Yuuki

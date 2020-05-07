@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import xyz.guqing.violet.auth.entity.OauthClientDetails;
+import xyz.guqing.violet.auth.model.entity.OauthClientDetails;
 import xyz.guqing.violet.auth.service.OauthClientDetailsService;
 import xyz.guqing.violet.common.core.entity.QueryRequest;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;

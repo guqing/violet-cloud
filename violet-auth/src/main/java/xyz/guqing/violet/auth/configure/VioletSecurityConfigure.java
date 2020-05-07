@@ -17,12 +17,12 @@ import xyz.guqing.violet.common.core.entity.constant.EndpointConstant;
 /**
  * WebSecurity配置
  *
- * @author MrBird
+ * @author guqing
  */
 @Order(2)
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class FebsSecurityConfigure extends WebSecurityConfigurerAdapter {
+public class VioletSecurityConfigure extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailService;
     private final ValidateCodeFilter validateCodeFilter;

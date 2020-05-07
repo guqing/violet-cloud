@@ -32,8 +32,7 @@ public class SecurityController {
             validateCodeService.create(request, response);
             return ResultEntity.ok();
         } catch (Exception e) {
-            e.printStackTrace();
+            return ResultEntity.fail();
         }
-        return ResultEntity.fail();
     }
 }

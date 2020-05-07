@@ -89,6 +89,10 @@ public class ResultEntity<T> {
                 ResultEntityEnum.USER_NOT_FOUND.getDesc());
     }
 
+    public static ResultEntity<String> executionTimeout(String message) {
+        return fail(ResultEntityEnum.SERVER_EXECUTION_TIMEOUT.getCode(), message);
+    }
+
     public static ResultEntity<String> authorizedFailed(String message) {
         return fail(ResultEntityEnum.CERTIFICATE_VERIFICATION_FAILED.getCode(), message);
     }

@@ -44,11 +44,11 @@
             <!--<artifactId>violet-common-doc-gateway-starter</artifactId>-->
             <!--<version>${violet-cloud.version}</version>-->
         <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>xyz.guqing</groupId>-->
-            <!--<artifactId>violet-common-redis-starter</artifactId>-->
-            <!--<version>${violet-cloud.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>xyz.guqing</groupId>
+            <artifactId>violet-common-redis-starter</artifactId>
+            <version>${violet-cloud.version}</version>
+        </dependency>
         <dependency>
             <groupId>net.logstash.logback</groupId>
             <artifactId>logstash-logback-encoder</artifactId>

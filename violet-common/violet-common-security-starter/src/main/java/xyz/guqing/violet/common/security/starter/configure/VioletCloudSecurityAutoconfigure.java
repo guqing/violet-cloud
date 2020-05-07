@@ -1,0 +1,59 @@
+package xyz.guqing.violet.common.security.starter.configure;
+
+import feign.RequestInterceptor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpHeaders;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.Base64Utils;
+import xyz.guqing.violet.common.core.entity.constant.FebsConstant;
+import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
+import xyz.guqing.violet.common.security.starter.handler.VioletAccessDeniedHandler;
+import xyz.guqing.violet.common.security.starter.handler.VioletAuthExceptionEntryPoint;
+import xyz.guqing.violet.common.security.starter.properties.VioletCloudSecurityProperties;
+
+/**
+ * @author guqing
+ */
+@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableConfigurationProperties(VioletCloudSecurityProperties.class)
+@ConditionalOnProperty(value = "febs.cloud.security.enable", havingValue = "true", matchIfMissing = true)
+public class VioletCloudSecurityAutoconfigure {
+
+    @Bean
+    @ConditionalOnMissingBean(name = "accessDeniedHandler")
+    public VioletAccessDeniedHandler accessDeniedHandler() {
+        return new VioletAccessDeniedHandler();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(name = "authenticationEntryPoint")
+    public VioletAuthExceptionEntryPoint authenticationEntryPoint() {
+        return new VioletAuthExceptionEntryPoint();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean(value = PasswordEncoder.class)
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public VioletCloudSecurityInteceptorConfigure febsCloudSecurityInteceptorConfigure() {
+        return new VioletCloudSecurityInteceptorConfigure();
+    }
+
+    @Bean
+    public RequestInterceptor oauth2FeignRequestInterceptor() {
+        return requestTemplate -> {
+            String gatewayToken = new String(Base64Utils.encode(FebsConstant.GATEWAY_TOKEN_VALUE.getBytes()));
+            requestTemplate.header(FebsConstant.GATEWAY_TOKEN_HEADER, gatewayToken);
+            String authorizationToken = VioletSecurityHelper.getCurrentTokenValue();
+            requestTemplate.header(HttpHeaders.AUTHORIZATION, FebsConstant.OAUTH2_TOKEN_TYPE + authorizationToken);
+        };
+    }
+}

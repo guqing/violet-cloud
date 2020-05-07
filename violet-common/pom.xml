@@ -14,5 +14,6 @@
     <modules>
         <module>violet-common-security-starter</module>
         <module>violet-common-core</module>
+        <module>violet-common-redis-starter</module>
     </modules>
 </project>

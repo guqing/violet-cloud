@@ -10,6 +10,63 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>violet-auth</artifactId>
+    <properties>
+        <violet-cloud.version>0.0.1-SNAPSHOT</violet-cloud.version>
+    </properties>
 
+    <dependencies>
+        <dependency>
+            <groupId>xyz.guqing</groupId>
+            <artifactId>violet-common-redis-starter</artifactId>
+            <version>${violet-cloud.version}</version>
+        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>cc.mrbird</groupId>-->
+            <!--<artifactId>febs-common-datasource-starter</artifactId>-->
+            <!--<version>${violet-cloud.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>cc.mrbird</groupId>-->
+            <!--<artifactId>febs-common-doc-starter</artifactId>-->
+            <!--<version>${violet-cloud.version}</version>-->
+        <!--</dependency>-->
+        <dependency>
+            <groupId>xyz.guqing</groupId>
+            <artifactId>violet-common-security-starter</artifactId>
+            <version>${violet-cloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+            <version>${easy-captcha.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash-logback-encoder.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xkcoding</groupId>
+            <artifactId>justauth-spring-boot-starter</artifactId>
+            <version>${justauth.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

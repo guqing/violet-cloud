@@ -1,45 +1,64 @@
 package xyz.guqing.violet.auth.model.entity;
 
-
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-
-import javax.validation.constraints.NotBlank;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Accessors;
+import xyz.guqing.violet.auth.model.base.BaseEntity;
 
 /**
- * @author MrBird
+ * <p>
+ * 系统用户社交账户关联表
+ * </p>
+ *
+ * @author guqing
+ * @since 2020-05-08
  */
 @Data
-@TableName("t_user_connection")
-public class UserConnection {
+@EqualsAndHashCode(callSuper = true)
+@Accessors(chain = true)
+@TableName("rms_user_connection")
+public class UserConnection extends BaseEntity {
 
-    @TableId(value = "USER_NAME")
-    @NotBlank(message = "{required}")
+    private static final long serialVersionUID = 1L;
+
+    /**
+     * Violet系统用户名
+     */
     private String userName;
 
-    @TableId(value = "PROVIDER_NAME")
-    @NotBlank(message = "{required}")
+    /**
+     * 第三方平台名称
+     */
     private String providerName;
 
-    @TableId(value = "PROVIDER_USER_ID")
-    @NotBlank(message = "{required}")
+    /**
+     * 第三方平台账户ID
+     */
     private String providerUserId;
 
-    @TableField(value = "PROVIDER_USER_NAME")
+    /**
+     * 第三方平台用户名
+     */
     private String providerUserName;
 
-    @TableField(value = "NICK_NAME")
+    /**
+     * 第三方平台昵称
+     */
     private String nickName;
 
-    @TableField("IMAGE_URL")
+    /**
+     * 第三方平台头像
+     */
     private String imageUrl;
 
-    @TableField("LOCATION")
+    /**
+     * 地址
+     */
     private String location;
 
-    @TableField("REMARK")
+    /**
+     * 备注
+     */
     private String remark;
-
 }

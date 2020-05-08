@@ -3,18 +3,13 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>violet-cloud</artifactId>
+        <artifactId>violet-common</artifactId>
         <groupId>xyz.guqing</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>violet-common</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>violet-common-security-starter</module>
-        <module>violet-common-core</module>
-        <module>violet-common-redis-starter</module>
-        <module>violet-common-datasource-starter</module>
-    </modules>
+    <artifactId>violet-common-datasource-starter</artifactId>
+
+
 </project>

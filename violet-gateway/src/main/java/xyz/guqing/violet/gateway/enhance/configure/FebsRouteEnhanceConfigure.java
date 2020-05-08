@@ -16,12 +16,12 @@ import xyz.guqing.violet.gateway.enhance.service.RouteEnhanceCacheService;
 import java.util.concurrent.ThreadPoolExecutor;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @EnableAsync
 @Configuration
 @EnableReactiveMongoRepositories(basePackages = "xyz.guqing.violet.gateway.enhance.mapper")
-@ConditionalOnProperty(name = "febs.gateway.enhance", havingValue = "true")
+@ConditionalOnProperty(name = "violet.gateway.enhance", havingValue = "true")
 public class FebsRouteEnhanceConfigure {
 
     @Bean(FebsConstant.ASYNC_POOL)
@@ -31,7 +31,7 @@ public class FebsRouteEnhanceConfigure {
         executor.setMaxPoolSize(20);
         executor.setQueueCapacity(100);
         executor.setKeepAliveSeconds(30);
-        executor.setThreadNamePrefix("Febs-Gateway-Async-Thread");
+        executor.setThreadNamePrefix("Violet-Gateway-Async-Thread");
         executor.setWaitForTasksToCompleteOnShutdown(true);
         executor.setAwaitTerminationSeconds(60);
         executor.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());

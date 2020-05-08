@@ -39,7 +39,7 @@ public class SocialLoginController {
     private static final String TYPE_BIND = "bind";
 
     private final SocialLoginService socialLoginService;
-    @Value("${febs.frontUrl}")
+    @Value("${violet.frontUrl}")
     private String frontUrl;
 
 

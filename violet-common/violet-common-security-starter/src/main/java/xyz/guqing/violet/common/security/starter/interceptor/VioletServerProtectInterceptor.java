@@ -10,6 +10,7 @@ import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author guqing
@@ -18,6 +19,9 @@ public class VioletServerProtectInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
+        response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        response.setContentType("application/json;charset=utf-8");
+
         // 从请求头中获取 Gateway Token
         String token = request.getHeader(FebsConstant.GATEWAY_TOKEN_HEADER);
         String gatewayToken = new String(Base64Utils.encode(FebsConstant.GATEWAY_TOKEN_VALUE.getBytes()));

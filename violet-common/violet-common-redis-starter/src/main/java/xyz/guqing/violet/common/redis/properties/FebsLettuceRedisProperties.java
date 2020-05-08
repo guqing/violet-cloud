@@ -3,9 +3,9 @@ package xyz.guqing.violet.common.redis.properties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
- * @author MrBird
+ * @author guqing
  */
-@ConfigurationProperties(prefix = "febs.lettuce.redis")
+@ConfigurationProperties(prefix = "violet.lettuce.redis")
 public class FebsLettuceRedisProperties {
 
     /**

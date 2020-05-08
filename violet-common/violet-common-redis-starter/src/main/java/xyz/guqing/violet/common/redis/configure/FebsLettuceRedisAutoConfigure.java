@@ -5,9 +5,11 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -22,10 +24,10 @@ import xyz.guqing.violet.common.redis.service.RedisService;
  * @author guqing
  */
 @EnableConfigurationProperties(FebsLettuceRedisProperties.class)
-@ConditionalOnProperty(value = "febs.lettuce.redis.enable", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(value = "violet.lettuce.redis.enable", havingValue = "true", matchIfMissing = true)
 public class FebsLettuceRedisAutoConfigure {
 
-    @Bean(name = "redisTemplate")
+    @Bean(name = "myRedisTemplate")
     @ConditionalOnClass(RedisOperations.class)
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
@@ -48,7 +50,7 @@ public class FebsLettuceRedisAutoConfigure {
     }
 
     @Bean
-    @ConditionalOnBean(name = "redisTemplate")
+    @ConditionalOnBean(name = "myRedisTemplate")
     public RedisService redisService() {
         return new RedisService();
     }

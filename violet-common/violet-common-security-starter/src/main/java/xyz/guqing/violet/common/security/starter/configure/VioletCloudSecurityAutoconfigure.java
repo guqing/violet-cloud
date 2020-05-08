@@ -21,7 +21,7 @@ import xyz.guqing.violet.common.security.starter.properties.VioletCloudSecurityP
  */
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @EnableConfigurationProperties(VioletCloudSecurityProperties.class)
-@ConditionalOnProperty(value = "febs.cloud.security.enable", havingValue = "true", matchIfMissing = true)
+@ConditionalOnProperty(value = "violet.cloud.security.enable", havingValue = "true", matchIfMissing = true)
 public class VioletCloudSecurityAutoconfigure {
 
     @Bean

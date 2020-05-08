@@ -1,12 +1,12 @@
 package xyz.guqing.violet.common.datasource.starter.configure;
 
-import cc.mrbird.febs.common.datasource.starter.inteceptor.DataPermissionInterceptor;
 import com.baomidou.mybatisplus.core.parser.ISqlParser;
 import com.baomidou.mybatisplus.extension.parsers.BlockAttackSqlParser;
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import xyz.guqing.violet.common.datasource.starter.inteceptor.DataPermissionInterceptor;
 
 import java.util.ArrayList;
 import java.util.List;

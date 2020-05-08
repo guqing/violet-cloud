@@ -15,7 +15,7 @@ public interface GeneratorConstant {
     /**
      * 生成代码的临时目录
      */
-    String TEMP_PATH = "febs_gen_temp/";
+    String TEMP_PATH = "violet_gen_temp/";
 
     /**
      * java类型文件后缀

@@ -9,6 +9,7 @@ import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author guqing
@@ -19,6 +20,9 @@ public class VioletAuthExceptionEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
+        response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        response.setContentType("application/json;charset=utf-8");
+
         String requestUri = request.getRequestURI();
 
         ResultEntity<String> authorizedFailed = ResultEntity.authorizedFailed("访问令牌不合法");

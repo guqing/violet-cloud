@@ -4,9 +4,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import xyz.guqing.violet.common.core.entity.constant.EndpointConstant;
 
 /**
- * @author MrBird
+ * @author guqing
  */
-@ConfigurationProperties(prefix = "febs.cloud.security")
+@ConfigurationProperties(prefix = "violet.cloud.security")
 public class VioletCloudSecurityProperties {
 
     /**

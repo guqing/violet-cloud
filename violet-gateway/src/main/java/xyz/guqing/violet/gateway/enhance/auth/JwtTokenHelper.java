@@ -14,17 +14,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @Component
 public class JwtTokenHelper implements Serializable {
 
     private static final long serialVersionUID = 1579222883969867182L;
 
-    @Value("${febs.gateway.jwt.secret}")
+    @Value("${violet.gateway.jwt.secret}")
     private String secret;
 
-    @Value("${febs.gateway.jwt.expiration}")
+    @Value("${violet.gateway.jwt.expiration}")
     private String expirationTime;
 
     public Claims getAllClaimsFromToken(String token) {

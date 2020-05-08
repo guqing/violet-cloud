@@ -23,7 +23,7 @@ public interface FebsConstant {
     /**
      * Gateway请求头TOKEN值
      */
-    String GATEWAY_TOKEN_VALUE = "febs:gateway:123456";
+    String GATEWAY_TOKEN_VALUE = "violet:gateway:123456";
 
     /**
      * 允许下载的文件类型，根据需求自己添加（小写）
@@ -33,12 +33,12 @@ public interface FebsConstant {
     /**
      * 验证码 key前缀
      */
-    String CODE_PREFIX = "febs.captcha.";
+    String CODE_PREFIX = "violet.captcha.";
 
     /**
      * 异步线程池名称
      */
-    String ASYNC_POOL = "febsAsyncThreadPool";
+    String ASYNC_POOL = "violetAsyncThreadPool";
 
     /**
      * OAUTH2 令牌类型 https://oauth.net/2/bearer-tokens/

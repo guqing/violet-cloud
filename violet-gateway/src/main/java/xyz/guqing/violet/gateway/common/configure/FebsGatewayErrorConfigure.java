@@ -17,7 +17,7 @@ import xyz.guqing.violet.gateway.common.handler.FebsGatewayExceptionHandler;
 import java.util.List;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @Configuration
 @RequiredArgsConstructor

@@ -4,13 +4,13 @@ package xyz.guqing.violet.gateway.enhance.utils;
 import xyz.guqing.violet.common.core.entity.constant.FebsConstant;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 public class RouteEnhanceCacheUtil {
 
-    private static final String BLACKLIST_CHACHE_KEY_PREFIX = "febs:route:blacklist:";
-    private static final String RATELIMIT_CACHE_KEY_PREFIX = "febs:route:ratelimit:";
-    private static final String RATELIMIT_COUNT_KEY_PREFIX = "febs:route:ratelimit:cout:";
+    private static final String BLACKLIST_CHACHE_KEY_PREFIX = "violet:route:blacklist:";
+    private static final String RATELIMIT_CACHE_KEY_PREFIX = "violet:route:ratelimit:";
+    private static final String RATELIMIT_COUNT_KEY_PREFIX = "violet:route:ratelimit:cout:";
 
     public static String getBlackListCacheKey(String ip) {
         if (FebsConstant.LOCALHOST.equalsIgnoreCase(ip)) {

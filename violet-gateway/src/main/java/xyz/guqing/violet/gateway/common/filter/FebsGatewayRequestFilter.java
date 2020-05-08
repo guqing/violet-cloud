@@ -26,7 +26,7 @@ public class FebsGatewayRequestFilter implements GlobalFilter {
 
     private final RouteEnhanceService routeEnhanceService;
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
-    @Value("${febs.gateway.enhance:false}")
+    @Value("${violet.gateway.enhance:false}")
     private Boolean routeEhance;
 
     @Override

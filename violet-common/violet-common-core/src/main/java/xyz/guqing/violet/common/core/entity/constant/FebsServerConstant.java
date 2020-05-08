@@ -1,11 +1,11 @@
 package xyz.guqing.violet.common.core.entity.constant;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 public interface FebsServerConstant {
 
-    String FEBS_AUTH = "FEBS-Auth";
+    String FEBS_AUTH = "Violet-Auth";
     String FEBS_CLOUD = "FEBS-Cloud";
     String FEBS_COMMON = "FEBS-Common";
     String FEBS_COMMON_CORE = "FEBS-Common-Core";

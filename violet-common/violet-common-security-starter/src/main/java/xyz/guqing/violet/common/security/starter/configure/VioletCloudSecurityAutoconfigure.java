@@ -43,7 +43,7 @@ public class VioletCloudSecurityAutoconfigure {
     }
 
     @Bean
-    public VioletCloudSecurityInteceptorConfigure febsCloudSecurityInteceptorConfigure() {
+    public VioletCloudSecurityInteceptorConfigure violetCloudSecurityInteceptorConfigure() {
         return new VioletCloudSecurityInteceptorConfigure();
     }
 

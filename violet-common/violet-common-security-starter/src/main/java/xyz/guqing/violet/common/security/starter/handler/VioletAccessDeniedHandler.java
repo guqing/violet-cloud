@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 public class VioletAccessDeniedHandler implements AccessDeniedHandler {
 

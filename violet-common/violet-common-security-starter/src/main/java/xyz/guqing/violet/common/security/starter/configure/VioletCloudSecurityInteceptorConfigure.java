@@ -12,13 +12,13 @@ import xyz.guqing.violet.common.security.starter.interceptor.VioletServerProtect
 public class VioletCloudSecurityInteceptorConfigure implements WebMvcConfigurer {
 
     @Bean
-    public HandlerInterceptor febsServerProtectInterceptor() {
+    public HandlerInterceptor violetServerProtectInterceptor() {
         return new VioletServerProtectInterceptor();
     }
 
     @Override
     @SuppressWarnings("all")
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(febsServerProtectInterceptor());
+        registry.addInterceptor(violetServerProtectInterceptor());
     }
 }

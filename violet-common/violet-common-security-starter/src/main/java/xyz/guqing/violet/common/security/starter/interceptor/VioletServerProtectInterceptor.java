@@ -6,6 +6,7 @@ import org.springframework.util.Base64Utils;
 import org.springframework.web.servlet.HandlerInterceptor;
 import xyz.guqing.violet.common.core.entity.constant.FebsConstant;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
+import xyz.guqing.violet.common.security.starter.properties.VioletCloudSecurityProperties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,11 +17,16 @@ import java.nio.charset.StandardCharsets;
  * @author guqing
  */
 public class VioletServerProtectInterceptor implements HandlerInterceptor {
+    private VioletCloudSecurityProperties properties;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         response.setContentType("application/json;charset=utf-8");
+
+        if (!properties.getOnlyFetchByGateway()) {
+            return true;
+        }
 
         // 从请求头中获取 Gateway Token
         String token = request.getHeader(FebsConstant.GATEWAY_TOKEN_HEADER);
@@ -33,5 +39,9 @@ public class VioletServerProtectInterceptor implements HandlerInterceptor {
             response.getWriter().write(JSONObject.toJSONString(accessDenied));
             return false;
         }
+    }
+
+    public void setProperties(VioletCloudSecurityProperties properties) {
+        this.properties = properties;
     }
 }

@@ -24,4 +24,6 @@ public interface EndpointConstant {
     String OAUTH_ERROR = "/oauth/error";
 
     String ACTUATOR_ALL = "/actuator/**";
+
+    String LOGIN = "/login";
 }

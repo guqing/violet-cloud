@@ -2,6 +2,8 @@ package xyz.guqing.violet.auth.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.guqing.violet.auth.service.ValidateCodeService;
 import xyz.guqing.violet.common.core.exception.ValidateCodeException;
@@ -34,5 +36,10 @@ public class SecurityController {
         } catch (Exception e) {
             return ResultEntity.fail();
         }
+    }
+
+    @RequestMapping("login")
+    public String login() {
+        return "login";
     }
 }

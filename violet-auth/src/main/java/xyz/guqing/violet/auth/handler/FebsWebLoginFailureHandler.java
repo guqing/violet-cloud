@@ -1,16 +1,17 @@
 package xyz.guqing.violet.auth.handler;
 
-import cc.mrbird.febs.common.core.entity.FebsResponse;
-import cc.mrbird.febs.common.core.utils.FebsUtil;
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.LockedException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
+import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author guqing
@@ -18,7 +19,10 @@ import java.io.IOException;
 @Component
 public class FebsWebLoginFailureHandler implements AuthenticationFailureHandler {
     @Override
-    public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException exception) throws IOException {
+    public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse response, AuthenticationException exception) throws IOException {
+        response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        response.setContentType("application/json;charset=utf-8");
+
         String message;
         if (exception instanceof BadCredentialsException) {
             message = "用户名或密码错误！";
@@ -27,7 +31,7 @@ public class FebsWebLoginFailureHandler implements AuthenticationFailureHandler 
         } else {
             message = "认证失败，请联系网站管理员！";
         }
-        FebsResponse febsResponse = new FebsResponse().message(message);
-        FebsUtil.makeFailureResponse(httpServletResponse, febsResponse);
+        ResultEntity<String> resultEntity = ResultEntity.loginFailed(message);
+        response.getWriter().write(JSONObject.toJSONString(resultEntity));
     }
 }

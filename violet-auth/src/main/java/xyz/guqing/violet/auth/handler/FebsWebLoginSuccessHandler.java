@@ -1,7 +1,6 @@
 package xyz.guqing.violet.auth.handler;
 
-import cc.mrbird.febs.common.core.entity.FebsResponse;
-import cc.mrbird.febs.common.core.utils.FebsUtil;
+import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
@@ -9,12 +8,15 @@ import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
+import xyz.guqing.violet.common.core.model.support.ResultEntity;
+import xyz.guqing.violet.common.core.utils.FebsUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * @author guqing
@@ -27,6 +29,9 @@ public class FebsWebLoginSuccessHandler extends SavedRequestAwareAuthenticationS
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
+        response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+        response.setContentType("application/json;charset=utf-8");
+
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         HttpSession session = request.getSession(false);
         if (session != null) {
@@ -34,13 +39,13 @@ public class FebsWebLoginSuccessHandler extends SavedRequestAwareAuthenticationS
             log.info("跳转到登录页的地址为: {}", attribute);
         }
         if (FebsUtil.isAjaxRequest(request)) {
-            FebsResponse data = new FebsResponse();
             if (savedRequest == null) {
-                FebsUtil.makeFailureResponse(response, data.message("请通过授权码模式跳转到该页面"));
+                ResultEntity<String> resultEntity = ResultEntity.accessDenied("请通过授权码模式跳转到该页面");
+                response.getWriter().write(JSONObject.toJSONString(resultEntity));
                 return;
             }
-            data.data(savedRequest.getRedirectUrl());
-            FebsUtil.makeSuccessResponse(response, data);
+            ResultEntity<String> resultEntity = ResultEntity.ok(savedRequest.getRedirectUrl());
+            response.getWriter().write(JSONObject.toJSONString(resultEntity));
         } else {
             if (savedRequest == null) {
                 super.onAuthenticationSuccess(request, response, authentication);

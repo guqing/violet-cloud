@@ -11,10 +11,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import xyz.guqing.violet.auth.model.entity.OauthClientDetails;
 import xyz.guqing.violet.auth.mapper.OauthClientDetailsMapper;
+import xyz.guqing.violet.auth.model.entity.OauthClientDetails;
 import xyz.guqing.violet.auth.service.OauthClientDetailsService;
 import xyz.guqing.violet.common.core.entity.QueryRequest;
+import xyz.guqing.violet.common.core.entity.constant.StringConstant;
 import xyz.guqing.violet.common.core.exception.AlreadyExistsException;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author Yuuki
+ * @author guqing
  */
 @Slf4j
 @Service
@@ -94,7 +95,7 @@ public class OauthClientDetailsServiceImpl extends ServiceImpl<OauthClientDetail
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteOauthClientDetails(String clientIds) {
-        Object[] clientIdArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(clientIds, ",");
+        Object[] clientIdArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(clientIds, StringConstant.COMMA);
         LambdaQueryWrapper<OauthClientDetails> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.in(OauthClientDetails::getClientId, clientIdArray);
         boolean removed = this.remove(queryWrapper);

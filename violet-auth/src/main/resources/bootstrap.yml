@@ -10,6 +10,8 @@ spring:
         file-extension: yaml
       discovery:
         server-addr: ${nacos.url}:8001
+  thymeleaf:
+    cache: false
 logging:
   level:
     org:

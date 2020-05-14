@@ -23,7 +23,7 @@ import java.nio.charset.StandardCharsets;
  */
 @Slf4j
 @Component
-public class FebsWebLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
+public class VioletWebLoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     private final RequestCache requestCache = new HttpSessionRequestCache();
 

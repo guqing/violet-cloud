@@ -8,14 +8,34 @@
     <meta name="author" content="guqing">
     <link rel="stylesheet" th:href="@{resource/login.min.css}" media="all">
     <script th:src="@{resource/jQuery-2.1.4.min.js}"></script>
-    <link rel="icon" th:href="@{resource/favicon.ico}" type="image/x-icon"/>
+
     <title>Violet系统登录</title>
 </head>
 <body>
-<div class="wrapper"><div class="container"><h1>Violet Cloud 系统登录</h1><form class="form"><input type="text" placeholder="用户名" id="username"><input type="password" placeholder="密码" id="password"><button type="submit" id="login">登录</button></form></div><ul class="bg-bubbles"><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li><li></li></ul></div>
+<div class="wrapper">
+    <div class="container"><h1>Violet Cloud 系统登录</h1>
+        <form class="form"><input type="text" placeholder="用户名" id="username"><input type="password" placeholder="密码"
+                                                                                     id="password">
+            <button type="submit" id="login">登录</button>
+        </form>
+    </div>
+    <ul class="bg-bubbles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</div>
 </body>
 <script th:inline="javascript">
-    var ctx = [[@{/}]];
+    var ctx = [[@{
+        /}]];
 </script>
 <script th:src="@{resource/login.min.js}"></script>
 </html>

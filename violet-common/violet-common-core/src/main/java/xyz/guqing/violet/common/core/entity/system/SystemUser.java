@@ -19,7 +19,7 @@ import java.util.Date;
  * @author guqing
  */
 @Data
-@TableName("t_user")
+@TableName("rms_user")
 @Excel("用户信息表")
 public class SystemUser implements Serializable {
 
@@ -55,13 +55,13 @@ public class SystemUser implements Serializable {
     /**
      * 用户 ID
      */
-    @TableId(value = "USER_ID", type = IdType.AUTO)
-    private Long userId;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
     /**
      * 用户名
      */
-    @TableField("USERNAME")
+    @TableField("username")
     @Size(min = 4, max = 10, message = "{range}")
     @ExcelField(value = "用户名")
     private String username;
@@ -69,19 +69,19 @@ public class SystemUser implements Serializable {
     /**
      * 密码
      */
-    @TableField("PASSWORD")
+    @TableField("password")
     private String password;
 
     /**
      * 部门 ID
      */
-    @TableField("DEPT_ID")
-    private Long deptId;
+    @TableField("department_id")
+    private Long departmentId;
 
     /**
      * 邮箱
      */
-    @TableField("EMAIL")
+    @TableField("email")
     @Size(max = 50, message = "{noMoreThan}")
     @Email(message = "{email}")
     @ExcelField(value = "邮箱")
@@ -90,7 +90,7 @@ public class SystemUser implements Serializable {
     /**
      * 联系电话
      */
-    @TableField("MOBILE")
+    @TableField("mobile")
     @IsMobile(message = "{mobile}")
     @ExcelField(value = "联系电话")
     private String mobile;
@@ -98,7 +98,7 @@ public class SystemUser implements Serializable {
     /**
      * 状态 0锁定 1有效
      */
-    @TableField("STATUS")
+    @TableField("status")
     @NotBlank(message = "{required}")
     @ExcelField(value = "状态", writeConverterExp = "0=锁定,1=有效")
     private String status;
@@ -106,25 +106,25 @@ public class SystemUser implements Serializable {
     /**
      * 创建时间
      */
-    @TableField("CREATE_TIME")
+    @TableField("create_time")
     private Date createTime;
 
     /**
      * 修改时间
      */
-    @TableField("MODIFY_TIME")
+    @TableField("modify_time")
     private Date modifyTime;
 
     /**
      * 最近访问时间
      */
-    @TableField("LAST_LOGIN_TIME")
+    @TableField("last_login_time")
     private Date lastLoginTime;
 
     /**
      * 性别 0男 1女 2 保密
      */
-    @TableField("SSEX")
+    @TableField("sex")
     @NotBlank(message = "{required}")
     @ExcelField(value = "性别", writeConverterExp = "0=男,1=女,2=保密")
     private String sex;
@@ -132,13 +132,13 @@ public class SystemUser implements Serializable {
     /**
      * 头像
      */
-    @TableField("AVATAR")
+    @TableField("avatar")
     private String avatar;
 
     /**
      * 描述
      */
-    @TableField("DESCRIPTION")
+    @TableField("description")
     @Size(max = 100, message = "{noMoreThan}")
     @ExcelField(value = "个人描述")
     private String description;

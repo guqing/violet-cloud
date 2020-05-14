@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.guqing.violet.auth.mapper.OauthClientDetailsMapper;
 import xyz.guqing.violet.auth.model.entity.OauthClientDetails;
+import xyz.guqing.violet.auth.security.service.MyJdbcClientDetailsService;
 import xyz.guqing.violet.auth.service.OauthClientDetailsService;
 import xyz.guqing.violet.common.core.entity.QueryRequest;
 import xyz.guqing.violet.common.core.entity.constant.StringConstant;
@@ -32,7 +33,9 @@ import java.util.List;
 public class OauthClientDetailsServiceImpl extends ServiceImpl<OauthClientDetailsMapper, OauthClientDetails> implements OauthClientDetailsService {
 
     private final PasswordEncoder passwordEncoder;
-    private final RedisClientDetailsService redisClientDetailsService;
+//    private final RedisClientDetailsService redisClientDetailsService;
+
+    private final MyJdbcClientDetailsService jdbcClientDetailsService;
 
     @Override
     public IPage<OauthClientDetails> findOauthClientDetails(QueryRequest request, OauthClientDetails oauthClientDetails) {
@@ -70,7 +73,7 @@ public class OauthClientDetailsServiceImpl extends ServiceImpl<OauthClientDetail
         boolean saved = this.save(oauthClientDetails);
         if (saved) {
             log.info("缓存Client -> {}", oauthClientDetails);
-            this.redisClientDetailsService.loadClientByClientId(oauthClientDetails.getClientId());
+            this.jdbcClientDetailsService.loadClientByClientId(oauthClientDetails.getClientId());
         }
     }
 
@@ -84,12 +87,7 @@ public class OauthClientDetailsServiceImpl extends ServiceImpl<OauthClientDetail
 
         oauthClientDetails.setClientId(null);
         oauthClientDetails.setClientSecret(null);
-        boolean updated = this.update(oauthClientDetails, queryWrapper);
-        if (updated) {
-            log.info("更新Client -> {}", oauthClientDetails);
-            this.redisClientDetailsService.removeRedisCache(clientId);
-            this.redisClientDetailsService.loadClientByClientId(clientId);
-        }
+        this.update(oauthClientDetails, queryWrapper);
     }
 
     @Override
@@ -98,11 +96,6 @@ public class OauthClientDetailsServiceImpl extends ServiceImpl<OauthClientDetail
         Object[] clientIdArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(clientIds, StringConstant.COMMA);
         LambdaQueryWrapper<OauthClientDetails> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.in(OauthClientDetails::getClientId, clientIdArray);
-        boolean removed = this.remove(queryWrapper);
-        if (removed) {
-            log.info("删除ClientId为({})的Client", clientIds);
-            Arrays.stream(clientIdArray).forEach(c -> this.redisClientDetailsService.removeRedisCache(String.valueOf(c)));
-
-        }
+        this.remove(queryWrapper);
     }
 }

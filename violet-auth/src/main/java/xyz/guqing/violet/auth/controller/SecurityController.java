@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 import xyz.guqing.violet.auth.service.ValidateCodeService;
 import xyz.guqing.violet.common.core.exception.ValidateCodeException;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
@@ -39,7 +40,8 @@ public class SecurityController {
     }
 
     @RequestMapping("login")
-    public String login() {
-        return "login";
+    public ModelAndView login(ModelAndView modelAndView) {
+        modelAndView.setViewName("login");
+        return modelAndView;
     }
 }

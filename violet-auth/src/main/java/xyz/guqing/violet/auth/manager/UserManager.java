@@ -41,7 +41,7 @@ public class UserManager {
     public SystemUser findByName(String username) {
         SystemUser user = userMapper.findByName(username);
         if (user != null) {
-            List<UserDataPermission> permissions = userMapper.findUserDataPermissions(user.getUserId());
+            List<UserDataPermission> permissions = userMapper.findUserDataPermissions(user.getId());
             String deptIds = permissions.stream().map(p -> String.valueOf(p.getDeptId())).collect(Collectors.joining(StringPool.COMMA));
             user.setDeptIds(deptIds);
         }
@@ -79,7 +79,7 @@ public class UserManager {
         this.userMapper.insert(systemUser);
 
         UserRole userRole = new UserRole();
-        userRole.setUserId(systemUser.getUserId());
+        userRole.setUserId(systemUser.getId());
         // 注册用户角色 ID
         userRole.setRoleId(FebsConstant.REGISTER_ROLE_ID);
         this.userRoleMapper.insert(userRole);

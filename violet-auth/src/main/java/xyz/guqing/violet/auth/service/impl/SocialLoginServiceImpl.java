@@ -19,6 +19,7 @@ import xyz.guqing.violet.auth.model.params.BindUserParam;
 import xyz.guqing.violet.auth.model.entity.UserConnection;
 import xyz.guqing.violet.auth.manager.UserManager;
 import xyz.guqing.violet.auth.properties.FebsAuthProperties;
+import xyz.guqing.violet.auth.security.service.MyJdbcClientDetailsService;
 import xyz.guqing.violet.auth.service.SocialLoginService;
 import xyz.guqing.violet.auth.service.UserConnectionService;
 import xyz.guqing.violet.common.core.entity.auth.UserTokenDTO;
@@ -50,7 +51,8 @@ public class SocialLoginServiceImpl implements SocialLoginService {
     private final PasswordEncoder passwordEncoder;
     private final UserConnectionService userConnectionService;
     private final ResourceOwnerPasswordTokenGranter granter;
-    private final RedisClientDetailsService redisClientDetailsService;
+//    private final RedisClientDetailsService redisClientDetailsService;
+    private final MyJdbcClientDetailsService jdbcClientDetailsService;
 
     @Override
     public AuthRequest renderAuth(String oauthType) {
@@ -185,7 +187,7 @@ public class SocialLoginServiceImpl implements SocialLoginService {
         String socialLoginClientId = properties.getSocialLoginClientId();
         ClientDetails clientDetails = null;
         try {
-            clientDetails = redisClientDetailsService.loadClientByClientId(socialLoginClientId);
+            clientDetails = jdbcClientDetailsService.loadClientByClientId(socialLoginClientId);
         } catch (Exception e) {
             throw new BadRequestException("获取第三方登录可用的Client失败");
         }

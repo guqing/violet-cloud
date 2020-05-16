@@ -1,4 +1,4 @@
-package xyz.guqing.violet.auth.configure;
+package xyz.guqing.violet.auth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +20,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import xyz.guqing.violet.auth.security.service.MyJdbcClientDetailsService;
 import xyz.guqing.violet.auth.security.service.UserDetailsServiceImpl;
 
 import javax.sql.DataSource;
@@ -95,6 +96,12 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.jdbc(dataSource);
+//        clients.inMemory()
+//                .withClient("violet")
+//                .secret(passwordEncoder.encode("123456"))
+//                .authorizedGrantTypes("refresh_token", "authorization_code", "password")
+//                .accessTokenValiditySeconds(3600)
+//                .scopes("all");
     }
 
     @Override
@@ -106,7 +113,7 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
 
     @Bean
     public JdbcClientDetailsService jdbcClientDetailsService() {
-        return new JdbcClientDetailsService(dataSource);
+        return new MyJdbcClientDetailsService(dataSource);
     }
 
     @Bean

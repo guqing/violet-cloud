@@ -1,4 +1,4 @@
-package xyz.guqing.violet.auth.configure;
+package xyz.guqing.violet.auth.config;
 
 import org.springframework.context.annotation.Configuration;
 

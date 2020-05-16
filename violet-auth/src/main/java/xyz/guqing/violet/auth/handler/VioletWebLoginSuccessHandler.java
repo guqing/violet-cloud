@@ -9,7 +9,6 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
-import xyz.guqing.violet.common.core.utils.FebsUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -38,7 +37,8 @@ public class VioletWebLoginSuccessHandler extends SavedRequestAwareAuthenticatio
             Object attribute = session.getAttribute("SPRING_SECURITY_SAVED_REQUEST");
             log.info("跳转到登录页的地址为: {}", attribute);
         }
-        if (FebsUtil.isAjaxRequest(request)) {
+
+        if (isAjaxRequest(request)) {
             if (savedRequest == null) {
                 ResultEntity<String> resultEntity = ResultEntity.accessDenied("请通过授权码模式跳转到该页面");
                 response.getWriter().write(JSONObject.toJSONString(resultEntity));
@@ -54,5 +54,10 @@ public class VioletWebLoginSuccessHandler extends SavedRequestAwareAuthenticatio
             clearAuthenticationAttributes(request);
             getRedirectStrategy().sendRedirect(request, response, savedRequest.getRedirectUrl());
         }
+    }
+
+    private static boolean isAjaxRequest(HttpServletRequest request) {
+        return (request.getHeader("X-Requested-With") != null
+                && "XMLHttpRequest".equals(request.getHeader("X-Requested-With")));
     }
 }

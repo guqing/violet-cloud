@@ -11,8 +11,6 @@ import xyz.guqing.violet.common.security.starter.annotation.EnableVioletCloudRes
  * @date 2020-05-07
  */
 @SpringBootApplication
-@EnableVioletCloudResourceServer
-@MapperScan("xyz.guqing.violet.auth.mapper")
 public class VioletAuthApplication {
 
     public static void main(String[] args) {

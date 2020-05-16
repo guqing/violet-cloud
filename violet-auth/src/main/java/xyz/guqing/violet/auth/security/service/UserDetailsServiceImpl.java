@@ -8,10 +8,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import xyz.guqing.violet.auth.entity.MyUserDetails;
+import xyz.guqing.violet.auth.security.entity.MyUserDetails;
 
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 /**

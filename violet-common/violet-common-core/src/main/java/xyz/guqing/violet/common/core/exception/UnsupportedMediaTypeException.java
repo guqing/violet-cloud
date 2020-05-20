@@ -7,6 +7,7 @@ package xyz.guqing.violet.common.core.exception;
  * @date 2020-04-04 16:03
  */
 public class UnsupportedMediaTypeException extends BadRequestException {
+    private static final long serialVersionUID = 503164471927700820L;
 
     public UnsupportedMediaTypeException(String message) {
         super(message);

@@ -8,6 +8,8 @@ import org.springframework.lang.NonNull;
  * @date 2020-05-07
  */
 public class BindSocialAccountException extends AbstractVioletCloudException {
+    private static final long serialVersionUID = 2170956971483598912L;
+
     public BindSocialAccountException(String message) {
         super(message);
     }

@@ -9,8 +9,9 @@ import org.springframework.http.HttpStatus;
  * @date 2020-04-04 16:03
  */
 public class ForbiddenException extends AbstractVioletCloudException {
+	private static final long serialVersionUID = 7685019181203066845L;
 
-    public ForbiddenException(String message) {
+	public ForbiddenException(String message) {
         super(message);
     }
 

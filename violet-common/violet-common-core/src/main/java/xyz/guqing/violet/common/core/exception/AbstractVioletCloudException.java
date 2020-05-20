@@ -11,6 +11,11 @@ import org.springframework.lang.Nullable;
  */
 public abstract class AbstractVioletCloudException extends RuntimeException {
     /**
+	 * version id
+	 */
+    private static final long serialVersionUID = -8889564685896439438L;
+    
+	/**
      * Error errorData.
      */
     private Object errorData;

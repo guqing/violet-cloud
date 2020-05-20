@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
  * @date 2020-04-04 16:03
  */
 public class BadRequestException extends AbstractVioletCloudException {
+    private static final long serialVersionUID = 2888541634229909695L;
 
     public BadRequestException(String message) {
         super(message);

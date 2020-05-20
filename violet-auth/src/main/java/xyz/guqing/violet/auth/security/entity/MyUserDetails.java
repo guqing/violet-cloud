@@ -16,6 +16,11 @@ import java.util.Set;
  */
 @Data
 public class MyUserDetails implements UserDetails {
+    /**
+     * version id
+     */
+    private static final long serialVersionUID = -7192149946008429854L;
+
     private Long id;
     private String username;
     private String password;

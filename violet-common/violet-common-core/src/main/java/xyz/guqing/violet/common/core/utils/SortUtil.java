@@ -4,8 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
-import xyz.guqing.violet.common.core.entity.QueryRequest;
-import xyz.guqing.violet.common.core.entity.constant.FebsConstant;
+import xyz.guqing.violet.common.core.entity.support.QueryRequest;
+import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
 
 /**
  * 处理排序工具类
@@ -34,14 +34,14 @@ public class SortUtil {
                 && StringUtils.isNotBlank(request.getOrder())
                 && !StringUtils.equalsIgnoreCase(request.getField(), "null")
                 && !StringUtils.equalsIgnoreCase(request.getOrder(), "null")) {
-            if (StringUtils.equals(request.getOrder(), FebsConstant.ORDER_DESC)) {
+            if (StringUtils.equals(request.getOrder(), VioletConstant.ORDER_DESC)) {
                 page.addOrder(OrderItem.desc(sortField));
             } else {
                 page.addOrder(OrderItem.asc(sortField));
             }
         } else {
             if (StringUtils.isNotBlank(defaultSort)) {
-                if (StringUtils.equals(defaultOrder, FebsConstant.ORDER_DESC)) {
+                if (StringUtils.equals(defaultOrder, VioletConstant.ORDER_DESC)) {
                     page.addOrder(OrderItem.desc(defaultSort));
                 } else {
                     page.addOrder(OrderItem.asc(defaultSort));
@@ -90,14 +90,14 @@ public class SortUtil {
                 && StringUtils.isNotBlank(request.getOrder())
                 && !StringUtils.equalsIgnoreCase(request.getField(), "null")
                 && !StringUtils.equalsIgnoreCase(request.getOrder(), "null")) {
-            if (StringUtils.equals(request.getOrder(), FebsConstant.ORDER_DESC)) {
+            if (StringUtils.equals(request.getOrder(), VioletConstant.ORDER_DESC)) {
                 wrapper.orderByDesc(sortField);
             } else {
                 wrapper.orderByAsc(sortField);
             }
         } else {
             if (StringUtils.isNotBlank(defaultSort)) {
-                if (StringUtils.equals(defaultOrder, FebsConstant.ORDER_DESC)) {
+                if (StringUtils.equals(defaultOrder, VioletConstant.ORDER_DESC)) {
                     wrapper.orderByDesc(defaultSort);
                 } else {
                     wrapper.orderByAsc(defaultSort);

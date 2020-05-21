@@ -12,7 +12,7 @@ import org.springframework.security.web.server.context.ServerSecurityContextRepo
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.entity.constant.FebsConstant;
+import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
 
 /**
  * @author MrBird
@@ -32,8 +32,8 @@ public class SecurityContextRepository implements ServerSecurityContextRepositor
     public Mono<SecurityContext> load(ServerWebExchange serverWebExchange) {
         ServerHttpRequest request = serverWebExchange.getRequest();
         String authHeader = request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-        if (StringUtils.isNotBlank(authHeader) && StringUtils.startsWith(authHeader, FebsConstant.OAUTH2_TOKEN_TYPE)) {
-            String authToken = StringUtils.substringAfter(authHeader, FebsConstant.OAUTH2_TOKEN_TYPE).trim();
+        if (StringUtils.isNotBlank(authHeader) && StringUtils.startsWith(authHeader, VioletConstant.OAUTH2_TOKEN_TYPE)) {
+            String authToken = StringUtils.substringAfter(authHeader, VioletConstant.OAUTH2_TOKEN_TYPE).trim();
             Authentication auth = new UsernamePasswordAuthenticationToken(authToken, authToken);
             return this.authenticationManager.authenticate(auth).map(SecurityContextImpl::new);
         } else {

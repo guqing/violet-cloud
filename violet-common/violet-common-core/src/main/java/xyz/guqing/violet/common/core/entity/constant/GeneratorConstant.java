@@ -44,7 +44,7 @@ public interface GeneratorConstant {
     /**
      * entity模板
      */
-    String ENTITY_TEMPLATE = "entity.ftl";
+    String ENTITY_TEMPLATE = "model.ftl";
     /**
      * mapper模板
      */

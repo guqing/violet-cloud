@@ -3,7 +3,7 @@ package xyz.guqing.violet.gateway.enhance.service;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.entity.constant.FebsConstant;
+import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
 
 /**
  * @author MrBird
@@ -31,7 +31,7 @@ public interface RouteEnhanceService {
      *
      * @param exchange ServerWebExchange
      */
-    @Async(FebsConstant.ASYNC_POOL)
+    @Async(VioletConstant.ASYNC_POOL)
     void saveRequestLogs(ServerWebExchange exchange);
 
     /**
@@ -39,7 +39,7 @@ public interface RouteEnhanceService {
      *
      * @param exchange ServerWebExchange
      */
-    @Async(FebsConstant.ASYNC_POOL)
+    @Async(VioletConstant.ASYNC_POOL)
     void saveBlockLogs(ServerWebExchange exchange);
 
     /**
@@ -47,6 +47,6 @@ public interface RouteEnhanceService {
      *
      * @param exchange ServerWebExchange
      */
-    @Async(FebsConstant.ASYNC_POOL)
+    @Async(VioletConstant.ASYNC_POOL)
     void saveRateLimitLogs(ServerWebExchange exchange);
 }

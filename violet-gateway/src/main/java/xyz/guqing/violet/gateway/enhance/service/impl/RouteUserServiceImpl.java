@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.entity.QueryRequest;
+import xyz.guqing.violet.common.core.entity.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.DateUtil;
 import xyz.guqing.violet.gateway.enhance.entity.RouteUser;
 import xyz.guqing.violet.gateway.enhance.mapper.RouteUserMapper;

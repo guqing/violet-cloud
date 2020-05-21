@@ -6,7 +6,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import xyz.guqing.violet.common.core.entity.constant.FebsConstant;
+import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -65,9 +65,9 @@ public class FileUtil {
         if (!fileTypeIsValid(fileType)) {
             throw new Exception("暂不支持该类型文件下载");
         }
-        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + java.net.URLEncoder.encode(fileName, FebsConstant.UTF8));
+        response.setHeader(HttpHeaders.CONTENT_DISPOSITION, "attachment;fileName=" + java.net.URLEncoder.encode(fileName, VioletConstant.UTF8));
         response.setContentType(MediaType.MULTIPART_FORM_DATA_VALUE);
-        response.setCharacterEncoding(FebsConstant.UTF8);
+        response.setCharacterEncoding(VioletConstant.UTF8);
         try (InputStream inputStream = new FileInputStream(file); OutputStream os = response.getOutputStream()) {
             byte[] b = new byte[2048];
             int length;
@@ -124,7 +124,7 @@ public class FileUtil {
     private static Boolean fileTypeIsValid(String fileType) {
         Preconditions.checkNotNull(fileType);
         fileType = StringUtils.lowerCase(fileType);
-        return ArrayUtils.contains(FebsConstant.VALID_FILE_TYPE, fileType);
+        return ArrayUtils.contains(VioletConstant.VALID_FILE_TYPE, fileType);
     }
 
     private static void compress(File file, ZipOutputStream zipOut, String baseDir) throws IOException {

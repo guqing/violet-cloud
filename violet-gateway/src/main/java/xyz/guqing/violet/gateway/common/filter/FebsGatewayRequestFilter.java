@@ -12,7 +12,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.entity.constant.FebsConstant;
+import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
 import xyz.guqing.violet.gateway.enhance.service.RouteEnhanceService;
 
 /**
@@ -45,9 +45,9 @@ public class FebsGatewayRequestFilter implements GlobalFilter {
             routeEnhanceService.saveRequestLogs(exchange);
         }
 
-        byte[] token = Base64Utils.encode((FebsConstant.GATEWAY_TOKEN_VALUE).getBytes());
+        byte[] token = Base64Utils.encode((VioletConstant.GATEWAY_TOKEN_VALUE).getBytes());
         String[] headerValues = {new String(token)};
-        ServerHttpRequest build = exchange.getRequest().mutate().header(FebsConstant.GATEWAY_TOKEN_HEADER, headerValues).build();
+        ServerHttpRequest build = exchange.getRequest().mutate().header(VioletConstant.GATEWAY_TOKEN_HEADER, headerValues).build();
         ServerWebExchange newExchange = exchange.mutate().request(build).build();
         return chain.filter(newExchange);
     }

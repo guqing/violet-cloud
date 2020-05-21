@@ -3,7 +3,7 @@ package xyz.guqing.violet.common.core.exception;
 import org.springframework.http.HttpStatus;
 
 /**
- * Exception of entity not found.
+ * Exception of model not found.
  *
  * @author guqing
  * @date 2020-04-04 16:03

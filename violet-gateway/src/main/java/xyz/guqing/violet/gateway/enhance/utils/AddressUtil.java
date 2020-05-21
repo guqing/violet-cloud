@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.lionsoul.ip2region.DataBlock;
 import org.lionsoul.ip2region.DbConfig;
 import org.lionsoul.ip2region.DbSearcher;
-import xyz.guqing.violet.common.core.entity.constant.FebsConstant;
+import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,7 +27,7 @@ public class AddressUtil {
             String dbPath = AddressUtil.class.getResource("/ip2region/ip2region.db").getPath();
             File file = new File(dbPath);
             if (!file.exists()) {
-                String tmpDir = System.getProperties().getProperty(FebsConstant.JAVA_TEMP_DIR);
+                String tmpDir = System.getProperties().getProperty(VioletConstant.JAVA_TEMP_DIR);
                 dbPath = tmpDir + "ip.db";
                 file = new File(dbPath);
                 InputStream resourceAsStream = AddressUtil.class.getClassLoader().getResourceAsStream("classpath:ip2region/ip2region.db");

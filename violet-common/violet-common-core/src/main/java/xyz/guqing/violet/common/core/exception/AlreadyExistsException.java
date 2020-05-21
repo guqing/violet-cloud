@@ -1,7 +1,7 @@
 package xyz.guqing.violet.common.core.exception;
 
 /**
- * Exception caused by entity existence already.
+ * Exception caused by model existence already.
  *
  * @author guqing
  * @date 2020-4-4 16:29

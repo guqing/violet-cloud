@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import xyz.guqing.violet.common.core.entity.constant.FebsConstant;
+import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
 import xyz.guqing.violet.gateway.enhance.runner.FebsRouteEnhanceRunner;
 import xyz.guqing.violet.gateway.enhance.service.BlackListService;
 import xyz.guqing.violet.gateway.enhance.service.RateLimitRuleService;
@@ -24,7 +24,7 @@ import java.util.concurrent.ThreadPoolExecutor;
 @ConditionalOnProperty(name = "violet.gateway.enhance", havingValue = "true")
 public class FebsRouteEnhanceConfigure {
 
-    @Bean(FebsConstant.ASYNC_POOL)
+    @Bean(VioletConstant.ASYNC_POOL)
     public ThreadPoolTaskExecutor asyncThreadPoolTaskExecutor() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
         executor.setCorePoolSize(5);

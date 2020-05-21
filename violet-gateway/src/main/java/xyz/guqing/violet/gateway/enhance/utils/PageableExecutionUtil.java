@@ -7,8 +7,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import reactor.core.publisher.Flux;
-import xyz.guqing.violet.common.core.entity.QueryRequest;
-import xyz.guqing.violet.common.core.entity.constant.FebsConstant;
+import xyz.guqing.violet.common.core.entity.support.QueryRequest;
+import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
 
 /**
  * @author MrBird
@@ -19,7 +19,7 @@ public class PageableExecutionUtil {
                                              ReactiveMongoTemplate template) {
         Sort sort = Sort.by("id").descending();
         if (StringUtils.isNotBlank(request.getField()) && StringUtils.isNotBlank(request.getOrder())) {
-            sort = FebsConstant.ORDER_ASC.equals(request.getOrder()) ?
+            sort = VioletConstant.ORDER_ASC.equals(request.getOrder()) ?
                     Sort.by(request.getField()).ascending() :
                     Sort.by(request.getField()).descending();
         }

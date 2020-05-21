@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Base64Utils;
-import xyz.guqing.violet.common.core.entity.constant.FebsConstant;
+import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 import xyz.guqing.violet.common.security.starter.handler.VioletAccessDeniedHandler;
 import xyz.guqing.violet.common.security.starter.handler.VioletAuthExceptionEntryPoint;
@@ -50,10 +50,10 @@ public class VioletCloudSecurityAutoconfigure {
     @Bean
     public RequestInterceptor oauth2FeignRequestInterceptor() {
         return requestTemplate -> {
-            String gatewayToken = new String(Base64Utils.encode(FebsConstant.GATEWAY_TOKEN_VALUE.getBytes()));
-            requestTemplate.header(FebsConstant.GATEWAY_TOKEN_HEADER, gatewayToken);
+            String gatewayToken = new String(Base64Utils.encode(VioletConstant.GATEWAY_TOKEN_VALUE.getBytes()));
+            requestTemplate.header(VioletConstant.GATEWAY_TOKEN_HEADER, gatewayToken);
             String authorizationToken = VioletSecurityHelper.getCurrentTokenValue();
-            requestTemplate.header(HttpHeaders.AUTHORIZATION, FebsConstant.OAUTH2_TOKEN_TYPE + authorizationToken);
+            requestTemplate.header(HttpHeaders.AUTHORIZATION, VioletConstant.OAUTH2_TOKEN_TYPE + authorizationToken);
         };
     }
 }

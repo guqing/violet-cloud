@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
  * @date 2020-04-04 16:03
  */
 public class ServiceException extends AbstractVioletCloudException {
+    private static final long serialVersionUID = 4732689741650548040L;
 
     public ServiceException(String message) {
         super(message);

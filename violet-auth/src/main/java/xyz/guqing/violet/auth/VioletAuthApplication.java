@@ -1,10 +1,8 @@
 package xyz.guqing.violet.auth;
 
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import xyz.guqing.violet.common.security.starter.annotation.EnableVioletCloudResourceServer;
 
 /**
  * @author guqing

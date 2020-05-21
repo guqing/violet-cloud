@@ -8,6 +8,8 @@ package xyz.guqing.violet.common.core.exception;
  */
 public class AlreadyExistsException extends BadRequestException {
 
+    private static final long serialVersionUID = -1379001199432321678L;
+
     public AlreadyExistsException(String message) {
         super(message);
     }

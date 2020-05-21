@@ -8,8 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.cloud.gateway.route.Route;
 import org.springframework.cloud.gateway.support.ServerWebExchangeUtils;
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Service;
@@ -18,7 +16,7 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import xyz.guqing.violet.common.core.utils.DateUtil;
-import xyz.guqing.violet.common.core.utils.FebsUtil;
+import xyz.guqing.violet.common.core.utils.VioletUtil;
 import xyz.guqing.violet.gateway.enhance.entity.*;
 import xyz.guqing.violet.gateway.enhance.service.*;
 import xyz.guqing.violet.gateway.enhance.utils.AddressUtil;
@@ -30,7 +28,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @Slf4j
 @Service
@@ -53,7 +51,7 @@ public class RouteEnhanceServiceImpl implements RouteEnhanceService {
         try {
             URI originUri = getGatewayOriginalRequestUrl(exchange);
             if (originUri != null) {
-                String requestIp = FebsUtil.getServerHttpRequestIpAddress(request);
+                String requestIp = VioletUtil.getServerHttpRequestIpAddress(request);
                 String requestMethod = request.getMethodValue();
                 AtomicBoolean forbid = new AtomicBoolean(false);
                 Set<Object> blackList = routeEnhanceCacheService.getBlackList(requestIp);
@@ -84,7 +82,7 @@ public class RouteEnhanceServiceImpl implements RouteEnhanceService {
         try {
             URI originUri = getGatewayOriginalRequestUrl(exchange);
             if (originUri != null) {
-                String requestIp = FebsUtil.getServerHttpRequestIpAddress(request);
+                String requestIp = VioletUtil.getServerHttpRequestIpAddress(request);
                 String requestMethod = request.getMethodValue();
                 AtomicBoolean limit = new AtomicBoolean(false);
                 Object o = routeEnhanceCacheService.getRateLimitRule(originUri.getPath(), METHOD_ALL);
@@ -116,7 +114,7 @@ public class RouteEnhanceServiceImpl implements RouteEnhanceService {
             URI url = getGatewayRequestUrl(exchange);
             Route route = getGatewayRoute(exchange);
             ServerHttpRequest request = exchange.getRequest();
-            String ipAddress = FebsUtil.getServerHttpRequestIpAddress(request);
+            String ipAddress = VioletUtil.getServerHttpRequestIpAddress(request);
             if (url != null && route != null) {
                 RouteLog routeLog = RouteLog.builder()
                         .ip(ipAddress)
@@ -135,7 +133,7 @@ public class RouteEnhanceServiceImpl implements RouteEnhanceService {
     public void saveBlockLogs(ServerWebExchange exchange) {
         URI originUri = getGatewayOriginalRequestUrl(exchange);
         ServerHttpRequest request = exchange.getRequest();
-        String requestIp = FebsUtil.getServerHttpRequestIpAddress(request);
+        String requestIp = VioletUtil.getServerHttpRequestIpAddress(request);
         if (originUri != null) {
             BlockLog blockLog = BlockLog.builder()
                     .ip(requestIp)
@@ -151,7 +149,7 @@ public class RouteEnhanceServiceImpl implements RouteEnhanceService {
     public void saveRateLimitLogs(ServerWebExchange exchange) {
         URI originUri = getGatewayOriginalRequestUrl(exchange);
         ServerHttpRequest request = exchange.getRequest();
-        String requestIp = FebsUtil.getServerHttpRequestIpAddress(request);
+        String requestIp = VioletUtil.getServerHttpRequestIpAddress(request);
         if (originUri != null) {
             RateLimitLog rateLimitLog = RateLimitLog.builder()
                     .ip(requestIp)

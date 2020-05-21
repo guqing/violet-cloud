@@ -3,7 +3,7 @@ package xyz.guqing.violet.common.core.validator;
 import org.apache.commons.lang3.StringUtils;
 import xyz.guqing.violet.common.core.annotation.IsMobile;
 import xyz.guqing.violet.common.core.entity.constant.RegexpConstant;
-import xyz.guqing.violet.common.core.utils.FebsUtil;
+import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -26,7 +26,7 @@ public class MobileValidator implements ConstraintValidator<IsMobile, String> {
                 return true;
             } else {
                 String regex = RegexpConstant.MOBILE_REG;
-                return FebsUtil.match(regex, s);
+                return VioletUtil.match(regex, s);
             }
         } catch (Exception e) {
             return false;

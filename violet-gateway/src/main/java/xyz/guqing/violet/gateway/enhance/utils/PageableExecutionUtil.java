@@ -11,11 +11,11 @@ import xyz.guqing.violet.common.core.entity.support.QueryRequest;
 import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 public class PageableExecutionUtil {
 
-    public static <FEBS> Flux<FEBS> getPages(Query query, QueryRequest request, Class<FEBS> clazz,
+    public static <VIOLET> Flux<VIOLET> getPages(Query query, QueryRequest request, Class<VIOLET> clazz,
                                              ReactiveMongoTemplate template) {
         Sort sort = Sort.by("id").descending();
         if (StringUtils.isNotBlank(request.getField()) && StringUtils.isNotBlank(request.getOrder())) {
@@ -23,7 +23,7 @@ public class PageableExecutionUtil {
                     Sort.by(request.getField()).ascending() :
                     Sort.by(request.getField()).descending();
         }
-        Pageable pageable = PageRequest.of(request.getPageNum(), request.getPageSize(), sort);
+        Pageable pageable = PageRequest.of(request.getCurrent(), request.getPageSize(), sort);
         return template.find(query.with(pageable), clazz);
     }
 }

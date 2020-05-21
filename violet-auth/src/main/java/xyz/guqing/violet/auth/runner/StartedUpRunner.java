@@ -6,7 +6,7 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
-import xyz.guqing.violet.auth.utils.VioletUtil;
+import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 /**
  * @author guqing

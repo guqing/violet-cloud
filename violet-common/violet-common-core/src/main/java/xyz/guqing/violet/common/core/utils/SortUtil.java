@@ -23,12 +23,12 @@ public class SortUtil {
      * @param camelToUnderscore 是否开启驼峰转下划线
      */
     public static void handlePageSort(QueryRequest request, Page<?> page, String defaultSort, String defaultOrder, boolean camelToUnderscore) {
-        page.setCurrent(request.getPageNum());
+        page.setCurrent(request.getCurrent());
         page.setSize(request.getPageSize());
         String sortField = request.getField();
         if (camelToUnderscore) {
-            sortField = FebsUtil.camelToUnderscore(sortField);
-            defaultSort = FebsUtil.camelToUnderscore(defaultSort);
+            sortField = VioletUtil.camelToUnderscore(sortField);
+            defaultSort = VioletUtil.camelToUnderscore(defaultSort);
         }
         if (StringUtils.isNotBlank(request.getField())
                 && StringUtils.isNotBlank(request.getOrder())
@@ -83,8 +83,8 @@ public class SortUtil {
     public static void handleWrapperSort(QueryRequest request, QueryWrapper<?> wrapper, String defaultSort, String defaultOrder, boolean camelToUnderscore) {
         String sortField = request.getField();
         if (camelToUnderscore) {
-            sortField = FebsUtil.camelToUnderscore(sortField);
-            defaultSort = FebsUtil.camelToUnderscore(defaultSort);
+            sortField = VioletUtil.camelToUnderscore(sortField);
+            defaultSort = VioletUtil.camelToUnderscore(defaultSort);
         }
         if (StringUtils.isNotBlank(request.getField())
                 && StringUtils.isNotBlank(request.getOrder())

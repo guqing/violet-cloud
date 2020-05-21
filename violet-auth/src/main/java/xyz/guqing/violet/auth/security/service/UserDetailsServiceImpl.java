@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import xyz.guqing.violet.auth.security.entity.MyUserDetails;
+import xyz.guqing.violet.common.core.model.bo.MyUserDetails;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +18,6 @@ import java.util.Set;
  */
 @Slf4j
 @Component
-@DS("litemall")
 public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;

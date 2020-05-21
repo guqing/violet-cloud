@@ -1,4 +1,4 @@
-package xyz.guqing.violet.auth.security.entity;
+package xyz.guqing.violet.common.core.model.bo;
 
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;

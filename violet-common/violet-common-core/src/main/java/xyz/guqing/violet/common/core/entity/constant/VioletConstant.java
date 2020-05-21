@@ -1,9 +1,9 @@
 package xyz.guqing.violet.common.core.entity.constant;
 
 /**
- * FEBS系统常量类
+ * Violet系统常量类
  *
- * @author MrBird
+ * @author guqing
  */
 public interface VioletConstant {
 

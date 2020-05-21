@@ -7,8 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
-import xyz.guqing.violet.common.core.entity.CurrentUser;
-import xyz.guqing.violet.common.core.entity.FebsAuthUser;
+import xyz.guqing.violet.common.core.model.bo.CurrentUser;
+import xyz.guqing.violet.common.core.model.bo.MyUserDetails;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -43,8 +43,8 @@ public class VioletSecurityHelper {
      */
     public static String getCurrentUsername() {
         Object principal = getOauth2Authentication().getPrincipal();
-        if (principal instanceof FebsAuthUser) {
-            return ((FebsAuthUser) principal).getUsername();
+        if (principal instanceof MyUserDetails) {
+            return ((MyUserDetails) principal).getUsername();
         }
         return (String) getOauth2Authentication().getPrincipal();
     }

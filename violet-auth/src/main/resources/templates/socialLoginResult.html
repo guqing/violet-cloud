@@ -11,7 +11,7 @@
 登录中..
 <script th:inline="javascript">
     var response = [[${response}]];
-    var frontUrl = [[${frontUrl}]];
+    var frontUrl = [[${redirectUrl}]];
     window.onload = function () {
         window.opener.postMessage(response, frontUrl);
         window.close();

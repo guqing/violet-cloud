@@ -29,5 +29,8 @@ public class Role extends BaseEntity {
      */
     private String remark;
 
-
+    /**
+     * 是否是默认角色
+     */
+    private Integer isDefault;
 }

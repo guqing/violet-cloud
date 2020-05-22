@@ -12,5 +12,10 @@ import xyz.guqing.violet.auth.model.entity.User;
  * @since 2020-05-21
  */
 public interface UserService extends IService<User> {
-
+    /**
+     * 根据用户名查询用户信息
+     * @param username 用户名
+     * @return 如果查询到返回用户信息，否则抛出NotFoundException
+     */
+    User getByUsername(String username);
 }

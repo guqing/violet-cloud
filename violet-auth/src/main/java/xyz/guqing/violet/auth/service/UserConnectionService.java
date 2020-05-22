@@ -12,5 +12,11 @@ import xyz.guqing.violet.auth.model.entity.UserConnection;
  * @since 2020-05-21
  */
 public interface UserConnectionService extends IService<UserConnection> {
-
+    /**
+     * 根据第三方登录识别码和用户uuid查询第三方帐号信息
+     * @param source 第三方识别码
+     * @param uuid 用户唯一标识
+     * @return 如果查询返回数据，否则抛出NotFoundException
+     */
+    UserConnection getBySourceAndUuid(String source, String uuid);
 }

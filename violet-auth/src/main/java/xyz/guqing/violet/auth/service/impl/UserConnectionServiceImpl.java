@@ -1,10 +1,15 @@
 package xyz.guqing.violet.auth.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import xyz.guqing.violet.auth.model.entity.UserConnection;
 import xyz.guqing.violet.auth.model.mapper.UserConnectionMapper;
 import xyz.guqing.violet.auth.service.UserConnectionService;
+import xyz.guqing.violet.common.core.exception.NotFoundException;
+
+import java.util.Objects;
 
 /**
  * <p>
@@ -17,4 +22,16 @@ import xyz.guqing.violet.auth.service.UserConnectionService;
 @Service
 public class UserConnectionServiceImpl extends ServiceImpl<UserConnectionMapper, UserConnection> implements UserConnectionService {
 
+    @Override
+    public UserConnection getBySourceAndUuid(String source, String uuid) {
+        LambdaQueryWrapper<UserConnection> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(UserConnection::getProviderName, source)
+                .eq(UserConnection::getProviderUserId, uuid);
+        UserConnection userConnection = getOne(queryWrapper);
+
+        if(Objects.isNull(userConnection)) {
+            throw new NotFoundException("第三方登录帐号未绑定任何系统帐号");
+        }
+        return userConnection;
+    }
 }

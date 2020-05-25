@@ -17,7 +17,7 @@ import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
-import xyz.guqing.violet.common.core.entity.CurrentUser;
+import xyz.guqing.violet.common.core.model.bo.CurrentUser;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 import xyz.guqing.violet.common.datasource.starter.annotation.DataPermission;
 
@@ -83,7 +83,7 @@ public class DataPermissionInterceptor extends AbstractSqlParserHandler implemen
             Table fromItem = (Table) plainSelect.getFromItem();
 
             String selectTableName = fromItem.getAlias() == null ? fromItem.getName() : fromItem.getAlias().getName();
-            String dataPermissionSql = String.format("%s.%s in (%s)", selectTableName, dataPermission.field(), StringUtils.defaultIfBlank(user.getDeptIds(), "'WITHOUT PERMISSIONS'"));
+            String dataPermissionSql = String.format("%s.%s in (%s)", selectTableName, dataPermission.field(), StringUtils.defaultIfBlank(user.getGroupId()+"", "'WITHOUT PERMISSIONS'"));
 
             if (plainSelect.getWhere() == null) {
                 plainSelect.setWhere(CCJSqlParserUtil.parseCondExpression(dataPermissionSql));

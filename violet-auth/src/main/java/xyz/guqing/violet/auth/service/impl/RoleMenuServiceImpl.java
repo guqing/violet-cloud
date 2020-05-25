@@ -3,7 +3,7 @@ package xyz.guqing.violet.auth.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import xyz.guqing.violet.auth.model.entity.RoleMenu;
-import xyz.guqing.violet.auth.model.mapper.RoleMenuMapper;
+import xyz.guqing.violet.auth.mapper.RoleMenuMapper;
 import xyz.guqing.violet.auth.service.RoleMenuService;
 
 /**

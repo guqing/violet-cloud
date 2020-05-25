@@ -27,11 +27,6 @@ public class UserConnectionServiceImpl extends ServiceImpl<UserConnectionMapper,
         LambdaQueryWrapper<UserConnection> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.eq(UserConnection::getProviderName, source)
                 .eq(UserConnection::getProviderUserId, uuid);
-        UserConnection userConnection = getOne(queryWrapper);
-
-        if(Objects.isNull(userConnection)) {
-            throw new NotFoundException("第三方登录帐号未绑定任何系统帐号");
-        }
-        return userConnection;
+        return getOne(queryWrapper);
     }
 }

@@ -1,7 +1,12 @@
 package xyz.guqing.violet.auth.security.service;
 
+import cn.hutool.core.util.StrUtil;
+import com.xkcoding.justauth.AuthRequestFactory;
+import me.zhyd.oauth.config.AuthSource;
+import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthUser;
+import me.zhyd.oauth.request.AuthRequest;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.TokenRequest;
@@ -22,6 +27,7 @@ import xyz.guqing.violet.common.core.exception.NotFoundException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * @author guqing
@@ -32,17 +38,20 @@ public class UserLoginService {
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
 
+    private final AuthRequestFactory factory;
     private final ResourceOwnerPasswordTokenGranter granter;
     private final JdbcClientDetailsService jdbcClientDetailsService;
     private final UserService userService;
     private final UserConnectionService userConnectionService;
     private final VioletAuthProperties violetAuthProperties;
 
-    public UserLoginService(ResourceOwnerPasswordTokenGranter granter,
+    public UserLoginService(AuthRequestFactory factory,
+                            ResourceOwnerPasswordTokenGranter granter,
                             JdbcClientDetailsService jdbcClientDetailsService,
                             UserService userService,
                             UserConnectionService userConnectionService,
                             VioletAuthProperties violetAuthProperties) {
+        this.factory = factory;
         this.granter = granter;
         this.jdbcClientDetailsService = jdbcClientDetailsService;
         this.userService = userService;
@@ -50,7 +59,9 @@ public class UserLoginService {
         this.violetAuthProperties = violetAuthProperties;
     }
 
-    public OAuth2AccessToken resolveLogin(AuthResponse response) {
+    public OAuth2AccessToken resolveLogin(String type, AuthCallback callback) {
+        AuthRequest authRequest = getAuthRequest(type);
+        AuthResponse response = authRequest.login(callback);
         if (!response.ok()) {
             throw new AuthenticationException("第三方登录失败:" + response.getMsg());
         }
@@ -58,9 +69,20 @@ public class UserLoginService {
         AuthUser authUser = (AuthUser) response.getData();
         String source = authUser.getSource().name();
         UserConnection userConnection = userConnectionService.getBySourceAndUuid(source, authUser.getUuid());
-
+        if(Objects.isNull(userConnection)) {
+            throw new NotFoundException("第三方登录帐号未绑定任何系统帐号");
+        }
         User user = userService.getByUsername(userConnection.getUserName());
         return getOauth2AccessToken(user);
+    }
+
+    public AuthRequest getAuthRequest(String type) {
+        if (StrUtil.isNotBlank(type)) {
+            AuthSource authSource = AuthSource.valueOf(type.toUpperCase());
+            return factory.get(authSource);
+        } else {
+            throw new AuthenticationException(String.format("暂不支持%s第三方登录", type));
+        }
     }
 
     /**
@@ -92,6 +114,5 @@ public class UserLoginService {
         TokenRequest tokenRequest = new TokenRequest(requestParameters, clientDetails.getClientId(), clientDetails.getScope(), grantTypes);
         return granter.grant(GrantTypeConstant.PASSWORD, tokenRequest);
     }
-
 
 }

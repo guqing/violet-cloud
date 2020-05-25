@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import me.zhyd.oauth.model.AuthUser;
 import xyz.guqing.violet.auth.model.entity.UserConnection;
 
+import java.util.List;
+
 /**
  * <p>
  * 系统用户社交账户关联表 服务类
@@ -27,4 +29,11 @@ public interface UserConnectionService extends IService<UserConnection> {
      * @param authUser 第三方登录用户信息
      */
     void create(String username, AuthUser authUser);
+
+    /**
+     * 根据用户名查询该用户绑定的所有第三方帐号
+     * @param username 用户名
+     * @return 如果查询到返回第三方帐号集合，否则返回空集合
+     */
+    List<UserConnection> listByUsername(String username);
 }

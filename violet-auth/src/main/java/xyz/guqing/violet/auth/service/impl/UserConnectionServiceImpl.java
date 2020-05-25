@@ -9,6 +9,8 @@ import xyz.guqing.violet.auth.model.entity.UserConnection;
 import xyz.guqing.violet.auth.model.mapper.UserConnectionMapper;
 import xyz.guqing.violet.auth.service.UserConnectionService;
 
+import java.util.List;
+
 /**
  * <p>
  * 系统用户社交账户关联表 服务实现类
@@ -40,5 +42,12 @@ public class UserConnectionServiceImpl extends ServiceImpl<UserConnectionMapper,
         userConnection.setLocation(authUser.getLocation());
 
         save(userConnection);
+    }
+
+    @Override
+    public List<UserConnection> listByUsername(String username) {
+        LambdaQueryWrapper<UserConnection> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(UserConnection::getUserName, username);
+        return list(queryWrapper);
     }
 }

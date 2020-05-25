@@ -23,7 +23,7 @@ import java.util.Objects;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Override
-    public User getByUsername(String username) {
+    public User loadUserByUsername(String username) {
         LambdaQueryWrapper<User> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.eq(User::getUsername, username);
         User user = getOne(queryWrapper);

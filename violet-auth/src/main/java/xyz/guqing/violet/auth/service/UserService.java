@@ -17,5 +17,5 @@ public interface UserService extends IService<User> {
      * @param username 用户名
      * @return 如果查询到返回用户信息，否则抛出NotFoundException
      */
-    User getByUsername(String username);
+    User loadUserByUsername(String username);
 }

@@ -23,7 +23,6 @@ public class VioletServerProtectInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws IOException {
         response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
         response.setContentType("application/json;charset=utf-8");
-
         if (!properties.getOnlyFetchByGateway()) {
             return true;
         }

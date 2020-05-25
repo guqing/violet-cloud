@@ -26,7 +26,9 @@ import xyz.guqing.violet.common.core.entity.constant.SocialConstant;
 import xyz.guqing.violet.common.core.exception.AuthenticationException;
 import xyz.guqing.violet.common.core.exception.BadRequestException;
 import xyz.guqing.violet.common.core.exception.NotFoundException;
+import xyz.guqing.violet.common.core.utils.VioletUtil;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -41,8 +43,6 @@ public class UserLoginService {
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
     private final AuthRequestFactory factory;
     private final ResourceOwnerPasswordTokenGranter granter;
     private final JdbcClientDetailsService jdbcClientDetailsService;
@@ -66,7 +66,6 @@ public class UserLoginService {
 
     public OAuth2AccessToken resolveLogin(String type, AuthCallback callback) {
         AuthRequest authRequest = getAuthRequest(type);
-        System.out.println(authRequest);
         AuthResponse response = authRequest.login(callback);
         if (!response.ok()) {
             throw new AuthenticationException("第三方登录失败:" + response.getMsg());
@@ -78,7 +77,7 @@ public class UserLoginService {
         if(Objects.isNull(userConnection)) {
          throw new NotFoundException("第三方登录帐号未绑定任何系统帐号");
         }
-        User user = userService.getByUsername(userConnection.getUserName());
+        User user = userService.loadUserByUsername(userConnection.getUserName());
         return getOauth2AccessToken(user);
     }
 
@@ -98,7 +97,11 @@ public class UserLoginService {
      * @throws BadRequestException 查询第三方可用ClientDetails出错
      * @throws NotFoundException 获取不到第三方可以用的ClientDetails
      */
-    public OAuth2AccessToken getOauth2AccessToken(User user) {
+    private OAuth2AccessToken getOauth2AccessToken(User user) {
+        // setAttribute有效范围是一个request
+        HttpServletRequest httpServletRequest = VioletUtil.getHttpServletRequest();
+        httpServletRequest.setAttribute(ParamsConstant.LOGIN_TYPE, SocialConstant.SOCIAL_LOGIN);
+
         String socialLoginClientId = violetAuthProperties.getSocialLoginClientId();
         ClientDetails clientDetails = null;
         try {
@@ -114,7 +117,7 @@ public class UserLoginService {
         Map<String, String> requestParameters = new HashMap<>(5, 1);
         requestParameters.put(ParamsConstant.GRANT_TYPE, SocialConstant.SOCIAL_LOGIN);
         requestParameters.put(USERNAME, user.getUsername());
-        requestParameters.put(PASSWORD, "123456");
+        requestParameters.put(PASSWORD, SocialConstant.SOCIAL_LOGIN_PASSWORD);
 
         String grantTypes = String.join(",", clientDetails.getAuthorizedGrantTypes());
         TokenRequest tokenRequest = new TokenRequest(requestParameters, clientDetails.getClientId(), clientDetails.getScope(), grantTypes);

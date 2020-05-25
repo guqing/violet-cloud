@@ -9,7 +9,7 @@ import xyz.guqing.violet.common.security.starter.interceptor.VioletServerProtect
 import xyz.guqing.violet.common.security.starter.properties.VioletCloudSecurityProperties;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 public class VioletCloudSecurityInteceptorConfigure implements WebMvcConfigurer {
     private VioletCloudSecurityProperties properties;

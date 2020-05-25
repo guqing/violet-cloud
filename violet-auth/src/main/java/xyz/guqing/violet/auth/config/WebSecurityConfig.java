@@ -30,4 +30,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(EndpointConstant.OAUTH_ALL).permitAll();
     }
 
+
 }

@@ -34,8 +34,10 @@
         <ip2region.version>1.7</ip2region.version>
         <guava.version>27.0-jre</guava.version>
         <excelkit.version>2.0.71</excelkit.version>
-        <mybatis-plus.version>3.2.0</mybatis-plus.version>
-        <dynamic-datasource.version>2.5.7</dynamic-datasource.version>
+
+        <mybatis-plus.version>3.3.1.tmp</mybatis-plus.version>
+        <dynamic-datasource.version>3.1.0</dynamic-datasource.version>
+
         <p6spy.version>3.8.5</p6spy.version>
         <spring-boot-admin.version>2.2.0</spring-boot-admin.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>

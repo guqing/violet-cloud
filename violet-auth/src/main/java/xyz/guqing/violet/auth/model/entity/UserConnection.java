@@ -13,9 +13,8 @@ import lombok.experimental.Accessors;
  * @since 2020-05-21
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class UserConnection extends BaseEntity {
+public class UserConnection {
 
     private static final long serialVersionUID = 1L;
 

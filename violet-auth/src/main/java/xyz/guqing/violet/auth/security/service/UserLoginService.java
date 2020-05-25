@@ -7,6 +7,8 @@ import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.TokenRequest;
@@ -25,6 +27,7 @@ import xyz.guqing.violet.common.core.exception.AuthenticationException;
 import xyz.guqing.violet.common.core.exception.BadRequestException;
 import xyz.guqing.violet.common.core.exception.NotFoundException;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -38,6 +41,8 @@ public class UserLoginService {
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     private final AuthRequestFactory factory;
     private final ResourceOwnerPasswordTokenGranter granter;
     private final JdbcClientDetailsService jdbcClientDetailsService;
@@ -61,6 +66,7 @@ public class UserLoginService {
 
     public OAuth2AccessToken resolveLogin(String type, AuthCallback callback) {
         AuthRequest authRequest = getAuthRequest(type);
+        System.out.println(authRequest);
         AuthResponse response = authRequest.login(callback);
         if (!response.ok()) {
             throw new AuthenticationException("第三方登录失败:" + response.getMsg());
@@ -70,7 +76,7 @@ public class UserLoginService {
         String source = authUser.getSource().name();
         UserConnection userConnection = userConnectionService.getBySourceAndUuid(source, authUser.getUuid());
         if(Objects.isNull(userConnection)) {
-            throw new NotFoundException("第三方登录帐号未绑定任何系统帐号");
+         throw new NotFoundException("第三方登录帐号未绑定任何系统帐号");
         }
         User user = userService.getByUsername(userConnection.getUserName());
         return getOauth2AccessToken(user);
@@ -108,7 +114,7 @@ public class UserLoginService {
         Map<String, String> requestParameters = new HashMap<>(5, 1);
         requestParameters.put(ParamsConstant.GRANT_TYPE, SocialConstant.SOCIAL_LOGIN);
         requestParameters.put(USERNAME, user.getUsername());
-        requestParameters.put(PASSWORD, user.getPassword());
+        requestParameters.put(PASSWORD, "123456");
 
         String grantTypes = String.join(",", clientDetails.getAuthorizedGrantTypes());
         TokenRequest tokenRequest = new TokenRequest(requestParameters, clientDetails.getClientId(), clientDetails.getScope(), grantTypes);

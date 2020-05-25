@@ -1,6 +1,7 @@
 package xyz.guqing.violet.auth.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import me.zhyd.oauth.model.AuthUser;
 import xyz.guqing.violet.auth.model.entity.UserConnection;
 
 /**
@@ -19,4 +20,11 @@ public interface UserConnectionService extends IService<UserConnection> {
      * @return 如果查询返回数据，否则抛出NotFoundException
      */
     UserConnection getBySourceAndUuid(String source, String uuid);
+
+    /**
+     * 创建第三方登录帐号
+     * @param username 用户名
+     * @param authUser 第三方登录用户信息
+     */
+    void create(String username, AuthUser authUser);
 }

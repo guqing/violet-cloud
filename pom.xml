@@ -47,6 +47,8 @@
         <knife4j.version>2.0.2</knife4j.version>
         <springfox.version>2.9.2</springfox.version>
         <swagger.version>1.5.21</swagger.version>
+
+        <modelmapper.version>2.3.0</modelmapper.version>
     </properties>
 
     <dependencyManagement>
@@ -79,6 +81,13 @@
                 <groupId>com.codingapi.txlcn</groupId>
                 <artifactId>txlcn-txmsg-netty</artifactId>
                 <version>${codingapi.txlcn.version}</version>
+            </dependency>
+
+            <!--model mapper-->
+            <dependency>
+                <groupId>org.modelmapper</groupId>
+                <artifactId>modelmapper</artifactId>
+                <version>${modelmapper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

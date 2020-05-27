@@ -15,6 +15,7 @@ import org.springframework.security.oauth2.provider.TokenRequest;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
 import org.springframework.stereotype.Service;
+import xyz.guqing.violet.auth.model.dto.SocialLoginDTO;
 import xyz.guqing.violet.auth.model.entity.User;
 import xyz.guqing.violet.auth.model.entity.UserConnection;
 import xyz.guqing.violet.auth.model.properties.VioletAuthProperties;
@@ -64,7 +65,7 @@ public class UserLoginService {
         this.violetAuthProperties = violetAuthProperties;
     }
 
-    public OAuth2AccessToken resolveLogin(String type, AuthCallback callback) {
+    public SocialLoginDTO resolveLogin(String type, AuthCallback callback) {
         AuthRequest authRequest = getAuthRequest(type);
         AuthResponse response = authRequest.login(callback);
         if (!response.ok()) {
@@ -74,11 +75,19 @@ public class UserLoginService {
         AuthUser authUser = (AuthUser) response.getData();
         String source = authUser.getSource().name();
         UserConnection userConnection = userConnectionService.getBySourceAndUuid(source, authUser.getUuid());
+
+        SocialLoginDTO socialLoginDTO = new SocialLoginDTO();
         if(Objects.isNull(userConnection)) {
-         throw new NotFoundException("第三方登录帐号未绑定任何系统帐号");
+            socialLoginDTO.setIsBind(false);
+            socialLoginDTO.setAuthUser(authUser);
+            return socialLoginDTO;
         }
+
         User user = userService.loadUserByUsername(userConnection.getUserName());
-        return getOauth2AccessToken(user);
+        OAuth2AccessToken oauth2AccessToken = getOauth2AccessToken(user);
+        socialLoginDTO.setIsBind(true);
+        socialLoginDTO.setAccessToken(oauth2AccessToken);
+        return socialLoginDTO;
     }
 
     public AuthRequest getAuthRequest(String type) {

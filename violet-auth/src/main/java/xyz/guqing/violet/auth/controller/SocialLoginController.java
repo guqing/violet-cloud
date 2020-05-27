@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import xyz.guqing.violet.auth.model.dto.SocialLoginDTO;
 import xyz.guqing.violet.auth.model.properties.VioletAuthProperties;
 import xyz.guqing.violet.auth.security.service.UserLoginService;
+import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -44,9 +46,9 @@ public class SocialLoginController {
 
     @RequestMapping("/{type}/callback")
     public ModelAndView login(@PathVariable String type, AuthCallback callback, ModelAndView modelAndView) {
-        OAuth2AccessToken oAuth2AccessToken = userLoginService.resolveLogin(type, callback);
+        SocialLoginDTO socialLoginDTO = userLoginService.resolveLogin(type, callback);
 
-        modelAndView.addObject("response", oAuth2AccessToken);
+        modelAndView.addObject("response", socialLoginDTO);
         modelAndView.addObject("redirectUrl", authProperties.getRedirectUrl());
         modelAndView.setViewName("socialLoginResult");
         return modelAndView;

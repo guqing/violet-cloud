@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import xyz.guqing.violet.auth.model.constant.SocialConstant;
+import xyz.guqing.violet.common.core.model.bo.CurrentUser;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.model.entity.constant.ParamsConstant;
@@ -40,7 +41,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userService.loadUserByUsername(username);
+        CurrentUser user = userService.loadUserByUsername(username);
 
         HttpServletRequest httpServletRequest = VioletUtil.getHttpServletRequest();
         String loginType = (String) httpServletRequest.getAttribute(ParamsConstant.LOGIN_TYPE);

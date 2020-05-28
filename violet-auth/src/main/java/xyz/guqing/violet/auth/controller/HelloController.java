@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.model.entity.system.UserConnection;
 import xyz.guqing.violet.auth.service.UserConnectionService;
 
@@ -19,6 +20,8 @@ import java.util.List;
 public class HelloController {
     @Autowired
     private UserConnectionService userConnectionService;
+    @Autowired
+    private UserService userService;
     @GetMapping("/test")
     public String test() {
         List<UserConnection> list = userConnectionService.listByUsername("guqing");
@@ -27,6 +30,6 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String hello() {
-        return "say hello,test this api";
+        return "say hello,test this api" + JSONObject.toJSONString(userService.loadUserByUsername("guqing"));
     }
 }

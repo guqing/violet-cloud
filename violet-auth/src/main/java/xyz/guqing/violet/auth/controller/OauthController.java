@@ -30,4 +30,5 @@ public class OauthController {
         modelAndView.setViewName("login");
         return modelAndView;
     }
+
 }

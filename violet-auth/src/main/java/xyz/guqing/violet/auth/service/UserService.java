@@ -2,7 +2,10 @@ package xyz.guqing.violet.auth.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.common.core.model.bo.CurrentUser;
+import xyz.guqing.violet.common.core.model.entity.system.Menu;
 import xyz.guqing.violet.common.core.model.entity.system.User;
+
+import java.util.List;
 
 /**
  * <p>

@@ -12,7 +12,6 @@ import java.io.Serializable;
  * @author MrBird
  */
 @Data
-@AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RouterMeta implements Serializable {
 
@@ -20,6 +19,7 @@ public class RouterMeta implements Serializable {
 
     private String title;
     private String icon;
-    private Boolean breadcrumb = true;
+    private Boolean hidden = false;
+    private Boolean keepAlive = false;
 
 }

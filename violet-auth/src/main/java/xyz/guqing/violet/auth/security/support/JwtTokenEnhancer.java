@@ -1,5 +1,6 @@
 package xyz.guqing.violet.auth.security.support;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
@@ -24,11 +25,12 @@ public class JwtTokenEnhancer implements TokenEnhancer {
 
         JwtTokenEnhancerEntity jwtTokenEnhancerEntity = new JwtTokenEnhancerEntity();
         jwtTokenEnhancerEntity.setDescription("JWT 扩展信息");
-        jwtTokenEnhancerEntity.setId(myUserDetails.getId());
-        jwtTokenEnhancerEntity.setUsername(oAuth2Authentication.getName());
+
+        // 拷贝属性
+        BeanUtils.copyProperties(myUserDetails, jwtTokenEnhancerEntity);
 
         Map<String, Object> jwtExt = new HashMap<>();
-        jwtExt.put("jwt_ext", jwtTokenEnhancerEntity);
+        jwtExt.put("userInfo", jwtTokenEnhancerEntity);
 
         ((DefaultOAuth2AccessToken) oAuth2AccessToken).setAdditionalInformation(jwtExt);
         return oAuth2AccessToken;

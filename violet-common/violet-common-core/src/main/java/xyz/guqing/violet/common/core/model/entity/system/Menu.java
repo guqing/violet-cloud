@@ -25,14 +25,31 @@ public class Menu extends BaseEntity {
     private Long parentId;
 
     /**
-     * 菜单/按钮名称
+     * 菜单路由名称，英文
      */
-    private String menuName;
+    private String name;
+
+    /**
+     * 菜单/按钮的标题
+     */
+    private String title;
+
+    /**
+     * 是否显示sidebar
+     */
+    private Boolean hidden;
+
+    private Boolean keepAlive;
 
     /**
      * 对应路由path
      */
     private String path;
+
+    /**
+     * 菜单的重定向路径
+     */
+    private String redirect;
 
     /**
      * 对应路由组件component
@@ -57,7 +74,7 @@ public class Menu extends BaseEntity {
     /**
      * 排序
      */
-    private Double orderIndex;
+    private Long orderIndex;
 
 
 }

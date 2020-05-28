@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import xyz.guqing.violet.auth.model.entity.UserConnection;
+import xyz.guqing.violet.common.core.model.entity.system.UserConnection;
 import xyz.guqing.violet.auth.service.UserConnectionService;
 
 import java.util.List;

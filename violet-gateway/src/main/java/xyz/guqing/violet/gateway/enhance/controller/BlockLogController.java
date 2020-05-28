@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.entity.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
 import xyz.guqing.violet.gateway.enhance.entity.BlockLog;
 import xyz.guqing.violet.gateway.enhance.service.BlockLogService;
 

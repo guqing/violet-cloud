@@ -12,7 +12,7 @@ import org.springframework.util.AntPathMatcher;
 import org.springframework.util.Base64Utils;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
+import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
 import xyz.guqing.violet.gateway.enhance.service.RouteEnhanceService;
 
 /**

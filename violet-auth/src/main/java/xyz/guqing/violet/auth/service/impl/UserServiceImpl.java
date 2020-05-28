@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import xyz.guqing.violet.auth.mapper.UserMapper;
-import xyz.guqing.violet.auth.model.entity.User;
+import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.exception.NotFoundException;
 

@@ -2,7 +2,7 @@ package xyz.guqing.violet.common.core.validator;
 
 import org.apache.commons.lang3.StringUtils;
 import xyz.guqing.violet.common.core.annotation.IsMobile;
-import xyz.guqing.violet.common.core.entity.constant.RegexpConstant;
+import xyz.guqing.violet.common.core.model.entity.constant.RegexpConstant;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import javax.validation.ConstraintValidator;

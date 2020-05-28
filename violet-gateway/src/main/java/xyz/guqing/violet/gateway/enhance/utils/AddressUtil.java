@@ -6,7 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.lionsoul.ip2region.DataBlock;
 import org.lionsoul.ip2region.DbConfig;
 import org.lionsoul.ip2region.DbSearcher;
-import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
+import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
 
 import java.io.File;
 import java.io.IOException;

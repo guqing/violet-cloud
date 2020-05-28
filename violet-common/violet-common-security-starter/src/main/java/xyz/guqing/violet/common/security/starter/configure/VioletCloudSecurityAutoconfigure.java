@@ -10,7 +10,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.Base64Utils;
-import xyz.guqing.violet.common.core.entity.constant.VioletConstant;
+import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 import xyz.guqing.violet.common.security.starter.handler.VioletAccessDeniedHandler;
 import xyz.guqing.violet.common.security.starter.handler.VioletAuthExceptionEntryPoint;

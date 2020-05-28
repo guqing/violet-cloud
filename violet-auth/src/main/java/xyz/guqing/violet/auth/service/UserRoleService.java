@@ -1,7 +1,7 @@
 package xyz.guqing.violet.auth.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import xyz.guqing.violet.auth.model.entity.UserRole;
+import xyz.guqing.violet.common.core.model.entity.system.UserRole;
 
 /**
  * <p>

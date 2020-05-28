@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import me.zhyd.oauth.model.AuthUser;
 import org.springframework.stereotype.Service;
-import xyz.guqing.violet.auth.model.entity.UserConnection;
+import xyz.guqing.violet.common.core.model.entity.system.UserConnection;
 import xyz.guqing.violet.auth.mapper.UserConnectionMapper;
 import xyz.guqing.violet.auth.service.UserConnectionService;
 

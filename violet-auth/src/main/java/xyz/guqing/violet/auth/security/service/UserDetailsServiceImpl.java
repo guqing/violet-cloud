@@ -9,9 +9,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import xyz.guqing.violet.auth.model.constant.SocialConstant;
-import xyz.guqing.violet.auth.model.entity.User;
+import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.auth.service.UserService;
-import xyz.guqing.violet.common.core.entity.constant.ParamsConstant;
+import xyz.guqing.violet.common.core.model.entity.constant.ParamsConstant;
 import xyz.guqing.violet.common.core.model.bo.MyUserDetails;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 

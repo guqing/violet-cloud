@@ -13,7 +13,7 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.entity.constant.PageConstant;
+import xyz.guqing.violet.common.core.model.entity.constant.PageConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

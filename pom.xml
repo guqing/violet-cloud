@@ -7,7 +7,7 @@
         <module>violet-common</module>
         <module>violet-auth</module>
         <module>violet-gateway</module>
-        <module>violet-microservice</module>
+        <module>violet-app</module>
     </modules>
 
     <parent>

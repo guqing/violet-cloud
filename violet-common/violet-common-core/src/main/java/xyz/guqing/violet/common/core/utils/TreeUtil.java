@@ -15,7 +15,7 @@ public class TreeUtil {
     private final static String TOP_NODE_ID = "0";
 
     /**
-     * 用于构建菜单或部门树
+     * 用于构建菜单或用户分组树
      *
      * @param nodes nodes
      * @return <T> List<? extends Tree>

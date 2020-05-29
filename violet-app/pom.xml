@@ -9,10 +9,11 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>violet-microservice</artifactId>
+    <artifactId>violet-app</artifactId>
     <packaging>pom</packaging>
     <modules>
         <module>microservice-test</module>
+        <module>violet-app-admin</module>
     </modules>
 
 </project>

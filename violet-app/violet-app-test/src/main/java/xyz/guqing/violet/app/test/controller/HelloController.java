@@ -1,4 +1,4 @@
-package xyz.guqing.micro.test.controller;
+package xyz.guqing.violet.app.test.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

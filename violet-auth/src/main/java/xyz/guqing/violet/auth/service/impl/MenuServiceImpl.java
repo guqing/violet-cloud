@@ -31,31 +31,4 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         List<Menu> userPermissions = baseMapper.findUserPermissions(username);
         return userPermissions.stream().map(Menu::getPerms).collect(Collectors.joining(","));
     }
-
-    @Override
-    public List<Menu> findUserMenus(String username) {
-        List<Menu> userMenus = this.baseMapper.findUserMenus(username);
-        if(CollectionUtils.isEmpty(userMenus)) {
-            return Collections.emptyList();
-        }
-        return userMenus;
-    }
-
-    @Override
-    public List<VueRouter<Menu>> getUserRouters(String username) {
-        List<VueRouter<Menu>> routes = new ArrayList<>();
-        List<Menu> menus = this.findUserMenus(username);
-        menus.forEach(menu -> {
-            VueRouter<Menu> route = new VueRouter<>();
-            BeanUtils.copyProperties(menu, route);
-
-            RouterMeta routerMeta = new RouterMeta();
-            BeanUtils.copyProperties(menu, routerMeta);
-            route.setMeta(routerMeta);
-
-            routes.add(route);
-        });
-        return TreeUtil.buildVueRouter(routes);
-    }
-
 }

@@ -11,5 +11,21 @@
 
     <artifactId>violet-app-admin</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>xyz.guqing</groupId>
+            <artifactId>violet-common-core</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>xyz.guqing</groupId>
+            <artifactId>violet-common-security-starter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
 </project>

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: MicroService-Admin
+    name: Violet-App-Admin
   cloud:
     nacos:
       config:

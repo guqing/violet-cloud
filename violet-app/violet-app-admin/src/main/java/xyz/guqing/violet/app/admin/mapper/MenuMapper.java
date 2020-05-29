@@ -1,4 +1,4 @@
-package xyz.guqing.violet.auth.mapper;
+package xyz.guqing.violet.app.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import xyz.guqing.violet.common.core.model.entity.system.Menu;
@@ -14,10 +14,12 @@ import java.util.List;
  * @since 2020-05-21
  */
 public interface MenuMapper extends BaseMapper<Menu> {
+
     /**
-     * 查询用户权限集合
+     * 获取用户菜单
+     *
      * @param username 用户名
-     * @return 如果查询到返回权限集合否则返回空集合
+     * @return 用户菜单
      */
-    List<Menu> findUserPermissions(String username);
+    List<Menu> findUserMenus(String username);
 }

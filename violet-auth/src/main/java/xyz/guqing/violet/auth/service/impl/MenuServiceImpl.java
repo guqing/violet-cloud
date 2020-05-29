@@ -1,8 +1,9 @@
 package xyz.guqing.violet.auth.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import xyz.guqing.violet.common.core.model.entity.router.RouterMeta;
 import xyz.guqing.violet.common.core.model.entity.router.VueRouter;
 import xyz.guqing.violet.common.core.model.entity.system.Menu;
@@ -11,6 +12,7 @@ import xyz.guqing.violet.auth.service.MenuService;
 import xyz.guqing.violet.common.core.utils.TreeUtil;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +34,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public List<Menu> findUserMenus(String username) {
-        return this.baseMapper.findUserMenus(username);
+        List<Menu> userMenus = this.baseMapper.findUserMenus(username);
+        if(CollectionUtils.isEmpty(userMenus)) {
+            return Collections.emptyList();
+        }
+        return userMenus;
     }
 
     @Override
@@ -41,17 +47,10 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         List<Menu> menus = this.findUserMenus(username);
         menus.forEach(menu -> {
             VueRouter<Menu> route = new VueRouter<>();
-            route.setId(menu.getId().toString());
-            route.setParentId(menu.getParentId().toString());
-            route.setPath(menu.getPath());
-            route.setComponent(menu.getComponent());
-            route.setName(menu.getName());
-            route.setRedirect(menu.getRedirect());
+            BeanUtils.copyProperties(menu, route);
+
             RouterMeta routerMeta = new RouterMeta();
-            routerMeta.setHidden(menu.getHidden());
-            routerMeta.setIcon(menu.getIcon());
-            routerMeta.setKeepAlive(menu.getKeepAlive());
-            routerMeta.setTitle(menu.getTitle());
+            BeanUtils.copyProperties(menu, routerMeta);
             route.setMeta(routerMeta);
 
             routes.add(route);

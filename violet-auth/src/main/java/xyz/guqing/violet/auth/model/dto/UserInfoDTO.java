@@ -1,34 +1,21 @@
-package xyz.guqing.violet.common.core.model.bo;
+package xyz.guqing.violet.auth.model.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
  * @author guqing
- * @date 2020-05-21
+ * @date 2020-05-29
  */
 @Data
-@Accessors(chain = true)
-public class CurrentUser implements Serializable {
+public class UserInfoDTO {
     private Long id;
 
     /**
      * 用户名
      */
     private String username;
-
-    /**
-     * 密码
-     */
-    @JsonIgnore
-    @JSONField(serialize = false)
-    private String password;
-
     /**
      * 用户组
      */

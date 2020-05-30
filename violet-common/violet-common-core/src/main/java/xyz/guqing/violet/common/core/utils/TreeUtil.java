@@ -64,7 +64,6 @@ public class TreeUtil {
             return null;
         }
         List<VueRouter<T>> topRoutes = new ArrayList<>();
-        VueRouter<T> router = new VueRouter<>();
         routes.forEach(route -> {
             String parentId = route.getParentId();
             if (parentId == null || TOP_NODE_ID.equals(parentId)) {

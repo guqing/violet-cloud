@@ -23,7 +23,6 @@ public interface MenuService extends IService<Menu> {
      * @return 用户路由
      */
     List<VueRouter<Menu>> getUserRouters(String username);
-
     /**
      * 获取用户菜单
      *

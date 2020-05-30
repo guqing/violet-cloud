@@ -6,8 +6,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.guqing.violet.auth.service.UserService;
+import xyz.guqing.violet.common.core.model.bo.CurrentUser;
 import xyz.guqing.violet.common.core.model.entity.system.UserConnection;
 import xyz.guqing.violet.auth.service.UserConnectionService;
+import xyz.guqing.violet.common.core.model.support.ResultEntity;
+import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 
 import java.util.List;
 
@@ -32,5 +35,11 @@ public class HelloController {
     @GetMapping("/hello")
     public String hello() {
         return "say hello,test this api" + JSONObject.toJSONString(userService.loadUserByUsername("guqing"));
+    }
+
+    @GetMapping("/user")
+    public ResultEntity<CurrentUser> getCurrentUser() {
+        CurrentUser currentUser = VioletSecurityHelper.getCurrentUser();
+        return ResultEntity.ok(currentUser);
     }
 }

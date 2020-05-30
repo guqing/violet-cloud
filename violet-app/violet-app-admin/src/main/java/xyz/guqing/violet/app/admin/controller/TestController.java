@@ -16,14 +16,20 @@ import java.util.List;
  * @date 2020-05-29
  */
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/menu")
 public class TestController {
     @Autowired
     private MenuService menuService;
 
-    @GetMapping("/menu")
+    @GetMapping("/tree")
     public ResultEntity<List<VueRouter<Menu>>> getMenu() {
         List<VueRouter<Menu>> userRouters = menuService.getUserRouters("guqing");
         return ResultEntity.ok(userRouters);
+    }
+
+    @GetMapping("router")
+    public ResultEntity<List<Menu>> getRouterList() {
+        List<Menu> menus = menuService.findUserMenus("guqing");
+        return ResultEntity.ok(menus);
     }
 }

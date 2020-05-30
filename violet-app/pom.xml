@@ -12,7 +12,7 @@
     <artifactId>violet-app</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>microservice-test</module>
+        <module>violet-app-test</module>
         <module>violet-app-admin</module>
     </modules>
 

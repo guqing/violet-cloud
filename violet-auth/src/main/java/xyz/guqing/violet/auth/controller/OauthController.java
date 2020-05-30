@@ -1,20 +1,19 @@
 package xyz.guqing.violet.auth.controller;
 
-import com.alibaba.fastjson.JSONObject;
-import com.xkcoding.justauth.AuthRequestFactory;
 import lombok.extern.slf4j.Slf4j;
-import me.zhyd.oauth.model.AuthCallback;
-import me.zhyd.oauth.model.AuthResponse;
-import me.zhyd.oauth.request.AuthRequest;
-import me.zhyd.oauth.utils.AuthStateUtils;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+import xyz.guqing.violet.auth.model.dto.UserInfoDTO;
+import xyz.guqing.violet.auth.service.UserService;
+import xyz.guqing.violet.common.core.model.bo.CurrentUser;
+import xyz.guqing.violet.common.core.model.support.ResultEntity;
+import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
+import java.security.Principal;
 
 /**
  * @author guqing
@@ -24,6 +23,12 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/oauth")
 public class OauthController {
+    private final UserService userService;
+
+    @Autowired
+    public OauthController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping("/login/page")
     public ModelAndView login(ModelAndView modelAndView) {
@@ -31,4 +36,10 @@ public class OauthController {
         return modelAndView;
     }
 
+    @GetMapping("/user")
+    public ResultEntity<CurrentUser> getUserInfo() {
+        String username = VioletSecurityHelper.getCurrentUsername();
+        CurrentUser currentUser = userService.loadUserByUsername(username);
+        return ResultEntity.ok(currentUser);
+    }
 }

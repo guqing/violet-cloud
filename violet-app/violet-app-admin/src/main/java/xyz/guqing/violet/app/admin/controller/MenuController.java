@@ -8,6 +8,7 @@ import xyz.guqing.violet.app.admin.service.MenuService;
 import xyz.guqing.violet.common.core.model.entity.router.VueRouter;
 import xyz.guqing.violet.common.core.model.entity.system.Menu;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
+import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 
 import java.util.List;
 
@@ -17,19 +18,25 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/menu")
-public class TestController {
+public class MenuController {
+    private final MenuService menuService;
+
     @Autowired
-    private MenuService menuService;
+    public MenuController(MenuService menuService) {
+        this.menuService = menuService;
+    }
 
     @GetMapping("/tree")
     public ResultEntity<List<VueRouter<Menu>>> getMenu() {
-        List<VueRouter<Menu>> userRouters = menuService.getUserRouters("guqing");
+        String username = VioletSecurityHelper.getCurrentUsername();
+        List<VueRouter<Menu>> userRouters = menuService.getUserRouters(username);
         return ResultEntity.ok(userRouters);
     }
 
     @GetMapping("router")
     public ResultEntity<List<Menu>> getRouterList() {
-        List<Menu> menus = menuService.findUserMenus("guqing");
+        String username = VioletSecurityHelper.getCurrentUsername();
+        List<Menu> menus = menuService.findUserMenus(username);
         return ResultEntity.ok(menus);
     }
 }

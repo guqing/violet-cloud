@@ -6,6 +6,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.DateUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -121,5 +122,13 @@ public class VioletUtil {
                 "端口号：" + environment.getProperty("server.port") + "\n" +
                 "-----------------------------------------";
         System.out.println(banner);
+    }
+
+    public Integer getStartPage(Integer current, Integer pageSize) {
+        return (current - 1) * pageSize;
+    }
+
+    public Integer getPageTotal(Integer pageSize, Integer total) {
+        return (total  +  pageSize  - 1) / pageSize;
     }
 }

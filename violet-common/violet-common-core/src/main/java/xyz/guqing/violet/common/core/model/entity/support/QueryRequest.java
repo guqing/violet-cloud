@@ -16,11 +16,11 @@ public class QueryRequest implements Serializable {
     /**
      * 当前页面数据量
      */
-    private int pageSize = 10;
+    private Long pageSize = 10L;
     /**
      * 当前页码
      */
-    private int current = 1;
+    private Long current = 1L;
     /**
      * 排序字段
      */

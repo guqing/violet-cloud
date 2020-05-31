@@ -1,9 +1,7 @@
 package xyz.guqing.violet.app.admin.model.dto;
 
-import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
-import xyz.guqing.violet.common.core.model.entity.system.User;
+import xyz.guqing.violet.app.admin.model.entity.UserDO;
 import xyz.guqing.violet.common.core.model.support.OutputConverter;
 
 import java.time.LocalDateTime;
@@ -13,14 +11,22 @@ import java.time.LocalDateTime;
  * @date 2020-05-30
  */
 @Data
-public class UserDTO implements OutputConverter<UserDTO, User>{
+public class UserDTO implements OutputConverter<UserDTO, UserDO>{
+    private Long id;
+
     private String username;
 
     private String email;
 
     private String mobile;
 
+    private Long groupId;
+
     private String groupName;
+
+    private Long roleId;
+
+    private String roleName;
 
     private String avatar;
 

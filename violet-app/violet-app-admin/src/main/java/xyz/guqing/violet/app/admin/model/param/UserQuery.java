@@ -1,6 +1,7 @@
 package xyz.guqing.violet.app.admin.model.param;
 
 import lombok.Data;
+import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
 
 import java.time.LocalDateTime;
 
@@ -18,6 +19,9 @@ public class UserQuery {
     private String groupName;
     private LocalDateTime createTimeFrom;
     private LocalDateTime createTimeTo;
-    private Integer current;
-    private Integer pageSize;
+    private QueryRequest queryRequest;
+
+    public UserQuery() {
+        queryRequest = new QueryRequest();
+    }
 }

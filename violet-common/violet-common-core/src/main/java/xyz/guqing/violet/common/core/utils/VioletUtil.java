@@ -124,11 +124,11 @@ public class VioletUtil {
         System.out.println(banner);
     }
 
-    public Integer getStartPage(Integer current, Integer pageSize) {
+    public static Long getStartPage(Long current, Long pageSize) {
         return (current - 1) * pageSize;
     }
 
-    public Integer getPageTotal(Integer pageSize, Integer total) {
+    public static Long getPageTotal(Long pageSize, Long total) {
         return (total  +  pageSize  - 1) / pageSize;
     }
 }

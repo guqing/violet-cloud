@@ -1,6 +1,7 @@
 package xyz.guqing.violet.app.admin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,9 +31,9 @@ public class UserController {
     }
 
     @GetMapping("/list")
-    public ResultEntity<PageInfo<UserDTO>> listUserByPage(@RequestBody UserQuery userQuery,
-                                                 @RequestBody QueryRequest queryRequest) {
-        List<User> users = userService.listByPage(userQuery, queryRequest);
-        return ResultEntity.okList(users, user -> new UserDTO().convertFrom(user));
+    @PreAuthorize("hasAuthority('user:view')")
+    public ResultEntity<PageInfo<UserDTO>> listUserByPage(@RequestBody UserQuery userQuery) {
+        PageInfo<UserDTO> users = userService.listByPage(userQuery);
+        return ResultEntity.ok(users);
     }
 }

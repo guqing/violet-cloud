@@ -10,10 +10,10 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.DateUtil;
+import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
 import xyz.guqing.violet.gateway.enhance.entity.BlockLog;
 import xyz.guqing.violet.gateway.enhance.mapper.BlockLogMapper;
 import xyz.guqing.violet.gateway.enhance.service.BlockLogService;
-import xyz.guqing.violet.gateway.enhance.utils.AddressUtil;
 import xyz.guqing.violet.gateway.enhance.utils.PageableExecutionUtil;
 
 import java.time.LocalDateTime;
@@ -41,7 +41,7 @@ public class BlockLogServiceImpl implements BlockLogService {
     @Override
     public Mono<BlockLog> create(BlockLog blockLog) {
         blockLog.setCreateTime(DateUtil.formatFullTime(LocalDateTime.now(), DateUtil.FULL_TIME_SPLIT_PATTERN));
-        blockLog.setLocation(AddressUtil.getCityInfo(blockLog.getIp()));
+        blockLog.setLocation(RegionAddressUtils.getCityInfo(blockLog.getIp()));
         return blockLogMapper.insert(blockLog);
     }
 

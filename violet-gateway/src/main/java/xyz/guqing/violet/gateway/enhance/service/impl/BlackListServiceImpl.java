@@ -12,11 +12,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.DateUtil;
+import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
 import xyz.guqing.violet.gateway.enhance.entity.BlackList;
 import xyz.guqing.violet.gateway.enhance.mapper.BlackListMapper;
 import xyz.guqing.violet.gateway.enhance.service.BlackListService;
 import xyz.guqing.violet.gateway.enhance.service.RouteEnhanceCacheService;
-import xyz.guqing.violet.gateway.enhance.utils.AddressUtil;
 import xyz.guqing.violet.gateway.enhance.utils.PageableExecutionUtil;
 
 import java.time.LocalDateTime;
@@ -53,7 +53,7 @@ public class BlackListServiceImpl implements BlackListService {
     public Mono<BlackList> create(BlackList blackList) {
         blackList.setCreateTime(DateUtil.formatFullTime(LocalDateTime.now(), DateUtil.FULL_TIME_SPLIT_PATTERN));
         if (StringUtils.isNotBlank(blackList.getIp())) {
-            blackList.setLocation(AddressUtil.getCityInfo(blackList.getIp()));
+            blackList.setLocation(RegionAddressUtils.getCityInfo(blackList.getIp()));
         }
         return blackListMapper.insert(blackList).doOnSuccess(b -> routeEnhanceCacheService.saveBlackList(blackList));
     }

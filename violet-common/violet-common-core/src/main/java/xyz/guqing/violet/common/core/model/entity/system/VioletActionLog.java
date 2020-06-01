@@ -1,6 +1,8 @@
 package xyz.guqing.violet.common.core.model.entity.system;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -14,9 +16,8 @@ import lombok.experimental.Accessors;
  * @since 2020-05-21
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class VioletActionLog extends BaseEntity {
+public class VioletActionLog {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,9 +32,9 @@ public class VioletActionLog extends BaseEntity {
     private String operation;
 
     /**
-     * 耗时
+     * 执行时间，单位毫秒
      */
-    private BigDecimal time;
+    private Long executionTime;
 
     /**
      * 操作方法
@@ -55,5 +56,8 @@ public class VioletActionLog extends BaseEntity {
      */
     private String location;
 
-
+    /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
 }

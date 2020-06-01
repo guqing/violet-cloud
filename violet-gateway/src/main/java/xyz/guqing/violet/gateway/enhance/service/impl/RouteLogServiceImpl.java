@@ -10,10 +10,10 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.DateUtil;
+import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
 import xyz.guqing.violet.gateway.enhance.entity.RouteLog;
 import xyz.guqing.violet.gateway.enhance.mapper.RouteLogMapper;
 import xyz.guqing.violet.gateway.enhance.service.RouteLogService;
-import xyz.guqing.violet.gateway.enhance.utils.AddressUtil;
 import xyz.guqing.violet.gateway.enhance.utils.PageableExecutionUtil;
 
 import java.time.LocalDateTime;
@@ -46,7 +46,7 @@ public class RouteLogServiceImpl implements RouteLogService {
     @Override
     public Mono<RouteLog> create(RouteLog routeLog) {
         routeLog.setCreateTime(DateUtil.formatFullTime(LocalDateTime.now(), DateUtil.FULL_TIME_SPLIT_PATTERN));
-        routeLog.setLocation(AddressUtil.getCityInfo(routeLog.getIp()));
+        routeLog.setLocation(RegionAddressUtils.getCityInfo(routeLog.getIp()));
         return routeLogMapper.insert(routeLog);
     }
 

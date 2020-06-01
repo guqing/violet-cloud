@@ -21,6 +21,7 @@ import java.util.stream.IntStream;
  * @date 2020-05-14
  */
 public class VioletUtil {
+    private static final Pattern CHINESE_PATTERN = Pattern.compile("[\u4e00-\u9fa5]");
     private static final String UNKNOW = "unknown";
 
     /**
@@ -113,6 +114,40 @@ public class VioletUtil {
 
     public static HttpServletRequest getHttpServletRequest() {
         return ((ServletRequestAttributes) Objects.requireNonNull(RequestContextHolder.getRequestAttributes())).getRequest();
+    }
+
+    /**
+     * 获取请求IP
+     *
+     * @return String 返回ip地址
+     */
+    public static String getRequestIpAddress() {
+        HttpServletRequest request = getHttpServletRequest();
+        String ip = request.getHeader("x-forwarded-for");
+        if (ip == null || ip.length() == 0 || UNKNOW.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || UNKNOW.equalsIgnoreCase(ip)) {
+            ip = request.getHeader("WL-Proxy-Client-IP");
+        }
+        if (ip == null || ip.length() == 0 || UNKNOW.equalsIgnoreCase(ip)) {
+            ip = request.getRemoteAddr();
+        }
+        return "0:0:0:0:0:0:0:1".equals(ip) ? "127.0.0.1" : ip;
+    }
+
+    /**
+     * 判断是否包含中文
+     *
+     * @param value 内容
+     * @return 结果
+     */
+    public static boolean containChinese(String value) {
+        if (StringUtils.isBlank(value)) {
+            return Boolean.FALSE;
+        }
+        Matcher matcher = CHINESE_PATTERN.matcher(value);
+        return matcher.find();
     }
 
     public static void printSystemUpBanner(Environment environment) {

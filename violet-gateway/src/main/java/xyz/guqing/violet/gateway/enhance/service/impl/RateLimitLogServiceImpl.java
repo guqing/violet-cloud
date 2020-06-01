@@ -10,10 +10,10 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.DateUtil;
+import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
 import xyz.guqing.violet.gateway.enhance.entity.RateLimitLog;
 import xyz.guqing.violet.gateway.enhance.mapper.RateLimitLogMapper;
 import xyz.guqing.violet.gateway.enhance.service.RateLimitLogService;
-import xyz.guqing.violet.gateway.enhance.utils.AddressUtil;
 import xyz.guqing.violet.gateway.enhance.utils.PageableExecutionUtil;
 
 import java.time.LocalDateTime;
@@ -41,7 +41,7 @@ public class RateLimitLogServiceImpl implements RateLimitLogService {
     @Override
     public Mono<RateLimitLog> create(RateLimitLog rateLimitLog) {
         rateLimitLog.setCreateTime(DateUtil.formatFullTime(LocalDateTime.now(), DateUtil.FULL_TIME_SPLIT_PATTERN));
-        rateLimitLog.setLocation(AddressUtil.getCityInfo(rateLimitLog.getIp()));
+        rateLimitLog.setLocation(RegionAddressUtils.getCityInfo(rateLimitLog.getIp()));
         return rateLimitLogMapper.insert(rateLimitLog);
     }
 

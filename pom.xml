@@ -29,17 +29,16 @@
         <com-alibaba-cloud.version>2.1.1.RELEASE</com-alibaba-cloud.version>
         <codingapi.txlcn.version>5.0.2.RELEASE</codingapi.txlcn.version>
 
-        <fastjson.version>1.2.62</fastjson.version>
+        <fastjson.version>1.2.68</fastjson.version>
         <xml-api.version>1.4.01</xml-api.version>
         <ip2region.version>1.7</ip2region.version>
         <guava.version>27.0-jre</guava.version>
-        <excelkit.version>2.0.71</excelkit.version>
 
         <mybatis-plus.version>3.3.1.tmp</mybatis-plus.version>
         <dynamic-datasource.version>3.1.0</dynamic-datasource.version>
 
-        <p6spy.version>3.8.5</p6spy.version>
-        <spring-boot-admin.version>2.2.0</spring-boot-admin.version>
+        <p6spy.version>3.9.0</p6spy.version>
+        <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
         <easy-captcha.version>1.6.2</easy-captcha.version>
         <logstash-logback-encoder.version>6.1</logstash-logback-encoder.version>
         <justauth.version>1.1.0</justauth.version>
@@ -47,8 +46,6 @@
         <knife4j.version>2.0.2</knife4j.version>
         <springfox.version>2.9.2</springfox.version>
         <swagger.version>1.5.21</swagger.version>
-
-        <modelmapper.version>2.3.0</modelmapper.version>
     </properties>
 
     <dependencyManagement>
@@ -83,12 +80,6 @@
                 <version>${codingapi.txlcn.version}</version>
             </dependency>
 
-            <!--model mapper-->
-            <dependency>
-                <groupId>org.modelmapper</groupId>
-                <artifactId>modelmapper</artifactId>
-                <version>${modelmapper.version}</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>

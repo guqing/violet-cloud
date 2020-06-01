@@ -23,7 +23,9 @@ public class PageableExecutionUtil {
                     Sort.by(request.getField()).ascending() :
                     Sort.by(request.getField()).descending();
         }
-        Pageable pageable = PageRequest.of(request.getCurrent(), request.getPageSize(), sort);
+        Long current = request.getCurrent();
+        Long pageSize = request.getPageSize();
+        Pageable pageable = PageRequest.of(current.intValue(),pageSize.intValue(), sort);
         return template.find(query.with(pageable), clazz);
     }
 }

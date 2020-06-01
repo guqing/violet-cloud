@@ -14,7 +14,6 @@ import org.springframework.security.oauth2.provider.client.JdbcClientDetailsServ
 import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
 import org.springframework.stereotype.Service;
 import xyz.guqing.violet.auth.model.dto.SocialLoginDTO;
-import xyz.guqing.violet.common.core.model.bo.CurrentUser;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.entity.system.UserConnection;
 import xyz.guqing.violet.auth.model.properties.VioletAuthProperties;

@@ -1,0 +1,19 @@
+language: java
+jdk:
+  - openjdk11
+before_install:
+  - chmod -R 777 mvnw
+  - sudo apt-get install sshpass  # 安装sshpass
+jobs:
+  include:
+    - stage: build
+      script: ./mvnw clean install
+    - stage: Deplay violet cloud
+      script: scripts/deploy.sh
+branches:
+  only:
+    - master
+    - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+notifications:
+  webhooks:
+    - https://fathomless-fjord-24024.herokuapp.com/notify

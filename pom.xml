@@ -24,7 +24,7 @@
     <description>Demo project for Spring Boot</description>
     <!--Greenwich.SR1   Hoxton.RELEASE-->
     <properties>
-        <java.version>11</java.version>
+        <java.version>8</java.version>
         <spring-cloud.version>Hoxton.RELEASE</spring-cloud.version>
         <com-alibaba-cloud.version>2.1.1.RELEASE</com-alibaba-cloud.version>
         <codingapi.txlcn.version>5.0.2.RELEASE</codingapi.txlcn.version>

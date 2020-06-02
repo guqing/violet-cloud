@@ -9,7 +9,7 @@ jobs:
     - stage: build
       script: ./mvnw clean install
     - stage: Deplay violet cloud
-      script: scripts/deploy.sh $SERVER $PASSWORD
+      script: ./scripts/deploy.sh $SERVER $PASSWORD
 branches:
   only:
     - master

@@ -8,6 +8,7 @@ sshpass -p $pwd scp -P 22 -o StrictHostKeyChecking=no violet-auth/target/violet-
 sshpass -p $pwd scp -P 22 -o StrictHostKeyChecking=no violet-app/violet-app-admin/target/violet-app-admin-0.0.1-SNAPSHOT.jar root@$serverIp:/root/violet/app/admin
 # 执行脚本
 sshpass -p $pwd ssh -tt -p 22 -o StrictHostKeyChecking=no root@$serverIp 2>&1 << eeooff
+source /etc/profile ~/.profile ~/.bash_profile
 cd /root/violet/gateway 
 ./stop.sh
 ./run.sh

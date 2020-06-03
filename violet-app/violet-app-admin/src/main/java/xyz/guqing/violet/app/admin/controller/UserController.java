@@ -1,5 +1,6 @@
 package xyz.guqing.violet.app.admin.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -20,6 +21,7 @@ import java.util.List;
  * @author guqing
  * @date 2020-05-30
  */
+@Slf4j
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -32,7 +34,8 @@ public class UserController {
 
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('user:view')")
-    public ResultEntity<PageInfo<UserDTO>> listUserByPage(@RequestBody UserQuery userQuery) {
+    public ResultEntity<PageInfo<UserDTO>> listUserByPage(UserQuery userQuery) {
+        log.debug("list user 查询条件：{}", userQuery);
         PageInfo<UserDTO> users = userService.listByPage(userQuery);
         return ResultEntity.ok(users);
     }
@@ -41,6 +44,7 @@ public class UserController {
     @PreAuthorize("hasAuthority('user:add')")
     @ControllerEndpoint(operation = "新增用户", exceptionMessage = "新增用户失败")
     public void addUser(@Valid UserParam userParam) {
+
     }
 
     @PutMapping

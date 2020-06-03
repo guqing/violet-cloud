@@ -43,8 +43,9 @@ public class UserController {
     @PostMapping
     @PreAuthorize("hasAuthority('user:add')")
     @ControllerEndpoint(operation = "新增用户", exceptionMessage = "新增用户失败")
-    public void addUser(@Valid UserParam userParam) {
-
+    public ResultEntity<String> addUser(@Valid UserParam userParam) {
+        userService.createUser(userParam);
+        return ResultEntity.ok();
     }
 
     @PutMapping
@@ -68,5 +69,15 @@ public class UserController {
     @PreAuthorize("hasAuthority('user:delete')")
     @ControllerEndpoint(operation = "删除用户", exceptionMessage = "删除用户失败")
     public void deleteUsers(@RequestBody List<Long> userIds) {
+    }
+
+    @GetMapping("/test")
+    public ResultEntity<UserParam> test(UserParam userParam) {
+        return ResultEntity.ok(userParam);
+    }
+
+    @GetMapping("/hello")
+    public ResultEntity<UserParam> hello(@RequestBody UserParam userParam) {
+        return ResultEntity.ok(userParam);
     }
 }

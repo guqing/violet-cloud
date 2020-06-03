@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import xyz.guqing.violet.app.admin.mapper.UserMapper;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
 import xyz.guqing.violet.app.admin.model.entity.UserDO;
+import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.app.admin.service.UserService;
 import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
@@ -62,6 +63,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public Long countUserBy(UserQuery userQuery) {
         return this.baseMapper.countUserBy(userQuery);
+    }
+
+    @Override
+    public void createUser(UserParam userParam) {
+
     }
 
 

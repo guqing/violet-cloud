@@ -2,6 +2,7 @@ package xyz.guqing.violet.app.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
+import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.entity.system.User;
@@ -31,4 +32,10 @@ public interface UserService extends IService<User> {
      * @return 返回统计结果
      */
     Long countUserBy(UserQuery userQuery);
+
+    /**
+     * 添加用户
+     * @param userParam 用户参数
+     */
+    void createUser(UserParam userParam);
 }

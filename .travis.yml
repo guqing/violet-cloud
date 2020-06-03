@@ -3,14 +3,14 @@ jdk:
   - openjdk11
 before_install:
   - chmod -R 777 mvnw
+before_deploy:
   - sudo apt-get install sshpass  # 安装sshpass
-jobs:
-  include:
-    - stage: build
-      script: ./mvnw clean install
-    - stage: Deplay violet cloud
-      script: ./scripts/deploy.sh $SERVER $PASSWORD
-      skip_cleanup: true
+script:
+  - ./mvnw clean install
+deploy:
+  - provider: script
+    script: ./scripts/deploy.sh $SERVER $PASSWORD
+    skip_cleanup: true
 branches:
   only:
     - master

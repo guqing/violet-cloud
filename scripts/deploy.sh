@@ -4,9 +4,9 @@ serverIp=$1
 pwd=$2
 # 上传jar
 #sshpass -p $pwd scp violet-gateway/target/violet-gateway-0.0.1-SNAPSHOT.jar root@$serverIp:/root/violet/gateway
-
-sshpass -p $pwd scp violet-auth/target/violet-auth-0.0.1-SNAPSHOT.jar root@$serverIp:/root/violet/auth
+ls violet-app/violet-app-admin/target/
 sshpass -p $pwd scp violet-app/violet-app-admin/target/violet-app-admin-0.0.1-SNAPSHOT.jar root@$serverIp:/root/violet/app/admin
+sshpass -p $pwd scp -P 22 -o StrictHostKeyChecking=no violet-auth/target/violet-auth-0.0.1-SNAPSHOT.jar root@$serverIp:/root/violet/auth
 
 # 执行脚本
 sshpass -p $pwd ssh -tt -p 22 -o StrictHostKeyChecking=no root@$serverIp 2>&1 << eeooff

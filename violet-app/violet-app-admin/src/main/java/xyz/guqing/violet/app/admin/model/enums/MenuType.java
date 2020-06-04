@@ -1,0 +1,26 @@
+package xyz.guqing.violet.app.admin.model.enums;
+
+/**
+ * @author guqing
+ * @date 2020-06-04
+ */
+public enum MenuType {
+    /**
+     * 菜单类型，0菜单，1按钮
+     */
+    MENU("0"),
+    BUTTON("1");
+    private String value;
+
+    MenuType(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+}

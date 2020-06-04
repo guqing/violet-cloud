@@ -1,12 +1,17 @@
 package xyz.guqing.violet.app.admin.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import xyz.guqing.violet.app.admin.mapper.UserMapper;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
 import xyz.guqing.violet.app.admin.model.entity.UserDO;
+import xyz.guqing.violet.app.admin.model.enums.GenderEnum;
+import xyz.guqing.violet.app.admin.model.enums.UserStatusEnum;
 import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
+import xyz.guqing.violet.app.admin.service.RoleService;
 import xyz.guqing.violet.app.admin.service.UserService;
 import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.entity.system.User;
@@ -26,7 +31,10 @@ import java.util.stream.Collectors;
  * @since 2020-05-21
  */
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+    private final RoleService roleService;
+
     @Override
     public PageInfo<UserDTO> listByPage(UserQuery userQuery) {
         QueryRequest queryRequest = userQuery.getQueryRequest();
@@ -66,8 +74,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void createUser(UserParam userParam) {
+        User user = userParam.convertTo();
+        user.setStatus(UserStatusEnum.NORMAL.getValue());
+        user.setGender(GenderEnum.MALE.getValue());
+        //保存用户信息
+        save(user);
 
+        // 保存用户角色
+        roleService.saveUserRoles(user.getId(), userParam.getRoleIds());
     }
 
 

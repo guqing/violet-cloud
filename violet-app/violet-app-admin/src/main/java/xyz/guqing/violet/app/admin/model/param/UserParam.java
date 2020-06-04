@@ -4,17 +4,24 @@ import lombok.Data;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.support.InputConverter;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.util.List;
+
 /**
  * @author guqing
  * @date 2020-06-01
  */
 @Data
 public class UserParam implements InputConverter<User> {
-    private String username;
+    private Long id;
 
+    @NotBlank(message = "用户名不能为空")
+    private String username;
     /**
      * 密码
      */
+    @NotBlank(message = "用户密码不能为空")
     private String password;
 
     /**
@@ -36,4 +43,9 @@ public class UserParam implements InputConverter<User> {
      * 描述
      */
     private String description;
+
+    @NotNull
+    private List<Long> roleIds;
+
+    private Long groupId;
 }

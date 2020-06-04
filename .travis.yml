@@ -6,6 +6,7 @@ before_install:
   - sudo apt-get install sshpass
 script:
   - ./mvnw clean install
+  - ls
 deploy:
   - provider: script
     script: ./scripts/deploy.sh $SERVER $PASSWORD

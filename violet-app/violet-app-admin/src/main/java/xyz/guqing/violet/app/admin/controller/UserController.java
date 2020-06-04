@@ -70,14 +70,4 @@ public class UserController {
     @ControllerEndpoint(operation = "删除用户", exceptionMessage = "删除用户失败")
     public void deleteUsers(@RequestBody List<Long> userIds) {
     }
-
-    @GetMapping("/test")
-    public ResultEntity<UserParam> test(UserParam userParam) {
-        return ResultEntity.ok(userParam);
-    }
-
-    @GetMapping("/hello")
-    public ResultEntity<UserParam> hello(@RequestBody UserParam userParam) {
-        return ResultEntity.ok(userParam);
-    }
 }

@@ -70,6 +70,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         );
 
         BeanUtils.copyProperties(user, myUserDetails);
+        myUserDetails.setRoleIds(VioletUtil.commaSeparatedToList(user.getRoleId()));
+        myUserDetails.setRoleNames(VioletUtil.commaSeparatedToList(user.getRoleName()));
         // 返回自定义的 MyUserDetails
         return myUserDetails;
     }

@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import xyz.guqing.violet.app.admin.model.param.MenuQuery;
 import xyz.guqing.violet.app.admin.service.MenuService;
 import xyz.guqing.violet.common.core.model.entity.router.VueRouter;
+import xyz.guqing.violet.common.core.model.entity.support.MenuTree;
 import xyz.guqing.violet.common.core.model.entity.system.Menu;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
@@ -29,14 +31,21 @@ public class MenuController {
     @GetMapping("/tree")
     public ResultEntity<List<VueRouter<Menu>>> getMenu() {
         String username = VioletSecurityHelper.getCurrentUsername();
-        List<VueRouter<Menu>> userRouters = menuService.getUserRouters(username);
+        List<VueRouter<Menu>> userRouters = menuService.listUserRouters(username);
         return ResultEntity.ok(userRouters);
     }
 
     @GetMapping("router")
     public ResultEntity<List<Menu>> getRouterList() {
         String username = VioletSecurityHelper.getCurrentUsername();
-        List<Menu> menus = menuService.findUserMenus(username);
+        List<Menu> menus = menuService.listUserMenus(username);
         return ResultEntity.ok(menus);
+    }
+
+    @GetMapping
+    public ResultEntity<List<MenuTree>> listMenuTree(MenuQuery menuQuery) {
+        Menu menu = menuQuery.convertTo();
+        List<MenuTree> menuTrees = this.menuService.listTreeMenus(menu);
+        return ResultEntity.ok(menuTrees);
     }
 }

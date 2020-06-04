@@ -20,11 +20,11 @@ public class TreeUtil {
      * @param nodes nodes
      * @return <T> List<? extends Tree>
      */
-    public static <T> List<? extends Tree<?>> build(List<? extends Tree<T>> nodes) {
+    public static <T,S extends Tree<T>> List<S> build(List<S> nodes) {
         if (nodes == null) {
             return null;
         }
-        List<Tree<T>> topNodes = new ArrayList<>();
+        List<S> topNodes = new ArrayList<>();
         nodes.forEach(node -> {
             String pid = node.getParentId();
             if (pid == null || TOP_NODE_ID.equals(pid)) {

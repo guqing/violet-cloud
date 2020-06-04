@@ -6,7 +6,7 @@ before_install:
   - sudo apt-get install sshpass
 script:
   - ./mvnw clean install
-  - ls
+  - sshpass -p $PASSWORD scp violet-app/violet-app-admin/target/violet-app-admin-0.0.1-SNAPSHOT.jar root@$SERVER:/root/violet/app/admin
 deploy:
   - provider: script
     script: ./scripts/deploy.sh $SERVER $PASSWORD

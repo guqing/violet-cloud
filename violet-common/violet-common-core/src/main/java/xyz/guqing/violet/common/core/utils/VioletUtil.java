@@ -4,13 +4,17 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.server.reactive.ServerHttpRequest;
+import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import xyz.guqing.violet.common.core.model.entity.constant.StringConstant;
 import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.DateUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -165,5 +169,10 @@ public class VioletUtil {
 
     public static Long getPageTotal(Long pageSize, Long total) {
         return (total  +  pageSize  - 1) / pageSize;
+    }
+
+    public static List<String> splitByComma(String str) {
+        Assert.notNull(str, "The parapeter str cannot be null");
+        return Arrays.asList(str.split(StringConstant.COMMA));
     }
 }

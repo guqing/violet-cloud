@@ -3,6 +3,7 @@ package xyz.guqing.violet.auth.model.dto;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 /**
  * @author guqing
@@ -23,9 +24,9 @@ public class UserInfoDTO {
 
     private String groupName;
 
-    private String roleId;
+    private List<String> roleIds;
 
-    private String roleName;
+    private List<String> roleNames;
     /**
      * 邮箱
      */

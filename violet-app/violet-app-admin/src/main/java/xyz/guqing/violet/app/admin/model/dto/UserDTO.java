@@ -5,6 +5,8 @@ import xyz.guqing.violet.app.admin.model.entity.UserDO;
 import xyz.guqing.violet.common.core.model.support.OutputConverter;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author guqing
@@ -24,9 +26,9 @@ public class UserDTO implements OutputConverter<UserDTO, UserDO>{
 
     private String groupName;
 
-    private Long roleId;
+    private List<String> roleIds;
 
-    private String roleName;
+    private List<String> roleNames;
 
     private String avatar;
 

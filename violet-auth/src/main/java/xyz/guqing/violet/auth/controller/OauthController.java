@@ -10,10 +10,14 @@ import org.springframework.web.servlet.ModelAndView;
 import xyz.guqing.violet.auth.model.dto.UserInfoDTO;
 import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.model.bo.CurrentUser;
+import xyz.guqing.violet.common.core.model.entity.constant.StringConstant;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
+import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import java.security.Principal;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author guqing
@@ -37,9 +41,17 @@ public class OauthController {
     }
 
     @GetMapping("/user")
-    public ResultEntity<CurrentUser> getUserInfo() {
+    public ResultEntity<UserInfoDTO> getUserInfo() {
         String username = VioletSecurityHelper.getCurrentUsername();
         CurrentUser currentUser = userService.loadUserByUsername(username);
-        return ResultEntity.ok(currentUser);
+        return ResultEntity.ok(convertTo(currentUser));
+    }
+
+    private UserInfoDTO convertTo(CurrentUser currentUser) {
+        UserInfoDTO userInfoDTO = new UserInfoDTO();
+        BeanUtils.copyProperties(currentUser,userInfoDTO);
+        userInfoDTO.setRoleIds(VioletUtil.splitByComma(currentUser.getRoleId()));
+        userInfoDTO.setRoleNames(VioletUtil.splitByComma(currentUser.getRoleName()));
+        return userInfoDTO;
     }
 }

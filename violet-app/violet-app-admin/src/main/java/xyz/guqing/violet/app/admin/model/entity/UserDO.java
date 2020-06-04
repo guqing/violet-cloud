@@ -13,6 +13,6 @@ import xyz.guqing.violet.common.core.model.entity.system.User;
 @EqualsAndHashCode(callSuper = true)
 public class UserDO extends User {
     private String groupName;
-    private Long roleId;
+    private String roleId;
     private String roleName;
 }

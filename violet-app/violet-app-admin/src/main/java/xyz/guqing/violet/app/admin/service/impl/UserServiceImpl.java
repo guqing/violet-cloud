@@ -2,6 +2,7 @@ package xyz.guqing.violet.app.admin.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.guqing.violet.app.admin.mapper.UserMapper;
@@ -13,11 +14,13 @@ import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.app.admin.service.RoleService;
 import xyz.guqing.violet.app.admin.service.UserService;
+import xyz.guqing.violet.common.core.model.entity.constant.StringConstant;
 import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -58,7 +61,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userQuery.setQueryRequest(queryRequest);
         List<UserDO> userByPage = this.baseMapper.findUserBy(userQuery);
         List<UserDTO> userDtoList = userByPage.stream()
-                .map(user -> (UserDTO)new UserDTO().convertFrom(user))
+                .map(user -> {
+                    UserDTO userDTO = new UserDTO().convertFrom(user);
+                    userDTO.setRoleIds(VioletUtil.splitByComma(user.getRoleId()));
+                    userDTO.setRoleNames(VioletUtil.splitByComma(user.getRoleName()));
+                    return userDTO;
+                })
                 .collect(Collectors.toList());
         pageInfo.setList(userDtoList);
 

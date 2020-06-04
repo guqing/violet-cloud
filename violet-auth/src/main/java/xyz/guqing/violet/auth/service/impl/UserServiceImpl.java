@@ -3,13 +3,18 @@ package xyz.guqing.violet.auth.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import xyz.guqing.violet.auth.mapper.UserMapper;
+import xyz.guqing.violet.auth.model.dto.UserInfoDTO;
+import xyz.guqing.violet.auth.service.MenuService;
 import xyz.guqing.violet.common.core.model.bo.CurrentUser;
 import xyz.guqing.violet.common.core.model.entity.system.Menu;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.exception.NotFoundException;
+import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import java.util.List;
 import java.util.Optional;
@@ -24,7 +29,9 @@ import java.util.stream.Collectors;
  * @since 2020-05-21
  */
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+    private final MenuService menuService;
 
     @Override
     public CurrentUser loadUserByUsername(String username) {
@@ -43,4 +50,21 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return user;
     }
 
+    @Override
+    public UserInfoDTO getUserInfo(String username) {
+        CurrentUser currentUser = loadUserByUsername(username);
+        UserInfoDTO userInfoDTO = convertTo(currentUser);
+        String permissions = menuService.findUserPermissions(username);
+        List<String> permissionList = VioletUtil.commaSeparatedToList(permissions);
+        userInfoDTO.setPermissions(permissionList);
+        return userInfoDTO;
+    }
+
+    private UserInfoDTO convertTo(CurrentUser currentUser) {
+        UserInfoDTO userInfoDTO = new UserInfoDTO();
+        BeanUtils.copyProperties(currentUser,userInfoDTO);
+        userInfoDTO.setRoleIds(VioletUtil.commaSeparatedToList(currentUser.getRoleId()));
+        userInfoDTO.setRoleNames(VioletUtil.commaSeparatedToList(currentUser.getRoleName()));
+        return userInfoDTO;
+    }
 }

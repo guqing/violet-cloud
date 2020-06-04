@@ -63,8 +63,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         List<UserDTO> userDtoList = userByPage.stream()
                 .map(user -> {
                     UserDTO userDTO = new UserDTO().convertFrom(user);
-                    userDTO.setRoleIds(VioletUtil.splitByComma(user.getRoleId()));
-                    userDTO.setRoleNames(VioletUtil.splitByComma(user.getRoleName()));
+                    userDTO.setRoleIds(VioletUtil.commaSeparatedToList(user.getRoleId()));
+                    userDTO.setRoleNames(VioletUtil.commaSeparatedToList(user.getRoleName()));
                     return userDTO;
                 })
                 .collect(Collectors.toList());

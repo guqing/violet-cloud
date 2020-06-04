@@ -171,7 +171,7 @@ public class VioletUtil {
         return (total  +  pageSize  - 1) / pageSize;
     }
 
-    public static List<String> splitByComma(String str) {
+    public static List<String> commaSeparatedToList(String str) {
         Assert.notNull(str, "The parapeter str cannot be null");
         return Arrays.asList(str.split(StringConstant.COMMA));
     }

@@ -27,6 +27,8 @@ public class UserInfoDTO {
     private List<String> roleIds;
 
     private List<String> roleNames;
+
+    private List<String> permissions;
     /**
      * 邮箱
      */

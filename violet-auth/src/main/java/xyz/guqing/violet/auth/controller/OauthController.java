@@ -43,15 +43,7 @@ public class OauthController {
     @GetMapping("/user")
     public ResultEntity<UserInfoDTO> getUserInfo() {
         String username = VioletSecurityHelper.getCurrentUsername();
-        CurrentUser currentUser = userService.loadUserByUsername(username);
-        return ResultEntity.ok(convertTo(currentUser));
+        return ResultEntity.ok(userService.getUserInfo(username));
     }
 
-    private UserInfoDTO convertTo(CurrentUser currentUser) {
-        UserInfoDTO userInfoDTO = new UserInfoDTO();
-        BeanUtils.copyProperties(currentUser,userInfoDTO);
-        userInfoDTO.setRoleIds(VioletUtil.splitByComma(currentUser.getRoleId()));
-        userInfoDTO.setRoleNames(VioletUtil.splitByComma(currentUser.getRoleName()));
-        return userInfoDTO;
-    }
 }

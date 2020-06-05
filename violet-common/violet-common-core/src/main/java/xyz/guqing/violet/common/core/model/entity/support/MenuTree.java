@@ -11,10 +11,8 @@ import xyz.guqing.violet.common.core.model.entity.system.Menu;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class MenuTree extends Tree<Menu> {
-    private String path;
-    private String component;
-    private String perms;
+    private String key;
+    private String value;
     private String icon;
     private String type;
-    private Integer orderIndex;
 }

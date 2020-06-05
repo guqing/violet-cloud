@@ -62,16 +62,12 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         menus.forEach(menu -> {
             MenuTree tree = new MenuTree();
             tree.setId(menu.getId().toString());
+            tree.setValue(tree.getId());
+            tree.setKey(tree.getId());
             tree.setParentId(menu.getParentId().toString());
-            tree.setLabel(menu.getName());
-            tree.setComponent(menu.getComponent());
+            tree.setTitle(menu.getTitle());
             tree.setIcon(menu.getIcon());
-            if(menu.getOrderIndex() != null) {
-                tree.setOrderIndex(menu.getOrderIndex().intValue());
-            }
-            tree.setPath(menu.getPath());
             tree.setType(menu.getType());
-            tree.setPerms(menu.getPerms());
             trees.add(tree);
         });
     }

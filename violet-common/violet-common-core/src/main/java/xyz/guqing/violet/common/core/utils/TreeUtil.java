@@ -84,12 +84,6 @@ public class TreeUtil {
                 }
             }
         });
-        VueRouter<T> router404 = new VueRouter<>();
-        router404.setName("404");
-        router404.setComponent("error-page/404");
-        router404.setPath("*");
-
-        topRoutes.add(router404);
         return topRoutes;
     }
 }

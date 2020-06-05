@@ -15,7 +15,7 @@ public class Tree<T> {
 
     private String id;
 
-    private String label;
+    private String title;
 
     private List<Tree<T>> children;
 

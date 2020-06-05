@@ -2,6 +2,7 @@ package xyz.guqing.violet.app.admin.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.guqing.violet.app.admin.model.param.MenuQuery;
@@ -40,6 +41,11 @@ public class MenuController {
         String username = VioletSecurityHelper.getCurrentUsername();
         List<Menu> menus = menuService.listUserMenus(username);
         return ResultEntity.ok(menus);
+    }
+
+    @GetMapping("/{id}")
+    public ResultEntity<Menu> getById(@PathVariable Long id) {
+        return ResultEntity.ok(menuService.getById(id));
     }
 
     @GetMapping

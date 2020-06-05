@@ -3,7 +3,9 @@ package xyz.guqing.violet.app.admin.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.entity.support.UserGroupTree;
 import xyz.guqing.violet.common.core.model.entity.system.UserGroup;
+import xyz.guqing.violet.common.core.model.support.PageInfo;
 
 /**
  * <p>
@@ -20,5 +22,5 @@ public interface UserGroupService extends IService<UserGroup> {
      * @param queryRequest 分页查询条件
      * @return 返回用户组列表分组
      */
-    Page<UserGroup> listByPage(String name, QueryRequest queryRequest);
+    PageInfo<UserGroupTree> listByPage(String name, QueryRequest queryRequest);
 }

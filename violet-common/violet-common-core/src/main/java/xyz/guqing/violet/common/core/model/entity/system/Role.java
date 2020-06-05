@@ -33,4 +33,6 @@ public class Role extends BaseEntity {
      * 是否是默认角色
      */
     private Integer isDefault;
+
+    private Integer deleted;
 }

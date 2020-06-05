@@ -42,7 +42,7 @@
             AND u.mobile = #{mobile}
         </if>
         <if test="groupName != null and groupName != ''">
-            AND g.group_name like CONCAT('%',#{userQuery.groupName},'%')
+            AND g.group_name like CONCAT('%',#{groupName},'%')
         </if>
         <if test="createTimeFrom != null and createTimeFrom !=''">
             And u.create_time &gt; #{createTimeFrom}
@@ -80,7 +80,7 @@
             AND u.mobile = #{mobile}
         </if>
         <if test="groupName != null and groupName != ''">
-            AND g.group_name like CONCAT('%',#{userQuery.groupName},'%')
+            AND g.group_name like CONCAT('%',#{groupName},'%')
         </if>
         <if test="createTimeFrom != null and createTimeFrom !=''">
             And u.create_time &gt; #{createTimeFrom}

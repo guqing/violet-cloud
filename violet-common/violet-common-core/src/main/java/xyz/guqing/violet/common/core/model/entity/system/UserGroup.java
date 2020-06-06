@@ -33,6 +33,4 @@ public class UserGroup extends BaseEntity {
      * 排序
      */
     private Long sortIndex;
-
-
 }

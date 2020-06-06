@@ -1,7 +1,7 @@
 package xyz.guqing.violet.app.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import xyz.guqing.violet.common.core.model.entity.support.UserGroupTree;
+import xyz.guqing.violet.common.core.model.dto.UserGroupTree;
 import xyz.guqing.violet.common.core.model.entity.system.UserGroup;
 
 import java.util.List;
@@ -21,4 +21,10 @@ public interface UserGroupService extends IService<UserGroup> {
      * @return 返回用户组列表分组
      */
     List<UserGroupTree> listBy(String name);
+
+    /**
+     * 创建或更新用户组
+     * @param userGroup 用户组参数
+     */
+    void createOrUpdate(UserGroup userGroup);
 }

@@ -1,4 +1,4 @@
-package xyz.guqing.violet.common.core.model.entity.support;
+package xyz.guqing.violet.common.core.model.support;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
@@ -16,6 +16,10 @@ public class Tree<T> {
     private String id;
 
     private String title;
+
+    private String key;
+
+    private String value;
 
     private List<Tree<T>> children;
 

@@ -2,7 +2,7 @@ package xyz.guqing.violet.gateway.enhance.service;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.gateway.enhance.entity.BlockLog;
 
 /**

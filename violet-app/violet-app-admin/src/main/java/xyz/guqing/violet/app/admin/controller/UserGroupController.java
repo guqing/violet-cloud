@@ -1,15 +1,11 @@
 package xyz.guqing.violet.app.admin.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import xyz.guqing.violet.app.admin.model.param.UserGroupParam;
 import xyz.guqing.violet.app.admin.service.UserGroupService;
-import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
-import xyz.guqing.violet.common.core.model.entity.support.UserGroupTree;
+import xyz.guqing.violet.common.core.model.dto.UserGroupTree;
 import xyz.guqing.violet.common.core.model.entity.system.UserGroup;
-import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
 import java.util.List;
@@ -33,5 +29,12 @@ public class UserGroupController {
     @GetMapping("/{id}")
     public ResultEntity<UserGroup> getById(@PathVariable Long id) {
         return  ResultEntity.ok(userGroupService.getById(id));
+    }
+
+    @PostMapping
+    public ResultEntity<String> createOrUpdate(UserGroupParam userGroupParam) {
+        UserGroup userGroup = userGroupParam.convertTo();
+        userGroupService.createOrUpdate(userGroup);
+        return ResultEntity.ok();
     }
 }

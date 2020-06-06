@@ -7,7 +7,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import reactor.core.publisher.Flux;
-import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
 
 /**

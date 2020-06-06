@@ -45,17 +45,16 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         queryWrapper.orderByAsc(Menu::getOrderIndex);
         List<Menu> menus = baseMapper.selectList(queryWrapper);
 
-        List<MenuTree> trees = new ArrayList<>();
-        buildTrees(trees, menus);
-
+        List<MenuTree> menuTrees = convertTo(menus);
         if (StringUtils.equals(menu.getType(), MenuType.BUTTON.getValue())) {
-           return trees;
+           return menuTrees;
         } else {
-            return TreeUtil.build(trees);
+            return TreeUtil.build(menuTrees);
         }
     }
 
-    private void buildTrees(List<MenuTree> trees, List<Menu> menus) {
+    private List<MenuTree> convertTo(List<Menu> menus) {
+        List<MenuTree> menuTrees = new ArrayList<>();
         menus.forEach(menu -> {
             MenuTree tree = new MenuTree();
             tree.setId(menu.getId().toString());
@@ -65,8 +64,9 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
             tree.setTitle(menu.getTitle());
             tree.setIcon(menu.getIcon());
             tree.setType(menu.getType());
-            trees.add(tree);
+            menuTrees.add(tree);
         });
+        return menuTrees;
     }
 
     @Override

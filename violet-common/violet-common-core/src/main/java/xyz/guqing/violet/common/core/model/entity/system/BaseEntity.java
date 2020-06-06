@@ -1,8 +1,6 @@
 package xyz.guqing.violet.common.core.model.entity.system;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -21,6 +19,7 @@ import java.time.LocalDateTime;
 @Data
 public class BaseEntity implements Serializable {
     @TableField(value = "id")
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     @TableField(value = "create_time", fill = FieldFill.INSERT)

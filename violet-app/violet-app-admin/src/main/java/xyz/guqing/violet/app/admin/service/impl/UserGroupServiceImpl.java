@@ -11,10 +11,10 @@ import xyz.guqing.violet.app.admin.mapper.UserGroupMapper;
 import xyz.guqing.violet.app.admin.service.UserGroupService;
 import xyz.guqing.violet.common.core.model.dto.UserGroupTree;
 import xyz.guqing.violet.common.core.model.entity.system.UserGroup;
+import xyz.guqing.violet.common.core.utils.TreeUtil;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -34,18 +34,14 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupMapper, UserGroup
         }
 
         List<UserGroup> list = list(queryWrapper);
-        if(CollectionUtils.isEmpty(list)) {
-            return Collections.emptyList();
-        }
 
+        List<UserGroupTree> userGroupTrees = convertTo(list);
         // 构建树
-        List<UserGroupTree> userGroupTrees = new LinkedList<>();
-        buildTrees(userGroupTrees, list);
-
-        return userGroupTrees;
+        return TreeUtil.build(userGroupTrees);
     }
 
-    private void buildTrees(List<UserGroupTree> trees, List<UserGroup> userGroups) {
+    private List<UserGroupTree> convertTo(List<UserGroup> userGroups) {
+        List<UserGroupTree> trees = new ArrayList<>();
         userGroups.forEach(userGroup -> {
             UserGroupTree tree = new UserGroupTree();
             tree.setId(userGroup.getId().toString());
@@ -55,6 +51,8 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupMapper, UserGroup
             tree.setParentId(userGroup.getParentId().toString());
             trees.add(tree);
         });
+
+        return trees;
     }
 
     @Override

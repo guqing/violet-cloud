@@ -1,7 +1,7 @@
 package xyz.guqing.violet.common.core.utils;
 
 
-import xyz.guqing.violet.common.core.model.entity.support.Tree;
+import xyz.guqing.violet.common.core.model.support.Tree;
 import xyz.guqing.violet.common.core.model.entity.router.VueRouter;
 
 import java.util.ArrayList;

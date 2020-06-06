@@ -2,7 +2,7 @@ package xyz.guqing.violet.app.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.common.core.model.entity.router.VueRouter;
-import xyz.guqing.violet.common.core.model.entity.support.MenuTree;
+import xyz.guqing.violet.common.core.model.dto.MenuTree;
 import xyz.guqing.violet.common.core.model.entity.system.Menu;
 
 import java.util.List;

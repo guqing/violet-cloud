@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import xyz.guqing.violet.app.admin.service.UserGroupService;
-import xyz.guqing.violet.common.core.model.entity.support.UserGroupTree;
+import xyz.guqing.violet.common.core.model.dto.UserGroupTree;
 
 import java.util.List;
 

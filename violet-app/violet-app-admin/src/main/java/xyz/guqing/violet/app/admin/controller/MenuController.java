@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import xyz.guqing.violet.app.admin.model.param.MenuQuery;
 import xyz.guqing.violet.app.admin.service.MenuService;
 import xyz.guqing.violet.common.core.model.entity.router.VueRouter;
-import xyz.guqing.violet.common.core.model.entity.support.MenuTree;
+import xyz.guqing.violet.common.core.model.dto.MenuTree;
 import xyz.guqing.violet.common.core.model.entity.system.Menu;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;

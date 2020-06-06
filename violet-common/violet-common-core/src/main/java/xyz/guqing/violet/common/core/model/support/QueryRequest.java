@@ -1,4 +1,4 @@
-package xyz.guqing.violet.common.core.model.entity.support;
+package xyz.guqing.violet.common.core.model.support;
 
 import lombok.Data;
 import lombok.ToString;

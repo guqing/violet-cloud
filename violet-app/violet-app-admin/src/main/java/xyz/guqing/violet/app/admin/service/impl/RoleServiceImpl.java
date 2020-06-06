@@ -1,6 +1,5 @@
 package xyz.guqing.violet.app.admin.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -11,7 +10,7 @@ import xyz.guqing.violet.app.admin.model.dto.RoleDTO;
 import xyz.guqing.violet.app.admin.model.entity.RoleDO;
 import xyz.guqing.violet.app.admin.model.param.RoleQuery;
 import xyz.guqing.violet.app.admin.service.RoleService;
-import xyz.guqing.violet.common.core.model.entity.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.entity.system.Role;
 import xyz.guqing.violet.common.core.model.entity.system.UserRole;
 import xyz.guqing.violet.common.core.model.support.PageInfo;

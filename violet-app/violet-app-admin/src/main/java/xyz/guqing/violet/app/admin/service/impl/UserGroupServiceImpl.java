@@ -1,6 +1,8 @@
 package xyz.guqing.violet.app.admin.service.impl;
 
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -13,6 +15,7 @@ import xyz.guqing.violet.common.core.model.entity.support.UserGroupTree;
 import xyz.guqing.violet.common.core.model.entity.system.UserGroup;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,7 +37,7 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupMapper, UserGroup
         }
 
         Page<UserGroup> userGroupPage = page(page, queryWrapper);
-
+        System.out.println(JSONObject.toJSONString(userGroupPage));
         // 构建树
         List<UserGroupTree> userGroupTrees = new LinkedList<>();
         buildTrees(userGroupTrees, userGroupPage.getRecords());
@@ -48,6 +51,11 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupMapper, UserGroup
         pageInfo.setTotal(userGroupPage.getTotal());
         pageInfo.setCurrent(userGroupPage.getCurrent());
         pageInfo.setPageSize(userGroupPage.getSize());
+        if(userGroupPage.getTotal() == 0) {
+            pageInfo.setList(Collections.emptyList());
+        } else {
+            pageInfo.setList(userGroupTrees);
+        }
         return pageInfo;
     }
 

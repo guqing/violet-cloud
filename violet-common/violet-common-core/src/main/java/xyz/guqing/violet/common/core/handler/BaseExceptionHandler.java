@@ -8,6 +8,7 @@ import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 import xyz.guqing.violet.common.core.exception.AuthenticationException;
 import xyz.guqing.violet.common.core.exception.BadRequestException;
 import xyz.guqing.violet.common.core.exception.ForbiddenException;
@@ -18,6 +19,7 @@ import xyz.guqing.violet.common.core.model.support.ResultEntity;
  * @author guqing
  */
 @Slf4j
+@RestControllerAdvice
 public class BaseExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)

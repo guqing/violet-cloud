@@ -1,0 +1,4 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  xyz.guqing.violet.common.core.config.MybatisPlusConfig,\
+  xyz.guqing.violet.common.core.handler.BaseExceptionHandler,\
+  xyz.guqing.violet.common.core.handler.ParamValidatorHandler

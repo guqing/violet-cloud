@@ -1,7 +1,9 @@
 package xyz.guqing.violet.app.admin.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import xyz.guqing.violet.app.admin.model.annotation.ControllerEndpoint;
 import xyz.guqing.violet.app.admin.model.param.UserGroupParam;
 import xyz.guqing.violet.app.admin.service.UserGroupService;
 import xyz.guqing.violet.common.core.model.dto.UserGroupTree;
@@ -33,9 +35,19 @@ public class UserGroupController {
     }
 
     @PostMapping("/save")
+    @PreAuthorize("hasAuthority('group:save')")
+    @ControllerEndpoint(operation = "保存用户组", exceptionMessage = "保存用户组失败")
     public ResultEntity<String> createOrUpdate(@RequestBody @Valid UserGroupParam userGroupParam) {
         UserGroup userGroup = userGroupParam.convertTo();
         userGroupService.createOrUpdate(userGroup);
+        return ResultEntity.ok();
+    }
+
+    @DeleteMapping
+    @PreAuthorize("hasAuthority('group:delete')")
+    @ControllerEndpoint(operation = "删除用户组", exceptionMessage = "删除用户组失败")
+    public ResultEntity<String> delete(List<Long> groupIds) {
+        userGroupService.removeByIds(groupIds);
         return ResultEntity.ok();
     }
 }

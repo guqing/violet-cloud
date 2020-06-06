@@ -74,5 +74,5 @@ public class Menu extends BaseEntity {
     /**
      * 排序
      */
-    private Long orderIndex;
+    private Long sortIndex;
 }

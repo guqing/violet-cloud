@@ -42,7 +42,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     public List<MenuTree> listTreeMenus(Menu menu) {
         LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.orderByAsc(Menu::getOrderIndex);
+        queryWrapper.orderByAsc(Menu::getSortIndex);
         List<Menu> menus = baseMapper.selectList(queryWrapper);
 
         List<MenuTree> menuTrees = convertTo(menus);

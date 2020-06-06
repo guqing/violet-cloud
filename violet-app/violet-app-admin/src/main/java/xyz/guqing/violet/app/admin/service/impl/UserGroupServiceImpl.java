@@ -1,7 +1,6 @@
 package xyz.guqing.violet.app.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
@@ -14,7 +13,6 @@ import xyz.guqing.violet.common.core.model.entity.system.UserGroup;
 import xyz.guqing.violet.common.core.utils.TreeUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -27,7 +25,8 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupMapper, UserGroup
     @Override
     public List<UserGroupTree> listBy(String name) {
         LambdaQueryWrapper<UserGroup> queryWrapper = Wrappers.lambdaQuery();
-        queryWrapper.orderByDesc(UserGroup::getCreateTime);
+        queryWrapper.orderByDesc(UserGroup::getSortIndex)
+                .orderByDesc(UserGroup::getCreateTime);
 
         if(StringUtils.isNotBlank(name)) {
             queryWrapper.like(UserGroup::getGroupName, name);

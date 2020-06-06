@@ -50,6 +50,7 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupMapper, UserGroup
         userGroups.forEach(userGroup -> {
             UserGroupTree tree = new UserGroupTree();
             tree.setId(userGroup.getId().toString());
+            tree.setKey(tree.getId());
             tree.setParentId(userGroup.getParentId().toString());
             tree.setTitle(userGroup.getGroupName());
             trees.add(tree);

@@ -26,9 +26,7 @@ import java.util.List;
 @Service
 public class UserGroupServiceImpl extends ServiceImpl<UserGroupMapper, UserGroup> implements UserGroupService {
     @Override
-    public PageInfo<UserGroupTree> listByPage(String name, QueryRequest queryRequest) {
-        Page<UserGroup> page = new Page<>(queryRequest.getCurrent(), queryRequest.getPageSize());
-
+    public List<UserGroupTree> listBy(String name) {
         LambdaQueryWrapper<UserGroup> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.orderByDesc(UserGroup::getCreateTime);
 
@@ -36,27 +34,16 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupMapper, UserGroup
             queryWrapper.like(UserGroup::getGroupName, name);
         }
 
-        Page<UserGroup> userGroupPage = page(page, queryWrapper);
-        System.out.println(JSONObject.toJSONString(userGroupPage));
+        List<UserGroup> list = list(queryWrapper);
+        if(CollectionUtils.isEmpty(list)) {
+            return Collections.emptyList();
+        }
+
         // 构建树
         List<UserGroupTree> userGroupTrees = new LinkedList<>();
-        buildTrees(userGroupTrees, userGroupPage.getRecords());
+        buildTrees(userGroupTrees, list);
 
-        return getPageInfo(userGroupPage, userGroupTrees);
-    }
-
-    private PageInfo<UserGroupTree> getPageInfo(Page<UserGroup> userGroupPage, List<UserGroupTree> userGroupTrees) {
-        PageInfo<UserGroupTree> pageInfo = new PageInfo<>();
-        pageInfo.setPages(userGroupPage.getPages());
-        pageInfo.setTotal(userGroupPage.getTotal());
-        pageInfo.setCurrent(userGroupPage.getCurrent());
-        pageInfo.setPageSize(userGroupPage.getSize());
-        if(userGroupPage.getTotal() == 0) {
-            pageInfo.setList(Collections.emptyList());
-        } else {
-            pageInfo.setList(userGroupTrees);
-        }
-        return pageInfo;
+        return userGroupTrees;
     }
 
     private void buildTrees(List<UserGroupTree> trees, List<UserGroup> userGroups) {

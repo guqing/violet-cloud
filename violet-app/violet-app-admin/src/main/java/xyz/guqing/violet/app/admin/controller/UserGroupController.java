@@ -10,6 +10,8 @@ import xyz.guqing.violet.common.core.model.entity.support.UserGroupTree;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
+import java.util.List;
+
 /**
  * @author guqing
  * @date 2020-06-05
@@ -21,8 +23,8 @@ public class UserGroupController {
     private final UserGroupService userGroupService;
 
     @GetMapping("/list")
-    public ResultEntity<PageInfo<UserGroupTree>> list(String name, QueryRequest queryRequest) {
-        PageInfo<UserGroupTree> pageInfo = userGroupService.listByPage(name, queryRequest);
-        return ResultEntity.ok(pageInfo);
+    public ResultEntity<List<UserGroupTree>> list(String name) {
+        List<UserGroupTree> userGroupTrees = userGroupService.listBy(name);
+        return ResultEntity.ok(userGroupTrees);
     }
 }

@@ -12,6 +12,6 @@
         left join user_role ur on (ur.role_id = r.id)
         left join user u on (u.id = ur.user_id)
         where u.username = #{username})
-        order by m.create_time desc, m.sort_index desc
+        order by m.create_time desc, m.sort_index asc
     </select>
 </mapper>

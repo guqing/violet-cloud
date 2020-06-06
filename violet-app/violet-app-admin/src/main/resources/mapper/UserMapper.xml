@@ -52,7 +52,9 @@
         </if>
         group by u.username,u.id,u.email,u.mobile,u.status,u.create_time,u.gender,
         u.group_id,u.last_login_time,u.modify_time,u.description,
-        u.avatar limit ${queryRequest.pageSize * (queryRequest.current-1)},
+        u.avatar
+        order by u.create_time desc
+        limit ${queryRequest.pageSize * (queryRequest.current-1)},
          #{queryRequest.pageSize}
     </select>
 

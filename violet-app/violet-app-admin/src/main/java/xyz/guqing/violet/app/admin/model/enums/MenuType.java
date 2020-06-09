@@ -23,4 +23,13 @@ public enum MenuType {
     public void setValue(String value) {
         this.value = value;
     }
+
+    public static String valueFrom(String type) {
+        for(MenuType menuType : values()) {
+            if(menuType.getValue().equals(type)) {
+                return type;
+            }
+        }
+        return MENU.getValue();
+    }
 }

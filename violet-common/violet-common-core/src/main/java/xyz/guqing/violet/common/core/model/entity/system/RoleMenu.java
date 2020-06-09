@@ -13,9 +13,8 @@ import lombok.experimental.Accessors;
  * @since 2020-05-21
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class RoleMenu extends BaseEntity {
+public class RoleMenu {
 
     private static final long serialVersionUID = 1L;
 

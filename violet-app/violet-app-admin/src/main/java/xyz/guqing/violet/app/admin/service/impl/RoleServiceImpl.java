@@ -1,15 +1,19 @@
 package xyz.guqing.violet.app.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import xyz.guqing.violet.app.admin.mapper.RoleMapper;
+import xyz.guqing.violet.app.admin.mapper.RoleMenuMapper;
 import xyz.guqing.violet.app.admin.mapper.UserRoleMapper;
 import xyz.guqing.violet.app.admin.model.dto.RoleDTO;
 import xyz.guqing.violet.app.admin.model.entity.RoleDO;
 import xyz.guqing.violet.app.admin.model.param.RoleQuery;
+import xyz.guqing.violet.app.admin.service.RoleMenuService;
 import xyz.guqing.violet.app.admin.service.RoleService;
+import xyz.guqing.violet.common.core.model.entity.system.RoleMenu;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.entity.system.Role;
 import xyz.guqing.violet.common.core.model.entity.system.UserRole;
@@ -18,6 +22,7 @@ import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
@@ -28,6 +33,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements RoleService {
     private final UserRoleMapper userRoleMapper;
+    private final RoleMenuService roleMenuService;
 
     @Override
     public void saveUserRoles(Long userId, List<Long> roleIds) {
@@ -66,5 +72,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         pageInfo.setTotal(countRole);
         pageInfo.setPages(VioletUtil.getPageTotal(queryRequest.getPageSize(), countRole));
         return pageInfo;
+    }
+
+    @Override
+    public void createOrUpdate(Role role, Set<Long> menuIds) {
+        saveOrUpdate(role);
+        // 创建角色和菜单关联关系
+        roleMenuService.createOrUpdate(role.getId(), menuIds);
     }
 }

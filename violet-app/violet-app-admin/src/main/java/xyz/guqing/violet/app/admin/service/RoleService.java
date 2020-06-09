@@ -7,6 +7,7 @@ import xyz.guqing.violet.common.core.model.entity.system.Role;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author guqing
@@ -26,4 +27,11 @@ public interface RoleService extends IService<Role> {
      * @return 返回分页角色列表
      */
     PageInfo<RoleDTO> listBy(RoleQuery roleQuery);
+
+    /**
+     * 创建或更新角色和角色关联的菜单信息
+     * @param role 角色信息
+     * @param menuIds 角色关联的菜单集合
+     */
+    void createOrUpdate(Role role, Set<Long> menuIds);
 }

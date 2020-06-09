@@ -1,6 +1,7 @@
 package xyz.guqing.violet.app.admin.model.param;
 
 import lombok.Data;
+import xyz.guqing.violet.app.admin.model.enums.MenuType;
 import xyz.guqing.violet.common.core.model.entity.system.Menu;
 import xyz.guqing.violet.common.core.model.support.InputConverter;
 
@@ -21,8 +22,6 @@ public class MenuParam implements InputConverter<Menu> {
     @Size(max = 150, message = "菜单标题不能字符长度不能大于 {max}")
     private String title;
 
-    @NotBlank(message = "资源类型不能为空")
-    @Size(max = 1, message = "资源类型只能是0或1")
     private String type;
 
     private String path;
@@ -51,6 +50,9 @@ public class MenuParam implements InputConverter<Menu> {
         if(sortIndex == null) {
             sortIndex = 0L;
         }
+
+        type = MenuType.valueFrom(type);
+
         return InputConverter.super.convertTo();
     }
 }

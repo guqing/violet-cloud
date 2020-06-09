@@ -1,24 +1,21 @@
 package xyz.guqing.violet.app.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import xyz.guqing.violet.app.admin.mapper.RoleMapper;
-import xyz.guqing.violet.app.admin.mapper.RoleMenuMapper;
 import xyz.guqing.violet.app.admin.mapper.UserRoleMapper;
 import xyz.guqing.violet.app.admin.model.dto.RoleDTO;
-import xyz.guqing.violet.app.admin.model.entity.RoleDO;
 import xyz.guqing.violet.app.admin.model.param.RoleQuery;
 import xyz.guqing.violet.app.admin.service.RoleMenuService;
 import xyz.guqing.violet.app.admin.service.RoleService;
-import xyz.guqing.violet.common.core.model.entity.system.RoleMenu;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.entity.system.Role;
 import xyz.guqing.violet.common.core.model.entity.system.UserRole;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
-import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import java.util.Collections;
 import java.util.List;
@@ -47,30 +44,40 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     @Override
     public PageInfo<RoleDTO> listBy(RoleQuery roleQuery) {
-        QueryRequest queryRequest = roleQuery.getQueryRequest();
-        PageInfo<RoleDTO> pageInfo = new PageInfo<>();
-        pageInfo.setPageSize(queryRequest.getPageSize());
-        pageInfo.setCurrent(queryRequest.getCurrent());
-
-        Long countRole = this.baseMapper.countRoleBy(roleQuery);
-        if(countRole == 0) {
-            pageInfo.setList(Collections.emptyList());
-            pageInfo.setTotal(countRole);
-            pageInfo.setPages(1L);
-            return pageInfo;
+        LambdaQueryWrapper<Role> queryWrapper = Wrappers.lambdaQuery();
+        if(roleQuery.getId() != null) {
+            queryWrapper.like(Role::getId, roleQuery.getId());
         }
 
-        List<RoleDO> userRoleMenu = this.baseMapper.findUserRoleMenu(roleQuery);
-        List<RoleDTO> roleDtoList = userRoleMenu.stream().map(roleDO -> {
-            RoleDTO roleDTO = new RoleDTO();
-            BeanUtils.copyProperties(roleDO, roleDTO);
-            roleDTO.setMenuIds(roleDO.getMenuIds());
+        if(roleQuery.getRoleName() != null) {
+            queryWrapper.like(Role::getRoleName, roleQuery.getRoleName());
+        }
+
+        if(roleQuery.getRemark() != null) {
+            queryWrapper.like(Role::getRemark, roleQuery.getRemark());
+        }
+        queryWrapper.orderByAsc(Role::getCreateTime);
+        QueryRequest queryRequest = roleQuery.getQueryRequest();
+        Page<Role> rolePage = new Page<>(queryRequest.getPageSize(),queryRequest.getCurrent());
+
+        return convertTo(page(rolePage, queryWrapper));
+    }
+
+    private PageInfo<RoleDTO> convertTo(Page<Role> page) {
+        PageInfo<RoleDTO> pageInfo = new PageInfo<>();
+        pageInfo.setPageSize(page.getSize());
+        pageInfo.setCurrent(page.getCurrent());
+        pageInfo.setTotal(page.getTotal());
+        pageInfo.setPages(page.getPages());
+
+        List<Role> roleList = page.getRecords();
+        List<RoleDTO> roleDtoList = roleList.stream().map(role -> {
+            RoleDTO roleDTO = new RoleDTO().convertFrom(role);
+            roleDTO.setMenuIds(Collections.emptySet());
             return roleDTO;
         }).collect(Collectors.toList());
 
         pageInfo.setList(roleDtoList);
-        pageInfo.setTotal(countRole);
-        pageInfo.setPages(VioletUtil.getPageTotal(queryRequest.getPageSize(), countRole));
         return pageInfo;
     }
 

@@ -51,6 +51,10 @@ public class MenuParam implements InputConverter<Menu> {
             sortIndex = 0L;
         }
 
+        if(keepAlive == null) {
+            keepAlive = false;
+        }
+
         type = MenuType.valueFrom(type);
 
         return InputConverter.super.convertTo();

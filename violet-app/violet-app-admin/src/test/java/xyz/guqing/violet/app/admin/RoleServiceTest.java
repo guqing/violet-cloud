@@ -23,10 +23,7 @@ class RoleServiceTest {
 
     @Test
     void test() {
-        QueryRequest queryRequest = new QueryRequest();
-        RoleQuery role = new RoleQuery();
-        role.setQueryRequest(queryRequest);
-        Page<Role> pageInfo = roleService.listBy(role);
-        System.out.println(JSONObject.toJSONString(pageInfo));
+        RoleDTO roleById = roleService.getRoleById(1L);
+        System.out.println(roleById);
     }
 }

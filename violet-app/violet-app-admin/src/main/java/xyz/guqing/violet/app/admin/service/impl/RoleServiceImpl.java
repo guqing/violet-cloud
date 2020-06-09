@@ -77,7 +77,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         Optional<RoleDO> optionalRoleDO = this.baseMapper.findById(roleId);
         if(optionalRoleDO.isPresent()) {
             RoleDO roleDO = optionalRoleDO.get();
-            new RoleDTO().convertFrom(roleDO);
+            return new RoleDTO().convertFrom(roleDO);
         }
         return null;
     }

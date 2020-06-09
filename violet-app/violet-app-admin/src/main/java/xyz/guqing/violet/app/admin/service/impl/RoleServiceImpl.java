@@ -45,7 +45,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-    public PageInfo<RoleDTO> listBy(RoleQuery roleQuery) {
+    public Page<Role> listBy(RoleQuery roleQuery) {
         LambdaQueryWrapper<Role> queryWrapper = Wrappers.lambdaQuery();
         if(roleQuery.getId() != null) {
             queryWrapper.like(Role::getId, roleQuery.getId());
@@ -60,27 +60,9 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         }
         queryWrapper.orderByAsc(Role::getCreateTime);
         QueryRequest queryRequest = roleQuery.getQueryRequest();
-        Page<Role> rolePage = new Page<>(queryRequest.getPageSize(),queryRequest.getCurrent());
+        Page<Role> rolePage = new Page<>(queryRequest.getCurrent(),queryRequest.getPageSize());
 
-        return convertTo(page(rolePage, queryWrapper));
-    }
-
-    private PageInfo<RoleDTO> convertTo(Page<Role> page) {
-        PageInfo<RoleDTO> pageInfo = new PageInfo<>();
-        pageInfo.setPageSize(page.getSize());
-        pageInfo.setCurrent(page.getCurrent());
-        pageInfo.setTotal(page.getTotal());
-        pageInfo.setPages(page.getPages());
-
-        List<Role> roleList = page.getRecords();
-        List<RoleDTO> roleDtoList = roleList.stream().map(role -> {
-            RoleDTO roleDTO = new RoleDTO().convertFrom(role);
-            roleDTO.setMenuIds(Collections.emptySet());
-            return roleDTO;
-        }).collect(Collectors.toList());
-
-        pageInfo.setList(roleDtoList);
-        return pageInfo;
+        return page(rolePage, queryWrapper);
     }
 
     @Override

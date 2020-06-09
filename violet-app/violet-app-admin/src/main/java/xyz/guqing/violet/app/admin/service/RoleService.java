@@ -1,5 +1,6 @@
 package xyz.guqing.violet.app.admin.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.app.admin.model.dto.RoleDTO;
 import xyz.guqing.violet.app.admin.model.param.RoleQuery;
@@ -26,7 +27,7 @@ public interface RoleService extends IService<Role> {
      * @param roleQuery 查询条件
      * @return 返回分页角色列表
      */
-    PageInfo<RoleDTO> listBy(RoleQuery roleQuery);
+    Page<Role> listBy(RoleQuery roleQuery);
 
     /**
      * 创建或更新角色和角色关联的菜单信息

@@ -34,4 +34,11 @@ public interface RoleService extends IService<Role> {
      * @param menuIds 角色关联的菜单集合
      */
     void createOrUpdate(Role role, Set<Long> menuIds);
+
+    /**
+     * 根据角色id查询角色详情
+     * @param roleId 角色id
+     * @return 查询到返回角色详情否则返回{@code null}
+     */
+    RoleDTO getRoleById(Long roleId);
 }

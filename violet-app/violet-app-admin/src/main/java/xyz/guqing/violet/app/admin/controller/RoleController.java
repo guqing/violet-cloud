@@ -36,6 +36,11 @@ public class RoleController {
         return ResultEntity.ok(pageInfo);
     }
 
+    @GetMapping("/{id}")
+    public ResultEntity<RoleDTO> get(@PathVariable Long id) {
+        return ResultEntity.ok(roleService.getRoleById(id));
+    }
+
     @PostMapping("/save")
     @PreAuthorize("hasAuthority('role:save')")
     @ControllerEndpoint(operation = "保存/更新", exceptionMessage = "保存/更新角色失败")

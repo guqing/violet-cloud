@@ -16,9 +16,9 @@
         </collection>
     </resultMap>
 
-    <select id="findUserRoleMenu" parameterType="xyz.guqing.violet.app.admin.model.param.RoleQuery"
+    <select id="findById" parameterType="java.lang.Long"
             resultMap="roleWithMenuResultMap">
-        select distinct
+        select
             role.id,
             role.role_name,
             role.remark,
@@ -29,33 +29,6 @@
             rm.menu_id menu_id
         from role
           left join role_menu rm on role.id = rm.role_id
-        where 1=1
-        <if test="id != null and id != ''">
-            AND role.id = #{id}
-        </if>
-        <if test="roleName != null and roleName != ''">
-            AND role.roleName = #{roleName}
-        </if>
-        <if test="remark != null and remark != ''">
-            AND role.remark = like CONCAT('%',#{remark},'%')
-        </if>
-        order by create_time
-        limit ${queryRequest.pageSize * (queryRequest.current-1)},
-        #{queryRequest.pageSize}
-    </select>
-
-    <select id="countRoleBy" parameterType="xyz.guqing.violet.app.admin.model.param.RoleQuery"
-            resultType="java.lang.Long">
-        select count(*) from role
-        where 1=1
-        <if test="id != null and id != ''">
-            AND role.id = #{id}
-        </if>
-        <if test="roleName != null and roleName != ''">
-            AND role.roleName = #{roleName}
-        </if>
-        <if test="remark != null and remark != ''">
-            AND role.remark = like CONCAT('%',#{remark},'%')
-        </if>
+        where role.id = #{id}
     </select>
 </mapper>

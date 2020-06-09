@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import xyz.guqing.violet.app.admin.mapper.RoleMapper;
 import xyz.guqing.violet.app.admin.mapper.UserRoleMapper;
 import xyz.guqing.violet.app.admin.model.dto.RoleDTO;
+import xyz.guqing.violet.app.admin.model.entity.RoleDO;
 import xyz.guqing.violet.app.admin.model.param.RoleQuery;
 import xyz.guqing.violet.app.admin.service.RoleMenuService;
 import xyz.guqing.violet.app.admin.service.RoleService;
@@ -19,6 +20,7 @@ import xyz.guqing.violet.common.core.model.support.PageInfo;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -86,5 +88,15 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         saveOrUpdate(role);
         // 创建角色和菜单关联关系
         roleMenuService.createOrUpdate(role.getId(), menuIds);
+    }
+
+    @Override
+    public RoleDTO getRoleById(Long roleId) {
+        Optional<RoleDO> optionalRoleDO = this.baseMapper.findById(roleId);
+        if(optionalRoleDO.isPresent()) {
+            RoleDO roleDO = optionalRoleDO.get();
+            new RoleDTO().convertFrom(roleDO);
+        }
+        return null;
     }
 }

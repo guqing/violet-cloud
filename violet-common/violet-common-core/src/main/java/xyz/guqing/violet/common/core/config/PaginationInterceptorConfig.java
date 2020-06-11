@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  */
 @Slf4j
 @Configuration
-public class MybatisPlusConfig {
+public class PaginationInterceptorConfig {
 
     @Bean
     @ConditionalOnMissingBean(PaginationInterceptor.class)

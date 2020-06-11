@@ -25,7 +25,8 @@
             LEFT JOIN user_group g ON (u.group_id = g.id)
             LEFT JOIN user_role ur ON (u.id = ur.user_id)
             LEFT JOIN role r ON (r.id = ur.role_id)
-        WHERE 1 = 1
+        WHERE
+            deleted=0
         <if test="username != null and username != ''">
             AND u.username = #{username}
         </if>
@@ -65,7 +66,8 @@
           count(*)
         from
           `user` u
-        WHERE 1 = 1
+        WHERE
+            deleted=0
         <if test="username != null and username != ''">
             AND u.username = #{username}
         </if>

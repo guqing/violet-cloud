@@ -3,6 +3,7 @@ package xyz.guqing.violet.app.admin.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.*;
  * @author guqing
  * @date 2020-06-01
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class VioletActionLogServiceImpl extends ServiceImpl<VioletActionLogMapper, VioletActionLog> implements VioletActionLogService {
@@ -48,6 +50,7 @@ public class VioletActionLogServiceImpl extends ServiceImpl<VioletActionLogMappe
             actionLog.setParams(params.toString());
         }
         actionLog.setCreateTime(LocalDateTime.now());
+        log.debug("访问ip的位置：[{}]", RegionAddressUtils.getCityInfo(ip));
         actionLog.setLocation(RegionAddressUtils.getCityInfo(ip));
         // 保存系统日志
         save(actionLog);

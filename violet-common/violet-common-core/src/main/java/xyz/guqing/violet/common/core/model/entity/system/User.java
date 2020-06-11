@@ -1,6 +1,8 @@
 package xyz.guqing.violet.common.core.model.entity.system;
 
 import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -83,5 +85,6 @@ public class User extends BaseEntity {
     /**
      * 删除状态：0未删除，1已删除
      */
+    @TableLogic
     private Integer deleted;
 }

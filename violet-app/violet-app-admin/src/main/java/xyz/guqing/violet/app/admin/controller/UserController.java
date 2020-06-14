@@ -60,6 +60,7 @@ public class UserController {
     @ControllerEndpoint(operation="修改个人信息", exceptionMessage = "修改个人信息失败")
     public ResultEntity<String> updateProfile(@Valid UserParam userParam) {
         User user = userParam.convertTo();
+        log.debug("当前用户信息:[{}]", VioletSecurityHelper.getCurrentUser());
         if(VioletSecurityHelper.isCurrentUser(user.getId())) {
             userService.updateById(user);
             return ResultEntity.ok();

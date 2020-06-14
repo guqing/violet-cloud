@@ -12,6 +12,7 @@ import xyz.guqing.violet.app.admin.service.UserService;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
+import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -59,15 +60,20 @@ public class UserController {
     @ControllerEndpoint(operation="修改个人信息", exceptionMessage = "修改个人信息失败")
     public ResultEntity<String> updateProfile(@Valid UserParam userParam) {
         User user = userParam.convertTo();
-        userService.updateById(user);
-        return ResultEntity.ok();
+        if(VioletSecurityHelper.isCurrentUser(user.getId())) {
+            userService.updateById(user);
+            return ResultEntity.ok();
+        }
+        return ResultEntity.accessDenied("无权修改别人的信息");
     }
 
     @PutMapping("avatar")
     @ControllerEndpoint(exceptionMessage = "修改头像失败")
-    public void updateAvatar(@RequestParam String avatar) {
+    public ResultEntity<String> updateAvatar(@RequestParam String avatar) {
+        String username = VioletSecurityHelper.getCurrentUsername();
+        userService.updateAvatar(username, avatar);
+        return ResultEntity.ok();
     }
-
 
     @DeleteMapping
     @PreAuthorize("hasAuthority('user:delete')")

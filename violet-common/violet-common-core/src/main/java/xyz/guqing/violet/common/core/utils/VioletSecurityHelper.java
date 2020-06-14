@@ -37,6 +37,16 @@ public class VioletSecurityHelper {
     }
 
     /**
+     * 判断id是否为当前登录用户id
+     * @param id 用户id
+     * @return 判断用户id是否为当前用户，如果是返回{@code true}否则返回{@code false}
+     */
+    public static boolean isCurrentUser(Long id) {
+        CurrentUser currentUser = getCurrentUser();
+        return currentUser != null && id.equals(currentUser.getId());
+    }
+
+    /**
      * 获取当前用户名称
      *
      * @return String 用户名

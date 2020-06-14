@@ -41,4 +41,11 @@ public interface UserService extends IService<User> {
      * @param userParam 用户信息
      */
     void updateUser(UserParam userParam);
+
+    /**
+     * 修改用户头像
+     * @param username 用户名
+     * @param avatar 头像url
+     */
+    void updateAvatar(String username, String avatar);
 }

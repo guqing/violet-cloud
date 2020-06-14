@@ -10,6 +10,7 @@
             u.email,
             u.mobile,
             u.status,
+            u.deleted,
             u.create_time createTime,
             u.gender,
             u.group_id,
@@ -26,7 +27,7 @@
             LEFT JOIN user_role ur ON (u.id = ur.user_id)
             LEFT JOIN role r ON (r.id = ur.role_id)
         WHERE
-            deleted=0
+            u.deleted=0
         <if test="username != null and username != ''">
             AND u.username = #{username}
         </if>
@@ -67,7 +68,7 @@
         from
           `user` u
         WHERE
-            deleted=0
+            u.deleted=0
         <if test="username != null and username != ''">
             AND u.username = #{username}
         </if>

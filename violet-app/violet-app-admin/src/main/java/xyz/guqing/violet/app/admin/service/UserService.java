@@ -35,4 +35,10 @@ public interface UserService extends IService<User> {
      * @param userParam 用户参数
      */
     void createUser(UserParam userParam);
+
+    /**
+     * 根据id用户id更新用户信息和用户角色关系
+     * @param userParam 用户信息
+     */
+    void updateUser(UserParam userParam);
 }

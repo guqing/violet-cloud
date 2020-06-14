@@ -1,10 +1,13 @@
 package xyz.guqing.violet.app.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.guqing.violet.app.admin.mapper.UserMapper;
+import xyz.guqing.violet.app.admin.mapper.UserRoleMapper;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
 import xyz.guqing.violet.app.admin.model.entity.UserDO;
 import xyz.guqing.violet.app.admin.model.enums.GenderEnum;
@@ -13,11 +16,13 @@ import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.app.admin.service.RoleService;
 import xyz.guqing.violet.app.admin.service.UserService;
+import xyz.guqing.violet.common.core.model.entity.system.UserRole;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 
+import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +39,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     private final RoleService roleService;
+    private final UserRoleMapper userRoleMapper;
 
     @Override
     public PageInfo<UserDTO> listByPage(UserQuery userQuery) {
@@ -91,5 +97,23 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         roleService.saveUserRoles(user.getId(), userParam.getRoleIds());
     }
 
+    @Override
+    public void updateUser(UserParam userParam) {
+        User user = userParam.convertTo();
+        this.updateById(user);
+
+        // 更新用户角色,先删除在插入
+        LambdaQueryWrapper<UserRole> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(UserRole::getUserId, user.getId());
+        userRoleMapper.delete(queryWrapper);
+        List<Long> roleIds = userParam.getRoleIds();
+        // 插入
+        roleIds.forEach(roleId -> {
+            UserRole userRole = new UserRole();
+            userRole.setUserId(user.getId());
+            userRole.setRoleId(roleId);
+            userRoleMapper.insert(userRole);
+        });
+    }
 
 }

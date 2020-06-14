@@ -9,6 +9,7 @@ import xyz.guqing.violet.app.admin.model.dto.UserDTO;
 import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.app.admin.service.UserService;
+import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
@@ -49,7 +50,9 @@ public class UserController {
     @PutMapping
     @PreAuthorize("hasAuthority('user:update')")
     @ControllerEndpoint(operation = "修改用户", exceptionMessage = "修改用户失败")
-    public void updateUser(@Valid UserParam userParam) {
+    public ResultEntity<String> updateUser(@Valid UserParam userParam) {
+        userService.updateUser(userParam);
+        return ResultEntity.ok();
     }
 
     @PutMapping("profile")

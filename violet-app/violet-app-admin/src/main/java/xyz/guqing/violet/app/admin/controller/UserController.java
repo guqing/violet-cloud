@@ -56,8 +56,11 @@ public class UserController {
     }
 
     @PutMapping("profile")
-    @ControllerEndpoint(exceptionMessage = "修改个人信息失败")
-    public void updateProfile(@Valid UserParam userParam) {
+    @ControllerEndpoint(operation="修改个人信息", exceptionMessage = "修改个人信息失败")
+    public ResultEntity<String> updateProfile(@Valid UserParam userParam) {
+        User user = userParam.convertTo();
+        userService.updateById(user);
+        return ResultEntity.ok();
     }
 
     @PutMapping("avatar")

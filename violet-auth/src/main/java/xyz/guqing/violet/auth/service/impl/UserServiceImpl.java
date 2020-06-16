@@ -1,6 +1,7 @@
 package xyz.guqing.violet.auth.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +17,7 @@ import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.exception.NotFoundException;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -58,6 +60,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         List<String> permissionList = VioletUtil.commaSeparatedToList(permissions);
         userInfoDTO.setPermissions(permissionList);
         return userInfoDTO;
+    }
+
+    @Override
+    public void updateLastLoginTime(Long userId, LocalDateTime loginTime) {
+        LambdaUpdateWrapper<User> updateWrapper = Wrappers.lambdaUpdate();
+        updateWrapper.set(User::getLastLoginTime, loginTime).eq(User::getId, userId);
+        update(updateWrapper);
     }
 
     private UserInfoDTO convertTo(CurrentUser currentUser) {

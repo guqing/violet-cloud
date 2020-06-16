@@ -3,6 +3,7 @@ package xyz.guqing.violet.auth.security.service;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.context.ApplicationContext;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import xyz.guqing.violet.auth.event.UserLoginEvent;
 import xyz.guqing.violet.auth.model.constant.SocialConstant;
 import xyz.guqing.violet.auth.service.MenuService;
 import xyz.guqing.violet.common.core.model.bo.CurrentUser;
@@ -30,13 +32,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private final PasswordEncoder passwordEncoder;
     private final UserService userService;
     private final MenuService menuService;
+    private final ApplicationContext applicationContext;
 
     public UserDetailsServiceImpl(PasswordEncoder passwordEncoder,
                                   UserService userService,
-                                  MenuService menuService) {
+                                  MenuService menuService,
+                                  ApplicationContext applicationContext) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
         this.menuService = menuService;
+        this.applicationContext = applicationContext;
     }
 //    private RedisTokenStoreSerializationStrategy serializationStrategy = new JdkSerializationStrategy();
 
@@ -72,6 +77,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         BeanUtils.copyProperties(user, myUserDetails);
         myUserDetails.setRoleIds(VioletUtil.commaSeparatedToList(user.getRoleId()));
         myUserDetails.setRoleNames(VioletUtil.commaSeparatedToList(user.getRoleName()));
+
+        // 发布事件处理登录
+        applicationContext.publishEvent(new UserLoginEvent(this, user.getId()));
+
         // 返回自定义的 MyUserDetails
         return myUserDetails;
     }

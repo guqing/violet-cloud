@@ -6,6 +6,7 @@ import xyz.guqing.violet.common.core.model.bo.CurrentUser;
 import xyz.guqing.violet.common.core.model.entity.system.Menu;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -37,4 +38,11 @@ public interface UserService extends IService<User> {
      * @return 返回查询到的用户信息dto，用户不存在抛出异常
      */
     UserInfoDTO getUserInfo(String username);
+
+    /**
+     * 更新最后登录时间
+     * @param userId 用户id
+     * @param loginTime 最后登录时间
+     */
+    void updateLastLoginTime(Long userId, LocalDateTime loginTime);
 }

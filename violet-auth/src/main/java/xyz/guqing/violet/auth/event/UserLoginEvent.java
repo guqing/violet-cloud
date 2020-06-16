@@ -7,23 +7,23 @@ import org.springframework.context.ApplicationEvent;
  * @date 2020-06-16
  */
 public class UserLoginEvent extends ApplicationEvent {
-    private Long userId;
+    private String username;
     /**
      * Create a new {@code ApplicationEvent}.
      *
      * @param source the object on which the event initially occurred or with
      *               which the event is associated (never {@code null})
      */
-    public UserLoginEvent(Object source, Long userId) {
+    public UserLoginEvent(Object source, String username) {
         super(source);
-        this.userId = userId;
+        this.username = username;
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

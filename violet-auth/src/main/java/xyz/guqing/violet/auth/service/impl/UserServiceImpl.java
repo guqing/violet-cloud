@@ -11,7 +11,6 @@ import xyz.guqing.violet.auth.mapper.UserMapper;
 import xyz.guqing.violet.auth.model.dto.UserInfoDTO;
 import xyz.guqing.violet.auth.service.MenuService;
 import xyz.guqing.violet.common.core.model.bo.CurrentUser;
-import xyz.guqing.violet.common.core.model.entity.system.Menu;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.exception.NotFoundException;
@@ -20,7 +19,6 @@ import xyz.guqing.violet.common.core.utils.VioletUtil;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -63,9 +61,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public void updateLastLoginTime(Long userId, LocalDateTime loginTime) {
+    public void updateLastLoginTime(String username, LocalDateTime loginTime) {
         LambdaUpdateWrapper<User> updateWrapper = Wrappers.lambdaUpdate();
-        updateWrapper.set(User::getLastLoginTime, loginTime).eq(User::getId, userId);
+        updateWrapper.set(User::getLastLoginTime, loginTime).eq(User::getUsername, username);
         update(updateWrapper);
     }
 

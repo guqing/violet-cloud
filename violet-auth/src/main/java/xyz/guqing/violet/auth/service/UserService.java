@@ -41,8 +41,8 @@ public interface UserService extends IService<User> {
 
     /**
      * 更新最后登录时间
-     * @param userId 用户id
+     * @param username 用户名
      * @param loginTime 最后登录时间
      */
-    void updateLastLoginTime(Long userId, LocalDateTime loginTime);
+    void updateLastLoginTime(String username, LocalDateTime loginTime);
 }

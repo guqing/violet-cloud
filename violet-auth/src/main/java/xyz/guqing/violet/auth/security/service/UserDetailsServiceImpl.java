@@ -79,7 +79,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         myUserDetails.setRoleNames(VioletUtil.commaSeparatedToList(user.getRoleName()));
 
         // 发布事件处理登录
-        applicationContext.publishEvent(new UserLoginEvent(this, user.getId()));
+        applicationContext.publishEvent(new UserLoginEvent(this, user.getUsername()));
 
         // 返回自定义的 MyUserDetails
         return myUserDetails;

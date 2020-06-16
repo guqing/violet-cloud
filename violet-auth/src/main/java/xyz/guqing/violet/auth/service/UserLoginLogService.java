@@ -12,5 +12,4 @@ import xyz.guqing.violet.common.core.model.entity.system.UserLoginLog;
  * @since 2020-05-21
  */
 public interface UserLoginLogService extends IService<UserLoginLog> {
-
 }

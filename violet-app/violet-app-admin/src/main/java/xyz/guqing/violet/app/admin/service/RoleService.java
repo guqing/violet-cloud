@@ -42,4 +42,10 @@ public interface RoleService extends IService<Role> {
      * @return 查询到返回角色详情否则返回{@code null}
      */
     RoleDTO getRoleById(Long roleId);
+
+    /**
+     * 删除角色
+     * @param roleIds 角色id集合
+     */
+    void deleteRoles(List<Long> roleIds);
 }

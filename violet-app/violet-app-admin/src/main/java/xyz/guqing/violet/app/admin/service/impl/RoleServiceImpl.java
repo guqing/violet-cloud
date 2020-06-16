@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import xyz.guqing.violet.app.admin.mapper.RoleMapper;
 import xyz.guqing.violet.app.admin.mapper.UserRoleMapper;
 import xyz.guqing.violet.app.admin.model.dto.RoleDTO;
@@ -13,16 +14,14 @@ import xyz.guqing.violet.app.admin.model.entity.RoleDO;
 import xyz.guqing.violet.app.admin.model.param.RoleQuery;
 import xyz.guqing.violet.app.admin.service.RoleMenuService;
 import xyz.guqing.violet.app.admin.service.RoleService;
+import xyz.guqing.violet.app.admin.service.UserRoleService;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.entity.system.Role;
 import xyz.guqing.violet.common.core.model.entity.system.UserRole;
-import xyz.guqing.violet.common.core.model.support.PageInfo;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * @author guqing
@@ -31,7 +30,7 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements RoleService {
-    private final UserRoleMapper userRoleMapper;
+    private final UserRoleService userRoleService;
     private final RoleMenuService roleMenuService;
 
     @Override
@@ -40,7 +39,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             UserRole userRole = new UserRole();
             userRole.setUserId(userId);
             userRole.setRoleId(roleId);
-            userRoleMapper.insert(userRole);
+            userRoleService.save(userRole);
         });
     }
 
@@ -80,5 +79,14 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             return new RoleDTO().convertFrom(roleDO);
         }
         return null;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteRoles(List<Long> roleIds) {
+        removeByIds(roleIds);
+
+        roleMenuService.deleteByRoleIds(roleIds);
+        userRoleService.deleteByRoleIds(roleIds);
     }
 }

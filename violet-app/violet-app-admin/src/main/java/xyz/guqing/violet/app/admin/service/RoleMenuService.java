@@ -25,4 +25,10 @@ public interface RoleMenuService extends IService<RoleMenu> {
      * @param menuIds 角色对应的菜单id集合
      */
     void createOrUpdate(Long roleId, Set<Long> menuIds);
+
+    /**
+     * 根据角色id集合批量删除关联关系
+     * @param roleIds 菜单id集合
+     */
+    void deleteByRoleIds(List<Long> roleIds);
 }

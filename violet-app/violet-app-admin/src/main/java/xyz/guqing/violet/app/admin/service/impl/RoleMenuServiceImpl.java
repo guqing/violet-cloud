@@ -43,6 +43,13 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
         }
     }
 
+    @Override
+    public void deleteByRoleIds(List<Long> roleIds) {
+        LambdaQueryWrapper<RoleMenu> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(RoleMenu::getRoleId, roleIds);
+        remove(queryWrapper);
+    }
+
     private void removeByRoleId(Long roleId) {
         // 根据角色id删除
         LambdaQueryWrapper<RoleMenu> queryWrapper = Wrappers.lambdaQuery();

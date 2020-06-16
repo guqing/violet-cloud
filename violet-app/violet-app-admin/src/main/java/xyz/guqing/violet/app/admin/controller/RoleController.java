@@ -17,6 +17,7 @@ import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author guqing
@@ -49,5 +50,12 @@ public class RoleController {
         Role role = roleParam.convertTo();
         roleService.createOrUpdate(role, roleParam.getMenuIds());
         return ResultEntity.ok();
+    }
+
+    @DeleteMapping
+    @PreAuthorize("hasAuthority('role:delete')")
+    @ControllerEndpoint(operation = "删除角色", exceptionMessage = "删除角色失败")
+    public void deleteRoles(List<Long> roleIds) {
+        roleService.deleteRoles(roleIds);
     }
 }

@@ -38,4 +38,10 @@ public interface MenuService extends IService<Menu> {
      * @return 返回查询到的菜单树
      */
     List<MenuTree> listTreeMenus(Menu menu);
+
+    /**
+     * 根据id集合批量递归删除菜单
+     * @param menuIds 菜单id集合
+     */
+    void deleteMenus(List<Long> menuIds);
 }

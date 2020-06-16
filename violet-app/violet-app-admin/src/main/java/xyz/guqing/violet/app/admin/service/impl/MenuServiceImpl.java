@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import xyz.guqing.violet.app.admin.mapper.MenuMapper;
 import xyz.guqing.violet.app.admin.model.enums.MenuType;
@@ -12,12 +13,14 @@ import xyz.guqing.violet.app.admin.service.MenuService;
 import xyz.guqing.violet.common.core.model.entity.router.RouterMeta;
 import xyz.guqing.violet.common.core.model.entity.router.VueRouter;
 import xyz.guqing.violet.common.core.model.dto.MenuTree;
+import xyz.guqing.violet.common.core.model.entity.system.BaseEntity;
 import xyz.guqing.violet.common.core.model.entity.system.Menu;
 import xyz.guqing.violet.common.core.utils.TreeUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -51,6 +54,35 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         } else {
             return TreeUtil.build(menuTrees);
         }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteMenus(List<Long> menuIds) {
+        delete(menuIds);
+    }
+
+    /**
+     * 根据菜单id集合递归删除菜单
+     * @param menuIds 菜单id集合
+     */
+    private void delete(List<Long> menuIds) {
+        // 根据id集合删除菜单
+        removeByIds(menuIds);
+
+        LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.in(Menu::getParentId, menuIds);
+        List<Menu> menus = list(queryWrapper);
+
+        if (CollectionUtils.isEmpty(menus)) {
+            return;
+        }
+
+        List<Long> menuIdList = menus.stream()
+                .map(Menu::getId)
+                .collect(Collectors.toList());
+        // 递归
+        this.delete(menuIdList);
     }
 
     private List<MenuTree> convertTo(List<Menu> menus) {

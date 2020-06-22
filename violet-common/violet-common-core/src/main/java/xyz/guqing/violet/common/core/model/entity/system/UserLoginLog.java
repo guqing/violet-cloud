@@ -1,6 +1,8 @@
 package xyz.guqing.violet.common.core.model.entity.system;
 
 import java.time.LocalDateTime;
+
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -43,6 +45,7 @@ public class UserLoginLog extends BaseEntity {
     /**
      * 操作系统
      */
+    @TableField("`system`")
     private String system;
 
     /**

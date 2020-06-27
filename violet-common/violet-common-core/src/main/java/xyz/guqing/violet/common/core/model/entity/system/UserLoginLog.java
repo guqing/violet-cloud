@@ -52,6 +52,4 @@ public class UserLoginLog extends BaseEntity {
      * 浏览器
      */
     private String browser;
-
-
 }

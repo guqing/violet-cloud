@@ -84,4 +84,10 @@ public class UserController {
         userService.removeByIds(userIds);
         return ResultEntity.ok();
     }
+
+    @GetMapping("/check/username")
+    public ResultEntity<Boolean> checkUsername(String username) {
+        boolean isPresent = userService.isPresentByUsername(username);
+        return ResultEntity.ok(isPresent);
+    }
 }

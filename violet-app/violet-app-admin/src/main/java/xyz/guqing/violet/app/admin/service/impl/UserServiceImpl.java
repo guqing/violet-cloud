@@ -28,6 +28,7 @@ import xyz.guqing.violet.common.core.utils.VioletUtil;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -125,5 +126,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         updateWrapper.set(User::getAvatar, avatar)
                 .eq(User::getUsername, username);
         update(updateWrapper);
+    }
+
+    @Override
+    public boolean isPresentByUsername(String username) {
+        LambdaQueryWrapper<User> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(User::getUsername, username);
+        // 不为空即存在返回true
+        return Objects.nonNull(getOne(queryWrapper));
     }
 }

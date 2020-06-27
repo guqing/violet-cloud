@@ -55,4 +55,11 @@ public interface UserService extends IService<User> {
      * @return 用户名已经存在返回{@code true},否则返回{@code false}
      */
     boolean isPresentByUsername(String username);
+
+    /**
+     * 判断用户密码是否正确
+     * @param password 密码
+     * @return 如果正确返回{@code true},否则返回{@code false}
+     */
+    boolean isCorrectByPassword(String password);
 }

@@ -90,4 +90,10 @@ public class UserController {
         boolean isPresent = userService.isPresentByUsername(username);
         return ResultEntity.ok(isPresent);
     }
+
+    @GetMapping("/check/password")
+    public ResultEntity<Boolean> checkPassword(String password) {
+        boolean isCorrect = userService.isCorrectByPassword(password);
+        return ResultEntity.ok(isCorrect);
+    }
 }

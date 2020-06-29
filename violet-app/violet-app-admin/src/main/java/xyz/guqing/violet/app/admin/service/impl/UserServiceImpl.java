@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.guqing.violet.app.admin.mapper.UserMapper;
@@ -17,7 +18,6 @@ import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.app.admin.service.RoleService;
 import xyz.guqing.violet.app.admin.service.UserService;
-import xyz.guqing.violet.common.core.model.bo.CurrentUser;
 import xyz.guqing.violet.common.core.model.entity.system.UserRole;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.entity.system.User;
@@ -25,9 +25,9 @@ import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 
-import javax.validation.constraints.NotNull;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -43,6 +43,7 @@ import java.util.stream.Collectors;
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
     private final RoleService roleService;
     private final UserRoleMapper userRoleMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public PageInfo<UserDTO> listByPage(UserQuery userQuery) {
@@ -125,5 +126,25 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         updateWrapper.set(User::getAvatar, avatar)
                 .eq(User::getUsername, username);
         update(updateWrapper);
+    }
+
+    @Override
+    public boolean isPresentByUsername(String username) {
+        // 不为空即存在返回true
+        return Objects.nonNull(getByUsername(username));
+    }
+
+    private User getByUsername(String username) {
+        LambdaQueryWrapper<User> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(User::getUsername, username);
+        return getOne(queryWrapper);
+    }
+    @Override
+    public boolean isCorrectByPassword(String password) {
+        String username = VioletSecurityHelper.getCurrentUsername();
+        User user = getByUsername(username);
+        // 加密后匹配
+        String encodedPassword = passwordEncoder.encode(password);
+        return passwordEncoder.matches(encodedPassword, user.getPassword());
     }
 }

@@ -48,4 +48,18 @@ public interface UserService extends IService<User> {
      * @param avatar 头像url
      */
     void updateAvatar(String username, String avatar);
+
+    /**
+     * 判断用户名是否存在
+     * @param username 用户名
+     * @return 用户名已经存在返回{@code true},否则返回{@code false}
+     */
+    boolean isPresentByUsername(String username);
+
+    /**
+     * 判断用户密码是否正确
+     * @param password 密码
+     * @return 如果正确返回{@code true},否则返回{@code false}
+     */
+    boolean isCorrectByPassword(String password);
 }

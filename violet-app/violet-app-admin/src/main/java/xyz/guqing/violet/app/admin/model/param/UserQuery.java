@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 @Data
 public class UserQuery {
     private String username;
+    private String nickname;
     private Long groupId;
     private Integer gender;
     private Integer status;

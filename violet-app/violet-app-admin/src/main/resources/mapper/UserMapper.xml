@@ -7,6 +7,7 @@
         SELECT
             u.id,
             u.username,
+            u.nickname,
             u.email,
             u.mobile,
             u.status,
@@ -71,6 +72,9 @@
             u.deleted=0
         <if test="username != null and username != ''">
             AND u.username = #{username}
+        </if>
+        <if test="nickname != null and nickname != ''">
+            AND u.nickname = #{nickname}
         </if>
         <if test="groupId != null and groupId != ''">
             AND g.id = #{groupId}

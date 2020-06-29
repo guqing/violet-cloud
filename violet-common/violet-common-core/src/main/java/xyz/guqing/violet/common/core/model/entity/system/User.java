@@ -33,6 +33,11 @@ public class User extends BaseEntity {
     private String password;
 
     /**
+     * 昵称
+     */
+    private String nickname;
+
+    /**
      * 用户组
      */
     private Long groupId;

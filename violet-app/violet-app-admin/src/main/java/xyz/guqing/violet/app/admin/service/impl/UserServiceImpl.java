@@ -94,6 +94,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Transactional(rollbackFor = Exception.class)
     public void createUser(UserParam userParam) {
         User user = userParam.convertTo();
+        user.setNickname(user.getUsername());
         user.setStatus(UserStatusEnum.NORMAL.getValue());
         user.setGender(GenderEnum.MALE.getValue());
         //保存用户信息

@@ -18,6 +18,8 @@ import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.app.admin.service.RoleService;
 import xyz.guqing.violet.app.admin.service.UserService;
+import xyz.guqing.violet.common.core.exception.NotFoundException;
+import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
 import xyz.guqing.violet.common.core.model.entity.system.UserRole;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.entity.system.User;
@@ -146,5 +148,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 加密后匹配
         String encodedPassword = passwordEncoder.encode(password);
         return passwordEncoder.matches(encodedPassword, user.getPassword());
+    }
+
+    @Override
+    public void resetPassword(String username) {
+        User user = getByUsername(username);
+        if(user == null) {
+            throw new NotFoundException("用户不存在");
+        }
+        String defaultPassword = passwordEncoder.encode(VioletConstant.DEFAULT_PASSWORD);
+        user.setPassword(defaultPassword);
+
+        updateById(user);
     }
 }

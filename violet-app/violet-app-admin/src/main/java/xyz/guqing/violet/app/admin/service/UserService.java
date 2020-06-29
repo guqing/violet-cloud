@@ -62,4 +62,10 @@ public interface UserService extends IService<User> {
      * @return 如果正确返回{@code true},否则返回{@code false}
      */
     boolean isCorrectByPassword(String password);
+
+    /**
+     * 重置用户密码
+     * @param username 用户名
+     */
+    void resetPassword(String username);
 }

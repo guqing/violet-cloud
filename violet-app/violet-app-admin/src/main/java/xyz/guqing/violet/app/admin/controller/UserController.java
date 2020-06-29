@@ -96,4 +96,12 @@ public class UserController {
         boolean isCorrect = userService.isCorrectByPassword(password);
         return ResultEntity.ok(isCorrect);
     }
+
+    @PutMapping("/reset/{username}")
+    @PreAuthorize("hasAuthority('user:reset')")
+    @ControllerEndpoint(operation = "重置用户密码", exceptionMessage = "重置用户密码失败")
+    public ResultEntity<String> resetPassword(@PathVariable String username) {
+        userService.resetPassword(username);
+        return ResultEntity.ok();
+    }
 }

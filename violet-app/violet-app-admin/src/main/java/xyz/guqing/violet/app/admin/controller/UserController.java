@@ -91,6 +91,12 @@ public class UserController {
         return ResultEntity.ok(isPresent);
     }
 
+    @GetMapping("/check/email")
+    public ResultEntity<Boolean> checkEmail(String email) {
+        boolean isPresent = userService.isPresentByEmail(email);
+        return ResultEntity.ok(isPresent);
+    }
+
     @GetMapping("/check/password")
     public ResultEntity<Boolean> checkPassword(String password) {
         boolean isCorrect = userService.isCorrectByPassword(password);

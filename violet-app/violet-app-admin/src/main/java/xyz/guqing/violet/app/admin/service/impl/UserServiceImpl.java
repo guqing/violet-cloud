@@ -137,11 +137,24 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return Objects.nonNull(getByUsername(username));
     }
 
+    @Override
+    public boolean isPresentByEmail(String email) {
+        User user = getByEmail(email);
+        return Objects.nonNull(user);
+    }
+
     private User getByUsername(String username) {
         LambdaQueryWrapper<User> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.eq(User::getUsername, username);
         return getOne(queryWrapper);
     }
+
+    private User getByEmail(String email) {
+        LambdaQueryWrapper<User> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(User::getEmail, email);
+        return getOne(queryWrapper);
+    }
+
     @Override
     public boolean isCorrectByPassword(String password) {
         String username = VioletSecurityHelper.getCurrentUsername();

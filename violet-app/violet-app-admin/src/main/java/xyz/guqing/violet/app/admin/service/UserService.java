@@ -57,6 +57,13 @@ public interface UserService extends IService<User> {
     boolean isPresentByUsername(String username);
 
     /**
+     * 判断邮箱是否已经被绑定
+     * @param email 邮箱地址
+     * @return 如果邮箱地址已经被绑定则返回{@code true},否则返回{@code false}
+     */
+    boolean isPresentByEmail(String email);
+
+    /**
      * 判断用户密码是否正确
      * @param password 密码
      * @return 如果正确返回{@code true},否则返回{@code false}

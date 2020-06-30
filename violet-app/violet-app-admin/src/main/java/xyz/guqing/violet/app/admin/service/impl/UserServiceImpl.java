@@ -105,6 +105,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateUser(UserParam userParam) {
         User user = userParam.convertTo();
         this.updateById(user);
@@ -124,6 +125,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void updateAvatar(String username, String avatar) {
         LambdaUpdateWrapper<User> updateWrapper = Wrappers.lambdaUpdate(User.class);
         updateWrapper.set(User::getAvatar, avatar)
@@ -165,6 +167,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void resetPassword(String username) {
         User user = getByUsername(username);
         if(user == null) {
@@ -173,6 +176,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         String defaultPassword = passwordEncoder.encode(VioletConstant.DEFAULT_PASSWORD);
         user.setPassword(defaultPassword);
 
+        updateById(user);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateStatus(String username, UserStatusEnum status) {
+        User user = getByUsername(username);
+        if(user == null) {
+            throw new NotFoundException("用户不存在");
+        }
+        user.setStatus(status.getValue());
         updateById(user);
     }
 }

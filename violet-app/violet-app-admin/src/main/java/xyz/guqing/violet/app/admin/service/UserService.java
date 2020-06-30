@@ -2,6 +2,7 @@ package xyz.guqing.violet.app.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
+import xyz.guqing.violet.app.admin.model.enums.UserStatusEnum;
 import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.common.core.model.entity.system.User;
@@ -75,4 +76,11 @@ public interface UserService extends IService<User> {
      * @param username 用户名
      */
     void resetPassword(String username);
+
+    /**
+     * 更新用户状态
+     * @param username 用户名
+     * @param status 用户状态
+     */
+    void updateStatus(String username, UserStatusEnum status);
 }

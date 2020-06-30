@@ -6,6 +6,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import xyz.guqing.violet.app.admin.model.annotation.ControllerEndpoint;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
+import xyz.guqing.violet.app.admin.model.enums.UserStatusEnum;
 import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.app.admin.service.UserService;
@@ -108,6 +109,30 @@ public class UserController {
     @ControllerEndpoint(operation = "重置用户密码", exceptionMessage = "重置用户密码失败")
     public ResultEntity<String> resetPassword(@PathVariable String username) {
         userService.resetPassword(username);
+        return ResultEntity.ok();
+    }
+
+    @PutMapping("/lock/{username}")
+    @PreAuthorize("hasAuthority('user:update')")
+    @ControllerEndpoint(operation = "锁定用户帐号", exceptionMessage = "锁定用户帐号失败")
+    public ResultEntity<String> lockUser(@PathVariable String username) {
+        if(username.equals(VioletSecurityHelper.getCurrentUsername())) {
+            return ResultEntity.accessDenied("无法锁定自己的账号");
+        }
+
+        userService.updateStatus(username, UserStatusEnum.DISABLE);
+        return ResultEntity.ok();
+    }
+
+    @PutMapping("/unlock/{username}")
+    @PreAuthorize("hasAuthority('user:update')")
+    @ControllerEndpoint(operation = "解锁用户帐号", exceptionMessage = "解锁用户帐号失败")
+    public ResultEntity<String> unlockUser(@PathVariable String username) {
+        if(username.equals(VioletSecurityHelper.getCurrentUsername())) {
+            return ResultEntity.accessDenied("无法解锁自己的账号");
+        }
+
+        userService.updateStatus(username, UserStatusEnum.NORMAL);
         return ResultEntity.ok();
     }
 }

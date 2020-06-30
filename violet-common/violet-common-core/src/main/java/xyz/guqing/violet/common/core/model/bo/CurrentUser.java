@@ -24,6 +24,11 @@ public class CurrentUser implements Serializable {
     private String username;
 
     /**
+     * 昵称
+     */
+    private String nickname;
+
+    /**
      * 密码
      */
     @JsonIgnore

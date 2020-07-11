@@ -1,5 +1,9 @@
 package xyz.guqing.violet.app.admin.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +13,7 @@ import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import xyz.guqing.violet.app.admin.mapper.VioletActionLogMapper;
+import xyz.guqing.violet.app.admin.model.param.ActionLogQuery;
 import xyz.guqing.violet.app.admin.service.VioletActionLogService;
 import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
 import xyz.guqing.violet.common.core.model.entity.system.VioletActionLog;
@@ -54,6 +59,47 @@ public class VioletActionLogServiceImpl extends ServiceImpl<VioletActionLogMappe
         actionLog.setLocation(RegionAddressUtils.getCityInfo(ip));
         // 保存系统日志
         save(actionLog);
+    }
+
+    @Override
+    public IPage<VioletActionLog> listBy(ActionLogQuery logQuery) {
+        Integer pageSize = logQuery.getPageSize();
+        Integer current = logQuery.getCurrent();
+
+        LambdaQueryWrapper<VioletActionLog> queryWrapper = Wrappers.lambdaQuery();
+
+        if(current == null) {
+            current = 1;
+        }
+
+        if(pageSize == null) {
+            pageSize = 10;
+        }
+
+        if(logQuery.getUsername() != null) {
+            queryWrapper.like(VioletActionLog::getUsername, logQuery.getUsername());
+        }
+
+        if(logQuery.getOperation() != null) {
+            queryWrapper.like(VioletActionLog::getOperation, logQuery.getOperation());
+        }
+
+        if(logQuery.getLocation() != null) {
+            queryWrapper.like(VioletActionLog::getLocation, logQuery.getLocation());
+        }
+
+        // createFrom <= createTime <= createTo
+        if(logQuery.getCreateFrom() != null) {
+            queryWrapper.ge(VioletActionLog::getCreateTime, logQuery.getCreateFrom());
+        }
+
+        if(logQuery.getCreateTo() != null) {
+            queryWrapper.le(VioletActionLog::getCreateTime, logQuery.getCreateTo());
+        }
+
+        // 按照创建时间降序排列，最近的显示在最前面
+        queryWrapper.orderByDesc(VioletActionLog::getCreateTime);
+        return page(new Page<>(current, pageSize), queryWrapper);
     }
 
     private StringBuilder handleParams(StringBuilder params, Object[] args, List paramNames) {

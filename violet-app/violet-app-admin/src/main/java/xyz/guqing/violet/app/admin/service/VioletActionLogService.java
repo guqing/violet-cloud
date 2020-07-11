@@ -1,8 +1,10 @@
 package xyz.guqing.violet.app.admin.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.scheduling.annotation.Async;
+import xyz.guqing.violet.app.admin.model.param.ActionLogQuery;
 import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
 import xyz.guqing.violet.common.core.model.entity.system.VioletActionLog;
 
@@ -27,4 +29,11 @@ public interface VioletActionLogService extends IService<VioletActionLog> {
      */
     @Async(VioletConstant.ASYNC_POOL)
     void saveLog(ProceedingJoinPoint point, Method method, String ip, String operation, String username, long start);
+
+    /**
+     * 根据条件查询日志
+     * @param logQuery 查询条件
+     * @return 返回分页查询结果
+     */
+    IPage<VioletActionLog> listBy(ActionLogQuery logQuery);
 }

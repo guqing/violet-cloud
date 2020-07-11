@@ -44,7 +44,7 @@ public class UserController {
     @PostMapping
     @PreAuthorize("hasAuthority('user:add')")
     @ControllerEndpoint(operation = "新增用户", exceptionMessage = "新增用户失败")
-    public ResultEntity<String> addUser(@Valid UserParam userParam) {
+    public ResultEntity<String> addUser(@RequestBody @Valid UserParam userParam) {
         userService.createUser(userParam);
         return ResultEntity.ok();
     }

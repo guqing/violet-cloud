@@ -86,13 +86,13 @@ public class UserController {
     }
 
     @GetMapping("/check/username")
-    public ResultEntity<Boolean> checkUsername(String username) {
+    public ResultEntity<Boolean> checkUsername(@RequestParam String username) {
         boolean isPresent = userService.isPresentByUsername(username);
         return ResultEntity.ok(isPresent);
     }
 
     @GetMapping("/check/password")
-    public ResultEntity<Boolean> checkPassword(String password) {
+    public ResultEntity<Boolean> checkPassword(@RequestParam String password) {
         boolean isCorrect = userService.isCorrectByPassword(password);
         return ResultEntity.ok(isCorrect);
     }

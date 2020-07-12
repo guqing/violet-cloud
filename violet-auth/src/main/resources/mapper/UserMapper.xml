@@ -4,6 +4,7 @@
     <select id="findByUsername" parameterType="string" resultType="xyz.guqing.violet.common.core.model.bo.CurrentUser">
         SELECT u.id,
                u.username,
+               u.nickname,
                u.email,
                u.mobile,
                u.password,

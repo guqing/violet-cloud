@@ -60,4 +60,5 @@ public interface VioletConstant {
     String LOCALHOST = "localhost";
     String LOCALHOST_IP = "127.0.0.1";
 
+    String DEFAULT_PASSWORD = "123456";
 }

@@ -2,6 +2,7 @@ package xyz.guqing.violet.app.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
+import xyz.guqing.violet.app.admin.model.enums.UserStatusEnum;
 import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.common.core.model.entity.system.User;
@@ -57,9 +58,29 @@ public interface UserService extends IService<User> {
     boolean isPresentByUsername(String username);
 
     /**
+     * 判断邮箱是否已经被绑定
+     * @param email 邮箱地址
+     * @return 如果邮箱地址已经被绑定则返回{@code true},否则返回{@code false}
+     */
+    boolean isPresentByEmail(String email);
+
+    /**
      * 判断用户密码是否正确
      * @param password 密码
      * @return 如果正确返回{@code true},否则返回{@code false}
      */
     boolean isCorrectByPassword(String password);
+
+    /**
+     * 重置用户密码
+     * @param username 用户名
+     */
+    void resetPassword(String username);
+
+    /**
+     * 更新用户状态
+     * @param username 用户名
+     * @param status 用户状态
+     */
+    void updateStatus(String username, UserStatusEnum status);
 }

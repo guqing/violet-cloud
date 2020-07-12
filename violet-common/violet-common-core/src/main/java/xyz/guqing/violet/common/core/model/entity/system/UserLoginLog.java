@@ -2,7 +2,9 @@ package xyz.guqing.violet.common.core.model.entity.system;
 
 import java.time.LocalDateTime;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -16,11 +18,14 @@ import lombok.experimental.Accessors;
  * @since 2020-05-21
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class UserLoginLog extends BaseEntity {
+public class UserLoginLog {
 
     private static final long serialVersionUID = 1L;
+
+    @TableField(value = "id")
+    @TableId(type = IdType.AUTO)
+    private Long id;
 
     /**
      * 用户名

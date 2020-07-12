@@ -73,7 +73,7 @@ public class RoleController {
     @DeleteMapping
     @PreAuthorize("hasAuthority('role:delete')")
     @ControllerEndpoint(operation = "删除角色", exceptionMessage = "删除角色失败")
-    public void deleteRoles(List<Long> roleIds) {
+    public void deleteRoles(@RequestBody List<Long> roleIds) {
         roleService.deleteRoles(roleIds);
     }
 }

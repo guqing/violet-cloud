@@ -97,6 +97,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setNickname(user.getUsername());
         user.setStatus(UserStatusEnum.NORMAL.getValue());
         user.setGender(GenderEnum.MALE.getValue());
+
+        // 加密密码
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         //保存用户信息
         save(user);
 
@@ -108,6 +112,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Transactional(rollbackFor = Exception.class)
     public void updateUser(UserParam userParam) {
         User user = userParam.convertTo();
+        // 加密密码
+        String password = user.getPassword();
+        if(password != null) {
+            user.setPassword(passwordEncoder.encode(password));
+        }
+
         this.updateById(user);
 
         // 更新用户角色,先删除在插入

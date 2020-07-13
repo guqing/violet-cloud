@@ -63,7 +63,7 @@ public class RoleController {
 
     @PostMapping("/save")
     @PreAuthorize("hasAuthority('role:save')")
-    @ControllerEndpoint(operation = "保存/更新", exceptionMessage = "保存/更新角色失败")
+    @ControllerEndpoint(operation = "保存/更新角色", exceptionMessage = "保存/更新角色失败")
     public ResultEntity<String> createOrUpdate(@RequestBody @Valid RoleParam roleParam) {
         Role role = roleParam.convertTo();
         roleService.createOrUpdate(role, roleParam.getMenuIds());

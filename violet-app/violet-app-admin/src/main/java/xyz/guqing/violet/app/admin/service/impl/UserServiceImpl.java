@@ -189,4 +189,12 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         user.setStatus(status.getValue());
         updateById(user);
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void removeByUserNames(List<String> usernames) {
+        LambdaQueryWrapper<User> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.in(User::getUsername, usernames);
+        remove(queryWrapper);
+    }
 }

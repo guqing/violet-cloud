@@ -17,6 +17,9 @@ public class UserInfoDTO {
      * 用户名
      */
     private String username;
+
+    private String nickname;
+
     /**
      * 用户组
      */

@@ -8,6 +8,8 @@ import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 
+import java.util.List;
+
 /**
  * <p>
  * 菜单表 服务类
@@ -83,4 +85,10 @@ public interface UserService extends IService<User> {
      * @param status 用户状态
      */
     void updateStatus(String username, UserStatusEnum status);
+
+    /**
+     * 根据用户名集合批量删除用户
+     * @param userNames 用户名集合
+     */
+    void removeByUserNames(List<String> userNames);
 }

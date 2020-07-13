@@ -80,9 +80,9 @@ public class UserController {
     @DeleteMapping
     @PreAuthorize("hasAuthority('user:delete')")
     @ControllerEndpoint(operation = "删除用户", exceptionMessage = "删除用户失败")
-    public ResultEntity<String> deleteUsers(@RequestBody List<Long> userIds) {
+    public ResultEntity<String> deleteUsers(@RequestBody List<String> usernameList) {
         // 使用逻辑删除
-        userService.removeByIds(userIds);
+        userService.removeByUserNames(usernameList);
         return ResultEntity.ok();
     }
 

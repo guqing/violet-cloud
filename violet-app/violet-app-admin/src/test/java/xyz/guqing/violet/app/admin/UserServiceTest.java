@@ -7,7 +7,6 @@ import xyz.guqing.violet.app.admin.model.dto.UserDTO;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.app.admin.service.UserService;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
-import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
 
 /**
  * @author guqing

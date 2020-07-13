@@ -3,6 +3,7 @@ package xyz.guqing.violet.app.admin.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import xyz.guqing.violet.app.admin.model.annotation.ControllerEndpoint;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
@@ -11,8 +12,10 @@ import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.app.admin.service.UserService;
 import xyz.guqing.violet.common.core.model.entity.system.User;
+import xyz.guqing.violet.common.core.model.support.CreateCheck;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
+import xyz.guqing.violet.common.core.model.support.UpdateCheck;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 
 import javax.validation.Valid;
@@ -44,7 +47,7 @@ public class UserController {
     @PostMapping
     @PreAuthorize("hasAuthority('user:add')")
     @ControllerEndpoint(operation = "新增用户", exceptionMessage = "新增用户失败")
-    public ResultEntity<String> addUser(@RequestBody @Valid UserParam userParam) {
+    public ResultEntity<String> addUser(@RequestBody @Validated(CreateCheck.class) UserParam userParam) {
         userService.createUser(userParam);
         return ResultEntity.ok();
     }
@@ -52,7 +55,7 @@ public class UserController {
     @PutMapping
     @PreAuthorize("hasAuthority('user:update')")
     @ControllerEndpoint(operation = "修改用户", exceptionMessage = "修改用户失败")
-    public ResultEntity<String> updateUser(@RequestBody @Valid UserParam userParam) {
+    public ResultEntity<String> updateUser(@RequestBody @Validated(UpdateCheck.class) UserParam userParam) {
         userService.updateUser(userParam);
         return ResultEntity.ok();
     }

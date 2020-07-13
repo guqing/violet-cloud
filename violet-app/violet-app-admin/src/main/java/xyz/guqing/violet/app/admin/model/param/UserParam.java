@@ -2,10 +2,12 @@ package xyz.guqing.violet.app.admin.model.param;
 
 import lombok.Data;
 import xyz.guqing.violet.common.core.model.entity.system.User;
+import xyz.guqing.violet.common.core.model.support.CreateCheck;
 import xyz.guqing.violet.common.core.model.support.InputConverter;
+import xyz.guqing.violet.common.core.model.support.UpdateCheck;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
 /**
@@ -16,12 +18,12 @@ import java.util.List;
 public class UserParam implements InputConverter<User> {
     private Long id;
 
-    @NotBlank(message = "用户名不能为空")
+    @NotBlank(message = "用户名不能为空", groups = {CreateCheck.class, UpdateCheck.class})
     private String username;
     /**
      * 密码
      */
-    @NotBlank(message = "用户密码不能为空")
+    @NotBlank(message = "用户密码不能为空", groups = {CreateCheck.class})
     private String password;
 
     /**
@@ -44,7 +46,7 @@ public class UserParam implements InputConverter<User> {
      */
     private String description;
 
-    @NotNull
+    @NotEmpty(message = "用户角色不能为空", groups = {CreateCheck.class, UpdateCheck.class})
     private List<Long> roleIds;
 
     private Long groupId;

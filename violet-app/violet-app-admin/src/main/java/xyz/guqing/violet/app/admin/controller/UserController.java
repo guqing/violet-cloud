@@ -52,14 +52,14 @@ public class UserController {
     @PutMapping
     @PreAuthorize("hasAuthority('user:update')")
     @ControllerEndpoint(operation = "修改用户", exceptionMessage = "修改用户失败")
-    public ResultEntity<String> updateUser(@Valid UserParam userParam) {
+    public ResultEntity<String> updateUser(@RequestBody @Valid UserParam userParam) {
         userService.updateUser(userParam);
         return ResultEntity.ok();
     }
 
     @PutMapping("profile")
     @ControllerEndpoint(operation="修改个人信息", exceptionMessage = "修改个人信息失败")
-    public ResultEntity<String> updateProfile(@Valid UserParam userParam) {
+    public ResultEntity<String> updateProfile(@RequestBody @Valid UserParam userParam) {
         User user = userParam.convertTo();
         log.debug("当前用户信息:[{}]", VioletSecurityHelper.getCurrentUser());
         if(VioletSecurityHelper.isCurrentUser(user.getId())) {
@@ -87,7 +87,7 @@ public class UserController {
     }
 
     @GetMapping("/check/username")
-    public ResultEntity<Boolean> checkUsername(String username) {
+    public ResultEntity<Boolean> checkUsername(@RequestParam String username) {
         boolean isPresent = userService.isPresentByUsername(username);
         return ResultEntity.ok(isPresent);
     }
@@ -99,7 +99,7 @@ public class UserController {
     }
 
     @GetMapping("/check/password")
-    public ResultEntity<Boolean> checkPassword(String password) {
+    public ResultEntity<Boolean> checkPassword(@RequestParam String password) {
         boolean isCorrect = userService.isCorrectByPassword(password);
         return ResultEntity.ok(isCorrect);
     }

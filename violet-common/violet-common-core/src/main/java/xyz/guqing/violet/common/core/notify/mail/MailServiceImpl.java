@@ -1,4 +1,4 @@
-package xyz.guqing.violet.common.core.notify.service;
+package xyz.guqing.violet.common.core.notify.mail;
 
 import freemarker.template.Template;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import javax.mail.internet.MimeMessage;
  * @date 2020-07-14
  */
 @Service
-public class MailService {
+public class MailServiceImpl {
     @Autowired
     private JavaMailSender javaMailSender;
     //发送邮件的模板引擎
@@ -94,6 +94,7 @@ public class MailService {
             // 传入附件
             FileSystemResource file = new FileSystemResource(new File("src/main/resources/static/img/sunshine.png"));
             helper.addInline("img", file);
+            helper.addInline();
             jms.send(message);
             return "发送成功";
         } catch (Exception e) {

@@ -26,6 +26,11 @@
             <artifactId>violet-common-security-starter</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>xyz.guqing</groupId>
+            <artifactId>violet-common-redis-starter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
     <build>

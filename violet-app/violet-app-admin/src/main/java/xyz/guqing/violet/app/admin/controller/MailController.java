@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.guqing.violet.app.admin.notify.mail.MailService;
+import xyz.guqing.violet.app.admin.service.NotifyService;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
 /**
@@ -17,11 +18,11 @@ import xyz.guqing.violet.common.core.model.support.ResultEntity;
 @RequestMapping("/mail")
 @RequiredArgsConstructor
 public class MailController {
-    private final MailService mailService;
+    private final NotifyService notifyService;
 
-    @GetMapping("/captcha")
+    @GetMapping("captcha")
     public ResultEntity<String> sendCaptcha(@RequestParam String email) {
-        mailService.sendTextMail(email, "验证码","这是一条随机验证码邮件");
+        notifyService.sendEmailCaptcha(email);
         return ResultEntity.ok();
     }
 }

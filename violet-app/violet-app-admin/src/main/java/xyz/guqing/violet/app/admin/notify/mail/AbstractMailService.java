@@ -1,4 +1,4 @@
-package xyz.guqing.violet.common.core.notify.mail;
+package xyz.guqing.violet.app.admin.notify.mail;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.mail.MailProperties;
@@ -8,11 +8,13 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.util.Assert;
+import xyz.guqing.violet.app.admin.service.SettingOptionService;
 import xyz.guqing.violet.common.core.exception.EmailException;
-import xyz.guqing.violet.common.core.notify.properties.EmailProperties;
-import xyz.guqing.violet.common.core.service.SettingOptionService;
+import xyz.guqing.violet.app.admin.notify.properties.EmailProperties;
 
+import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 
 /**
@@ -91,17 +93,24 @@ abstract class AbstractMailService implements MailService{
         return mailSenderFactory.getMailSender(getMailProperties());
     }
 
-    private synchronized String getMailFrom(@NonNull JavaMailSender javaMailSender) {
+    private synchronized InternetAddress getMailFrom(@NonNull JavaMailSender javaMailSender) throws UnsupportedEncodingException {
         Assert.notNull(javaMailSender, "Java mail sender must not be null");
 
         if (javaMailSender instanceof JavaMailSenderImpl) {
             // get user name(email)
             JavaMailSenderImpl mailSender = (JavaMailSenderImpl) javaMailSender;
+            String username = mailSender.getUsername();
+
+
             // build internet address
-            return mailSender.getUsername();
+            return new InternetAddress(username, getFromName(), mailSender.getDefaultEncoding());
         }
 
         throw new UnsupportedOperationException("Unsupported java mail sender: " + javaMailSender.getClass().getName());
+    }
+
+    private String getFromName() {
+        return settingOptionService.getByPropertyOrDefault(EmailProperties.FROM_NAME, String.class, null);
     }
 
     /**

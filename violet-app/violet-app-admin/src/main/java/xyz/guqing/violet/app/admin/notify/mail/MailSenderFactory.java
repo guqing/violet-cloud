@@ -1,4 +1,4 @@
-package xyz.guqing.violet.common.core.notify.mail;
+package xyz.guqing.violet.app.admin.notify.mail;
 
 import org.springframework.boot.autoconfigure.mail.MailProperties;
 import org.springframework.lang.NonNull;

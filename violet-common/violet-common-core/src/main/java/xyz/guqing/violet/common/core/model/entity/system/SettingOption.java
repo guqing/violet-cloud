@@ -15,7 +15,6 @@ import lombok.experimental.Accessors;
 public class SettingOption extends BaseEntity{
     private static final long serialVersionUID = 1L;
 
-    private String groupName;
     private String optionKey;
     private String optionValue;
 }

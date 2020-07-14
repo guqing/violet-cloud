@@ -1,4 +1,4 @@
-package xyz.guqing.violet.common.core.notify.mail;
+package xyz.guqing.violet.app.admin.notify.mail;
 
 import java.io.File;
 import java.util.Map;

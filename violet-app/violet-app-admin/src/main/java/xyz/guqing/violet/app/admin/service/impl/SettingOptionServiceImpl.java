@@ -1,15 +1,15 @@
-package xyz.guqing.violet.common.core.service.impl;
+package xyz.guqing.violet.app.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
+import xyz.guqing.violet.app.admin.service.SettingOptionService;
 import xyz.guqing.violet.common.core.exception.MissingPropertyException;
-import xyz.guqing.violet.common.core.mapper.SettingOptionMapper;
+import xyz.guqing.violet.app.admin.mapper.SettingOptionMapper;
 import xyz.guqing.violet.common.core.model.entity.system.SettingOption;
 import xyz.guqing.violet.common.core.model.enums.PropertyEnum;
-import xyz.guqing.violet.common.core.service.SettingOptionService;
 
 import java.util.Optional;
 
@@ -33,11 +33,9 @@ public class SettingOptionServiceImpl extends ServiceImpl<SettingOptionMapper, S
     @Override
     public Optional<Object> getByKey(String key) {
         Assert.hasText(key, "Option key must not be blank");
-        String[] split = key.split(":");
         // 根据分组和key查询
         LambdaQueryWrapper<SettingOption> queryWrapper = Wrappers.lambdaQuery();
-        queryWrapper.eq(SettingOption::getGroupName, split[0])
-                .eq(SettingOption::getOptionKey,split[1]);
+        queryWrapper.eq(SettingOption::getOptionKey, key);
         SettingOption settingOption = getOne(queryWrapper);
         if(settingOption != null) {
             return Optional.of(settingOption.getOptionValue());

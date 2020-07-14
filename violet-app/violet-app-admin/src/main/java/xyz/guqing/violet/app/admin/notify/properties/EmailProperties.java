@@ -1,12 +1,12 @@
-package xyz.guqing.violet.common.core.notify.properties;
+package xyz.guqing.violet.app.admin.notify.properties;
 
 import xyz.guqing.violet.common.core.model.enums.PropertyEnum;
 
 /**
  * Email properties.
  *
- * @author johnniang
- * @date 3/27/19
+ * @author guqing
+ * @date 2020-7-14
  */
 public enum EmailProperties implements PropertyEnum {
 

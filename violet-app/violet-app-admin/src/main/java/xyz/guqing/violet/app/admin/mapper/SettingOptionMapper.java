@@ -1,4 +1,4 @@
-package xyz.guqing.violet.common.core.mapper;
+package xyz.guqing.violet.app.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import xyz.guqing.violet.common.core.model.entity.system.SettingOption;

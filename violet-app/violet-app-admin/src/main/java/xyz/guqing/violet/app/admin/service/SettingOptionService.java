@@ -1,4 +1,4 @@
-package xyz.guqing.violet.common.core.service;
+package xyz.guqing.violet.app.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.common.core.model.entity.system.SettingOption;

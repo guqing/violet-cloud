@@ -2,12 +2,14 @@ package xyz.guqing.violet.app.admin.notify.mail;
 
 import freemarker.template.Template;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.util.Assert;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import xyz.guqing.violet.app.admin.service.SettingOptionService;
 import xyz.guqing.violet.common.core.exception.EmailException;
+import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
 
 import javax.mail.MessagingException;
 import java.io.File;
@@ -34,6 +36,7 @@ public class MailServiceImpl extends AbstractMailService {
     }
 
     @Override
+    @Async(VioletConstant.ASYNC_POOL)
     public void sendTextMail(String to, String subject, String content) {
         sendMailTemplate(messageHelper -> {
             messageHelper.setSubject(subject);
@@ -43,6 +46,7 @@ public class MailServiceImpl extends AbstractMailService {
     }
 
     @Override
+    @Async(VioletConstant.ASYNC_POOL)
     public void sendHtmlMail(String to, String subject, String content) {
         sendMailTemplate(messageHelper -> {
             messageHelper.setSubject(subject);
@@ -52,6 +56,7 @@ public class MailServiceImpl extends AbstractMailService {
     }
 
     @Override
+    @Async(VioletConstant.ASYNC_POOL)
     public void sendInlineMail(String to, String subject, String content, Map<String, File> contentIdMap) {
         Assert.notNull(contentIdMap, "Parameter contentIdMap cannot be null");
 
@@ -70,6 +75,7 @@ public class MailServiceImpl extends AbstractMailService {
     }
 
     @Override
+    @Async(VioletConstant.ASYNC_POOL)
     public void sendTemplateMail(String to, String subject, Map<String, Object> content, String templateName) {
         sendMailTemplate(messageHelper -> {
             // build message content with freemarker
@@ -83,6 +89,7 @@ public class MailServiceImpl extends AbstractMailService {
     }
 
     @Override
+    @Async(VioletConstant.ASYNC_POOL)
     public void sendAttachMail(String to, String subject, Map<String, Object> content, String templateName, String attachFilePath) {
         sendMailTemplate(messageHelper -> {
             messageHelper.setSubject(subject);
@@ -91,6 +98,4 @@ public class MailServiceImpl extends AbstractMailService {
             messageHelper.addAttachment(attachmentPath.getFileName().toString(), attachmentPath.toFile());
         });
     }
-
-
 }

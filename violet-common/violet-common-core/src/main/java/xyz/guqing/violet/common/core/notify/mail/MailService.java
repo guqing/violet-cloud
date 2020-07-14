@@ -28,6 +28,9 @@ public interface MailService {
     /**
      * 发送带静态资源的邮件其实就是在发送HTML邮件的基础上嵌入静态资源（比如图片
      * 嵌入静态资源的过程和传入附件类似，唯一的区别在于需要标识资源的cid
+     * 例如：
+     * <html><body>内联图片：<img src='cid:img'/></body></html>
+     * helper.addInline("img", file);
      * @param to 接收者
      * @param content 发送内容
      * @param subject 主题

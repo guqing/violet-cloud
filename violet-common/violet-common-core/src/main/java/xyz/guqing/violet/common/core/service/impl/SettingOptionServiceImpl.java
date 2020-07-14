@@ -54,4 +54,28 @@ public class SettingOptionServiceImpl extends ServiceImpl<SettingOptionMapper, S
     public <T> Optional<T> getByKey(String key, Class<T> valueType) {
         return getByKey(key).map(value -> PropertyEnum.convertTo(value.toString(), valueType));
     }
+
+    @Override
+    public <T> T getByPropertyOrDefault(PropertyEnum property, Class<T> propertyType, T defaultValue) {
+        Assert.notNull(property, "Setting property must not be null");
+
+        return getByProperty(property, propertyType).orElse(defaultValue);
+    }
+
+    @Override
+    public <T> T getByPropertyOrDefault(PropertyEnum property, Class<T> propertyType) {
+        return getByProperty(property, propertyType).orElse(property.defaultValue(propertyType));
+    }
+
+    @Override
+    public <T> Optional<T> getByProperty(PropertyEnum property, Class<T> propertyType) {
+        return getByProperty(property).map(propertyValue -> PropertyEnum.convertTo(propertyValue.toString(), propertyType));
+    }
+
+    @Override
+    public Optional<Object> getByProperty(PropertyEnum property) {
+        Assert.notNull(property, "Setting property must not be null");
+
+        return getByKey(property.getValue());
+    }
 }

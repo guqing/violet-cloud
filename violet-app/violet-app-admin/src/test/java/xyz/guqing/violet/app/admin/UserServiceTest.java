@@ -8,6 +8,8 @@ import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.app.admin.service.UserService;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 
+import java.util.Random;
+
 /**
  * @author guqing
  * @date 2020-05-31

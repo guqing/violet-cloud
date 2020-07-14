@@ -12,6 +12,7 @@ import xyz.guqing.violet.common.redis.service.RedisService;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * @author guqing
@@ -34,7 +35,7 @@ public class NotifyServiceImpl implements NotifyService {
     public void sendEmailCaptcha(String email) {
         Map<String,Object> param = new HashMap<>(2,1);
         param.put("email", email);
-        int captcha = (int)(Math.random()*9+1)*100000;
+        String captcha = generateCaptcha();
         param.put("captcha", captcha);
 
         log.debug("一次性邮箱验证码为:", captcha);
@@ -49,6 +50,15 @@ public class NotifyServiceImpl implements NotifyService {
     public boolean checkEmailCaptcha(String email, String captcha) {
         Object value = redisService.get(captchaCacheKey(email));
         return value != null && value.equals(captcha);
+    }
+
+    private String generateCaptcha() {
+        Random random = new Random();
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 6; i++) {
+            sb.append(random.nextInt(10));
+        }
+        return sb.toString();
     }
 
     private String captchaCacheKey(String email) {

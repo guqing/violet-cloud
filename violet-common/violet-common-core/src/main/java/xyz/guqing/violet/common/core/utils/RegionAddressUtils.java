@@ -27,13 +27,12 @@ public class RegionAddressUtils {
         DbSearcher searcher = null;
         try {
             DbConfig config = new DbConfig();
-            Resource resource = getIp2RegionPath();
-            searcher = new DbSearcher(config, resource.getURI().getPath());
+            searcher = new DbSearcher(config, getIp2RegionPath());
             Method method = searcher.getClass().getMethod("btreeSearch", String.class);
             DataBlock dataBlock = (DataBlock) method.invoke(searcher, ip);
             return dataBlock.getRegion();
         } catch (Exception e) {
-            log.warn("获取地址信息异常,{}", e.getMessage());
+            log.warn("获取地址信息异常,[{}],异常堆栈: [{}]", e.getMessage(), e);
             return StringUtils.EMPTY;
         } finally {
             if (searcher != null) {
@@ -46,19 +45,19 @@ public class RegionAddressUtils {
         }
     }
 
-    private static Resource getIp2RegionPath() {
-        PathMatchingResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
-        Resource resource = resourcePatternResolver.getResource("classpath:ip2region/ip2region.db");
-        if (!resource.exists()) {
+    private static String getIp2RegionPath() throws IOException {
+        String dbPath = RegionAddressUtils.class.getResource("/ip2region/ip2region.db").getPath();
+        File file = new File(dbPath);
+        if (!file.exists()) {
             String tmpDir = System.getProperties().getProperty(VioletConstant.JAVA_TEMP_DIR);
-            String dbPath = tmpDir + "ip.db";
-            File file = new File(dbPath);
-            try(InputStream resourceAsStream = resource.getInputStream()) {
+            dbPath = tmpDir + "ip.db";
+            file = new File(dbPath);
+            InputStream resourceAsStream = RegionAddressUtils.class.getClassLoader()
+                    .getResourceAsStream("classpath:ip2region/ip2region.db");
+            if (resourceAsStream != null) {
                 FileUtils.copyInputStreamToFile(resourceAsStream, file);
-            } catch (IOException e) {
-                throw new VioletInternalException(e.getMessage(), e);
             }
         }
-        return resource;
+        return file.getPath();
     }
 }

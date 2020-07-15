@@ -18,9 +18,9 @@ public class UserConnection {
     private static final long serialVersionUID = 1L;
 
     /**
-     * Violet系统用户名
+     * Violet系统用户id
      */
-    private String userName;
+    private Long userId;
 
     /**
      * 第三方平台名称

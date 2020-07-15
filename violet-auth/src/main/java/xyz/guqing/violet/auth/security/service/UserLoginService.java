@@ -96,7 +96,7 @@ public class UserLoginService {
             return socialLoginDTO;
         }
 
-        User user = userService.getByUsername(userConnection.getUserName());
+        User user = userService.getById(userConnection.getUserId());
         OAuth2AccessToken oauth2AccessToken = getOauth2AccessToken(user);
         socialLoginDTO.setIsBind(true);
         socialLoginDTO.setAccessToken(oauth2AccessToken);
@@ -170,6 +170,7 @@ public class UserLoginService {
         // 注册
         User user = registerUser(registerUser.getEmail(), encryptPassword);
         Long userId = user.getId();
+        userConnectionService.create();
         return null;
     }
 

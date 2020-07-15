@@ -25,15 +25,15 @@ public interface UserConnectionService extends IService<UserConnection> {
 
     /**
      * 创建第三方登录帐号
-     * @param username 用户名
+     * @param userId 用户id
      * @param authUser 第三方登录用户信息
      */
-    void create(String username, AuthUser authUser);
+    void create(Long userId, AuthUser authUser);
 
     /**
      * 根据用户名查询该用户绑定的所有第三方帐号
-     * @param username 用户名
+     * @param userId 用户id
      * @return 如果查询到返回第三方帐号集合，否则返回空集合
      */
-    List<UserConnection> listByUsername(String username);
+    List<UserConnection> listByUserId(Long userId);
 }

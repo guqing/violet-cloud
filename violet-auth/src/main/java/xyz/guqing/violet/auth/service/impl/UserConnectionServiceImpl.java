@@ -31,9 +31,9 @@ public class UserConnectionServiceImpl extends ServiceImpl<UserConnectionMapper,
     }
 
     @Override
-    public void create(String username, AuthUser authUser) {
+    public void create(Long userId, AuthUser authUser) {
         UserConnection userConnection = new UserConnection();
-        userConnection.setUserName(username);
+        userConnection.setUserId(userId);
         userConnection.setProviderName(authUser.getSource().toString());
         userConnection.setProviderUserId(authUser.getUuid());
         userConnection.setProviderUserName(authUser.getUsername());
@@ -45,9 +45,9 @@ public class UserConnectionServiceImpl extends ServiceImpl<UserConnectionMapper,
     }
 
     @Override
-    public List<UserConnection> listByUsername(String username) {
+    public List<UserConnection> listByUserId(Long userId) {
         LambdaQueryWrapper<UserConnection> queryWrapper = Wrappers.lambdaQuery();
-        queryWrapper.eq(UserConnection::getUserName, username);
+        queryWrapper.eq(UserConnection::getUserId, userId);
         return list(queryWrapper);
     }
 }

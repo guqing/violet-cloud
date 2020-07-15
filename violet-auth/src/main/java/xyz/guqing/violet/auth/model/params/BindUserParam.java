@@ -1,9 +1,11 @@
 package xyz.guqing.violet.auth.model.params;
 
 import lombok.Data;
+import me.zhyd.oauth.model.AuthUser;
 import xyz.guqing.violet.common.core.model.constant.RegexpConstant;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
@@ -23,4 +25,7 @@ public class BindUserParam {
 
     @NotBlank(message = "验证码不能为空")
     private String captcha;
+
+    @NotNull(message = "第三方认证用户信息不能为空")
+    private AuthUser authUser;
 }

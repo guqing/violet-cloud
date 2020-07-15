@@ -36,6 +36,7 @@ import xyz.guqing.violet.common.core.utils.VioletUtil;
 import xyz.guqing.violet.common.redis.service.RedisService;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -150,10 +151,9 @@ public class UserLoginService {
      * 注册并登录
      *
      * @param registerUser 注册用户
-     * @param authUser   第三方平台对象
      * @return 注册并登录成功返回令牌对象
      */
-    public OAuth2AccessToken socialSignLogin(BindUserParam registerUser, AuthUser authUser) {
+    public OAuth2AccessToken socialSignLogin(BindUserParam registerUser) {
         // 校验验证码
         boolean checkResult = checkEmailCaptcha(registerUser.getEmail(), registerUser.getCaptcha());
         if(!checkResult) {
@@ -166,6 +166,7 @@ public class UserLoginService {
             throw new AlreadyExistsException("该用户已经存在");
         }
 
+        AuthUser authUser = registerUser.getAuthUser();
         String encryptPassword = passwordEncoder.encode(registerUser.getPassword());
         // 注册
         User user = registerUser(registerUser.getEmail(), encryptPassword);

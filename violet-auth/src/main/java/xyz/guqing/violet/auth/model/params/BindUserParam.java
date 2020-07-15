@@ -1,6 +1,7 @@
 package xyz.guqing.violet.auth.model.params;
 
 import lombok.Data;
+import xyz.guqing.violet.common.core.model.constant.RegexpConstant;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -13,7 +14,7 @@ import javax.validation.constraints.Size;
 @Data
 public class BindUserParam {
     @NotBlank(message = "邮箱地址不能为空")
-    @Pattern(regexp = "^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\\\.[a-zA-Z0-9-]+)*\\\\.[a-zA-Z0-9]{2,6}$", message = "邮箱地址格式不正确")
+    @Pattern(regexp = RegexpConstant.EMAIL, message = "邮箱地址格式不正确")
     private String email;
 
     @NotBlank(message = "密码不能为空")

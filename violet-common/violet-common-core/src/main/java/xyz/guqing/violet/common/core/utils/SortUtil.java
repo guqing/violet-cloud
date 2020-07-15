@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
-import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
+import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 
 /**
  * 处理排序工具类

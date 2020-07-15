@@ -2,7 +2,7 @@ package xyz.guqing.violet.common.security.starter.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import xyz.guqing.violet.common.core.model.entity.constant.EndpointConstant;
+import xyz.guqing.violet.common.core.model.constant.EndpointConstant;
 
 /**
  * @author guqing

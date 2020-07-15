@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
+import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 import xyz.guqing.violet.gateway.enhance.runner.FebsRouteEnhanceRunner;
 import xyz.guqing.violet.gateway.enhance.service.BlackListService;
 import xyz.guqing.violet.gateway.enhance.service.RateLimitRuleService;

@@ -1,4 +1,4 @@
-package xyz.guqing.violet.common.core.model.entity.constant;
+package xyz.guqing.violet.common.core.model.constant;
 
 /**
  * Violet系统常量类

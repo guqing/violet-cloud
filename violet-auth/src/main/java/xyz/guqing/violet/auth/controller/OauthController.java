@@ -1,7 +1,6 @@
 package xyz.guqing.violet.auth.controller;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,15 +8,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import xyz.guqing.violet.auth.model.dto.UserInfoDTO;
 import xyz.guqing.violet.auth.service.UserService;
-import xyz.guqing.violet.common.core.model.bo.CurrentUser;
-import xyz.guqing.violet.common.core.model.entity.constant.StringConstant;
+import xyz.guqing.violet.common.core.model.constant.StringConstant;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
-import xyz.guqing.violet.common.core.utils.VioletUtil;
-
-import java.security.Principal;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * @author guqing

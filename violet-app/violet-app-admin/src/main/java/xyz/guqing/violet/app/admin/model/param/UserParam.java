@@ -1,6 +1,7 @@
 package xyz.guqing.violet.app.admin.model.param;
 
 import lombok.Data;
+import xyz.guqing.violet.common.core.model.constant.RegexpConstant;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.support.CreateCheck;
 import xyz.guqing.violet.common.core.model.support.InputConverter;
@@ -30,13 +31,13 @@ public class UserParam implements InputConverter<User> {
     /**
      * 邮箱
      */
-    @Pattern(regexp = "^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.[a-zA-Z0-9]{2,6}$", message = "邮箱地址格式不正确")
+    @Pattern(regexp = RegexpConstant.EMAIL, message = "邮箱地址格式不正确")
     private String email;
 
     /**
      * 联系电话
      */
-    @Pattern(regexp = "^(?:(?:\\+|00)86)?1[3-9]\\d{9}$", message = "手机号码格式不正确")
+    @Pattern(regexp = RegexpConstant.MOBILE, message = "手机号码格式不正确")
     private String mobile;
 
     /**

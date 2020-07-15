@@ -9,7 +9,7 @@ import org.springframework.util.Assert;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import xyz.guqing.violet.app.admin.service.SettingOptionService;
 import xyz.guqing.violet.common.core.exception.EmailException;
-import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
+import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 
 import javax.mail.MessagingException;
 import java.io.File;

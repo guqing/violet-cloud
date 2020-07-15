@@ -51,7 +51,6 @@ public class SocialLoginController {
         return modelAndView;
     }
 
-
     /**
      * 注册并登录
      *

@@ -1,9 +1,9 @@
-package xyz.guqing.violet.common.core.model.entity.constant;
+package xyz.guqing.violet.common.core.model.constant;
 
 /**
  * 端点常量
  *
- * @author MrBird
+ * @author guqing
  */
 public interface EndpointConstant {
 

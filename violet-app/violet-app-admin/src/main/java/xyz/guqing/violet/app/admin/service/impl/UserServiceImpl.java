@@ -19,7 +19,7 @@ import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.app.admin.service.RoleService;
 import xyz.guqing.violet.app.admin.service.UserService;
 import xyz.guqing.violet.common.core.exception.NotFoundException;
-import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
+import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 import xyz.guqing.violet.common.core.model.entity.system.UserRole;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.entity.system.User;

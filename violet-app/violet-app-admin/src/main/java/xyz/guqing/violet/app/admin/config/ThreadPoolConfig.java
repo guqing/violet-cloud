@@ -5,7 +5,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import xyz.guqing.violet.app.admin.model.properties.ThreadPoolProperties;
-import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
+import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadFactory;

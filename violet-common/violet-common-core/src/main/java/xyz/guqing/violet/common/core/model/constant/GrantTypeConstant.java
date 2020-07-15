@@ -1,9 +1,9 @@
-package xyz.guqing.violet.common.core.model.entity.constant;
+package xyz.guqing.violet.common.core.model.constant;
 
 /**
  * 认证类型常量类
  *
- * @author MrBird
+ * @author guqing
  */
 public interface GrantTypeConstant {
 

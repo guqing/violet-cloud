@@ -13,7 +13,6 @@ import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.entity.constant.PageConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -130,19 +129,6 @@ public class FebsUtil {
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, contentType);
         DataBuffer dataBuffer = response.bufferFactory().wrap(JSONObject.toJSONString(value).getBytes());
         return response.writeWith(Mono.just(dataBuffer));
-    }
-
-    /**
-     * 封装前端分页表格所需数据
-     *
-     * @param pageInfo pageInfo
-     * @return Map<String, Object>
-     */
-    public static Map<String, Object> getDataTable(IPage<?> pageInfo) {
-        Map<String, Object> data = new HashMap<>(2);
-        data.put(PageConstant.ROWS, pageInfo.getRecords());
-        data.put(PageConstant.TOTAL, pageInfo.getTotal());
-        return data;
     }
 
     /**

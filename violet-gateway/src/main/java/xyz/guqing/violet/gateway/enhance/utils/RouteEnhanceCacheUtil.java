@@ -1,7 +1,7 @@
 package xyz.guqing.violet.gateway.enhance.utils;
 
 
-import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
+import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 
 /**
  * @author guqing

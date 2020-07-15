@@ -8,7 +8,7 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import xyz.guqing.violet.common.core.model.entity.constant.StringConstant;
+import xyz.guqing.violet.common.core.model.constant.StringConstant;
 
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;

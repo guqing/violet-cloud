@@ -1,4 +1,4 @@
-package xyz.guqing.violet.common.core.model.entity.constant;
+package xyz.guqing.violet.common.core.model.constant;
 
 /**
  * 请求参数常量

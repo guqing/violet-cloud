@@ -56,13 +56,13 @@ public class SocialLoginController {
      * 注册并登录
      *
      * @param registerUser register user
-     * @param authUser   authUser
+     * @param authUser authUser
      * @return ResultEntity
      */
     @ResponseBody
     @PostMapping("sign/login")
     public ResultEntity<OAuth2AccessToken> signLogin(@RequestBody @Valid BindUserParam registerUser, AuthUser authUser) {
-        OAuth2AccessToken oAuth2AccessToken = this.userLoginService.socailSignLogin(registerUser, authUser);
+        OAuth2AccessToken oAuth2AccessToken = this.userLoginService.socialSignLogin(registerUser, authUser);
         return ResultEntity.ok(oAuth2AccessToken);
     }
 }

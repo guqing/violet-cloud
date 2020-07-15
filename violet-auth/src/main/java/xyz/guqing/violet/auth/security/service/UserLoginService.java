@@ -151,9 +151,9 @@ public class UserLoginService {
      *
      * @param registerUser 注册用户
      * @param authUser   第三方平台对象
-     * @return OAuth2AccessToken 注册并登录成功返回令牌对象
+     * @return 注册并登录成功返回令牌对象
      */
-    public OAuth2AccessToken socailSignLogin(BindUserParam registerUser, AuthUser authUser) {
+    public OAuth2AccessToken socialSignLogin(BindUserParam registerUser, AuthUser authUser) {
         // 校验验证码
         boolean checkResult = checkEmailCaptcha(registerUser.getEmail(), registerUser.getCaptcha());
         if(!checkResult) {
@@ -169,9 +169,9 @@ public class UserLoginService {
         String encryptPassword = passwordEncoder.encode(registerUser.getPassword());
         // 注册
         User user = registerUser(registerUser.getEmail(), encryptPassword);
-        Long userId = user.getId();
-        userConnectionService.create();
-        return null;
+        // 保存第三方绑定帐号
+        userConnectionService.create(user.getId(), authUser);
+        return getOauth2AccessToken(user);
     }
 
     /**
@@ -184,6 +184,8 @@ public class UserLoginService {
     @Transactional(rollbackFor = Exception.class)
     public User registerUser(String email, String password) {
         User user = new User();
+        user.setEmail(email);
+        user.setNickname(email);
         user.setUsername(generateUsername());
         user.setPassword(password);
         user.setStatus(UserStatusEnum.NORMAL.getValue());

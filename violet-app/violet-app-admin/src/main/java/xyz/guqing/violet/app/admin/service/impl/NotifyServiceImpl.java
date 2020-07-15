@@ -22,18 +22,13 @@ import java.util.Random;
 @Service
 @RequiredArgsConstructor
 public class NotifyServiceImpl implements NotifyService {
-    /**
-     * 验证码缓存有效期5分钟
-     */
-    private static final Long CAPTCHA_EXPIRE = 300L;
-
     private final MailService mailService;
     private final RedisService redisService;
 
     @Override
     @Async(VioletConstant.ASYNC_POOL)
     public void sendEmailCaptcha(String email) {
-        Map<String,Object> param = new HashMap<>(2,1);
+        Map<String, Object> param = new HashMap<>(2, 1);
         param.put("email", email);
         String captcha = generateCaptcha();
         param.put("captcha", captcha);
@@ -41,9 +36,9 @@ public class NotifyServiceImpl implements NotifyService {
         log.debug("一次性邮箱验证码为:", captcha);
 
         // 设置缓存
-        redisService.set(captchaCacheKey(email), captcha, CAPTCHA_EXPIRE);
+        redisService.set(VioletConstant.CAPTCHA_PREFIX + email, captcha, VioletConstant.CAPTCHA_EXPIRE);
         // 发送邮件
-        mailService.sendTemplateMail(email, "邮箱验证",param, "mail/mail_captcha.ftl");
+        mailService.sendTemplateMail(email, "邮箱验证", param, "mail/mail_captcha.ftl");
     }
 
     private String generateCaptcha() {
@@ -53,9 +48,5 @@ public class NotifyServiceImpl implements NotifyService {
             sb.append(random.nextInt(10));
         }
         return sb.toString();
-    }
-
-    private String captchaCacheKey(String email) {
-        return RedisUtils.keyBuilder("app_admin", "notify", "captcha", email);
     }
 }

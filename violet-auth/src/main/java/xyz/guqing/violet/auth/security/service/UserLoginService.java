@@ -211,12 +211,8 @@ public class UserLoginService {
      * @return 如果校验正确返回{@code true},否则返回{@code false}
      */
     private boolean checkEmailCaptcha(String email, String captcha) {
-        Object value = redisService.get(captchaCacheKey(email));
+        Object value = redisService.get(VioletConstant.CAPTCHA_PREFIX+email);
         return value != null && value.equals(captcha);
-    }
-
-    private String captchaCacheKey(String email) {
-        return RedisUtils.keyBuilder("app_admin", "notify", "captcha", email);
     }
 
     private String generateUsername() {

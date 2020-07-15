@@ -33,7 +33,12 @@ public interface VioletConstant {
     /**
      * 验证码 key前缀
      */
-    String CODE_PREFIX = "violet.captcha.";
+    String CAPTCHA_PREFIX = "violet:verify:captcha:";
+
+    /**
+     * 验证码有效期
+     */
+    Long CAPTCHA_EXPIRE = 300L;
 
     /**
      * 异步线程池名称
@@ -55,7 +60,7 @@ public interface VioletConstant {
     /**
      * 注册用户角色ID
      */
-    Long REGISTER_ROLE_ID = 2L;
+    Long REGISTER_ROLE_ID = 1L;
 
     String LOCALHOST = "localhost";
     String LOCALHOST_IP = "127.0.0.1";

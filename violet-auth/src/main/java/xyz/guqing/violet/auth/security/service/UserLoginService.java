@@ -7,13 +7,19 @@ import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.TokenRequest;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import xyz.guqing.violet.auth.model.dto.SocialLoginDTO;
+import xyz.guqing.violet.auth.model.params.BindUserParam;
+import xyz.guqing.violet.auth.service.UserRoleService;
+import xyz.guqing.violet.common.core.exception.*;
+import xyz.guqing.violet.common.core.model.entity.constant.VioletConstant;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.entity.system.UserConnection;
 import xyz.guqing.violet.auth.model.properties.VioletAuthProperties;
@@ -22,15 +28,16 @@ import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.model.entity.constant.GrantTypeConstant;
 import xyz.guqing.violet.common.core.model.entity.constant.ParamsConstant;
 import xyz.guqing.violet.common.core.model.entity.constant.SocialConstant;
-import xyz.guqing.violet.common.core.exception.AuthenticationException;
-import xyz.guqing.violet.common.core.exception.BadRequestException;
-import xyz.guqing.violet.common.core.exception.NotFoundException;
+import xyz.guqing.violet.common.core.model.entity.system.UserRole;
+import xyz.guqing.violet.common.core.model.enums.GenderEnum;
+import xyz.guqing.violet.common.core.model.enums.UserStatusEnum;
+import xyz.guqing.violet.common.core.utils.RedisUtils;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
+import xyz.guqing.violet.common.redis.service.RedisService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.time.LocalDateTime;
+import java.util.*;
 
 /**
  * @author guqing
@@ -47,19 +54,28 @@ public class UserLoginService {
     private final UserService userService;
     private final UserConnectionService userConnectionService;
     private final VioletAuthProperties violetAuthProperties;
+    private final PasswordEncoder passwordEncoder;
+    private final RedisService redisService;
+    private final UserRoleService userRoleService;
 
     public UserLoginService(AuthRequestFactory factory,
                             ResourceOwnerPasswordTokenGranter granter,
                             JdbcClientDetailsService jdbcClientDetailsService,
                             UserService userService,
                             UserConnectionService userConnectionService,
-                            VioletAuthProperties violetAuthProperties) {
+                            VioletAuthProperties violetAuthProperties,
+                            PasswordEncoder passwordEncoder,
+                            RedisService redisService,
+                            UserRoleService userRoleService) {
         this.factory = factory;
         this.granter = granter;
         this.jdbcClientDetailsService = jdbcClientDetailsService;
         this.userService = userService;
         this.userConnectionService = userConnectionService;
         this.violetAuthProperties = violetAuthProperties;
+        this.passwordEncoder = passwordEncoder;
+        this.redisService = redisService;
+        this.userRoleService = userRoleService;
     }
 
     public SocialLoginDTO resolveLogin(String type, AuthCallback callback) {
@@ -130,4 +146,78 @@ public class UserLoginService {
         return granter.grant(GrantTypeConstant.PASSWORD, tokenRequest);
     }
 
+    /**
+     * 注册并登录
+     *
+     * @param registerUser 注册用户
+     * @param authUser   第三方平台对象
+     * @return OAuth2AccessToken 注册并登录成功返回令牌对象
+     */
+    public OAuth2AccessToken socailSignLogin(BindUserParam registerUser, AuthUser authUser) {
+        // 校验验证码
+        boolean checkResult = checkEmailCaptcha(registerUser.getEmail(), registerUser.getCaptcha());
+        if(!checkResult) {
+            throw new BadArgumentException("验证码错误");
+        }
+
+        Optional<User> optionalUser = userService.getByEmail(registerUser.getEmail());
+        if(optionalUser.isPresent()) {
+            // 用户存在，则抛出异常
+            throw new AlreadyExistsException("该用户已经存在");
+        }
+
+        String encryptPassword = passwordEncoder.encode(registerUser.getPassword());
+        // 注册
+        User user = registerUser(registerUser.getEmail(), encryptPassword);
+        Long userId = user.getId();
+        return null;
+    }
+
+    /**
+     * 注册用户
+     *
+     * @param email email
+     * @param password password
+     * @return SystemUser SystemUser
+     */
+    @Transactional(rollbackFor = Exception.class)
+    public User registerUser(String email, String password) {
+        User user = new User();
+        user.setUsername(generateUsername());
+        user.setPassword(password);
+        user.setStatus(UserStatusEnum.NORMAL.getValue());
+        user.setGender(GenderEnum.UNKNOWN.getValue());
+        user.setAvatar("");
+        user.setDescription("该用户很懒，什么也没有留下");
+        user.setCreateTime(LocalDateTime.now());
+        user.setModifyTime(LocalDateTime.now());
+        userService.save(user);
+
+        UserRole userRole = new UserRole();
+        userRole.setUserId(user.getId());
+        // 注册用户角色 ID
+        userRole.setRoleId(VioletConstant.REGISTER_ROLE_ID);
+        userRoleService.save(userRole);
+        return user;
+    }
+
+    /**
+     * 校验一次性邮箱验证码正确性
+     * @param email 邮箱地址
+     * @param captcha 验证码
+     * @return 如果校验正确返回{@code true},否则返回{@code false}
+     */
+    private boolean checkEmailCaptcha(String email, String captcha) {
+        Object value = redisService.get(captchaCacheKey(email));
+        return value != null && value.equals(captcha);
+    }
+
+    private String captchaCacheKey(String email) {
+        return RedisUtils.keyBuilder("app_admin", "notify", "captcha", email);
+    }
+
+    private String generateUsername() {
+        UUID uuid = UUID.randomUUID();
+        return uuid.toString().replace("-", "");
+    }
 }

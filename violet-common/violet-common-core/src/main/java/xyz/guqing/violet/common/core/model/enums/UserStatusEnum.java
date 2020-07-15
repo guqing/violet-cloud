@@ -1,4 +1,4 @@
-package xyz.guqing.violet.app.admin.model.enums;
+package xyz.guqing.violet.common.core.model.enums;
 
 /**
  * @author guqing

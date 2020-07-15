@@ -67,6 +67,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         update(updateWrapper);
     }
 
+    @Override
+    public Optional<User> getByEmail(String email) {
+        LambdaQueryWrapper<User> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(User::getEmail, email);
+        return Optional.ofNullable(getOne(queryWrapper));
+    }
+
     private UserInfoDTO convertTo(CurrentUser currentUser) {
         UserInfoDTO userInfoDTO = new UserInfoDTO();
         BeanUtils.copyProperties(currentUser,userInfoDTO);

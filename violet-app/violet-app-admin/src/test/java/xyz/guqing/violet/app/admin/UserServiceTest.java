@@ -9,6 +9,7 @@ import xyz.guqing.violet.app.admin.service.UserService;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * @author guqing

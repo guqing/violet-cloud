@@ -1,0 +1,25 @@
+package xyz.guqing.violet.auth.model.params;
+
+import lombok.Data;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+/**
+ * @author guqing
+ * @date 2020-07-15
+ */
+@Data
+public class BindUserParam {
+    @NotBlank(message = "邮箱地址不能为空")
+    @Pattern(regexp = "^[a-zA-Z0-9_.-]+@[a-zA-Z0-9-]+(\\\\.[a-zA-Z0-9-]+)*\\\\.[a-zA-Z0-9]{2,6}$", message = "邮箱地址格式不正确")
+    private String email;
+
+    @NotBlank(message = "密码不能为空")
+    @Size(min = 3, max = 16, message = "密码字符长度必须在 {min}-{max} 之间")
+    private String password;
+
+    @NotBlank(message = "验证码不能为空")
+    private String captcha;
+}

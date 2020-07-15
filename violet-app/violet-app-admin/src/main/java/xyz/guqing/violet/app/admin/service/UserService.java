@@ -2,7 +2,7 @@ package xyz.guqing.violet.app.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
-import xyz.guqing.violet.app.admin.model.enums.UserStatusEnum;
+import xyz.guqing.violet.common.core.model.enums.UserStatusEnum;
 import xyz.guqing.violet.app.admin.model.param.UserParam;
 import xyz.guqing.violet.app.admin.model.param.UserQuery;
 import xyz.guqing.violet.common.core.model.entity.system.User;

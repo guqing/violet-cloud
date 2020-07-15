@@ -3,7 +3,8 @@
         <div class="emailtext" style="background:#fff;padding:10;color: #444;font-size:18px;">
             <p>${email!}, 您好!</p>
             <div>
-                你的一次性邮箱验证码为：<a href="javascript:void(0);">${captcha!}</a>
+                你的一次性邮箱验证码为：<a href="javascript:void(0);">${captcha!}</a><br/>
+                验证码有效期为5分钟，请勿告知他人
             </div>
             <div style="margin-top: 15px;">
                 谢谢

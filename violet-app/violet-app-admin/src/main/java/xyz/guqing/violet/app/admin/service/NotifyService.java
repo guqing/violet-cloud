@@ -10,12 +10,4 @@ public interface NotifyService {
      * @param email 接收者email
      */
     void sendEmailCaptcha(String email);
-
-    /**
-     * 校验一次性邮箱验证码正确性
-     * @param email 邮箱地址
-     * @param captcha 验证码
-     * @return 如果校验正确返回{@code true},否则返回{@code false}
-     */
-    boolean checkEmailCaptcha(String email, String captcha);
 }

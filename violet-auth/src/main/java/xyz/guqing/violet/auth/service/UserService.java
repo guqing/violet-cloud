@@ -8,6 +8,7 @@ import xyz.guqing.violet.common.core.model.entity.system.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * <p>
@@ -45,4 +46,11 @@ public interface UserService extends IService<User> {
      * @param loginTime 最后登录时间
      */
     void updateLastLoginTime(String username, LocalDateTime loginTime);
+
+    /**
+     * 根据邮箱地址查询用户
+     * @param email 邮箱
+     * @return 返回查询到的用户信息Optional,可为空
+     */
+    Optional<User> getByEmail(String email);
 }

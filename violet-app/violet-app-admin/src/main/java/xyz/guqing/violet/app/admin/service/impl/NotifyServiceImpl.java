@@ -46,12 +46,6 @@ public class NotifyServiceImpl implements NotifyService {
         mailService.sendTemplateMail(email, "邮箱验证",param, "mail/mail_captcha.ftl");
     }
 
-    @Override
-    public boolean checkEmailCaptcha(String email, String captcha) {
-        Object value = redisService.get(captchaCacheKey(email));
-        return value != null && value.equals(captcha);
-    }
-
     private String generateCaptcha() {
         Random random = new Random();
         StringBuilder sb = new StringBuilder();

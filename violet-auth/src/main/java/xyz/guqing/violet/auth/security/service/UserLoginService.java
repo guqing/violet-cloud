@@ -7,6 +7,7 @@ import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.ClientDetails;
@@ -153,6 +154,7 @@ public class UserLoginService {
      * @param registerUser 注册用户
      * @return 注册并登录成功返回令牌对象
      */
+    @Transactional(rollbackFor = Exception.class)
     public OAuth2AccessToken socialSignLogin(BindUserParam registerUser) {
         // 校验验证码
         boolean checkResult = checkEmailCaptcha(registerUser.getEmail(), registerUser.getCaptcha());
@@ -169,7 +171,8 @@ public class UserLoginService {
         AuthUser authUser = registerUser.getAuthUser();
         String encryptPassword = passwordEncoder.encode(registerUser.getPassword());
         // 注册
-        User user = registerUser(registerUser.getEmail(), encryptPassword);
+        User patinaUser = authUserPatina(registerUser.getEmail(), encryptPassword, authUser);
+        User user = registerUser(patinaUser);
         user.setNickname(authUser.getNickname());
         user.setDescription(authUser.getRemark());
         user.setAvatar(authUser.getAvatar());
@@ -181,23 +184,11 @@ public class UserLoginService {
     /**
      * 注册用户
      *
-     * @param email email
-     * @param password password
-     * @return SystemUser SystemUser
+     * @param user 填充好信息的用户
+     * @return 返回保存后填充了id的用户
      */
     @Transactional(rollbackFor = Exception.class)
-    public User registerUser(String email, String password) {
-        User user = new User();
-        user.setEmail(email);
-        user.setNickname(email);
-        user.setUsername(generateUsername());
-        user.setPassword(password);
-        user.setStatus(UserStatusEnum.NORMAL.getValue());
-        user.setGender(GenderEnum.UNKNOWN.getValue());
-        user.setAvatar("");
-        user.setDescription("该用户很懒，什么也没有留下");
-        user.setCreateTime(LocalDateTime.now());
-        user.setModifyTime(LocalDateTime.now());
+    public User registerUser(User user) {
         userService.save(user);
 
         UserRole userRole = new UserRole();
@@ -205,6 +196,47 @@ public class UserLoginService {
         // 注册用户角色 ID
         userRole.setRoleId(VioletConstant.REGISTER_ROLE_ID);
         userRoleService.save(userRole);
+        return user;
+    }
+
+    /**
+     * 使用第三方用户信息对毛坯用户润色，让其信息更加光鲜
+     * @param email 邮箱地址
+     * @param encryptPassword 加密后的密码
+     * @param authUser 第三方登录获取的用户信息
+     * @return 返回润色后的用户信息对象
+     */
+    private User authUserPatina(String email, String encryptPassword, AuthUser authUser) {
+        User user = shapingBaseUser(email, encryptPassword);
+        if(StringUtils.isNotBlank(authUser.getNickname())) {
+            user.setNickname(authUser.getNickname());
+        }
+        user.setAvatar(authUser.getAvatar());
+        user.setDescription(authUser.getRemark());
+        if(StringUtils.isNotBlank(authUser.getUsername())) {
+            user.setUsername(authUser.getUsername() + authUser.getUuid());
+        }
+        return user;
+    }
+
+    /**
+     * 塑造一个毛坯用户，填充了基础信息
+     * @param email 电子邮件
+     * @param encryptPassword 加密后的密码
+     * @return 返回填充了信息的用户
+     */
+    private User shapingBaseUser(String email, String encryptPassword) {
+        User user = new User();
+        user.setEmail(email);
+        user.setNickname(email);
+        user.setUsername(generateUsername());
+        user.setPassword(encryptPassword);
+        user.setStatus(UserStatusEnum.NORMAL.getValue());
+        user.setGender(GenderEnum.UNKNOWN.getValue());
+        user.setAvatar("");
+        user.setDescription("这个用户很懒，什么也没有留下");
+        user.setCreateTime(LocalDateTime.now());
+        user.setModifyTime(LocalDateTime.now());
         return user;
     }
 

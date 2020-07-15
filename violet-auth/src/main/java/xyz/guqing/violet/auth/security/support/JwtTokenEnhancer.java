@@ -29,7 +29,6 @@ public class JwtTokenEnhancer implements TokenEnhancer {
 
         Map<String, Object> jwtExt = new HashMap<>(1,1);
         jwtExt.put("userInfo", userInfoDTO);
-
         ((DefaultOAuth2AccessToken) oAuth2AccessToken).setAdditionalInformation(jwtExt);
         return oAuth2AccessToken;
     }

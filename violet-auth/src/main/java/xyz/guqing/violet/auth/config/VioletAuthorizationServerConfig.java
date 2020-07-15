@@ -59,6 +59,11 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
     @Autowired
     private TokenEnhancer jwtTokenEnhancer;
 
+    /**
+     * 用于保存配置在重载方法configure中为其赋值
+     */
+    private AuthorizationServerEndpointsConfigurer endpointsConfigurer;
+
     @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) {
         /*
@@ -90,7 +95,7 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
          *                 .tokenStore(redisTokenStore)
          *                 .userDetailsService(kiteUserDetailsService);
          */
-
+        this.endpointsConfigurer = endpoints;
     }
 
     @Override
@@ -138,5 +143,13 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
     @Bean
     public DefaultOAuth2RequestFactory oAuth2RequestFactory() {
         return new DefaultOAuth2RequestFactory(jdbcClientDetailsService());
+    }
+
+    /**
+     * 获取 EndpointsConfigurer,后续用于手动生成jwt格式的token，否则只能生成普通token
+     * @return 返回EndpointsConfigurer
+     */
+    public AuthorizationServerEndpointsConfigurer getEndpointsConfigurer() {
+        return endpointsConfigurer;
     }
 }

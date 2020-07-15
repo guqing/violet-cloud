@@ -2,20 +2,24 @@ package xyz.guqing.violet.auth.security.service;
 
 import cn.hutool.core.util.StrUtil;
 import com.xkcoding.justauth.AuthRequestFactory;
+import lombok.RequiredArgsConstructor;
 import me.zhyd.oauth.config.AuthSource;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.TokenRequest;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
 import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import xyz.guqing.violet.auth.config.VioletAuthorizationServerConfig;
 import xyz.guqing.violet.auth.model.dto.SocialLoginDTO;
 import xyz.guqing.violet.auth.model.params.BindUserParam;
 import xyz.guqing.violet.auth.service.UserRoleService;
@@ -46,6 +50,7 @@ import java.util.*;
  * @date 2020-05-14
  */
 @Service
+@RequiredArgsConstructor
 public class UserLoginService {
     private static final String USERNAME = "username";
     private static final String PASSWORD = "password";
@@ -59,26 +64,8 @@ public class UserLoginService {
     private final PasswordEncoder passwordEncoder;
     private final RedisService redisService;
     private final UserRoleService userRoleService;
+    private final VioletAuthorizationServerConfig violetAuthorizationServerConfig;
 
-    public UserLoginService(AuthRequestFactory factory,
-                            ResourceOwnerPasswordTokenGranter granter,
-                            JdbcClientDetailsService jdbcClientDetailsService,
-                            UserService userService,
-                            UserConnectionService userConnectionService,
-                            VioletAuthProperties violetAuthProperties,
-                            PasswordEncoder passwordEncoder,
-                            RedisService redisService,
-                            UserRoleService userRoleService) {
-        this.factory = factory;
-        this.granter = granter;
-        this.jdbcClientDetailsService = jdbcClientDetailsService;
-        this.userService = userService;
-        this.userConnectionService = userConnectionService;
-        this.violetAuthProperties = violetAuthProperties;
-        this.passwordEncoder = passwordEncoder;
-        this.redisService = redisService;
-        this.userRoleService = userRoleService;
-    }
 
     public SocialLoginDTO resolveLogin(String type, AuthCallback callback) {
         AuthRequest authRequest = getAuthRequest(type);
@@ -143,9 +130,12 @@ public class UserLoginService {
         requestParameters.put(USERNAME, user.getUsername());
         requestParameters.put(PASSWORD, SocialConstant.SOCIAL_LOGIN_PASSWORD);
 
+        // 准备生成token
         String grantTypes = String.join(",", clientDetails.getAuthorizedGrantTypes());
         TokenRequest tokenRequest = new TokenRequest(requestParameters, clientDetails.getClientId(), clientDetails.getScope(), grantTypes);
-        return granter.grant(GrantTypeConstant.PASSWORD, tokenRequest);
+        AuthorizationServerEndpointsConfigurer endpoint = violetAuthorizationServerConfig.getEndpointsConfigurer();
+
+        return endpoint.getTokenGranter().grant(GrantTypeConstant.PASSWORD, tokenRequest);
     }
 
     /**

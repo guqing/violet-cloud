@@ -60,7 +60,8 @@ public class SocialLoginController {
      */
     @ResponseBody
     @PostMapping("sign/login")
-    public ResultEntity<OAuth2AccessToken> signLogin(@RequestBody @Valid BindUserParam registerUser, AuthUser authUser) {
+    public ResultEntity<OAuth2AccessToken> signLogin(@Valid BindUserParam registerUser,
+                                                     AuthUser authUser) {
         OAuth2AccessToken oAuth2AccessToken = this.userLoginService.socialSignLogin(registerUser, authUser);
         return ResultEntity.ok(oAuth2AccessToken);
     }

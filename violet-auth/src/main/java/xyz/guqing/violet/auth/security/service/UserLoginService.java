@@ -169,6 +169,8 @@ public class UserLoginService {
         String encryptPassword = passwordEncoder.encode(registerUser.getPassword());
         // 注册
         User user = registerUser(registerUser.getEmail(), encryptPassword);
+        user.setNickname(authUser.getNickname());
+        user.setDescription(authUser.getRemark());
         // 保存第三方绑定帐号
         userConnectionService.create(user.getId(), authUser);
         return getOauth2AccessToken(user);

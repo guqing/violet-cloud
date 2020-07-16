@@ -3,7 +3,8 @@ package xyz.guqing.violet.app.admin.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import xyz.guqing.violet.app.admin.converter.LocalDateTimeConverter;
+import xyz.guqing.violet.app.admin.converter.StringToLocalDateConverter;
+import xyz.guqing.violet.app.admin.converter.StringToLocalDateTimeConverter;
 
 /**
  * @author guqing
@@ -13,6 +14,7 @@ import xyz.guqing.violet.app.admin.converter.LocalDateTimeConverter;
 public class MyWebMvcConfigure implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new LocalDateTimeConverter.StringToLocalDateTimeConverter());
+        registry.addConverter(new StringToLocalDateConverter());
+        registry.addConverter(new StringToLocalDateTimeConverter());
     }
 }

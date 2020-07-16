@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
  */
 @Data
 public class ActionLogDTO implements OutputConverter<ActionLogDTO, VioletActionLog> {
+    private Long id;
     /**
      * 操作用户
      */

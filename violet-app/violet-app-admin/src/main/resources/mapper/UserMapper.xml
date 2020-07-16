@@ -47,10 +47,10 @@
         <if test="groupName != null and groupName != ''">
             AND g.group_name like CONCAT('%',#{groupName},'%')
         </if>
-        <if test="createTimeFrom != null and createTimeFrom !=''">
+        <if test="createTimeFrom != null">
             And u.create_time &gt; #{createTimeFrom}
         </if>
-        <if test="createTimeTo!= null and createTimeTo !=''">
+        <if test="createTimeTo!= null">
             And u.create_time &lt; #{createTimeTo}
         </if>
         group by u.username,u.id,u.email,u.mobile,u.status,u.create_time,u.gender,
@@ -91,10 +91,10 @@
         <if test="groupName != null and groupName != ''">
             AND g.group_name like CONCAT('%',#{groupName},'%')
         </if>
-        <if test="createTimeFrom != null and createTimeFrom !=''">
+        <if test="createTimeFrom != null">
             And u.create_time &gt; #{createTimeFrom}
         </if>
-        <if test="createTimeTo!= null and createTimeTo !=''">
+        <if test="createTimeTo!= null">
             And u.create_time &lt; #{createTimeTo}
         </if>
     </select>

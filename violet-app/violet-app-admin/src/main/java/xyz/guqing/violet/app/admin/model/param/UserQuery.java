@@ -20,13 +20,7 @@ public class UserQuery {
     private Integer status;
     private String mobile;
     private String groupName;
-
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createTimeFrom;
-
-    @JsonFormat(pattern="yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDateTime createTimeTo;
     private QueryRequest queryRequest;
 

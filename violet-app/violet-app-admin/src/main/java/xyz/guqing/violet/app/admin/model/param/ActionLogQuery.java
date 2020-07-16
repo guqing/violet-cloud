@@ -1,5 +1,6 @@
 package xyz.guqing.violet.app.admin.model.param;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -21,11 +22,13 @@ public class ActionLogQuery {
     /**
      * 日志创建开始时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDateTime createFrom;
 
     /**
      * 日志创建结束时间
      */
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDateTime createTo;
 
     private Integer pageSize = 10;

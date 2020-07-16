@@ -18,8 +18,8 @@ import xyz.guqing.violet.common.core.model.support.ResultEntity;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/log")
-public class LogController {
+@RequestMapping("/log/action")
+public class ActionLogController {
     private final VioletActionLogService actionLogService;
 
     @GetMapping

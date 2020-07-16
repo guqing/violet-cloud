@@ -125,7 +125,7 @@ public class UserLoginService {
             throw new NotFoundException("未找到第三方登录可用的Client");
         }
 
-        Map<String, String> requestParameters = new HashMap<>(5, 1);
+        Map<String, String> requestParameters = new HashMap<>(3, 1);
         requestParameters.put(ParamsConstant.GRANT_TYPE, SocialConstant.SOCIAL_LOGIN);
         requestParameters.put(USERNAME, user.getUsername());
         requestParameters.put(PASSWORD, SocialConstant.SOCIAL_LOGIN_PASSWORD);
@@ -135,6 +135,7 @@ public class UserLoginService {
         TokenRequest tokenRequest = new TokenRequest(requestParameters, clientDetails.getClientId(), clientDetails.getScope(), grantTypes);
         AuthorizationServerEndpointsConfigurer endpoint = violetAuthorizationServerConfig.getEndpointsConfigurer();
 
+        // 想生成原始token则使用granter.grant(GrantTypeConstant.PASSWORD, tokenRequest)
         return endpoint.getTokenGranter().grant(GrantTypeConstant.PASSWORD, tokenRequest);
     }
 

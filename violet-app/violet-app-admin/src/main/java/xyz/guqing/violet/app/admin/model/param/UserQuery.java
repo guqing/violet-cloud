@@ -1,5 +1,6 @@
 package xyz.guqing.violet.app.admin.model.param;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 
@@ -18,7 +19,11 @@ public class UserQuery {
     private Integer status;
     private String mobile;
     private String groupName;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDateTime createTimeFrom;
+
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDateTime createTimeTo;
     private QueryRequest queryRequest;
 

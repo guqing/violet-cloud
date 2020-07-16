@@ -17,7 +17,7 @@ public class StringToLocalDateTimeConverter implements Converter<String, LocalDa
      */
     @Override
     public LocalDateTime convert(@NonNull String s) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss", Locale.CHINESE);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.CHINESE);
         return LocalDateTime.parse(s, formatter);
     }
 }

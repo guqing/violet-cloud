@@ -14,7 +14,6 @@ import xyz.guqing.violet.app.admin.converter.StringToLocalDateTimeConverter;
 public class MyWebMvcConfigure implements WebMvcConfigurer {
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new StringToLocalDateConverter());
         registry.addConverter(new StringToLocalDateTimeConverter());
     }
 }

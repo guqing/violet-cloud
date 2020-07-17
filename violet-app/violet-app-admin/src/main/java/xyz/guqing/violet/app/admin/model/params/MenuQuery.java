@@ -1,4 +1,4 @@
-package xyz.guqing.violet.app.admin.model.param;
+package xyz.guqing.violet.app.admin.model.params;
 
 import lombok.Data;
 import xyz.guqing.violet.common.core.model.entity.system.Menu;

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xyz.guqing.violet.app.admin.mapper.UserMapper">
     <select id="findUserBy"
-            parameterType="xyz.guqing.violet.app.admin.model.param.UserQuery"
+            parameterType="xyz.guqing.violet.app.admin.model.params.UserQuery"
             resultType="xyz.guqing.violet.app.admin.model.entity.UserDO">
         SELECT
             u.id,
@@ -62,7 +62,7 @@
     </select>
 
     <select id="countUserBy"
-            parameterType="xyz.guqing.violet.app.admin.model.param.UserQuery"
+            parameterType="xyz.guqing.violet.app.admin.model.params.UserQuery"
             resultType="java.lang.Long">
         SELECT
           count(*)

@@ -2,7 +2,6 @@ package xyz.guqing.violet.auth.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import me.zhyd.oauth.model.AuthCallback;
-import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
 import me.zhyd.oauth.utils.AuthStateUtils;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
@@ -35,6 +34,7 @@ public class SocialLoginController {
         this.userLoginService = userLoginService;
         this.authProperties = authProperties;
     }
+
     @GetMapping("/login/{type}")
     public void login(@PathVariable String type, HttpServletResponse response) throws IOException {
         AuthRequest authRequest = userLoginService.getAuthRequest(type);

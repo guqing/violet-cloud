@@ -3,7 +3,7 @@ package xyz.guqing.violet.app.admin.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.app.admin.model.dto.RoleDTO;
-import xyz.guqing.violet.app.admin.model.param.RoleQuery;
+import xyz.guqing.violet.app.admin.model.params.RoleQuery;
 import xyz.guqing.violet.common.core.model.entity.system.Role;
 
 import java.util.List;

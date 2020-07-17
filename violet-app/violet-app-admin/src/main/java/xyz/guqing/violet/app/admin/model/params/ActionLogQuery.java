@@ -1,6 +1,5 @@
-package xyz.guqing.violet.app.admin.model.param;
+package xyz.guqing.violet.app.admin.model.params;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.time.LocalDateTime;

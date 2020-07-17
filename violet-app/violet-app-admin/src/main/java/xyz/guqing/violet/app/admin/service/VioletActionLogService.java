@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.scheduling.annotation.Async;
-import xyz.guqing.violet.app.admin.model.param.ActionLogQuery;
+import xyz.guqing.violet.app.admin.model.params.ActionLogQuery;
 import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 import xyz.guqing.violet.common.core.model.entity.system.VioletActionLog;
 

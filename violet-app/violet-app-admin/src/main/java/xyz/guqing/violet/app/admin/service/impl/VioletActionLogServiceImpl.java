@@ -13,7 +13,7 @@ import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import xyz.guqing.violet.app.admin.mapper.VioletActionLogMapper;
-import xyz.guqing.violet.app.admin.model.param.ActionLogQuery;
+import xyz.guqing.violet.app.admin.model.params.ActionLogQuery;
 import xyz.guqing.violet.app.admin.service.VioletActionLogService;
 import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
 import xyz.guqing.violet.common.core.model.entity.system.VioletActionLog;

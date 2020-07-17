@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import xyz.guqing.violet.app.admin.model.enums.MenuType;
-import xyz.guqing.violet.app.admin.model.param.MenuQuery;
+import xyz.guqing.violet.app.admin.model.params.MenuQuery;
 import xyz.guqing.violet.app.admin.service.MenuService;
 import xyz.guqing.violet.common.core.model.dto.MenuTree;
 import xyz.guqing.violet.common.core.model.entity.system.Menu;

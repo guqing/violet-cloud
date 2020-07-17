@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import xyz.guqing.violet.app.admin.model.annotation.ControllerEndpoint;
-import xyz.guqing.violet.app.admin.model.param.UserGroupParam;
+import xyz.guqing.violet.app.admin.model.params.UserGroupParam;
 import xyz.guqing.violet.app.admin.service.UserGroupService;
 import xyz.guqing.violet.common.core.model.dto.UserGroupTree;
 import xyz.guqing.violet.common.core.model.entity.system.UserGroup;

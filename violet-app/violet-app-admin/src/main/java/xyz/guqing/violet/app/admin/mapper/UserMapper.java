@@ -2,12 +2,10 @@ package xyz.guqing.violet.app.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import xyz.guqing.violet.app.admin.model.entity.UserDO;
-import xyz.guqing.violet.app.admin.model.param.UserQuery;
-import xyz.guqing.violet.common.core.model.bo.CurrentUser;
+import xyz.guqing.violet.app.admin.model.params.UserQuery;
 import xyz.guqing.violet.common.core.model.entity.system.User;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * <p>

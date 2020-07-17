@@ -4,12 +4,9 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
-import xyz.guqing.violet.app.admin.model.param.UserQuery;
+import xyz.guqing.violet.app.admin.model.params.UserQuery;
 import xyz.guqing.violet.app.admin.service.UserService;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
-
-import java.util.Random;
-import java.util.UUID;
 
 /**
  * @author guqing

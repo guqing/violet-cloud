@@ -1,6 +1,7 @@
 package xyz.guqing.violet.app.admin.model.params;
 
 import lombok.Data;
+import xyz.guqing.violet.common.core.model.support.QueryRequest;
 
 import java.time.LocalDateTime;
 
@@ -27,10 +28,5 @@ public class ActionLogQuery {
      * 日志创建结束时间
      */
     private LocalDateTime createTo;
-
-    private Integer pageSize = 10;
-    /**
-     * 当前页码
-     */
-    private Integer current = 1;
+    private QueryRequest queryRequest = new QueryRequest();
 }

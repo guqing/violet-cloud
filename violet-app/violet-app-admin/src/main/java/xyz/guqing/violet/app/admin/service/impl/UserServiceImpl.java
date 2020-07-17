@@ -51,7 +51,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     public PageInfo<UserDTO> listByPage(UserQuery userQuery) {
         QueryRequest queryRequest = userQuery.getQueryRequest();
         Long current = queryRequest.getCurrent();
-        Long pageSize = userQuery.getQueryRequest().getPageSize();
+        Long pageSize = queryRequest.getPageSize();
 
         PageInfo<UserDTO> pageInfo = new PageInfo<>();
         pageInfo.setCurrent(current);

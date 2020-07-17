@@ -13,5 +13,5 @@ public class RoleQuery {
     private String roleName;
     private String remark;
     private String createTime;
-    private QueryRequest queryRequest;
+    private QueryRequest queryRequest = new QueryRequest();
 }

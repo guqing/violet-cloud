@@ -14,9 +14,5 @@ public class LoginLogParam {
     private String username;
     private LocalDateTime createFrom;
     private LocalDateTime createTo;
-    /**
-     * 分页
-     */
-    private Integer current = 1;
-    private Integer pageSize = 10;
+    private QueryRequest queryRequest = new QueryRequest();
 }

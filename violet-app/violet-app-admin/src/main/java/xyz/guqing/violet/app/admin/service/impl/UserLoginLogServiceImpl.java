@@ -13,6 +13,7 @@ import xyz.guqing.violet.app.admin.mapper.UserLoginLogMapper;
 import xyz.guqing.violet.app.admin.model.params.LoginLogParam;
 import xyz.guqing.violet.app.admin.service.UserLoginLogService;
 import xyz.guqing.violet.common.core.model.entity.system.UserLoginLog;
+import xyz.guqing.violet.common.core.model.support.QueryRequest;
 
 import java.time.LocalDateTime;
 
@@ -29,15 +30,9 @@ public class UserLoginLogServiceImpl extends ServiceImpl<UserLoginLogMapper, Use
 
         LambdaQueryWrapper<UserLoginLog> queryWrapper = Wrappers.lambdaQuery();
 
-        Integer current = loginLogParam.getCurrent();
-        if (current == null) {
-            current = 1;
-        }
-
-        Integer pageSize = loginLogParam.getPageSize();
-        if (pageSize == null) {
-            pageSize = 10;
-        }
+        QueryRequest queryRequest = loginLogParam.getQueryRequest();
+        Long current = queryRequest.getCurrent();
+        Long pageSize = queryRequest.getPageSize();
 
         String username = loginLogParam.getUsername();
         if (StringUtils.isNotBlank(username)) {
@@ -51,6 +46,7 @@ public class UserLoginLogServiceImpl extends ServiceImpl<UserLoginLogMapper, Use
                     .le(UserLoginLog::getLoginTime, createTo);
         }
 
+        queryWrapper.orderByDesc(UserLoginLog::getLoginTime);
         return page(new Page<>(current, pageSize), queryWrapper);
     }
 }

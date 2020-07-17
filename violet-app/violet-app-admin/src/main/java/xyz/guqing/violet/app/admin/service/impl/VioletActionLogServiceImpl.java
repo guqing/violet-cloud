@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import xyz.guqing.violet.app.admin.mapper.VioletActionLogMapper;
 import xyz.guqing.violet.app.admin.model.params.ActionLogQuery;
 import xyz.guqing.violet.app.admin.service.VioletActionLogService;
+import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
 import xyz.guqing.violet.common.core.model.entity.system.VioletActionLog;
 
@@ -63,18 +64,11 @@ public class VioletActionLogServiceImpl extends ServiceImpl<VioletActionLogMappe
 
     @Override
     public IPage<VioletActionLog> listBy(ActionLogQuery logQuery) {
-        Integer pageSize = logQuery.getPageSize();
-        Integer current = logQuery.getCurrent();
+        QueryRequest queryRequest = logQuery.getQueryRequest();
+        Long pageSize = queryRequest.getPageSize();
+        Long current = queryRequest.getCurrent();
 
         LambdaQueryWrapper<VioletActionLog> queryWrapper = Wrappers.lambdaQuery();
-
-        if(current == null) {
-            current = 1;
-        }
-
-        if(pageSize == null) {
-            pageSize = 10;
-        }
 
         if(logQuery.getUsername() != null) {
             queryWrapper.like(VioletActionLog::getUsername, logQuery.getUsername());

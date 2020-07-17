@@ -10,7 +10,7 @@ import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 /**
  * 处理排序工具类
  *
- * @author MrBird
+ * @author guqing
  */
 public class SortUtil {
     /**

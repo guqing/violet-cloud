@@ -50,7 +50,7 @@ public class RegionAddressUtils {
         File file = new File(dbPath);
         if (!file.exists()) {
             String tmpDir = System.getProperties().getProperty(VioletConstant.JAVA_TEMP_DIR);
-            dbPath = tmpDir + "ip.db";
+            dbPath = tmpDir + "/ip2region.db";
             file = new File(dbPath);
             InputStream resourceAsStream = RegionAddressUtils.class.getClassLoader()
                     .getResourceAsStream("classpath:ip2region/ip2region.db");

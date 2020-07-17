@@ -10,6 +10,7 @@ import xyz.guqing.violet.app.admin.model.params.ActionLogQuery;
 import xyz.guqing.violet.app.admin.service.VioletActionLogService;
 import xyz.guqing.violet.common.core.model.entity.system.VioletActionLog;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
+import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
 /**
@@ -23,8 +24,8 @@ public class ActionLogController {
     private final VioletActionLogService actionLogService;
 
     @GetMapping
-    public ResultEntity<PageInfo<ActionLogDTO>> list(ActionLogQuery actionLogQuery) {
-        IPage<VioletActionLog> actionLogPage = actionLogService.listBy(actionLogQuery);
+    public ResultEntity<PageInfo<ActionLogDTO>> list(ActionLogQuery actionLogQuery, QueryRequest queryRequest) {
+        IPage<VioletActionLog> actionLogPage = actionLogService.listBy(actionLogQuery,queryRequest);
         return ResultEntity.okList(actionLogPage, actionLog -> new ActionLogDTO().convertFrom(actionLog));
     }
 }

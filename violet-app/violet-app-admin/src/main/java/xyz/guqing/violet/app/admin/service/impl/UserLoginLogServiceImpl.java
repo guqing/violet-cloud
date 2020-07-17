@@ -25,12 +25,11 @@ import java.time.LocalDateTime;
 @Service
 public class UserLoginLogServiceImpl extends ServiceImpl<UserLoginLogMapper, UserLoginLog> implements UserLoginLogService {
     @Override
-    public IPage<UserLoginLog> listBy(LoginLogParam loginLogParam) {
+    public IPage<UserLoginLog> listBy(LoginLogParam loginLogParam, QueryRequest queryRequest) {
         log.debug("列表查询参数:{}", JSONObject.toJSONString(loginLogParam));
 
         LambdaQueryWrapper<UserLoginLog> queryWrapper = Wrappers.lambdaQuery();
 
-        QueryRequest queryRequest = loginLogParam.getQueryRequest();
         Long current = queryRequest.getCurrent();
         Long pageSize = queryRequest.getPageSize();
 

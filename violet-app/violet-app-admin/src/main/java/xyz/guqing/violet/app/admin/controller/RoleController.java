@@ -50,8 +50,8 @@ public class RoleController {
 
     @GetMapping("list")
     public ResultEntity<PageInfo<RoleDTO>> listBy(RoleQuery roleQuery, QueryRequest queryRequest) {
-        log.debug("角色查询对象：{}", JSONObject.toJSONString(roleQuery));
         roleQuery.setQueryRequest(queryRequest);
+        log.debug("角色查询对象：{}", JSONObject.toJSONString(roleQuery));
         Page<Role> pageInfo = roleService.listBy(roleQuery);
         return ResultEntity.okList(pageInfo, role -> new RoleDTO().convertFrom(role));
     }

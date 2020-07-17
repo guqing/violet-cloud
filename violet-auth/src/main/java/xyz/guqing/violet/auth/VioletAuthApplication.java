@@ -4,12 +4,14 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.scheduling.annotation.EnableAsync;
 import xyz.guqing.violet.common.security.starter.annotation.EnableVioletCloudResourceServer;
 
 /**
  * @author guqing
  * @date 2020-05-07
  */
+@EnableAsync
 @SpringBootApplication
 @EnableVioletCloudResourceServer
 @MapperScan("xyz.guqing.violet.auth.mapper")

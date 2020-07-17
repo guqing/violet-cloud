@@ -1,4 +1,4 @@
-package xyz.guqing.violet.app.admin.model.properties;
+package xyz.guqing.violet.common.core.model.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;

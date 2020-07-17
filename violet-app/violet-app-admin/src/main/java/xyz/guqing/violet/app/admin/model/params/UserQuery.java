@@ -20,5 +20,5 @@ public class UserQuery {
     private String groupName;
     private LocalDateTime createTimeFrom;
     private LocalDateTime createTimeTo;
-    private QueryRequest queryRequest = new QueryRequest();
+    private QueryRequest queryRequest;
 }

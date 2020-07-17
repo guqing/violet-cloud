@@ -30,7 +30,7 @@ public class RateLimitRuleServiceImpl implements RateLimitRuleService {
 
     private final RouteEnhanceCacheService routeEnhanceCacheService;
     private RateLimitRuleMapper rateLimitRuleMapper;
-    private ReactiveMongoTemplate template;
+    private ReactiveMongoTemplate reactiveMongoTemplate;
 
     @Autowired(required = false)
     public void setRateLimitRuleMapper(RateLimitRuleMapper rateLimitRuleMapper) {
@@ -39,7 +39,7 @@ public class RateLimitRuleServiceImpl implements RateLimitRuleService {
 
     @Autowired(required = false)
     public void setTemplate(ReactiveMongoTemplate template) {
-        this.template = template;
+        this.reactiveMongoTemplate = template;
     }
 
     @Override
@@ -55,13 +55,13 @@ public class RateLimitRuleServiceImpl implements RateLimitRuleService {
     @Override
     public Flux<RateLimitRule> findPages(QueryRequest request, RateLimitRule rateLimitRule) {
         Query query = getQuery(rateLimitRule);
-        return PageableExecutionUtil.getPages(query, request, RateLimitRule.class, template);
+        return PageableExecutionUtil.getPages(query, request, RateLimitRule.class, reactiveMongoTemplate);
     }
 
     @Override
     public Mono<Long> findCount(RateLimitRule rateLimitRule) {
         Query query = getQuery(rateLimitRule);
-        return template.count(query, RateLimitRule.class);
+        return reactiveMongoTemplate.count(query, RateLimitRule.class);
     }
 
     @Override

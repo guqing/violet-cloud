@@ -1,5 +1,6 @@
 package xyz.guqing.violet.gateway.enhance.service.impl;
 
+import lombok.AllArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
@@ -26,7 +27,7 @@ import java.util.Arrays;
 public class RouteLogServiceImpl implements RouteLogService {
 
     private RouteLogMapper routeLogMapper;
-    private ReactiveMongoTemplate template;
+    private ReactiveMongoTemplate reactiveMongoTemplate;
 
     @Autowired(required = false)
     public void setRouteLogMapper(RouteLogMapper routeLogMapper) {
@@ -35,7 +36,7 @@ public class RouteLogServiceImpl implements RouteLogService {
 
     @Autowired(required = false)
     public void setTemplate(ReactiveMongoTemplate template) {
-        this.template = template;
+        this.reactiveMongoTemplate = template;
     }
 
     @Override
@@ -59,13 +60,13 @@ public class RouteLogServiceImpl implements RouteLogService {
     @Override
     public Flux<RouteLog> findPages(QueryRequest request, RouteLog routeLog) {
         Query query = getQuery(routeLog);
-        return PageableExecutionUtil.getPages(query, request, RouteLog.class, template);
+        return PageableExecutionUtil.getPages(query, request, RouteLog.class, reactiveMongoTemplate);
     }
 
     @Override
     public Mono<Long> findCount(RouteLog routeLog) {
         Query query = getQuery(routeLog);
-        return template.count(query, RouteLog.class);
+        return reactiveMongoTemplate.count(query, RouteLog.class);
     }
 
     private Query getQuery(RouteLog routeLog) {

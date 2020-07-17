@@ -1,7 +1,8 @@
 package xyz.guqing.violet.gateway;
 
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 
 /**
  * @author guqing
@@ -10,6 +11,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class VioletGatewayApplication {
     public static void main(String[] args) {
-        SpringApplication.run(VioletGatewayApplication.class, args);
+        new SpringApplicationBuilder(VioletGatewayApplication.class)
+                .web(WebApplicationType.REACTIVE)
+                .run(args);
     }
 }

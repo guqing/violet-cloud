@@ -1,4 +1,4 @@
-package xyz.guqing.violet.common.core.handler;
+package xyz.guqing.violet.app.admin.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import org.apache.ibatis.reflection.MetaObject;

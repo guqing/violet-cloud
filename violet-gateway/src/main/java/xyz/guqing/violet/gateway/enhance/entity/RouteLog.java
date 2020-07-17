@@ -9,7 +9,7 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @Data
 @Builder

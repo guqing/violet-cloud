@@ -13,7 +13,7 @@ import xyz.guqing.violet.gateway.enhance.entity.BlockLog;
 import xyz.guqing.violet.gateway.enhance.service.BlockLogService;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @RestController
 @RequiredArgsConstructor

@@ -8,7 +8,7 @@ import xyz.guqing.violet.gateway.enhance.entity.BlackList;
 import java.util.Collection;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @Repository
 public interface BlackListMapper extends ReactiveMongoRepository<BlackList, String> {

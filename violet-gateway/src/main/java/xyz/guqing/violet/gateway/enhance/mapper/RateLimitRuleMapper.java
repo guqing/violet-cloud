@@ -8,7 +8,7 @@ import xyz.guqing.violet.gateway.enhance.entity.RateLimitRule;
 import java.util.Collection;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @Repository
 public interface RateLimitRuleMapper extends ReactiveMongoRepository<RateLimitRule, String> {

@@ -9,7 +9,7 @@ import xyz.guqing.violet.gateway.enhance.entity.RouteUser;
 import java.util.Collection;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @Repository
 public interface RouteUserMapper extends ReactiveMongoRepository<RouteUser, String> {

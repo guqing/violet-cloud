@@ -10,7 +10,7 @@ import xyz.guqing.violet.gateway.enhance.entity.BlackList;
 import xyz.guqing.violet.gateway.enhance.service.BlackListService;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @RestController
 @RequiredArgsConstructor

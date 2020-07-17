@@ -12,7 +12,7 @@ import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.codec.ServerCodecConfigurer;
 import org.springframework.web.reactive.result.view.ViewResolver;
-import xyz.guqing.violet.gateway.common.handler.FebsGatewayExceptionHandler;
+import xyz.guqing.violet.gateway.common.handler.VioletGatewayExceptionHandler;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Configuration
 @RequiredArgsConstructor
-public class FebsGatewayErrorConfigure {
+public class VioletGatewayErrorConfigure {
 
     private final ServerProperties serverProperties;
     private final ApplicationContext applicationContext;
@@ -32,7 +32,7 @@ public class FebsGatewayErrorConfigure {
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public ErrorWebExceptionHandler errorWebExceptionHandler(ErrorAttributes errorAttributes) {
-        FebsGatewayExceptionHandler exceptionHandler = new FebsGatewayExceptionHandler(
+        VioletGatewayExceptionHandler exceptionHandler = new VioletGatewayExceptionHandler(
                 errorAttributes,
                 this.resourceProperties,
                 this.serverProperties.getError(),

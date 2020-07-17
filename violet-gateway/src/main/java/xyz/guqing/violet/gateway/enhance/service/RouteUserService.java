@@ -6,7 +6,7 @@ import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.gateway.enhance.entity.RouteUser;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 public interface RouteUserService {
 

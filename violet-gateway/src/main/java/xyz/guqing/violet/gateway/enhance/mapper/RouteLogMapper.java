@@ -8,7 +8,7 @@ import xyz.guqing.violet.gateway.enhance.entity.RouteLog;
 import java.util.Collection;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @Repository
 public interface RouteLogMapper extends ReactiveMongoRepository<RouteLog, String> {

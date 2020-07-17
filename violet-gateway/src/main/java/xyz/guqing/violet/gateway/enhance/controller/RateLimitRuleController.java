@@ -10,7 +10,7 @@ import xyz.guqing.violet.gateway.enhance.entity.RateLimitRule;
 import xyz.guqing.violet.gateway.enhance.service.RateLimitRuleService;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @RestController
 @RequiredArgsConstructor

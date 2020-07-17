@@ -13,7 +13,7 @@ import xyz.guqing.violet.gateway.enhance.entity.RateLimitLog;
 import xyz.guqing.violet.gateway.enhance.service.RateLimitLogService;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @RestController
 @RequiredArgsConstructor

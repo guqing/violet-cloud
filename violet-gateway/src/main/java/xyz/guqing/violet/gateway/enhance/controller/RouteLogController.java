@@ -13,7 +13,7 @@ import xyz.guqing.violet.gateway.enhance.entity.RouteLog;
 import xyz.guqing.violet.gateway.enhance.service.RouteLogService;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @RestController
 @RequiredArgsConstructor

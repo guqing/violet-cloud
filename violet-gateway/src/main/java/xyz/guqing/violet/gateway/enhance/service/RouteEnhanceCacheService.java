@@ -7,7 +7,7 @@ import xyz.guqing.violet.gateway.enhance.entity.RateLimitRule;
 import java.util.Set;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 public interface RouteEnhanceCacheService {
 

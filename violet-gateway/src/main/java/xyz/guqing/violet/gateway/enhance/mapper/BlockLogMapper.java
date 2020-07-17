@@ -7,7 +7,7 @@ import xyz.guqing.violet.gateway.enhance.entity.BlockLog;
 import java.util.Collection;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 public interface BlockLogMapper extends ReactiveMongoRepository<BlockLog, String> {
 

@@ -16,16 +16,15 @@ import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 import xyz.guqing.violet.gateway.enhance.service.RouteEnhanceService;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @Slf4j
 @Component
 @Order(0)
 @RequiredArgsConstructor
-public class FebsGatewayRequestFilter implements GlobalFilter {
+public class VioletGatewayRequestFilter implements GlobalFilter {
 
     private final RouteEnhanceService routeEnhanceService;
-    private final AntPathMatcher pathMatcher = new AntPathMatcher();
     @Value("${violet.gateway.enhance:false}")
     private Boolean routeEhance;
 

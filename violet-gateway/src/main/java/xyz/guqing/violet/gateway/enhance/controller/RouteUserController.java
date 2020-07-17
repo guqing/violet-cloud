@@ -10,7 +10,7 @@ import xyz.guqing.violet.gateway.enhance.entity.RouteUser;
 import xyz.guqing.violet.gateway.enhance.service.RouteUserService;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @RestController
 @RequiredArgsConstructor

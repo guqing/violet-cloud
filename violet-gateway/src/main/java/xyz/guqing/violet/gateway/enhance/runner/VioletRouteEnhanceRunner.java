@@ -8,10 +8,10 @@ import xyz.guqing.violet.gateway.enhance.service.RateLimitRuleService;
 import xyz.guqing.violet.gateway.enhance.service.RouteEnhanceCacheService;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @RequiredArgsConstructor
-public class FebsRouteEnhanceRunner implements ApplicationRunner {
+public class VioletRouteEnhanceRunner implements ApplicationRunner {
 
     private final RouteEnhanceCacheService cacheService;
     private final BlackListService blackListService;

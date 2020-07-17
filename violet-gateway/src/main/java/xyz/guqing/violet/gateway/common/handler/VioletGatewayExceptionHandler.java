@@ -17,13 +17,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author MrBird
+ * @author guqing
  */
 @Slf4j
-public class FebsGatewayExceptionHandler extends DefaultErrorWebExceptionHandler {
+public class VioletGatewayExceptionHandler extends DefaultErrorWebExceptionHandler {
 
-    public FebsGatewayExceptionHandler(ErrorAttributes errorAttributes, ResourceProperties resourceProperties,
-                                       ErrorProperties errorProperties, ApplicationContext applicationContext) {
+    public VioletGatewayExceptionHandler(ErrorAttributes errorAttributes,
+                                         ResourceProperties resourceProperties,
+                                         ErrorProperties errorProperties,
+                                         ApplicationContext applicationContext) {
         super(errorAttributes, resourceProperties, errorProperties, applicationContext);
     }
 
@@ -52,7 +54,7 @@ public class FebsGatewayExceptionHandler extends DefaultErrorWebExceptionHandler
         } else {
             errorMessage = "网关转发异常";
         }
-        Map<String, Object> errorAttributes = new HashMap<>(3);
+        Map<String, Object> errorAttributes = new HashMap<>(1,1);
         errorAttributes.put("message", errorMessage);
         return errorAttributes;
     }

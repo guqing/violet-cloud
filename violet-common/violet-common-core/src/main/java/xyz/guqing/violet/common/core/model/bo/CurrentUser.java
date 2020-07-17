@@ -89,4 +89,6 @@ public class CurrentUser implements Serializable {
      * 状态 0锁定 1有效
      */
     private Integer status;
+
+    private LocalDateTime createTime;
 }

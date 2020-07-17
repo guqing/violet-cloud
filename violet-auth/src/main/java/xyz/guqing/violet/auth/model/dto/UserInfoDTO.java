@@ -76,4 +76,6 @@ public class UserInfoDTO {
      * 状态 0锁定 1有效
      */
     private Integer status;
+
+    private LocalDateTime createTime;
 }

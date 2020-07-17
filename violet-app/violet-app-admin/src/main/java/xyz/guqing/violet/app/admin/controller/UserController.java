@@ -12,10 +12,7 @@ import xyz.guqing.violet.app.admin.model.params.UserParam;
 import xyz.guqing.violet.app.admin.model.params.UserQuery;
 import xyz.guqing.violet.app.admin.service.UserService;
 import xyz.guqing.violet.common.core.model.entity.system.User;
-import xyz.guqing.violet.common.core.model.support.CreateCheck;
-import xyz.guqing.violet.common.core.model.support.PageInfo;
-import xyz.guqing.violet.common.core.model.support.ResultEntity;
-import xyz.guqing.violet.common.core.model.support.UpdateCheck;
+import xyz.guqing.violet.common.core.model.support.*;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 
 import javax.validation.Valid;
@@ -38,8 +35,10 @@ public class UserController {
 
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('user:view')")
-    public ResultEntity<PageInfo<UserDTO>> listUserByPage(UserQuery userQuery) {
-        log.debug("list user 查询条件：{}", userQuery);
+    public ResultEntity<PageInfo<UserDTO>> listUserByPage(UserQuery userQuery,
+                                                          QueryRequest queryRequest) {
+        userQuery.setQueryRequest(queryRequest);
+        log.debug("用户列表查询参数: [{}]", userQuery);
         PageInfo<UserDTO> users = userService.listByPage(userQuery);
         return ResultEntity.ok(users);
     }

@@ -63,8 +63,7 @@ public class VioletActionLogServiceImpl extends ServiceImpl<VioletActionLogMappe
     }
 
     @Override
-    public IPage<VioletActionLog> listBy(ActionLogQuery logQuery) {
-        QueryRequest queryRequest = logQuery.getQueryRequest();
+    public IPage<VioletActionLog> listBy(ActionLogQuery logQuery, QueryRequest queryRequest) {
         Long pageSize = queryRequest.getPageSize();
         Long current = queryRequest.getCurrent();
 

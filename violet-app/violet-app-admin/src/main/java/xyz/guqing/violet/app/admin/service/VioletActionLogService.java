@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.Async;
 import xyz.guqing.violet.app.admin.model.params.ActionLogQuery;
 import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 import xyz.guqing.violet.common.core.model.entity.system.VioletActionLog;
+import xyz.guqing.violet.common.core.model.support.QueryRequest;
 
 import java.lang.reflect.Method;
 
@@ -35,5 +36,5 @@ public interface VioletActionLogService extends IService<VioletActionLog> {
      * @param logQuery 查询条件
      * @return 返回分页查询结果
      */
-    IPage<VioletActionLog> listBy(ActionLogQuery logQuery);
+    IPage<VioletActionLog> listBy(ActionLogQuery logQuery, QueryRequest queryRequest);
 }

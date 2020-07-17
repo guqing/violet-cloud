@@ -28,5 +28,4 @@ public class ActionLogQuery {
      * 日志创建结束时间
      */
     private LocalDateTime createTo;
-    private QueryRequest queryRequest = new QueryRequest();
 }

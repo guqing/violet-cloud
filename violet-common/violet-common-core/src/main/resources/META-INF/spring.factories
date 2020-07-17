@@ -2,4 +2,5 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   xyz.guqing.violet.common.core.config.PaginationInterceptorConfig,\
   xyz.guqing.violet.common.core.handler.SaveUpdateRelatedFieldsMetaHandler,\
   xyz.guqing.violet.common.core.handler.BaseExceptionHandler,\
-  xyz.guqing.violet.common.core.handler.ParamValidatorHandler
+  xyz.guqing.violet.common.core.handler.ParamValidatorHandler,\
+  xyz.guqing.violet.common.core.config.DateHandlerConfig

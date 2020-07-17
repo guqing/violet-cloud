@@ -1,4 +1,4 @@
-package xyz.guqing.violet.app.admin.config;
+package xyz.guqing.violet.common.core.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;

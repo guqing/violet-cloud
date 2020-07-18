@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import xyz.guqing.violet.auth.model.dto.UserInfoDTO;
 import xyz.guqing.violet.auth.service.UserService;
-import xyz.guqing.violet.common.core.model.constant.StringConstant;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 

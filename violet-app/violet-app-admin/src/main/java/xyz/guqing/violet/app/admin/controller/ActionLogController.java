@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import xyz.guqing.violet.app.admin.model.dto.ActionLogDTO;
 import xyz.guqing.violet.app.admin.model.params.ActionLogQuery;
 import xyz.guqing.violet.app.admin.service.VioletActionLogService;
+import xyz.guqing.violet.app.admin.utils.PageConvert;
 import xyz.guqing.violet.common.core.model.entity.system.VioletActionLog;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
@@ -26,6 +27,10 @@ public class ActionLogController {
     @GetMapping
     public ResultEntity<PageInfo<ActionLogDTO>> list(ActionLogQuery actionLogQuery, QueryRequest queryRequest) {
         IPage<VioletActionLog> actionLogPage = actionLogService.listBy(actionLogQuery,queryRequest);
-        return ResultEntity.okList(actionLogPage, actionLog -> new ActionLogDTO().convertFrom(actionLog));
+        return ResultEntity.ok(convertTo(actionLogPage));
+    }
+
+    private PageInfo<ActionLogDTO> convertTo(IPage<VioletActionLog> actionLogPage) {
+        return PageConvert.convertFrom(actionLogPage, actionLog -> new ActionLogDTO().convertFrom(actionLog));
     }
 }

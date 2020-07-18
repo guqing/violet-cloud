@@ -1,6 +1,7 @@
 package xyz.guqing.violet.app.admin.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -12,6 +13,7 @@ import xyz.guqing.violet.app.admin.model.dto.RoleDTO;
 import xyz.guqing.violet.app.admin.model.params.RoleParam;
 import xyz.guqing.violet.app.admin.model.params.RoleQuery;
 import xyz.guqing.violet.app.admin.service.RoleService;
+import xyz.guqing.violet.app.admin.utils.PageConvert;
 import xyz.guqing.violet.common.core.model.entity.system.Role;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
@@ -53,7 +55,7 @@ public class RoleController {
         roleQuery.setQueryRequest(queryRequest);
         log.debug("角色查询对象：{}", JSONObject.toJSONString(roleQuery));
         Page<Role> pageInfo = roleService.listBy(roleQuery);
-        return ResultEntity.okList(pageInfo, role -> new RoleDTO().convertFrom(role));
+        return ResultEntity.ok(convertTo(pageInfo));
     }
 
     @GetMapping("/{id}")
@@ -75,5 +77,9 @@ public class RoleController {
     @ControllerEndpoint(operation = "删除角色", exceptionMessage = "删除角色失败")
     public void deleteRoles(@RequestBody List<Long> roleIds) {
         roleService.deleteRoles(roleIds);
+    }
+
+    private PageInfo<RoleDTO> convertTo(IPage<Role> rolePage) {
+        return PageConvert.convertFrom(rolePage, role -> new RoleDTO().convertFrom(role));
     }
 }

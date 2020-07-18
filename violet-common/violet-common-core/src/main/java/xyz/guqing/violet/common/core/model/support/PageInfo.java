@@ -1,8 +1,6 @@
 package xyz.guqing.violet.common.core.model.support;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.Data;
-import org.springframework.lang.NonNull;
 import org.springframework.util.Assert;
 
 import java.util.ArrayList;
@@ -30,16 +28,6 @@ public class PageInfo<DTO> {
         this.pages = pages;
         this.current = current;
         this.pageSize = pageSize;
-    }
-
-    public static<T, DTO> PageInfo<DTO> convertFrom(@NonNull IPage<T> page, Function<T, DTO> function){
-        List<T> content = page.getRecords();
-        PageInfo<DTO> pageInfo = getDtoPageInfo(function, content);
-        pageInfo.setTotal(page.getTotal());
-        pageInfo.setPages(page.getPages());
-        pageInfo.setCurrent(page.getCurrent());
-        pageInfo.setPageSize(page.getSize());
-        return pageInfo;
     }
 
     public static<T, DTO> PageInfo<DTO> convertFrom(List<T> list, Function<T, DTO> function){

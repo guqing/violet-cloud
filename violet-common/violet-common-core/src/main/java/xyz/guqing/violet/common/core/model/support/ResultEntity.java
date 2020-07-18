@@ -36,11 +36,6 @@ public class ResultEntity<T> {
                 ResultEntityEnum.SUCCESS.getDesc(), data);
     }
 
-    public static<T, DTO> ResultEntity<PageInfo<DTO>> okList(IPage<T> page, Function<T, DTO> function) {
-        PageInfo<DTO> pageInfo = PageInfo.convertFrom(page, function);
-        return ok(pageInfo);
-    }
-
     public static<T, DTO> ResultEntity<PageInfo<DTO>> okList(List<T> list, Function<T, DTO> function) {
         return ok(PageInfo.convertFrom(list, function));
     }

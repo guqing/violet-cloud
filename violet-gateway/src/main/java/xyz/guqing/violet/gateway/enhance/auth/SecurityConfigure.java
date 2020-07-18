@@ -31,7 +31,7 @@ public class SecurityConfigure {
     }
 
     @Bean
-    public SecurityWebFilterChain securitygWebFilterChain(ServerHttpSecurity http) {
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         return http
                 .exceptionHandling()
                 .authenticationEntryPoint((s, e) -> Mono.fromRunnable(() -> s.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED)))

@@ -1,4 +1,4 @@
-package xyz.guqing.violet.common.core.config;
+package xyz.guqing.violet.app.admin.config;
 
 import com.baomidou.mybatisplus.extension.plugins.PaginationInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.pagination.optimize.JsqlParserCountOptimize;

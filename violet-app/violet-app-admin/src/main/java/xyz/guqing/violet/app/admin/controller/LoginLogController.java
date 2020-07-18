@@ -2,6 +2,7 @@ package xyz.guqing.violet.app.admin.controller;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +19,7 @@ import xyz.guqing.violet.common.core.model.support.ResultEntity;
  * @author guqing
  * @date 2020-07-17
  */
+@Slf4j
 @RestController
 @RequestMapping("/log/login")
 @RequiredArgsConstructor
@@ -26,6 +28,7 @@ public class LoginLogController {
 
     @GetMapping
     public ResultEntity<PageInfo<UserLoginLogDTO>> list(LoginLogParam loginLogParam, QueryRequest queryRequest) {
+        log.debug("登录日志列表参数:[{}]", queryRequest);
         IPage<UserLoginLog> userLoginLogs = userLoginLogService.listBy(loginLogParam,queryRequest);
         return ResultEntity.ok(convertTo(userLoginLogs));
     }

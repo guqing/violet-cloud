@@ -18,14 +18,14 @@ import java.util.List;
 public interface MenuService extends IService<Menu> {
 
     /**
-     * 获取用户路由
+     * 获取用户路由树
      *
      * @param username 用户名
      * @return 用户路由
      */
     List<VueRouter<Menu>> listUserRouters(String username);
     /**
-     * 获取用户菜单
+     * 获取扁平化用户菜单
      *
      * @param username 用户名
      * @return 用户菜单

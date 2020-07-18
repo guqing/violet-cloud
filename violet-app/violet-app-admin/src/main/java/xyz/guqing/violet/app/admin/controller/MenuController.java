@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import xyz.guqing.violet.app.admin.model.annotation.ControllerEndpoint;
+import xyz.guqing.violet.app.admin.model.dto.MenuDTO;
 import xyz.guqing.violet.app.admin.model.params.MenuParam;
 import xyz.guqing.violet.app.admin.model.params.MenuQuery;
 import xyz.guqing.violet.app.admin.service.MenuService;
@@ -15,6 +16,7 @@ import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author guqing
@@ -38,10 +40,10 @@ public class MenuController {
     }
 
     @GetMapping("router")
-    public ResultEntity<List<Menu>> getRouterList() {
+    public ResultEntity<List<MenuDTO>> getRouterList() {
         String username = VioletSecurityHelper.getCurrentUsername();
         List<Menu> menus = menuService.listUserMenus(username);
-        return ResultEntity.ok(menus);
+        return ResultEntity.ok(convertTo(menus));
     }
 
     @GetMapping("/{id}")
@@ -71,5 +73,11 @@ public class MenuController {
     public ResultEntity<String> deleteMenus(List<Long> menuIds) {
         menuService.deleteMenus(menuIds);
         return ResultEntity.ok();
+    }
+
+    private List<MenuDTO> convertTo(List<Menu> menus) {
+        return menus.stream()
+                .map(menu -> (MenuDTO)new MenuDTO().convertFrom(menu))
+                .collect(Collectors.toList());
     }
 }

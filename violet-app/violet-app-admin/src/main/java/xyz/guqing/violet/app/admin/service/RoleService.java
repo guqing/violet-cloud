@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.app.admin.model.dto.RoleDTO;
 import xyz.guqing.violet.app.admin.model.params.RoleQuery;
-import xyz.guqing.violet.common.core.model.entity.system.Role;
+import xyz.guqing.common.support.model.entity.system.Role;
 
 import java.util.List;
 import java.util.Set;

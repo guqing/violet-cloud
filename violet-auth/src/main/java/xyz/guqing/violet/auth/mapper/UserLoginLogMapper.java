@@ -1,7 +1,7 @@
 package xyz.guqing.violet.auth.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import xyz.guqing.violet.common.core.model.entity.system.UserLoginLog;
+import xyz.guqing.common.support.model.entity.system.UserLoginLog;
 
 /**
  * <p>

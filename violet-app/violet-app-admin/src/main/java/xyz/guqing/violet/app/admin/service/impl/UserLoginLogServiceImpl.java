@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import xyz.guqing.violet.app.admin.mapper.UserLoginLogMapper;
 import xyz.guqing.violet.app.admin.model.params.LoginLogParam;
 import xyz.guqing.violet.app.admin.service.UserLoginLogService;
-import xyz.guqing.violet.common.core.model.entity.system.UserLoginLog;
+import xyz.guqing.common.support.model.entity.system.UserLoginLog;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 
 import java.time.LocalDateTime;

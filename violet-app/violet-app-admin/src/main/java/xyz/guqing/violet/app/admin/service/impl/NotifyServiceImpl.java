@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import xyz.guqing.violet.app.admin.notify.mail.MailService;
 import xyz.guqing.violet.app.admin.service.NotifyService;
 import xyz.guqing.violet.common.core.model.constant.VioletConstant;
-import xyz.guqing.violet.common.core.utils.RedisUtils;
 import xyz.guqing.violet.common.redis.service.RedisService;
 
 import java.util.HashMap;

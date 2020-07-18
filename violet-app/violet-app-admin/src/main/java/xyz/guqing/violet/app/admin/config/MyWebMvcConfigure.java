@@ -3,7 +3,7 @@ package xyz.guqing.violet.app.admin.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import xyz.guqing.violet.app.admin.converter.StringToLocalDateTimeConverter;
+import xyz.guqing.common.support.converter.StringToLocalDateTimeConverter;
 
 /**
  * @author guqing

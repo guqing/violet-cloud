@@ -1,18 +1,11 @@
 package xyz.guqing.violet.auth.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
-import xyz.guqing.violet.common.core.model.entity.router.RouterMeta;
-import xyz.guqing.violet.common.core.model.entity.router.VueRouter;
-import xyz.guqing.violet.common.core.model.entity.system.Menu;
+import xyz.guqing.common.support.model.entity.system.Menu;
 import xyz.guqing.violet.auth.mapper.MenuMapper;
 import xyz.guqing.violet.auth.service.MenuService;
-import xyz.guqing.violet.common.core.utils.TreeUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 

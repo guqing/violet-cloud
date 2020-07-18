@@ -14,10 +14,10 @@ import org.springframework.stereotype.Component;
 import xyz.guqing.violet.auth.event.UserLoginEvent;
 import xyz.guqing.violet.auth.model.constant.SocialConstant;
 import xyz.guqing.violet.auth.service.MenuService;
-import xyz.guqing.violet.common.core.model.bo.CurrentUser;
+import xyz.guqing.violet.common.core.model.dto.CurrentUser;
 import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.model.constant.ParamsConstant;
-import xyz.guqing.violet.common.core.model.bo.MyUserDetails;
+import xyz.guqing.violet.common.core.model.dto.MyUserDetails;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import javax.servlet.http.HttpServletRequest;

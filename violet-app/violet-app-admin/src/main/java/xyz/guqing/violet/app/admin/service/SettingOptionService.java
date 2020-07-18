@@ -1,8 +1,8 @@
 package xyz.guqing.violet.app.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import xyz.guqing.violet.common.core.model.entity.system.SettingOption;
-import xyz.guqing.violet.common.core.model.enums.PropertyEnum;
+import xyz.guqing.common.support.model.entity.system.SettingOption;
+import xyz.guqing.common.support.model.enums.PropertyEnum;
 
 import java.util.Optional;
 

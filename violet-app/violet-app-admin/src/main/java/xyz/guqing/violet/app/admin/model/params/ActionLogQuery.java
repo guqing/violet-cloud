@@ -1,7 +1,6 @@
 package xyz.guqing.violet.app.admin.model.params;
 
 import lombok.Data;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
 
 import java.time.LocalDateTime;
 

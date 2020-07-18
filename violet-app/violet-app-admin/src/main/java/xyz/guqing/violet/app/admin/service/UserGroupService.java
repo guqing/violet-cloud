@@ -1,8 +1,8 @@
 package xyz.guqing.violet.app.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import xyz.guqing.violet.common.core.model.dto.UserGroupTree;
-import xyz.guqing.violet.common.core.model.entity.system.UserGroup;
+import xyz.guqing.common.support.model.dto.UserGroupTree;
+import xyz.guqing.common.support.model.entity.system.UserGroup;
 
 import java.util.List;
 

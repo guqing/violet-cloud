@@ -16,5 +16,6 @@
         <module>violet-common-core</module>
         <module>violet-common-redis-starter</module>
         <module>violet-common-datasource-starter</module>
+        <module>violet-common-support</module>
     </modules>
 </project>

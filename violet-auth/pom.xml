@@ -17,30 +17,15 @@
     <dependencies>
         <dependency>
             <groupId>xyz.guqing</groupId>
+            <artifactId>violet-common-support</artifactId>
+            <version>${violet-cloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>xyz.guqing</groupId>
             <artifactId>violet-common-redis-starter</artifactId>
             <version>${violet-cloud.version}</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>xyz.guqing</groupId>-->
-            <!--<artifactId>violet-common-datasource-starter</artifactId>-->
-            <!--<version>${violet-cloud.version}</version>-->
-        <!--</dependency>-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.3.1.tmp</version>
-        </dependency>
 
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.20</version>
-        </dependency>
-        <!--<dependency>-->
-            <!--<groupId>cc.mrbird</groupId>-->
-            <!--<artifactId>febs-common-doc-starter</artifactId>-->
-            <!--<version>${violet-cloud.version}</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>xyz.guqing</groupId>
             <artifactId>violet-common-security-starter</artifactId>

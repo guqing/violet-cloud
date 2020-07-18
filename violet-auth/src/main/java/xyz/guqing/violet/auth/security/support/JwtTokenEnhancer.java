@@ -6,7 +6,7 @@ import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import xyz.guqing.violet.auth.model.dto.UserInfoDTO;
-import xyz.guqing.violet.common.core.model.bo.MyUserDetails;
+import xyz.guqing.violet.common.core.model.dto.MyUserDetails;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package xyz.guqing.violet.app.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import xyz.guqing.violet.common.core.model.entity.system.UserRole;
+import xyz.guqing.common.support.model.entity.system.UserRole;
 
 import java.util.List;
 

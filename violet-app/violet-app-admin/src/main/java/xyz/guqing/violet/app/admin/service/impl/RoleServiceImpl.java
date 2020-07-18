@@ -15,8 +15,8 @@ import xyz.guqing.violet.app.admin.service.RoleMenuService;
 import xyz.guqing.violet.app.admin.service.RoleService;
 import xyz.guqing.violet.app.admin.service.UserRoleService;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
-import xyz.guqing.violet.common.core.model.entity.system.Role;
-import xyz.guqing.violet.common.core.model.entity.system.UserRole;
+import xyz.guqing.common.support.model.entity.system.Role;
+import xyz.guqing.common.support.model.entity.system.UserRole;
 
 import java.util.List;
 import java.util.Optional;

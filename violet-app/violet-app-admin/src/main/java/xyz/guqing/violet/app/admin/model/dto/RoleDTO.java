@@ -1,7 +1,7 @@
 package xyz.guqing.violet.app.admin.model.dto;
 
 import lombok.Data;
-import xyz.guqing.violet.common.core.model.entity.system.Role;
+import xyz.guqing.common.support.model.entity.system.Role;
 import xyz.guqing.violet.common.core.model.support.OutputConverter;
 
 import java.time.LocalDateTime;

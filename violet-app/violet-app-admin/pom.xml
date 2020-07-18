@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>xyz.guqing</groupId>
-            <artifactId>violet-common-core</artifactId>
+            <artifactId>violet-common-support</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
         <dependency>

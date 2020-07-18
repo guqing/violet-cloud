@@ -6,9 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.lionsoul.ip2region.DataBlock;
 import org.lionsoul.ip2region.DbConfig;
 import org.lionsoul.ip2region.DbSearcher;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
-import xyz.guqing.violet.common.core.exception.VioletInternalException;
 import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 
 import java.io.File;

@@ -1,7 +1,7 @@
 package xyz.guqing.violet.app.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import xyz.guqing.violet.common.core.model.entity.system.SettingOption;
+import xyz.guqing.common.support.model.entity.system.SettingOption;
 
 /**
  * @author guqing

@@ -1,8 +1,8 @@
 package xyz.guqing.violet.app.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import xyz.guqing.violet.common.core.model.entity.system.Role;
-import xyz.guqing.violet.common.core.model.entity.system.RoleMenu;
+import xyz.guqing.common.support.model.entity.system.Role;
+import xyz.guqing.common.support.model.entity.system.RoleMenu;
 
 import java.util.List;
 import java.util.Set;

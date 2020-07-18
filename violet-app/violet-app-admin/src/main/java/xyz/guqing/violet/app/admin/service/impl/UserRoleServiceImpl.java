@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import xyz.guqing.violet.app.admin.mapper.UserRoleMapper;
 import xyz.guqing.violet.app.admin.service.UserRoleService;
-import xyz.guqing.violet.common.core.model.entity.system.UserRole;
+import xyz.guqing.common.support.model.entity.system.UserRole;
 
 import java.util.List;
 

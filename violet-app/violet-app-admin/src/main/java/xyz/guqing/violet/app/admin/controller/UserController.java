@@ -7,14 +7,12 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import xyz.guqing.violet.app.admin.model.annotation.ControllerEndpoint;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
-import xyz.guqing.violet.common.core.model.support.PageInfo;
-import xyz.guqing.violet.common.core.model.support.ResultEntity;
-import xyz.guqing.violet.common.core.model.enums.UserStatusEnum;
+import xyz.guqing.violet.common.core.model.support.*;
+import xyz.guqing.common.support.model.enums.UserStatusEnum;
 import xyz.guqing.violet.app.admin.model.params.UserParam;
 import xyz.guqing.violet.app.admin.model.params.UserQuery;
 import xyz.guqing.violet.app.admin.service.UserService;
-import xyz.guqing.violet.common.core.model.entity.system.User;
-import xyz.guqing.violet.common.core.model.support.*;
+import xyz.guqing.common.support.model.entity.system.User;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 
 import javax.validation.Valid;

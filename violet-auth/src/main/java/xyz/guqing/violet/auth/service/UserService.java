@@ -2,12 +2,10 @@ package xyz.guqing.violet.auth.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.auth.model.dto.UserInfoDTO;
-import xyz.guqing.violet.common.core.model.bo.CurrentUser;
-import xyz.guqing.violet.common.core.model.entity.system.Menu;
-import xyz.guqing.violet.common.core.model.entity.system.User;
+import xyz.guqing.violet.common.core.model.dto.CurrentUser;
+import xyz.guqing.common.support.model.entity.system.User;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 /**

@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.guqing.violet.app.admin.mapper.UserGroupMapper;
 import xyz.guqing.violet.app.admin.service.UserGroupService;
-import xyz.guqing.violet.common.core.model.dto.UserGroupTree;
-import xyz.guqing.violet.common.core.model.entity.system.UserGroup;
+import xyz.guqing.common.support.model.dto.UserGroupTree;
+import xyz.guqing.common.support.model.entity.system.UserGroup;
 import xyz.guqing.violet.common.core.utils.TreeUtil;
 
 import java.util.ArrayList;

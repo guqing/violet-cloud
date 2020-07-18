@@ -2,7 +2,7 @@ package xyz.guqing.violet.app.admin.model.params;
 
 import lombok.Data;
 import xyz.guqing.violet.common.core.model.constant.RegexpConstant;
-import xyz.guqing.violet.common.core.model.entity.system.User;
+import xyz.guqing.common.support.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.support.CreateCheck;
 import xyz.guqing.violet.common.core.model.support.InputConverter;
 import xyz.guqing.violet.common.core.model.support.UpdateCheck;

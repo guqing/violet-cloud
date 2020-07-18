@@ -17,7 +17,7 @@ import xyz.guqing.violet.app.admin.model.params.ActionLogQuery;
 import xyz.guqing.violet.app.admin.service.VioletActionLogService;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
-import xyz.guqing.violet.common.core.model.entity.system.VioletActionLog;
+import xyz.guqing.common.support.model.entity.system.VioletActionLog;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;

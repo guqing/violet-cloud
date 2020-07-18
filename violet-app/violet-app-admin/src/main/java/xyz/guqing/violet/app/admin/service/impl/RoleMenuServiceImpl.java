@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import xyz.guqing.violet.app.admin.mapper.RoleMenuMapper;
 import xyz.guqing.violet.app.admin.service.RoleMenuService;
-import xyz.guqing.violet.common.core.model.entity.system.RoleMenu;
+import xyz.guqing.common.support.model.entity.system.RoleMenu;
 
 import java.util.Collections;
 import java.util.List;

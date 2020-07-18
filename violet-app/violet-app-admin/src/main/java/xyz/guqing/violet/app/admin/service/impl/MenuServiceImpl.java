@@ -10,11 +10,10 @@ import org.springframework.util.CollectionUtils;
 import xyz.guqing.violet.app.admin.mapper.MenuMapper;
 import xyz.guqing.violet.app.admin.model.enums.MenuType;
 import xyz.guqing.violet.app.admin.service.MenuService;
-import xyz.guqing.violet.common.core.model.entity.router.RouterMeta;
-import xyz.guqing.violet.common.core.model.entity.router.VueRouter;
-import xyz.guqing.violet.common.core.model.dto.MenuTree;
-import xyz.guqing.violet.common.core.model.entity.system.BaseEntity;
-import xyz.guqing.violet.common.core.model.entity.system.Menu;
+import xyz.guqing.violet.common.core.model.dto.RouterMeta;
+import xyz.guqing.violet.common.core.model.dto.VueRouter;
+import xyz.guqing.common.support.model.dto.MenuTree;
+import xyz.guqing.common.support.model.entity.system.Menu;
 import xyz.guqing.violet.common.core.utils.TreeUtil;
 
 import java.util.ArrayList;

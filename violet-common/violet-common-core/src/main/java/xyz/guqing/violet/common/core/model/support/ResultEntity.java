@@ -1,7 +1,6 @@
 package xyz.guqing.violet.common.core.model.support;
 
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import xyz.guqing.violet.common.core.model.enums.ResultEntityEnum;

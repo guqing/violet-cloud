@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xyz.guqing.violet.app.admin.mapper.MenuMapper">
-    <select id="findUserMenus" resultType="xyz.guqing.violet.common.core.model.entity.system.Menu">
+    <select id="findUserMenus" resultType="xyz.guqing.common.support.model.entity.system.Menu">
         select m.*
         from menu m
         where m.type &lt;&gt; 1

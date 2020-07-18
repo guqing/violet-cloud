@@ -17,7 +17,7 @@ import org.apache.ibatis.mapping.SqlCommandType;
 import org.apache.ibatis.plugin.*;
 import org.apache.ibatis.reflection.MetaObject;
 import org.apache.ibatis.reflection.SystemMetaObject;
-import xyz.guqing.violet.common.core.model.bo.CurrentUser;
+import xyz.guqing.violet.common.core.model.dto.CurrentUser;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 import xyz.guqing.violet.common.datasource.starter.annotation.DataPermission;
 

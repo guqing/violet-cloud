@@ -7,8 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
-import xyz.guqing.violet.common.core.model.bo.CurrentUser;
-import xyz.guqing.violet.common.core.model.bo.MyUserDetails;
+import xyz.guqing.violet.common.core.model.dto.CurrentUser;
+import xyz.guqing.violet.common.core.model.dto.MyUserDetails;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;

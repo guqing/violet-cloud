@@ -8,7 +8,7 @@ import xyz.guqing.violet.auth.event.UserLoginEvent;
 import xyz.guqing.violet.auth.service.UserLoginLogService;
 import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.model.constant.VioletConstant;
-import xyz.guqing.violet.common.core.model.entity.system.UserLoginLog;
+import xyz.guqing.common.support.model.entity.system.UserLoginLog;
 import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 

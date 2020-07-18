@@ -1,11 +1,7 @@
 package xyz.guqing.violet.auth.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import xyz.guqing.violet.common.core.model.entity.router.VueRouter;
-import xyz.guqing.violet.common.core.model.entity.system.Menu;
-
-import java.util.List;
-import java.util.Map;
+import xyz.guqing.common.support.model.entity.system.Menu;
 
 /**
  * <p>

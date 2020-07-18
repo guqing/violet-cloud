@@ -2,7 +2,7 @@ package xyz.guqing.violet.auth.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-import xyz.guqing.violet.common.core.model.entity.system.Role;
+import xyz.guqing.common.support.model.entity.system.Role;
 import xyz.guqing.violet.auth.mapper.RoleMapper;
 import xyz.guqing.violet.auth.service.RoleService;
 

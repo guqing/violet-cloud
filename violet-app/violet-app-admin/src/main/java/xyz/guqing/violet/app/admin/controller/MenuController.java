@@ -8,9 +8,9 @@ import xyz.guqing.violet.app.admin.model.dto.MenuDTO;
 import xyz.guqing.violet.app.admin.model.params.MenuParam;
 import xyz.guqing.violet.app.admin.model.params.MenuQuery;
 import xyz.guqing.violet.app.admin.service.MenuService;
-import xyz.guqing.violet.common.core.model.entity.router.VueRouter;
-import xyz.guqing.violet.common.core.model.dto.MenuTree;
-import xyz.guqing.violet.common.core.model.entity.system.Menu;
+import xyz.guqing.violet.common.core.model.dto.VueRouter;
+import xyz.guqing.common.support.model.dto.MenuTree;
+import xyz.guqing.common.support.model.entity.system.Menu;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 

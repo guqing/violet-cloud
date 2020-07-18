@@ -2,7 +2,7 @@ package xyz.guqing.violet.app.admin.model.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import xyz.guqing.violet.common.core.model.entity.system.Role;
+import xyz.guqing.common.support.model.entity.system.Role;
 
 import java.util.Set;
 

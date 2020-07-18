@@ -1,6 +1,6 @@
 package xyz.guqing.violet.app.admin.notify.properties;
 
-import xyz.guqing.violet.common.core.model.enums.PropertyEnum;
+import xyz.guqing.common.support.model.enums.PropertyEnum;
 
 /**
  * Email properties.

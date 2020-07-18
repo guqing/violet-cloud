@@ -8,8 +8,8 @@ import org.springframework.util.Assert;
 import xyz.guqing.violet.app.admin.service.SettingOptionService;
 import xyz.guqing.violet.common.core.exception.MissingPropertyException;
 import xyz.guqing.violet.app.admin.mapper.SettingOptionMapper;
-import xyz.guqing.violet.common.core.model.entity.system.SettingOption;
-import xyz.guqing.violet.common.core.model.enums.PropertyEnum;
+import xyz.guqing.common.support.model.entity.system.SettingOption;
+import xyz.guqing.common.support.model.enums.PropertyEnum;
 
 import java.util.Optional;
 

@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.*;
 import xyz.guqing.violet.app.admin.model.annotation.ControllerEndpoint;
 import xyz.guqing.violet.app.admin.model.params.UserGroupParam;
 import xyz.guqing.violet.app.admin.service.UserGroupService;
-import xyz.guqing.violet.common.core.model.dto.UserGroupTree;
-import xyz.guqing.violet.common.core.model.entity.system.UserGroup;
+import xyz.guqing.common.support.model.dto.UserGroupTree;
+import xyz.guqing.common.support.model.entity.system.UserGroup;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
 import javax.validation.Valid;

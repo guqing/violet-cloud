@@ -16,16 +16,17 @@ import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 public class PageableExecutionUtil {
 
     public static <VIOLET> Flux<VIOLET> getPages(Query query, QueryRequest request, Class<VIOLET> clazz,
-                                             ReactiveMongoTemplate template) {
+                                                 ReactiveMongoTemplate template) {
         Sort sort = Sort.by("id").descending();
         if (StringUtils.isNotBlank(request.getField()) && StringUtils.isNotBlank(request.getOrder())) {
             sort = VioletConstant.ORDER_ASC.equals(request.getOrder()) ?
                     Sort.by(request.getField()).ascending() :
                     Sort.by(request.getField()).descending();
         }
-        Long current = request.getCurrent();
+        // jpa的分页是从0开始的，为了前端统一，则前端传1表示第一页
+        Long current = request.getCurrent() - 1L < 0L ? 0L : request.getCurrent() - 1L;
         Long pageSize = request.getPageSize();
-        Pageable pageable = PageRequest.of(current.intValue(),pageSize.intValue(), sort);
+        Pageable pageable = PageRequest.of(current.intValue(), pageSize.intValue(), sort);
         return template.find(query.with(pageable), clazz);
     }
 }

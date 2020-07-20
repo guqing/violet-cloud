@@ -2,7 +2,7 @@ package xyz.guqing.violet.gateway.enhance.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
@@ -17,12 +17,11 @@ import xyz.guqing.violet.gateway.enhance.service.RouteUserService;
 @RequiredArgsConstructor
 @RequestMapping("route")
 public class RouteLoginController {
-
     private final JwtTokenHelper tokenHelper;
     private final PasswordEncoder passwordEncoder;
     private final RouteUserService routeUserService;
 
-    @GetMapping("login")
+    @PostMapping("login")
     public Mono<ResultEntity<String>> login(String username, String password) {
         String error = "认证失败，用户名或密码错误";
         return routeUserService.findByUsername(username)

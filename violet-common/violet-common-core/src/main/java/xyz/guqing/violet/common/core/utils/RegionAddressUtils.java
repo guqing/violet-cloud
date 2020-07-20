@@ -44,6 +44,7 @@ public class RegionAddressUtils {
 
     private static String getIp2RegionPath() throws IOException {
         String dbPath = RegionAddressUtils.class.getResource("/ip2region/ip2region.db").getPath();
+        log.debug("获取ip2region的路径:[{}]", dbPath);
         File file = new File(dbPath);
         if (!file.exists()) {
             String tmpDir = System.getProperties().getProperty(VioletConstant.JAVA_TEMP_DIR);

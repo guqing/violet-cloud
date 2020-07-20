@@ -7,8 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import xyz.guqing.violet.common.redis.service.RedisService;
-import xyz.guqing.violet.gateway.enhance.entity.BlackList;
-import xyz.guqing.violet.gateway.enhance.entity.RateLimitRule;
+import xyz.guqing.violet.gateway.enhance.model.entity.BlackList;
+import xyz.guqing.violet.gateway.enhance.model.entity.RateLimitRule;
 import xyz.guqing.violet.gateway.enhance.service.RouteEnhanceCacheService;
 import xyz.guqing.violet.gateway.enhance.utils.RouteEnhanceCacheUtil;
 

@@ -1,4 +1,4 @@
-package xyz.guqing.violet.gateway.enhance.entity;
+package xyz.guqing.violet.gateway.enhance.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,30 +16,38 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 @NoArgsConstructor
 @AllArgsConstructor
-public class RateLimitLog {
+public class RouteLog {
 
     @Id
     private String id;
     /**
-     * 被拦截请求IP
+     * 请求IP
      */
     private String ip;
     /**
-     * 被拦截请求URI
+     * 请求URI
      */
     private String requestUri;
     /**
-     * 被拦截请求方法
+     * 目标URI
+     */
+    private String targetUri;
+    /**
+     * 请求方法
      */
     private String requestMethod;
     /**
-     * IP对应地址
+     * 目标服务
      */
-    private String location;
+    private String targetServer;
     /**
-     * 拦截时间点
+     * 请求时间点
      */
     private String createTime;
+    /**
+     * 请求地点
+     */
+    private String location;
 
     @Transient
     private String createTimeFrom;

@@ -1,10 +1,11 @@
-package xyz.guqing.violet.gateway.enhance.entity;
+package xyz.guqing.violet.gateway.enhance.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
@@ -15,7 +16,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 @NoArgsConstructor
 @AllArgsConstructor
-public class BlackList {
+public class RateLimitRule {
 
     public static final String CLOSE = "0";
     public static final String OPEN = "1";
@@ -24,10 +25,6 @@ public class BlackList {
 
     @Id
     private String id;
-    /**
-     * 黑名单ip
-     */
-    private String ip;
     /**
      * 请求URI
      */
@@ -45,9 +42,13 @@ public class BlackList {
      */
     private String limitTo;
     /**
-     * ip对应地址
+     * 次数
      */
-    private String location;
+    private String count;
+    /**
+     * 时间周期，单位秒
+     */
+    private String intervalSec;
     /**
      * 状态，0关闭，1开启
      */
@@ -56,4 +57,9 @@ public class BlackList {
      * 规则创建时间
      */
     private String createTime;
+
+    @Transient
+    private String createTimeFrom;
+    @Transient
+    private String createTimeTo;
 }

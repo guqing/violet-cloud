@@ -5,7 +5,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import xyz.guqing.violet.gateway.enhance.entity.RouteUser;
+import xyz.guqing.violet.gateway.enhance.model.entity.RouteUser;
 
 import java.io.Serializable;
 import java.util.Base64;

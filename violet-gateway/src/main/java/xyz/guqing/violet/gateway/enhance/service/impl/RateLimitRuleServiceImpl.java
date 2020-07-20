@@ -12,7 +12,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.DateUtil;
-import xyz.guqing.violet.gateway.enhance.entity.RateLimitRule;
+import xyz.guqing.violet.gateway.enhance.model.entity.RateLimitRule;
 import xyz.guqing.violet.gateway.enhance.mapper.RateLimitRuleMapper;
 import xyz.guqing.violet.gateway.enhance.service.RateLimitRuleService;
 import xyz.guqing.violet.gateway.enhance.service.RouteEnhanceCacheService;

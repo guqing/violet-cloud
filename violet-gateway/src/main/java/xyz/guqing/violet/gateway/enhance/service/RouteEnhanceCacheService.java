@@ -1,8 +1,8 @@
 package xyz.guqing.violet.gateway.enhance.service;
 
 import reactor.core.publisher.Flux;
-import xyz.guqing.violet.gateway.enhance.entity.BlackList;
-import xyz.guqing.violet.gateway.enhance.entity.RateLimitRule;
+import xyz.guqing.violet.gateway.enhance.model.entity.BlackList;
+import xyz.guqing.violet.gateway.enhance.model.entity.RateLimitRule;
 
 import java.util.Set;
 

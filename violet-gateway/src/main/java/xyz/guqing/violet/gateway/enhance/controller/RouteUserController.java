@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
-import xyz.guqing.violet.gateway.enhance.entity.RouteUser;
+import xyz.guqing.violet.gateway.enhance.model.entity.RouteUser;
+import xyz.guqing.violet.gateway.enhance.model.params.UserParam;
+import xyz.guqing.violet.gateway.enhance.model.params.UserQuery;
 import xyz.guqing.violet.gateway.enhance.service.RouteUserService;
+
+import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author guqing
@@ -20,12 +25,14 @@ public class RouteUserController {
     private final RouteUserService routeUserService;
 
     @GetMapping("data")
-    public Flux<RouteUser> findUserPages(QueryRequest request, RouteUser routeUser) {
+    public Flux<RouteUser> findUserPages(QueryRequest request, UserQuery userQuery) {
+        RouteUser routeUser = userQuery.convertTo();
         return routeUserService.findPages(request, routeUser);
     }
 
     @GetMapping("count")
-    public Mono<Long> findUserCount(RouteUser routeUser) {
+    public Mono<Long> findUserCount(UserQuery userQuery) {
+        RouteUser routeUser = userQuery.convertTo();
         return routeUserService.findCount(routeUser);
     }
 
@@ -36,19 +43,21 @@ public class RouteUserController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('admin')")
-    public Mono<RouteUser> createRouteUser(RouteUser routeUser) {
+    public Mono<RouteUser> createRouteUser(@RequestBody @Valid UserParam userParam) {
+        RouteUser routeUser = userParam.convertTo();
         return routeUserService.create(routeUser);
     }
 
     @PutMapping
     @PreAuthorize("hasAuthority('admin')")
-    public Mono<RouteUser> updateRouteUser(RouteUser routeUser) {
+    public Mono<RouteUser> updateRouteUser(@RequestBody @Valid UserParam userParam) {
+        RouteUser routeUser = userParam.convertTo();
         return routeUserService.update(routeUser);
     }
 
     @DeleteMapping
     @PreAuthorize("hasAuthority('admin')")
-    public Flux<RouteUser> deleteRouteUser(String ids) {
+    public Flux<RouteUser> deleteRouteUser(@RequestBody List<String> ids) {
         return routeUserService.delete(ids);
     }
 }

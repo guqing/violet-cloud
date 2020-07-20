@@ -12,13 +12,14 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.DateUtil;
-import xyz.guqing.violet.gateway.enhance.entity.RouteUser;
+import xyz.guqing.violet.gateway.enhance.model.entity.RouteUser;
 import xyz.guqing.violet.gateway.enhance.mapper.RouteUserMapper;
 import xyz.guqing.violet.gateway.enhance.service.RouteUserService;
 import xyz.guqing.violet.gateway.enhance.utils.PageableExecutionUtil;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author guqing
@@ -59,9 +60,8 @@ public class RouteUserServiceImpl implements RouteUserService {
     }
 
     @Override
-    public Flux<RouteUser> delete(String ids) {
-        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, ",");
-        return routeUserMapper.deleteByIdIn(Arrays.asList(idArray));
+    public Flux<RouteUser> delete(List<String> ids) {
+        return routeUserMapper.deleteByIdIn(ids);
     }
 
     @Override
@@ -85,7 +85,10 @@ public class RouteUserServiceImpl implements RouteUserService {
         Query query = new Query();
         Criteria criteria = new Criteria();
         if (StringUtils.isNotBlank(routeUser.getUsername())) {
-            criteria.and("username").is(routeUser.getUsername());
+            criteria.and("username").regex(routeUser.getUsername());
+        }
+        if(StringUtils.isNotBlank(routeUser.getRoles())) {
+            criteria.and("roles").regex(routeUser.getRoles());
         }
         query.addCriteria(criteria);
         return query;

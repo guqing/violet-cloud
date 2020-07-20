@@ -3,7 +3,9 @@ package xyz.guqing.violet.gateway.enhance.service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
-import xyz.guqing.violet.gateway.enhance.entity.RouteUser;
+import xyz.guqing.violet.gateway.enhance.model.entity.RouteUser;
+
+import java.util.List;
 
 /**
  * @author guqing
@@ -32,7 +34,7 @@ public interface RouteUserService {
      * @param ids 路由用户id
      * @return 被删除的路由用户
      */
-    Flux<RouteUser> delete(String ids);
+    Flux<RouteUser> delete(List<String> ids);
 
     /**
      * 根据用户名获取路由用户

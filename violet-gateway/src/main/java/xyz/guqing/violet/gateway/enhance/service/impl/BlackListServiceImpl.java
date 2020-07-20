@@ -13,7 +13,7 @@ import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.DateUtil;
 import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
-import xyz.guqing.violet.gateway.enhance.entity.BlackList;
+import xyz.guqing.violet.gateway.enhance.model.entity.BlackList;
 import xyz.guqing.violet.gateway.enhance.mapper.BlackListMapper;
 import xyz.guqing.violet.gateway.enhance.service.BlackListService;
 import xyz.guqing.violet.gateway.enhance.service.RouteEnhanceCacheService;

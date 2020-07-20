@@ -2,7 +2,7 @@ package xyz.guqing.violet.gateway.enhance.mapper;
 
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import reactor.core.publisher.Flux;
-import xyz.guqing.violet.gateway.enhance.entity.BlockLog;
+import xyz.guqing.violet.gateway.enhance.model.entity.BlockLog;
 
 import java.util.Collection;
 

@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
-import xyz.guqing.violet.gateway.enhance.entity.RateLimitRule;
+import xyz.guqing.violet.gateway.enhance.model.entity.RateLimitRule;
 import xyz.guqing.violet.gateway.enhance.service.RateLimitRuleService;
 
 /**

@@ -1,4 +1,4 @@
-package xyz.guqing.violet.gateway.enhance.entity;
+package xyz.guqing.violet.gateway.enhance.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;

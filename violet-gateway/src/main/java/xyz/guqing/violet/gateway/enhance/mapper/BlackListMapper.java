@@ -3,7 +3,7 @@ package xyz.guqing.violet.gateway.enhance.mapper;
 import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.stereotype.Repository;
 import reactor.core.publisher.Flux;
-import xyz.guqing.violet.gateway.enhance.entity.BlackList;
+import xyz.guqing.violet.gateway.enhance.model.entity.BlackList;
 
 import java.util.Collection;
 

@@ -19,6 +19,7 @@ import xyz.guqing.violet.common.core.utils.DateUtil;
 import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 import xyz.guqing.violet.gateway.enhance.entity.*;
+import xyz.guqing.violet.gateway.enhance.model.entity.*;
 import xyz.guqing.violet.gateway.enhance.service.*;
 
 import java.net.URI;

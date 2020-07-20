@@ -34,7 +34,7 @@ db.getCollection("blackList").insert([ {
     location: "",
     status: "1",
     createTime: "2020-07-17 18:01:07",
-    _class: "xyz.guqing.violet.gateway.enhance.entity.BlackList"
+    _class: "BlackList"
 } ]);
 
 // ----------------------------
@@ -68,7 +68,7 @@ db.getCollection("rateLimitRule").insert([ {
     intervalSec: "10",
     status: "1",
     createTime: "2020-07-17 18:01:46",
-    _class: "xyz.guqing.violet.gateway.enhance.entity.RateLimitRule"
+    _class: "RateLimitRule"
 } ]);
 
 // ----------------------------
@@ -92,7 +92,7 @@ db.getCollection("routeUser").insert([ {
     password: "$2a$10$FZmcHU9UUw8XN.MluZz2reWKu7N.8QhSDgfENTltSoHmHj6BzEoQO",
     roles: "user",
     createTime: "2020-07-17 18:00:48",
-    _class: "xyz.guqing.violet.gateway.enhance.entity.RouteUser"
+    _class: "RouteUser"
 } ]);
 db.getCollection("routeUser").insert([ {
     _id: ObjectId("5e1d2eee55165e6516c23058"),
@@ -100,5 +100,5 @@ db.getCollection("routeUser").insert([ {
     password: "$2a$10$FZmcHU9UUw8XN.MluZz2reWKu7N.8QhSDgfENTltSoHmHj6BzEoQO",
     roles: "admin",
     createTime: "2020-07-17 18:00:02",
-    _class: "xyz.guqing.violet.gateway.enhance.entity.RouteUser"
+    _class: "RouteUser"
 } ]);

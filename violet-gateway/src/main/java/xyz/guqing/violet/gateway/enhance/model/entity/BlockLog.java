@@ -1,4 +1,4 @@
-package xyz.guqing.violet.gateway.enhance.entity;
+package xyz.guqing.violet.gateway.enhance.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

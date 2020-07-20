@@ -1,5 +1,6 @@
 package xyz.guqing.violet.app.admin.model.params;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -9,6 +10,7 @@ import java.time.LocalDateTime;
  * @date 2020-07-17
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class LoginLogParam {
     private String username;
     private LocalDateTime createFrom;

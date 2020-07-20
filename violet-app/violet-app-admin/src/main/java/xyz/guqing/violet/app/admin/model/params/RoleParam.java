@@ -1,5 +1,6 @@
 package xyz.guqing.violet.app.admin.model.params;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import xyz.guqing.common.support.model.entity.system.Role;
 import xyz.guqing.violet.common.core.model.support.InputConverter;
@@ -13,6 +14,7 @@ import java.util.Set;
  * @date 2020-06-09
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class RoleParam implements InputConverter<Role> {
     private Long id;
 

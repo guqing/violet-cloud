@@ -11,6 +11,11 @@ import xyz.guqing.violet.common.core.model.support.OutputConverter;
 @Data
 public class MenuDTO implements OutputConverter<MenuDTO, Menu> {
     /**
+     * 没有id玩不转的
+     */
+    private Long id;
+
+    /**
      * 上级菜单ID
      */
     private Long parentId;

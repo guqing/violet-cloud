@@ -85,10 +85,7 @@ public class RouteUserServiceImpl implements RouteUserService {
         Query query = new Query();
         Criteria criteria = new Criteria();
         if (StringUtils.isNotBlank(routeUser.getUsername())) {
-            criteria.and("username").regex(routeUser.getUsername());
-        }
-        if(StringUtils.isNotBlank(routeUser.getRoles())) {
-            criteria.and("roles").regex(routeUser.getRoles());
+            criteria.and("username").is(routeUser.getUsername());
         }
         query.addCriteria(criteria);
         return query;

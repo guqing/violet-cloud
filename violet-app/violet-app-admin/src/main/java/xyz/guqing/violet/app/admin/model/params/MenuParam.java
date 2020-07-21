@@ -1,5 +1,6 @@
 package xyz.guqing.violet.app.admin.model.params;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import xyz.guqing.violet.app.admin.model.enums.MenuType;
 import xyz.guqing.common.support.model.entity.system.Menu;
@@ -13,6 +14,7 @@ import javax.validation.constraints.Size;
  * @date 2020-06-06
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class MenuParam implements InputConverter<Menu> {
     private Long id;
 

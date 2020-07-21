@@ -1,5 +1,6 @@
 package xyz.guqing.violet.app.admin.model.params;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import xyz.guqing.violet.common.core.model.constant.RegexpConstant;
 import xyz.guqing.common.support.model.entity.system.User;
@@ -15,6 +16,7 @@ import java.util.List;
  * @date 2020-06-01
  */
 @Data
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class UserParam implements InputConverter<User> {
     private Long id;
 

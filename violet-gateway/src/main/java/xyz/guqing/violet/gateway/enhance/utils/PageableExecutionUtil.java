@@ -28,7 +28,6 @@ public class PageableExecutionUtil {
         // jpa的分页是从0开始的，为了前端统一，则前端传1表示第一页
         Long current = request.getCurrent() - 1L < 0L ? 0L : request.getCurrent() - 1L;
         Long pageSize = request.getPageSize();
-        log.info("分页查询参数,current: [{}], pageSize: [{}]", current, pageSize);
         Pageable pageable = PageRequest.of(current.intValue(), pageSize.intValue(), sort);
         return template.find(query.with(pageable), clazz);
     }

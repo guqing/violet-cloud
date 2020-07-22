@@ -30,7 +30,8 @@ public class RegionAddressUtils {
                 String tmpDir = System.getProperties().getProperty(VioletConstant.JAVA_TEMP_DIR);
                 dbPath = tmpDir + "ip.db";
                 file = new File(dbPath);
-                InputStream resourceAsStream = RegionAddressUtils.class.getClassLoader().getResourceAsStream("classpath:ip2region/ip2region.db");
+                InputStream resourceAsStream = RegionAddressUtils.class.getClassLoader()
+                        .getResourceAsStream("classpath:ip2region/ip2region.db");
                 if (resourceAsStream != null) {
                     FileUtils.copyInputStreamToFile(resourceAsStream, file);
                 }
@@ -41,7 +42,7 @@ public class RegionAddressUtils {
             DataBlock dataBlock = (DataBlock) method.invoke(searcher, ip);
             return dataBlock.getRegion();
         } catch (Exception e) {
-            log.warn("获取地址信息异常,{}", e.getMessage());
+            log.warn("获取地址信息异常,{}, 异常堆栈: {}", e.getMessage(), e);
             return StringUtils.EMPTY;
         } finally {
             if (searcher != null) {

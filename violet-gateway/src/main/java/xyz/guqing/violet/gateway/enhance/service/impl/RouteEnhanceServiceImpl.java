@@ -111,21 +111,23 @@ public class RouteEnhanceServiceImpl implements RouteEnhanceService {
         URI originUri = getGatewayOriginalRequestUrl(exchange);
         // /auth/user为令牌校验请求，是系统自发行为，非用户请求，故不记录
         if (!StringUtils.equalsIgnoreCase(TOKEN_CHECK_URL, originUri.getPath())) {
-            URI url = getGatewayRequestUrl(exchange);
-            Route route = getGatewayRoute(exchange);
-            ServerHttpRequest request = exchange.getRequest();
-            String ipAddress = VioletUtil.getServerHttpRequestIpAddress(request);
-            if (url != null && route != null) {
-                RouteLog routeLog = RouteLog.builder()
-                        .ip(ipAddress)
-                        .requestUri(originUri.getPath())
-                        .targetServer(route.getId())
-                        .targetUri(url.getPath())
-                        .requestMethod(request.getMethodValue())
-                        .location(RegionAddressUtils.getCityInfo(ipAddress))
-                        .build();
-                routeLogService.create(routeLog).subscribe();
-            }
+            return;
+        }
+
+        URI url = getGatewayRequestUrl(exchange);
+        Route route = getGatewayRoute(exchange);
+        ServerHttpRequest request = exchange.getRequest();
+        String ipAddress = VioletUtil.getServerHttpRequestIpAddress(request);
+        if (url != null && route != null) {
+            RouteLog routeLog = RouteLog.builder()
+                    .ip(ipAddress)
+                    .requestUri(originUri.getPath())
+                    .targetServer(route.getId())
+                    .targetUri(url.getPath())
+                    .requestMethod(request.getMethodValue())
+                    .location(RegionAddressUtils.getCityInfo(ipAddress))
+                    .build();
+            routeLogService.create(routeLog).subscribe();
         }
     }
 

@@ -5,6 +5,8 @@ import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.gateway.enhance.model.entity.RouteLog;
 
+import java.util.List;
+
 /**
  * @author guqing
  */
@@ -31,7 +33,7 @@ public interface RouteLogService {
      * @param ids 路由日志id
      * @return 被删除的路由日志
      */
-    Flux<RouteLog> delete(String ids);
+    Flux<RouteLog> delete(List<String> ids);
 
     /**
      * 查找路由日志分页数据

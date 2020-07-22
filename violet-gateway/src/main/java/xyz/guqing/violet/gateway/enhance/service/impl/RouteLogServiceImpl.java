@@ -14,10 +14,10 @@ import xyz.guqing.violet.gateway.enhance.model.entity.RouteLog;
 import xyz.guqing.violet.gateway.enhance.mapper.RouteLogMapper;
 import xyz.guqing.violet.gateway.enhance.service.RouteLogService;
 import xyz.guqing.violet.gateway.enhance.utils.PageableExecutionUtil;
-import xyz.guqing.violet.gateway.enhance.utils.RegionAddressUtils;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author guqing
@@ -46,14 +46,12 @@ public class RouteLogServiceImpl implements RouteLogService {
     @Override
     public Mono<RouteLog> create(RouteLog routeLog) {
         routeLog.setCreateTime(DateUtil.formatFullTime(LocalDateTime.now(), DateUtil.FULL_TIME_SPLIT_PATTERN));
-        routeLog.setLocation(RegionAddressUtils.getCityInfo(routeLog.getIp()));
         return routeLogMapper.insert(routeLog);
     }
 
     @Override
-    public Flux<RouteLog> delete(String ids) {
-        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, ",");
-        return routeLogMapper.deleteByIdIn(Arrays.asList(idArray));
+    public Flux<RouteLog> delete(List<String> ids) {
+        return routeLogMapper.deleteByIdIn(ids);
     }
 
     @Override

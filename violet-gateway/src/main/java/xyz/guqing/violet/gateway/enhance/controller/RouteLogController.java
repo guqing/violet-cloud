@@ -2,15 +2,14 @@ package xyz.guqing.violet.gateway.enhance.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.gateway.enhance.model.entity.RouteLog;
 import xyz.guqing.violet.gateway.enhance.service.RouteLogService;
+
+import java.util.List;
 
 /**
  * @author guqing
@@ -34,7 +33,7 @@ public class RouteLogController {
 
     @DeleteMapping
     @PreAuthorize("hasAuthority('admin')")
-    public Flux<RouteLog> deleteRouteLogs(String ids) {
+    public Flux<RouteLog> deleteRouteLogs(@RequestBody List<String> ids) {
         return routeLogService.delete(ids);
     }
 }

@@ -3,13 +3,13 @@ jdk:
   - openjdk11
 before_install:
   - chmod -R 777 mvnw
-  - sudo apt-get install sshpass
+#  - sudo apt-get install sshpass
 script:
   - ./mvnw clean install
-deploy:
-  - provider: script
-    script: bash ./scripts/deploy.sh $SERVER $PASSWORD
-    skip_cleanup: true
+#deploy:
+#  - provider: script
+#    script: bash ./scripts/deploy.sh $SERVER $PASSWORD
+#    skip_cleanup: true
 branches:
   only:
     - master

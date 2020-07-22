@@ -1,7 +1,7 @@
 package xyz.guqing.violet.gateway;
 
 import org.junit.jupiter.api.Test;
-import xyz.guqing.violet.common.core.utils.RegionAddressUtils;
+import xyz.guqing.violet.gateway.enhance.utils.RegionAddressUtils;
 
 /**
  * @author guqing

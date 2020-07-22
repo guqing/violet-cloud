@@ -54,6 +54,7 @@ public class RouteUserServiceImpl implements RouteUserService {
     public Mono<RouteUser> update(RouteUser routeUser) {
         return this.routeUserMapper.findById(routeUser.getId())
                 .flatMap(u -> {
+                    u.setUsername(routeUser.getUsername());
                     u.setRoles(routeUser.getRoles());
                     return this.routeUserMapper.save(u);
                 });

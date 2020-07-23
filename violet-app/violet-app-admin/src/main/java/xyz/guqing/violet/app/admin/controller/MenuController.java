@@ -33,6 +33,7 @@ public class MenuController {
     }
 
     @GetMapping("/tree")
+    @PreAuthorize("hasAuthority('menu:view')")
     public ResultEntity<List<VueRouter<Menu>>> getMenu() {
         String username = VioletSecurityHelper.getCurrentUsername();
         List<VueRouter<Menu>> userRouters = menuService.listUserRouters(username);
@@ -40,6 +41,7 @@ public class MenuController {
     }
 
     @GetMapping("router")
+    @PreAuthorize("hasAuthority('menu:view')")
     public ResultEntity<List<MenuDTO>> getRouterList() {
         String username = VioletSecurityHelper.getCurrentUsername();
         List<Menu> menus = menuService.listUserMenus(username);
@@ -47,11 +49,13 @@ public class MenuController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('menu:view')")
     public ResultEntity<Menu> getById(@PathVariable Long id) {
         return ResultEntity.ok(menuService.getById(id));
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('menu:view')")
     public ResultEntity<List<MenuTree>> listMenuTree(MenuQuery menuQuery) {
         Menu menu = menuQuery.convertTo();
         List<MenuTree> menuTrees = this.menuService.listTreeMenus(menu);

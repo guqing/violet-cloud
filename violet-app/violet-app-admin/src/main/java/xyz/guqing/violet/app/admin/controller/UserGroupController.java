@@ -24,12 +24,14 @@ public class UserGroupController {
     private final UserGroupService userGroupService;
 
     @GetMapping("/list")
+    @PreAuthorize("hasAuthority('group:view')")
     public ResultEntity<List<UserGroupTree>> list(String name) {
         List<UserGroupTree> userGroupTrees = userGroupService.listBy(name);
         return ResultEntity.ok(userGroupTrees);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('group:view')")
     public ResultEntity<UserGroup> getById(@PathVariable Long id) {
         return  ResultEntity.ok(userGroupService.getById(id));
     }

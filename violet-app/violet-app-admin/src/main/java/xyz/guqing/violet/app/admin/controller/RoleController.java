@@ -36,6 +36,7 @@ public class RoleController {
     private final RoleService roleService;
 
     @GetMapping("/options")
+    @PreAuthorize("hasAuthority('role:view')")
     public ResultEntity<List<RoleDTO>> listAll() {
         List<Role> list = roleService.list();
         return ResultEntity.ok(convertTo(list));
@@ -51,6 +52,7 @@ public class RoleController {
     }
 
     @GetMapping("list")
+    @PreAuthorize("hasAuthority('role:view')")
     public ResultEntity<PageInfo<RoleDTO>> listBy(RoleQuery roleQuery, QueryRequest queryRequest) {
         roleQuery.setQueryRequest(queryRequest);
         log.debug("角色查询对象：{}", JSONObject.toJSONString(roleQuery));
@@ -59,6 +61,7 @@ public class RoleController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('role:view')")
     public ResultEntity<RoleDTO> get(@PathVariable Long id) {
         return ResultEntity.ok(roleService.getRoleById(id));
     }

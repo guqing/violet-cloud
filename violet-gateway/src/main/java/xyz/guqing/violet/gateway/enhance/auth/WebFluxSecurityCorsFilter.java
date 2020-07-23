@@ -1,5 +1,6 @@
 package xyz.guqing.violet.gateway.enhance.auth;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;
@@ -17,6 +18,7 @@ import reactor.core.publisher.Mono;
 /**
  * @author guqing
  */
+@Slf4j
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class WebFluxSecurityCorsFilter implements WebFilter {
@@ -25,6 +27,7 @@ public class WebFluxSecurityCorsFilter implements WebFilter {
     @SuppressWarnings("all")
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
+        log.info("跨域拦截器: {}", CorsUtils.isCorsRequest(request));
         if (CorsUtils.isCorsRequest(request)) {
             ServerHttpResponse response = exchange.getResponse();
             HttpHeaders headers = response.getHeaders();

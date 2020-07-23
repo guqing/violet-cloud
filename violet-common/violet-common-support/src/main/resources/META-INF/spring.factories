@@ -1,5 +1,4 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   xyz.guqing.common.support.config.PaginationInterceptorConfig,\
   xyz.guqing.common.support.handler.BaseExceptionHandler,\
-  xyz.guqing.common.support.handler.SaveUpdateRelatedFieldsMetaHandler,\
-  xyz.guqing.common.support.config.CorsConfig
+  xyz.guqing.common.support.handler.SaveUpdateRelatedFieldsMetaHandler

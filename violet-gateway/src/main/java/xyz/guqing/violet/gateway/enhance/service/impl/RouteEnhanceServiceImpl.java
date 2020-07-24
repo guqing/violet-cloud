@@ -108,6 +108,7 @@ public class RouteEnhanceServiceImpl implements RouteEnhanceService {
 
     @Override
     public void saveRequestLogs(ServerWebExchange exchange) {
+        log.debug("保存请求日志: {}", JSONObject.toJSONString(getGatewayRoute(exchange)));
         URI originUri = getGatewayOriginalRequestUrl(exchange);
         // /auth/user为令牌校验请求，是系统自发行为，非用户请求，故不记录
         if (!StringUtils.equalsIgnoreCase(TOKEN_CHECK_URL, originUri.getPath())) {

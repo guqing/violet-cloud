@@ -1,9 +1,11 @@
 package xyz.guqing.violet.gateway.enhance.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.exception.AuthenticationException;
@@ -23,6 +25,7 @@ public class RouteLoginController {
     private final RouteUserService routeUserService;
 
     @GetMapping("login")
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public Mono<ResultEntity<String>> login(String username, String password) {
         return routeUserService.findByUsername(username)
                 .map(u -> {

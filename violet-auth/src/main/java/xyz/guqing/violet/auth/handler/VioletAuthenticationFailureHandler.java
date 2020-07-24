@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
  * @author guqing
  */
 @Component
-public class VioletWebLoginFailureHandler implements AuthenticationFailureHandler {
+public class VioletAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse response, AuthenticationException exception) throws IOException {
         response.setCharacterEncoding(StandardCharsets.UTF_8.toString());

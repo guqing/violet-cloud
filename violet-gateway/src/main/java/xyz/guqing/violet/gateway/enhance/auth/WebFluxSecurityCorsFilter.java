@@ -27,7 +27,6 @@ public class WebFluxSecurityCorsFilter implements WebFilter {
     @SuppressWarnings("all")
     public Mono<Void> filter(ServerWebExchange exchange, WebFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
-        log.info("跨域拦截器: {}", CorsUtils.isCorsRequest(request));
         if (CorsUtils.isCorsRequest(request)) {
             ServerHttpResponse response = exchange.getResponse();
             HttpHeaders headers = response.getHeaders();

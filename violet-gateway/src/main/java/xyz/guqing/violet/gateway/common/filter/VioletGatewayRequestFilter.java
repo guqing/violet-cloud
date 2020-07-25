@@ -29,6 +29,7 @@ public class VioletGatewayRequestFilter implements GlobalFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
+        log.debug("过滤器执行: {}, 是否记录日志: {}", exchange.getRequest().getPath(), routeEhance);
         if (routeEhance) {
             Mono<Void> balckListResult = routeEnhanceService.filterBalckList(exchange);
             if (balckListResult != null) {

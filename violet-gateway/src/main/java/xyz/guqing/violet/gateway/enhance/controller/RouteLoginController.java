@@ -25,7 +25,6 @@ public class RouteLoginController {
     private final RouteUserService routeUserService;
 
     @GetMapping("login")
-    @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public Mono<ResultEntity<String>> login(String username, String password) {
         return routeUserService.findByUsername(username)
                 .map(u -> {

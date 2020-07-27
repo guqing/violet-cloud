@@ -40,6 +40,7 @@ public class SocialLoginController {
         this.authRequestFactory = authRequestFactory;
     }
 
+    @ResponseBody
     @GetMapping("/list")
     public ResultEntity<List<String>> connections() {
         List<String> oauthList = authRequestFactory.oauthList();

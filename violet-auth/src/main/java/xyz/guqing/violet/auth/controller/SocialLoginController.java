@@ -1,5 +1,6 @@
 package xyz.guqing.violet.auth.controller;
 
+import com.xkcoding.justauth.AuthRequestFactory;
 import lombok.extern.slf4j.Slf4j;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.request.AuthRequest;
@@ -17,6 +18,7 @@ import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @author guqing
@@ -28,11 +30,20 @@ import java.io.IOException;
 public class SocialLoginController {
     private final UserLoginService userLoginService;
     private final VioletAuthProperties authProperties;
+    private final AuthRequestFactory authRequestFactory;
 
     public SocialLoginController(UserLoginService userLoginService,
-                                 VioletAuthProperties authProperties) {
+                                 VioletAuthProperties authProperties,
+                                 AuthRequestFactory authRequestFactory) {
         this.userLoginService = userLoginService;
         this.authProperties = authProperties;
+        this.authRequestFactory = authRequestFactory;
+    }
+
+    @GetMapping("/list")
+    public ResultEntity<List<String>> connections() {
+        List<String> oauthList = authRequestFactory.oauthList();
+        return ResultEntity.ok(oauthList);
     }
 
     @GetMapping("/login/{type}")

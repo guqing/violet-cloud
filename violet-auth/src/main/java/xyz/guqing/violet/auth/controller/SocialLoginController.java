@@ -110,6 +110,7 @@ public class SocialLoginController {
         this.userLoginService.bind(username, authUser);
     }
 
+    @ResponseBody
     @GetMapping("providers")
     public ResultEntity<List<String>> listUserConnections() {
         String username = VioletSecurityHelper.getCurrentUsername();

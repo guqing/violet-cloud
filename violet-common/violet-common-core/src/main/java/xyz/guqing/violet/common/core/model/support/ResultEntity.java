@@ -104,9 +104,8 @@ public class ResultEntity<T> {
                 ResultEntityEnum.USER_RESOURCE_EXCEPTION.getDesc(), data);
     }
 
-    public static ResultEntity<String> serverError() {
-        return fail(ResultEntityEnum.SERVER_ERROR.getCode(),
-                ResultEntityEnum.SERVER_ERROR.getDesc());
+    public static ResultEntity<String> serverError(String message) {
+        return fail(ResultEntityEnum.SERVER_ERROR.getCode(),message);
     }
 
     public static ResultEntity<String> unSupportedMediaType() {

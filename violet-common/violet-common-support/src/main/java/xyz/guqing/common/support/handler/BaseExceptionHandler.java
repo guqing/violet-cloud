@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import xyz.guqing.violet.common.core.exception.AuthenticationException;
 import xyz.guqing.violet.common.core.exception.BadRequestException;
+import xyz.guqing.violet.common.core.exception.BindSocialAccountException;
 import xyz.guqing.violet.common.core.exception.ForbiddenException;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
@@ -56,6 +57,13 @@ public class BaseExceptionHandler {
         String message = "该方法不支持" + StringUtils.substringBetween(e.getMessage(), "'", "'") + "请求方法";
         log.error(message);
         return ResultEntity.accessDenied(message);
+    }
+
+    @ExceptionHandler(BindSocialAccountException.class)
+    @ResponseStatus(HttpStatus.CONFLICT)
+    public ResultEntity<String> handleBindSocialAccountException(BindSocialAccountException e) {
+        log.error("绑定社交帐号出错:{}", e);
+        return ResultEntity.badArgument(e.getMessage());
     }
 
     @ExceptionHandler(BadRequestException.class)
@@ -114,6 +122,6 @@ public class BaseExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResultEntity<String> handleException(Exception e) {
         log.error("系统内部异常，{}",e);
-        return ResultEntity.serverError();
+        return ResultEntity.serverError(e.getMessage());
     }
 }

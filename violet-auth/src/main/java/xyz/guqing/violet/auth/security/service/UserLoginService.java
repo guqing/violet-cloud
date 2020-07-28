@@ -18,8 +18,10 @@ import org.springframework.security.oauth2.provider.client.JdbcClientDetailsServ
 import org.springframework.security.oauth2.provider.password.ResourceOwnerPasswordTokenGranter;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import xyz.guqing.violet.auth.config.VioletAuthorizationServerConfig;
 import xyz.guqing.violet.auth.model.dto.SocialLoginDTO;
+import xyz.guqing.violet.auth.model.dto.SocialRelationDTO;
 import xyz.guqing.violet.auth.model.params.BindUserParam;
 import xyz.guqing.violet.auth.service.UserRoleService;
 import xyz.guqing.violet.common.core.exception.*;
@@ -42,6 +44,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author guqing
@@ -264,5 +267,17 @@ public class UserLoginService {
             throw new AuthenticationException("第三方登录失败:" + response.getMsg());
         }
         return (AuthUser) response.getData();
+    }
+
+    public List<String> listProviderByUsername(String username) {
+        User user = userService.getByUsername(username);
+        Long userId = user.getId();
+
+        List<UserConnection> userConnections = userConnectionService.listByUserId(userId);
+        if(CollectionUtils.isEmpty(userConnections)) {
+            return Collections.emptyList();
+        }
+
+        return userConnections.stream().map(UserConnection::getProviderName).collect(Collectors.toList());
     }
 }

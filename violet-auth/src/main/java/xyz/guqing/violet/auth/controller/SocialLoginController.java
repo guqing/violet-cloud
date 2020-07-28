@@ -1,6 +1,5 @@
 package xyz.guqing.violet.auth.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.xkcoding.justauth.AuthRequestFactory;
 import lombok.extern.slf4j.Slf4j;
 import me.zhyd.oauth.model.AuthCallback;
@@ -17,6 +16,7 @@ import xyz.guqing.violet.auth.model.params.BindUserParam;
 import xyz.guqing.violet.auth.model.params.SocialUserParam;
 import xyz.guqing.violet.auth.model.properties.VioletAuthProperties;
 import xyz.guqing.violet.auth.security.service.UserLoginService;
+import xyz.guqing.violet.auth.service.UserConnectionService;
 import xyz.guqing.violet.common.core.model.constant.StringConstant;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
@@ -105,9 +105,15 @@ public class SocialLoginController {
     @ResponseBody
     @PostMapping("/bind")
     public void bind(@RequestBody SocialUserParam socialUserParam) {
-        log.debug("获取系统用户信息:{}", JSONObject.toJSONString(VioletSecurityHelper.getCurrentUser()));
         String username = VioletSecurityHelper.getCurrentUsername();
         AuthUser authUser = socialUserParam.convertTo();
         this.userLoginService.bind(username, authUser);
+    }
+
+    @GetMapping("providers")
+    public ResultEntity<List<String>> listUserConnections() {
+        String username = VioletSecurityHelper.getCurrentUsername();
+        List<String> providerNames = userLoginService.listProviderByUsername(username);
+        return ResultEntity.ok(providerNames);
     }
 }

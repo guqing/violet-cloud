@@ -66,13 +66,7 @@ public class UserLoginService {
 
 
     public SocialLoginDTO resolveLogin(String type, AuthCallback callback) {
-        AuthRequest authRequest = getAuthRequest(type);
-        AuthResponse response = authRequest.login(callback);
-        if (!response.ok()) {
-            throw new AuthenticationException("第三方登录失败:" + response.getMsg());
-        }
-
-        AuthUser authUser = (AuthUser) response.getData();
+        AuthUser authUser = getAuthUserFromCallback(type, callback);
         String source = authUser.getSource().name();
         UserConnection userConnection = userConnectionService.getBySourceAndUuid(source, authUser.getUuid());
 
@@ -246,11 +240,29 @@ public class UserLoginService {
     }
 
     public void bind(String username, AuthUser authUser) {
-        UserConnection userConnection = userConnectionService.getBySourceAndUuid(authUser.getSource().toString(), authUser.getUuid());
+        String source = authUser.getSource().name();
+        UserConnection userConnection = userConnectionService.getBySourceAndUuid(source, authUser.getUuid());
         if (userConnection != null) {
             throw new BindSocialAccountException("绑定失败，该第三方账号已被绑定,请先解绑后重试");
         }
         User user = userService.getByUsername(username);
         userConnectionService.create(user.getId(), authUser);
+    }
+
+    public SocialLoginDTO resolveBind(String oauthType, AuthCallback callback) {
+        AuthUser authUser = getAuthUserFromCallback(oauthType, callback);
+        SocialLoginDTO socialLoginDTO = new SocialLoginDTO();
+        socialLoginDTO.setIsBind(false);
+        socialLoginDTO.setAuthUser(authUser);
+        return socialLoginDTO;
+    }
+
+    private AuthUser getAuthUserFromCallback(String oauthType, AuthCallback callback) {
+        AuthRequest authRequest = getAuthRequest(oauthType);
+        AuthResponse response = authRequest.login(callback);
+        if (!response.ok()) {
+            throw new AuthenticationException("第三方登录失败:" + response.getMsg());
+        }
+        return (AuthUser) response.getData();
     }
 }

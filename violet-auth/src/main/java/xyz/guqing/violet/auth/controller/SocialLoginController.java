@@ -7,6 +7,7 @@ import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
 import me.zhyd.oauth.utils.AuthStateUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import xyz.guqing.violet.auth.model.dto.SocialLoginDTO;
 import xyz.guqing.violet.auth.model.params.BindUserParam;
 import xyz.guqing.violet.auth.model.properties.VioletAuthProperties;
 import xyz.guqing.violet.auth.security.service.UserLoginService;
+import xyz.guqing.violet.common.core.model.constant.StringConstant;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 
@@ -31,6 +33,7 @@ import java.util.List;
 @Controller
 @RequestMapping("social")
 public class SocialLoginController {
+    private static final String TYPE_BIND = "bind";
     private final UserLoginService userLoginService;
     private final VioletAuthProperties authProperties;
     private final AuthRequestFactory authRequestFactory;
@@ -50,15 +53,30 @@ public class SocialLoginController {
         return ResultEntity.ok(oauthList);
     }
 
-    @GetMapping("/login/{type}")
-    public void login(@PathVariable String type, HttpServletResponse response) throws IOException {
-        AuthRequest authRequest = userLoginService.getAuthRequest(type);
-        response.sendRedirect(authRequest.authorize(AuthStateUtils.createState()));
+    @GetMapping("/login/{oauthType}/{type}")
+    public void login(@PathVariable String oauthType,
+                      @PathVariable String type,
+                      HttpServletResponse response) throws IOException {
+        AuthRequest authRequest = userLoginService.getAuthRequest(oauthType);
+        String state = AuthStateUtils.createState() + StringConstant.DOUBLE_COLON + type;
+        response.sendRedirect(authRequest.authorize(state));
     }
 
-    @RequestMapping("/{type}/callback")
-    public ModelAndView login(@PathVariable String type, AuthCallback callback, ModelAndView modelAndView) {
-        SocialLoginDTO socialLoginDTO = userLoginService.resolveLogin(type, callback);
+    @RequestMapping("/{oauthType}/callback")
+    public ModelAndView login(@PathVariable String oauthType,
+                              String state,
+                              AuthCallback callback,
+                              ModelAndView modelAndView) {
+        String type = StringUtils.substringAfterLast(state, StringConstant.DOUBLE_COLON);
+
+        SocialLoginDTO socialLoginDTO;
+        if (StringUtils.equals(type, TYPE_BIND)) {
+            // 帐号绑定
+            socialLoginDTO = userLoginService.resolveBind(oauthType, callback);
+        } else {
+            // 登录
+            socialLoginDTO = userLoginService.resolveLogin(oauthType, callback);
+        }
 
         modelAndView.addObject("response", socialLoginDTO);
         modelAndView.addObject("redirectUrl", authProperties.getRedirectUrl());
@@ -81,6 +99,7 @@ public class SocialLoginController {
 
     /**
      * 绑定
+     *
      * @param authUser authUser
      */
     @ResponseBody

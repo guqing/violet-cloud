@@ -244,4 +244,13 @@ public class UserLoginService {
         UUID uuid = UUID.randomUUID();
         return uuid.toString().replace("-", "");
     }
+
+    public void bind(String username, AuthUser authUser) {
+        UserConnection userConnection = userConnectionService.getBySourceAndUuid(authUser.getSource().toString(), authUser.getUuid());
+        if (userConnection != null) {
+            throw new BindSocialAccountException("绑定失败，该第三方账号已被绑定,请先解绑后重试");
+        }
+        User user = userService.getByUsername(username);
+        userConnectionService.create(user.getId(), authUser);
+    }
 }

@@ -151,7 +151,7 @@ public class UserLoginService {
             throw new AlreadyExistsException("该用户已经存在");
         }
 
-        AuthUser authUser = registerUser.getAuthUser();
+        AuthUser authUser = registerUser.getSocialUserParam().convertTo();
         String encryptPassword = passwordEncoder.encode(registerUser.getPassword());
         // 注册
         User patinaUser = authUserPatina(registerUser.getEmail(), encryptPassword, authUser);

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import xyz.guqing.violet.auth.model.dto.SocialLoginDTO;
 import xyz.guqing.violet.auth.model.params.BindUserParam;
+import xyz.guqing.violet.auth.model.params.SocialUserParam;
 import xyz.guqing.violet.auth.model.properties.VioletAuthProperties;
 import xyz.guqing.violet.auth.security.service.UserLoginService;
 import xyz.guqing.violet.common.core.model.constant.StringConstant;
@@ -98,15 +99,15 @@ public class SocialLoginController {
     }
 
     /**
-     * 绑定
-     *
-     * @param authUser authUser
+     * 绑定社交帐号
+     * @param socialUserParam 第三方用户信息
      */
     @ResponseBody
     @PostMapping("/bind")
-    public void bind(@RequestBody AuthUser authUser) {
+    public void bind(@RequestBody SocialUserParam socialUserParam) {
         log.debug("获取系统用户信息:{}", JSONObject.toJSONString(VioletSecurityHelper.getCurrentUser()));
         String username = VioletSecurityHelper.getCurrentUsername();
+        AuthUser authUser = socialUserParam.convertTo();
         this.userLoginService.bind(username, authUser);
     }
 }

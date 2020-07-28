@@ -2,6 +2,7 @@ package xyz.guqing.violet.auth.model.params;
 
 import lombok.Data;
 import me.zhyd.oauth.model.AuthUser;
+import org.springframework.web.bind.annotation.RequestBody;
 import xyz.guqing.violet.common.core.model.constant.RegexpConstant;
 
 import javax.validation.constraints.NotBlank;
@@ -27,5 +28,5 @@ public class BindUserParam {
     private String captcha;
 
     @NotNull(message = "第三方认证用户信息不能为空")
-    private AuthUser authUser;
+    private SocialUserParam socialUserParam;
 }

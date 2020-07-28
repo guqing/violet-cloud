@@ -95,6 +95,6 @@ public class GatewayExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResultEntity<String> handleException(Exception e) {
         log.error("系统内部异常，{}",e);
-        return ResultEntity.serverError();
+        return ResultEntity.serverError(e.getMessage());
     }
 }

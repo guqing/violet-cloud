@@ -36,4 +36,11 @@ public interface UserConnectionService extends IService<UserConnection> {
      * @return 如果查询到返回第三方帐号集合，否则返回空集合
      */
     List<UserConnection> listByUserId(Long userId);
+
+    /**
+     * 根据用户id和第三方类型解绑帐号
+     * @param userId 用户id
+     * @param providerName 第三方认证类型
+     */
+    void deleteBy(Long userId, String providerName);
 }

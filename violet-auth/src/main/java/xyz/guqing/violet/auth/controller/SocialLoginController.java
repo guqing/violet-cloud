@@ -104,10 +104,19 @@ public class SocialLoginController {
      */
     @ResponseBody
     @PostMapping("/bind")
-    public void bind(@RequestBody SocialUserParam socialUserParam) {
+    public ResultEntity<String> bind(@RequestBody SocialUserParam socialUserParam) {
         String username = VioletSecurityHelper.getCurrentUsername();
         AuthUser authUser = socialUserParam.convertTo();
         this.userLoginService.bind(username, authUser);
+        return ResultEntity.ok();
+    }
+
+    @ResponseBody
+    @PostMapping("/unbind/{oauthType}")
+    public ResultEntity<String> unbind(@PathVariable String oauthType) {
+        String username = VioletSecurityHelper.getCurrentUsername();
+        this.userLoginService.unbind(username, oauthType);
+        return ResultEntity.ok();
     }
 
     @ResponseBody

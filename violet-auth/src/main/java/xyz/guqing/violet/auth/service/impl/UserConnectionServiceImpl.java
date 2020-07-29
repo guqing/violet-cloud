@@ -50,4 +50,12 @@ public class UserConnectionServiceImpl extends ServiceImpl<UserConnectionMapper,
         queryWrapper.eq(UserConnection::getUserId, userId);
         return list(queryWrapper);
     }
+
+    @Override
+    public void deleteBy(Long userId, String providerName) {
+        LambdaQueryWrapper<UserConnection> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.eq(UserConnection::getUserId, userId)
+                .eq(UserConnection::getProviderName, providerName);
+        remove(queryWrapper);
+    }
 }

@@ -280,4 +280,10 @@ public class UserLoginService {
 
         return userConnections.stream().map(UserConnection::getProviderName).collect(Collectors.toList());
     }
+
+    public void unbind(String username, String oauthType) {
+        User user = userService.getByUsername(username);
+        Long userId = user.getId();
+        userConnectionService.deleteBy(userId, oauthType);
+    }
 }

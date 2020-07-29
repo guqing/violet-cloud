@@ -11,6 +11,7 @@ import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.exception.AuthenticationException;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 import xyz.guqing.violet.gateway.enhance.auth.JwtTokenHelper;
+import xyz.guqing.violet.gateway.enhance.model.entity.RouteUser;
 import xyz.guqing.violet.gateway.enhance.service.RouteUserService;
 
 /**
@@ -26,16 +27,16 @@ public class RouteLoginController {
 
     @GetMapping("login")
     public Mono<ResultEntity<String>> login(String username, String password) {
-        return routeUserService.findByUsername(username)
-                .map(u -> {
-                    if (u == null) {
-                        throw new AuthenticationException("用户不存在");
-                    }
-                    boolean matches = passwordEncoder.matches(password, u.getPassword());
-                    if (!matches) {
-                        throw new AuthenticationException("认证失败，用户名或密码错误");
-                    }
-                    return ResultEntity.ok(tokenHelper.generateToken(u));
-                });
+        Mono<RouteUser> routeUserMono = routeUserService.findByUsername(username);
+        if (routeUserMono == null) {
+            throw new AuthenticationException("用户不存在");
+        }
+        return routeUserMono.map(u -> {
+            boolean matches = passwordEncoder.matches(password, u.getPassword());
+            if (!matches) {
+                throw new AuthenticationException("认证失败，用户名或密码错误");
+            }
+            return ResultEntity.ok(tokenHelper.generateToken(u));
+        });
     }
 }

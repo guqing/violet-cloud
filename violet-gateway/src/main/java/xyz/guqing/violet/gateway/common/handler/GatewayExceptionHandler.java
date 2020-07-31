@@ -11,6 +11,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.exception.AuthenticationException;
 import xyz.guqing.violet.common.core.exception.BadRequestException;
 import xyz.guqing.violet.common.core.exception.ForbiddenException;
@@ -28,29 +29,30 @@ import java.util.Map;
 public class GatewayExceptionHandler {
     @ExceptionHandler(value = AccessDeniedException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ResultEntity<String> handleAccessDeniedException() {
-        return ResultEntity.accessDenied("没有权限访问该资源");
+    public Mono<ResultEntity<String>> handleAccessDeniedException() {
+        ResultEntity<String> resultEntity = ResultEntity.accessDenied("没有权限访问该资源");
+        return Mono.just(resultEntity);
     }
 
     @ExceptionHandler(value = ForbiddenException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
-    public ResultEntity<String> handleAccessDeniedException(ForbiddenException e) {
+    public Mono<ResultEntity<String>> handleAccessDeniedException(ForbiddenException e) {
         log.error("无权访问,{}", e);
-        return ResultEntity.accessDenied("没有权限访问该资源");
+        return Mono.just(ResultEntity.accessDenied("没有权限访问该资源"));
     }
 
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResultEntity<String> handleBadRequestException(BadRequestException e) {
+    public Mono<ResultEntity<String>> handleBadRequestException(BadRequestException e) {
         log.error("Captured an exception：{0}", e);
-        return ResultEntity.badArgument(e.getMessage());
+        return Mono.just(ResultEntity.badArgument(e.getMessage()));
     }
 
     @ExceptionHandler(AuthenticationException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
-    public ResultEntity<String> handleAuthFailException(AuthenticationException e) {
+    public Mono<ResultEntity<String>> handleAuthFailException(AuthenticationException e) {
         log.error("认证失败，错误信息：{0}", e);
-        return ResultEntity.authorizedFailed("认证失败:" + e.getMessage());
+        return Mono.just(ResultEntity.authorizedFailed("认证失败:" + e.getMessage()));
     }
 
     /**
@@ -61,9 +63,9 @@ public class GatewayExceptionHandler {
      */
     @ExceptionHandler(BindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResultEntity<String> validExceptionHandler(BindException e){
+    public Mono<ResultEntity<String>> validExceptionHandler(BindException e){
         // 将错误的参数的详细信息封装到统一的返回实体
-        return validParam(e.getBindingResult());
+        return Mono.just(validParam(e.getBindingResult()));
     }
 
     /**
@@ -74,8 +76,8 @@ public class GatewayExceptionHandler {
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResultEntity<String> validExceptionHandler(MethodArgumentNotValidException e){
-        return validParam(e.getBindingResult());
+    public Mono<ResultEntity<String>> validExceptionHandler(MethodArgumentNotValidException e){
+        return Mono.just(validParam(e.getBindingResult()));
     }
 
     private ResultEntity<String> validParam(BindingResult bindResult) {
@@ -93,8 +95,8 @@ public class GatewayExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    public ResultEntity<String> handleException(Exception e) {
+    public Mono<ResultEntity<String>> handleException(Exception e) {
         log.error("系统内部异常，{}",e);
-        return ResultEntity.serverError(e.getMessage());
+        return Mono.just(ResultEntity.serverError(e.getMessage()));
     }
 }

@@ -57,9 +57,4 @@ public class RateLimitRule {
      * 规则创建时间
      */
     private String createTime;
-
-    @Transient
-    private String createTimeFrom;
-    @Transient
-    private String createTimeTo;
 }

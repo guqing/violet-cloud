@@ -7,6 +7,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.gateway.enhance.model.entity.RateLimitRule;
+import xyz.guqing.violet.gateway.enhance.model.params.RateLimitRuleQuery;
 import xyz.guqing.violet.gateway.enhance.service.RateLimitRuleService;
 
 /**
@@ -20,12 +21,14 @@ public class RateLimitRuleController {
     private final RateLimitRuleService rateLimitRuleService;
 
     @GetMapping("data")
-    public Flux<RateLimitRule> findUserPages(QueryRequest request, RateLimitRule rateLimitRule) {
+    public Flux<RateLimitRule> findUserPages(QueryRequest request, RateLimitRuleQuery rateLimitRuleQuery) {
+        RateLimitRule rateLimitRule = rateLimitRuleQuery.convertTo();
         return rateLimitRuleService.findPages(request, rateLimitRule);
     }
 
     @GetMapping("count")
-    public Mono<Long> findUserCount(RateLimitRule rateLimitRule) {
+    public Mono<Long> findUserCount(RateLimitRuleQuery rateLimitRuleQuery) {
+        RateLimitRule rateLimitRule = rateLimitRuleQuery.convertTo();
         return rateLimitRuleService.findCount(rateLimitRule);
     }
 

@@ -20,6 +20,7 @@ import xyz.guqing.violet.gateway.enhance.utils.PageableExecutionUtil;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author guqing
@@ -82,9 +83,8 @@ public class RateLimitRuleServiceImpl implements RateLimitRuleService {
     }
 
     @Override
-    public Flux<RateLimitRule> delete(String ids) {
-        String[] idArray = StringUtils.splitByWholeSeparatorPreserveAllTokens(ids, ",");
-        return rateLimitRuleMapper.deleteByIdIn(Arrays.asList(idArray))
+    public Flux<RateLimitRule> delete(List<String> ids) {
+        return rateLimitRuleMapper.deleteByIdIn(ids)
                 .doOnNext(routeEnhanceCacheService::removeRateLimitRule);
     }
 

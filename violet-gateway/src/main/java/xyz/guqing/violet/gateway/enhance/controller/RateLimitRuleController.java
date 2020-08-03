@@ -12,6 +12,7 @@ import xyz.guqing.violet.gateway.enhance.model.params.RateLimitRuleQuery;
 import xyz.guqing.violet.gateway.enhance.service.RateLimitRuleService;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author guqing
@@ -56,7 +57,7 @@ public class RateLimitRuleController {
 
     @DeleteMapping
     @PreAuthorize("hasAuthority('admin')")
-    public Flux<RateLimitRule> deleteRateLimitRule(String ids) {
+    public Flux<RateLimitRule> deleteRateLimitRule(@RequestBody List<String> ids) {
         return rateLimitRuleService.delete(ids);
     }
 }

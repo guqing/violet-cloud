@@ -5,6 +5,8 @@ import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.gateway.enhance.model.entity.RateLimitRule;
 
+import java.util.List;
+
 /**
  * @author guqing
  */
@@ -65,5 +67,5 @@ public interface RateLimitRuleService {
      * @param ids 限流规则id
      * @return 被删除的限流规则
      */
-    Flux<RateLimitRule> delete(String ids);
+    Flux<RateLimitRule> delete(List<String> ids);
 }

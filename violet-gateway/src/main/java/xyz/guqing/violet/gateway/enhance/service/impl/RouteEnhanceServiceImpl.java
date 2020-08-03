@@ -44,7 +44,7 @@ public class RouteEnhanceServiceImpl implements RouteEnhanceService {
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
     @Override
-    public Mono<Void> filterBalckList(ServerWebExchange exchange) {
+    public Mono<Void> filterBlackList(ServerWebExchange exchange) {
         Stopwatch stopwatch = Stopwatch.createStarted();
         ServerHttpRequest request = exchange.getRequest();
         ServerHttpResponse response = exchange.getResponse();

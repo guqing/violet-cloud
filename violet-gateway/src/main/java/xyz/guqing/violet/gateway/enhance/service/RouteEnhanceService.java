@@ -16,7 +16,7 @@ public interface RouteEnhanceService {
      * @param exchange ServerWebExchange
      * @return Mono<Void>
      */
-    Mono<Void> filterBalckList(ServerWebExchange exchange);
+    Mono<Void> filterBlackList(ServerWebExchange exchange);
 
     /**
      * 根据限流规则进行过滤

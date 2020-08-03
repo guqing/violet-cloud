@@ -4,6 +4,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.gateway.enhance.model.entity.RouteLog;
+import xyz.guqing.violet.gateway.enhance.model.params.RouteLogQuery;
 
 import java.util.List;
 
@@ -42,7 +43,7 @@ public interface RouteLogService {
      * @param routeLog routeLog
      * @return 路由日志分页数据
      */
-    Flux<RouteLog> findPages(QueryRequest request, RouteLog routeLog);
+    Flux<RouteLog> findPages(QueryRequest request, RouteLogQuery routeLog);
 
     /**
      * 查找路由分页数据count
@@ -50,5 +51,5 @@ public interface RouteLogService {
      * @param routeLog routeLog
      * @return count
      */
-    Mono<Long> findCount(RouteLog routeLog);
+    Mono<Long> findCount(RouteLogQuery routeLog);
 }

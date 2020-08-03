@@ -12,12 +12,12 @@ import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.common.core.utils.DateUtil;
 import xyz.guqing.violet.gateway.enhance.model.entity.RouteLog;
 import xyz.guqing.violet.gateway.enhance.mapper.RouteLogMapper;
+import xyz.guqing.violet.gateway.enhance.model.params.RouteLogQuery;
 import xyz.guqing.violet.gateway.enhance.service.RouteLogService;
 import xyz.guqing.violet.gateway.enhance.utils.PageableExecutionUtil;
 import xyz.guqing.violet.gateway.enhance.utils.RegionAddressUtils;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -57,18 +57,18 @@ public class RouteLogServiceImpl implements RouteLogService {
     }
 
     @Override
-    public Flux<RouteLog> findPages(QueryRequest request, RouteLog routeLog) {
+    public Flux<RouteLog> findPages(QueryRequest request, RouteLogQuery routeLog) {
         Query query = getQuery(routeLog);
         return PageableExecutionUtil.getPages(query, request, RouteLog.class, reactiveMongoTemplate);
     }
 
     @Override
-    public Mono<Long> findCount(RouteLog routeLog) {
+    public Mono<Long> findCount(RouteLogQuery routeLog) {
         Query query = getQuery(routeLog);
         return reactiveMongoTemplate.count(query, RouteLog.class);
     }
 
-    private Query getQuery(RouteLog routeLog) {
+    private Query getQuery(RouteLogQuery routeLog) {
         Query query = new Query();
         Criteria criteria = new Criteria();
         if (StringUtils.isNotBlank(routeLog.getIp())) {

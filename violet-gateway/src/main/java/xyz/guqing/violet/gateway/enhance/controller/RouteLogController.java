@@ -7,6 +7,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.gateway.enhance.model.entity.RouteLog;
+import xyz.guqing.violet.gateway.enhance.model.params.RouteLogQuery;
 import xyz.guqing.violet.gateway.enhance.service.RouteLogService;
 
 import java.util.List;
@@ -22,13 +23,13 @@ public class RouteLogController {
     private final RouteLogService routeLogService;
 
     @GetMapping("data")
-    public Flux<RouteLog> findRouteLogsPages(QueryRequest request, RouteLog routeLog) {
-        return routeLogService.findPages(request, routeLog);
+    public Flux<RouteLog> findRouteLogsPages(QueryRequest request, RouteLogQuery routeLogQuery) {
+        return routeLogService.findPages(request, routeLogQuery);
     }
 
     @GetMapping("count")
-    public Mono<Long> findRouteLogsCount(RouteLog routeLog) {
-        return routeLogService.findCount(routeLog);
+    public Mono<Long> findRouteLogsCount(RouteLogQuery routeLogQuery) {
+        return routeLogService.findCount(routeLogQuery);
     }
 
     @DeleteMapping

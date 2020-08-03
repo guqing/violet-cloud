@@ -48,9 +48,4 @@ public class RouteLog {
      * 请求地点
      */
     private String location;
-
-    @Transient
-    private String createTimeFrom;
-    @Transient
-    private String createTimeTo;
 }

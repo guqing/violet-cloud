@@ -7,8 +7,11 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import xyz.guqing.violet.common.core.model.support.QueryRequest;
 import xyz.guqing.violet.gateway.enhance.model.entity.RateLimitRule;
+import xyz.guqing.violet.gateway.enhance.model.params.RateLimitRuleParam;
 import xyz.guqing.violet.gateway.enhance.model.params.RateLimitRuleQuery;
 import xyz.guqing.violet.gateway.enhance.service.RateLimitRuleService;
+
+import javax.validation.Valid;
 
 /**
  * @author guqing
@@ -39,13 +42,15 @@ public class RateLimitRuleController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('admin')")
-    public Mono<RateLimitRule> createRateLimitRule(RateLimitRule rateLimitRule) {
+    public Mono<RateLimitRule> createRateLimitRule(@RequestBody @Valid RateLimitRuleParam rateLimitRuleParam) {
+        RateLimitRule rateLimitRule = rateLimitRuleParam.convertTo();
         return rateLimitRuleService.create(rateLimitRule);
     }
 
     @PutMapping
     @PreAuthorize("hasAuthority('admin')")
-    public Mono<RateLimitRule> updateRateLimitRule(RateLimitRule rateLimitRule) {
+    public Mono<RateLimitRule> updateRateLimitRule(@RequestBody @Valid RateLimitRuleParam rateLimitRuleParam) {
+        RateLimitRule rateLimitRule = rateLimitRuleParam.convertTo();
         return rateLimitRuleService.update(rateLimitRule);
     }
 

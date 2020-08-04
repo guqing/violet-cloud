@@ -18,6 +18,7 @@ import xyz.guqing.violet.app.admin.model.params.UserParam;
 import xyz.guqing.violet.app.admin.model.params.UserQuery;
 import xyz.guqing.violet.app.admin.service.RoleService;
 import xyz.guqing.violet.app.admin.service.UserService;
+import xyz.guqing.violet.common.core.exception.BadArgumentException;
 import xyz.guqing.violet.common.core.exception.NotFoundException;
 import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 import xyz.guqing.common.support.model.entity.system.UserRole;
@@ -206,5 +207,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         LambdaQueryWrapper<User> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.in(User::getUsername, usernames);
         remove(queryWrapper);
+    }
+
+    @Override
+    public void updatePassword(String username, String oldPassword, String newPassword) {
+        boolean correctByPassword = isCorrectByPassword(oldPassword);
+        if(!correctByPassword) {
+            throw new BadArgumentException("原始密码不正确");
+        }
+        // 修改密码
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        LambdaUpdateWrapper<User> updateWrapper = Wrappers.lambdaUpdate();
+        updateWrapper.set(User::getPassword, encodedPassword)
+                .eq(User::getUsername, username);
+        update(updateWrapper);
     }
 }

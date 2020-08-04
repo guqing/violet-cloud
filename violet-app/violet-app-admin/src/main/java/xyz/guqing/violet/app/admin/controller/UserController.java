@@ -79,6 +79,14 @@ public class UserController {
         return ResultEntity.ok();
     }
 
+    @PutMapping("password")
+    @ControllerEndpoint(exceptionMessage = "修改密码")
+    public ResultEntity<String> updatePassword(@RequestParam String oldPassword, @RequestParam String newPassword) {
+        String username = VioletSecurityHelper.getCurrentUsername();
+        userService.updatePassword(username, oldPassword, newPassword);
+        return ResultEntity.ok();
+    }
+
     @DeleteMapping
     @PreAuthorize("hasAuthority('user:delete')")
     @ControllerEndpoint(operation = "删除用户", exceptionMessage = "删除用户失败")

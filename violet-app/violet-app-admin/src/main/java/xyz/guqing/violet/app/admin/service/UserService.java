@@ -91,4 +91,12 @@ public interface UserService extends IService<User> {
      * @param userNames 用户名集合
      */
     void removeByUserNames(List<String> userNames);
+
+    /**
+     * 修改用户密码
+     * @param username 用户名
+     * @param oldPassword 原始密码
+     * @param newPassword 新密码
+     */
+    void updatePassword(String username, String oldPassword, String newPassword);
 }

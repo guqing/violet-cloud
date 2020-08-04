@@ -8,6 +8,7 @@ import xyz.guqing.violet.app.admin.model.params.UserQuery;
 import xyz.guqing.common.support.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -68,23 +69,24 @@ public interface UserService extends IService<User> {
 
     /**
      * 判断用户密码是否正确
+     * @param username 用户名
      * @param password 密码
      * @return 如果正确返回{@code true},否则返回{@code false}
      */
-    boolean isCorrectByPassword(String password);
+    boolean isCorrectByPassword(@NotNull String username, @NotNull String password);
 
     /**
      * 重置用户密码
      * @param username 用户名
      */
-    void resetPassword(String username);
+    void resetPassword(@NotNull String username);
 
     /**
      * 更新用户状态
      * @param username 用户名
      * @param status 用户状态
      */
-    void updateStatus(String username, UserStatusEnum status);
+    void updateStatus(@NotNull String username, UserStatusEnum status);
 
     /**
      * 根据用户名集合批量删除用户

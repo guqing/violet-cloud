@@ -169,8 +169,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public boolean isCorrectByPassword(String password) {
-        String username = VioletSecurityHelper.getCurrentUsername();
+    public boolean isCorrectByPassword(String username, String password) {
         User user = getByUsername(username);
         // 加密后匹配
         String encodedPassword = passwordEncoder.encode(password);
@@ -211,7 +210,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public void updatePassword(String username, String oldPassword, String newPassword) {
-        boolean correctByPassword = isCorrectByPassword(oldPassword);
+        boolean correctByPassword = isCorrectByPassword(username, oldPassword);
         if(!correctByPassword) {
             throw new BadArgumentException("原始密码不正确");
         }

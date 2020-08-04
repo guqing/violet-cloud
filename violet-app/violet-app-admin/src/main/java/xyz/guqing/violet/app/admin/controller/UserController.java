@@ -110,7 +110,8 @@ public class UserController {
 
     @GetMapping("/check/password")
     public ResultEntity<Boolean> checkPassword(@RequestParam String password) {
-        boolean isCorrect = userService.isCorrectByPassword(password);
+        String username = VioletSecurityHelper.getCurrentUsername();
+        boolean isCorrect = userService.isCorrectByPassword(username, password);
         return ResultEntity.ok(isCorrect);
     }
 

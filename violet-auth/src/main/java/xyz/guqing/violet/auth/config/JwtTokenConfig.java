@@ -12,7 +12,7 @@ import xyz.guqing.violet.auth.security.support.JwtTokenEnhancer;
  * JwtTokenConfig
  *
  * @author guqing
- * @date 2019/10/12
+ * @date 2020-8-6
  */
 @Configuration
 public class JwtTokenConfig {

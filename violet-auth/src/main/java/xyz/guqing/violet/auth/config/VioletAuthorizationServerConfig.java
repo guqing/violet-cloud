@@ -20,6 +20,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 import xyz.guqing.violet.auth.security.service.MyJdbcClientDetailsService;
 import xyz.guqing.violet.auth.security.service.UserDetailsServiceImpl;
 
@@ -44,8 +45,8 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
     @Autowired
     private AuthenticationManager authenticationManager;
 
-//    @Autowired
-//    private TokenStore redisTokenStore;
+    @Autowired
+    private RedisTokenStore redisTokenStore;
 
     @Autowired
     private DataSource dataSource;
@@ -66,15 +67,6 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
 
     @Override
     public void configure(final AuthorizationServerEndpointsConfigurer endpoints) {
-        /*
-         * 普通 jwt 模式
-         *   endpoints.tokenStore(jwtTokenStore)
-         *                 .accessTokenConverter(jwtAccessTokenConverter)
-         *                 .userDetailsService(userDetailsServiceImpl)
-         *                 //支持 password 模式
-         *                 .authenticationManager(authenticationManager);
-         */
-
         // jwt 增强模式
         TokenEnhancerChain enhancerChain = new TokenEnhancerChain();
         List<TokenEnhancer> enhancerList = new ArrayList<>();
@@ -82,31 +74,22 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
         enhancerList.add(jwtAccessTokenConverter);
         enhancerChain.setTokenEnhancers(enhancerList);
 
-        endpoints.tokenStore(jwtTokenStore)
+        /*
+         * redis token 方式
+         * 可修改tokenStore为jwtTokenStore替换存储方式
+         */
+        endpoints.tokenStore(redisTokenStore)
                 .userDetailsService(userDetailsServiceImpl)
                 // 支持 password 模式
                 .authenticationManager(authenticationManager)
                 .tokenEnhancer(enhancerChain)
                 .accessTokenConverter(jwtAccessTokenConverter);
-
-        /*
-         * redis token 方式
-         *  endpoints.authenticationManager(authenticationManager)
-         *                 .tokenStore(redisTokenStore)
-         *                 .userDetailsService(kiteUserDetailsService);
-         */
         this.endpointsConfigurer = endpoints;
     }
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.jdbc(dataSource);
-//        clients.inMemory()
-//                .withClient("violet")
-//                .secret(passwordEncoder.encode("123456"))
-//                .authorizedGrantTypes("refresh_token", "authorization_code", "password")
-//                .accessTokenValiditySeconds(3600)
-//                .scopes("all");
     }
 
     @Override

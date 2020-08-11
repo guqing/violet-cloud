@@ -1,11 +1,10 @@
 package xyz.guqing.violet.auth.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -18,11 +17,11 @@ import org.springframework.security.oauth2.provider.request.DefaultOAuth2Request
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
-import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import xyz.guqing.violet.auth.security.service.MyJdbcClientDetailsService;
 import xyz.guqing.violet.auth.security.service.UserDetailsServiceImpl;
+import xyz.guqing.violet.auth.security.support.JwtTokenEnhancer;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -33,32 +32,19 @@ import java.util.List;
  * @date 2020-5-13
  */
 @Configuration
+@RequiredArgsConstructor
 @EnableAuthorizationServer
 public class VioletAuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+    private final UserDetailsServiceImpl userDetailsServiceImpl;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    public PasswordEncoder passwordEncoder;
+    private final DataSource dataSource;
 
-    @Autowired
-    public UserDetailsServiceImpl userDetailsServiceImpl;
+    private final JwtTokenStore jwtTokenStore;
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    private final JwtAccessTokenConverter jwtAccessTokenConverter;
 
-    @Autowired
-    private RedisTokenStore redisTokenStore;
-
-    @Autowired
-    private DataSource dataSource;
-
-    @Autowired
-    private TokenStore jwtTokenStore;
-
-    @Autowired
-    private JwtAccessTokenConverter jwtAccessTokenConverter;
-
-    @Autowired
-    private TokenEnhancer jwtTokenEnhancer;
+    private final JwtTokenEnhancer jwtTokenEnhancer;
 
     /**
      * 用于保存配置在重载方法configure中为其赋值
@@ -75,10 +61,10 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
         enhancerChain.setTokenEnhancers(enhancerList);
 
         /*
-         * redis token 方式
-         * 可修改tokenStore为jwtTokenStore替换存储方式
+         * jwt token 方式
+         * 可修改tokenStore为RedisTokenStore替换存储方式
          */
-        endpoints.tokenStore(redisTokenStore)
+        endpoints.tokenStore(jwtTokenStore)
                 .userDetailsService(userDetailsServiceImpl)
                 // 支持 password 模式
                 .authenticationManager(authenticationManager)
@@ -130,6 +116,7 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
 
     /**
      * 获取 EndpointsConfigurer,后续用于手动生成jwt格式的token，否则只能生成普通token
+     *
      * @return 返回EndpointsConfigurer
      */
     public AuthorizationServerEndpointsConfigurer getEndpointsConfigurer() {

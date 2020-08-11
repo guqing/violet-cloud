@@ -18,7 +18,7 @@ import xyz.guqing.violet.auth.security.support.JwtTokenEnhancer;
 public class JwtTokenConfig {
 
     @Bean
-    public TokenStore jwtTokenStore() {
+    public JwtTokenStore jwtTokenStore() {
         return new JwtTokenStore(jwtAccessTokenConverter());
     }
 
@@ -30,7 +30,7 @@ public class JwtTokenConfig {
     }
 
     @Bean
-    public TokenEnhancer jwtTokenEnhancer(){
+    public JwtTokenEnhancer jwtTokenEnhancer(){
        return new JwtTokenEnhancer();
     }
 }

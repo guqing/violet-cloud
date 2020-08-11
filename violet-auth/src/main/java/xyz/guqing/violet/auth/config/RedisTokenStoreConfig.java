@@ -12,14 +12,14 @@ import org.springframework.security.oauth2.provider.token.store.redis.RedisToken
  * @author guqing
  * @date 2020-8-6
  */
-@Configuration
+//@Configuration
 public class RedisTokenStoreConfig {
 
-    @Autowired
-    private RedisConnectionFactory redisConnectionFactory;
-
-    @Bean
-    public RedisTokenStore redisTokenStore (){
-        return new RedisTokenStore(redisConnectionFactory);
-    }
+//    @Autowired
+//    private RedisConnectionFactory redisConnectionFactory;
+//
+//    @Bean
+//    public RedisTokenStore redisTokenStore (){
+//        return new RedisTokenStore(redisConnectionFactory);
+//    }
 }

@@ -22,6 +22,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import xyz.guqing.violet.auth.security.service.MyJdbcClientDetailsService;
 import xyz.guqing.violet.auth.security.service.UserDetailsServiceImpl;
 import xyz.guqing.violet.auth.security.support.JwtTokenEnhancer;
+import xyz.guqing.violet.auth.translator.VioletWebResponseExceptionTranslator;
 
 import javax.sql.DataSource;
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
 
     private final JwtTokenEnhancer jwtTokenEnhancer;
 
+    private final VioletWebResponseExceptionTranslator webResponseExceptionTranslator;
+
     /**
      * 用于保存配置在重载方法configure中为其赋值
      */
@@ -69,7 +72,8 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
                 // 支持 password 模式
                 .authenticationManager(authenticationManager)
                 .tokenEnhancer(enhancerChain)
-                .accessTokenConverter(jwtAccessTokenConverter);
+                .accessTokenConverter(jwtAccessTokenConverter)
+                .exceptionTranslator(webResponseExceptionTranslator);;
         this.endpointsConfigurer = endpoints;
     }
 

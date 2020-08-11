@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.oauth2.common.exceptions.InvalidGrantException;
 import org.springframework.util.Assert;
 import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
@@ -78,6 +79,12 @@ public class BaseExceptionHandler {
     public ResultEntity<String> handleAuthFailException(AuthenticationException e) {
         log.error("认证失败，错误信息：{0}", e);
         return ResultEntity.authorizedFailed("认证失败:" + e.getMessage());
+    }
+
+    @ExceptionHandler(InvalidGrantException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ResultEntity<String> handleInvalidGrantException(InvalidGrantException e) {
+        return ResultEntity.authorizedFailed(e.getMessage());
     }
 
     /**

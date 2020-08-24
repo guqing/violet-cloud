@@ -74,7 +74,7 @@ public class MenuController {
     @DeleteMapping
     @PreAuthorize("hasAuthority('menu:delete')")
     @ControllerEndpoint(operation = "删除菜单/按钮", exceptionMessage = "删除菜单/按钮失败")
-    public ResultEntity<String> deleteMenus(List<Long> menuIds) {
+    public ResultEntity<String> deleteMenus(@RequestBody List<Long> menuIds) {
         menuService.deleteMenus(menuIds);
         return ResultEntity.ok();
     }

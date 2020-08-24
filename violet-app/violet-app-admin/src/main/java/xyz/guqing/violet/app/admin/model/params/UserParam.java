@@ -57,4 +57,5 @@ public class UserParam implements InputConverter<User> {
     private List<Long> roleIds;
 
     private Long groupId;
+
 }

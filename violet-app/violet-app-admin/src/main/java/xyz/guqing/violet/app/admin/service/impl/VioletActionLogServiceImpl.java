@@ -12,6 +12,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import xyz.guqing.common.support.utils.PageUtils;
 import xyz.guqing.violet.app.admin.mapper.VioletActionLogMapper;
 import xyz.guqing.violet.app.admin.model.params.ActionLogQuery;
 import xyz.guqing.violet.app.admin.service.VioletActionLogService;
@@ -63,10 +64,7 @@ public class VioletActionLogServiceImpl extends ServiceImpl<VioletActionLogMappe
     }
 
     @Override
-    public IPage<VioletActionLog> listBy(ActionLogQuery logQuery, PageQuery queryRequest) {
-        Long pageSize = queryRequest.getPageSize();
-        Long current = queryRequest.getCurrent();
-
+    public IPage<VioletActionLog> listBy(ActionLogQuery logQuery, PageQuery pageQuery) {
         LambdaQueryWrapper<VioletActionLog> queryWrapper = Wrappers.lambdaQuery();
 
         if(logQuery.getUsername() != null) {
@@ -92,7 +90,7 @@ public class VioletActionLogServiceImpl extends ServiceImpl<VioletActionLogMappe
 
         // 按照创建时间降序排列，最近的显示在最前面
         queryWrapper.orderByDesc(VioletActionLog::getCreateTime);
-        return page(new Page<>(current, pageSize), queryWrapper);
+        return page(PageUtils.convert(pageQuery), queryWrapper);
     }
 
     private StringBuilder handleParams(StringBuilder params, Object[] args, List paramNames) {

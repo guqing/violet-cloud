@@ -25,7 +25,7 @@ import java.util.stream.IntStream;
 public class VioletUtil {
     private static final Pattern CHINESE_PATTERN = Pattern.compile("[\u4e00-\u9fa5]");
     private static final String UNKNOW = "unknown";
-
+    private static final String CAMEL_TO_UNDERSCORE_REGEX = "[A-Z]";
     /**
      * 驼峰转下划线
      *
@@ -36,19 +36,18 @@ public class VioletUtil {
         if (StringUtils.isBlank(value)) {
             return value;
         }
-        String[] arr = StringUtils.splitByCharacterTypeCamelCase(value);
-        if (arr.length == 0) {
-            return value;
+
+        Matcher matcher = Pattern.compile(CAMEL_TO_UNDERSCORE_REGEX).matcher(value);
+        StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            String g = matcher.group();
+            matcher.appendReplacement(sb, StringConstant.UNDER_LINE + g.toLowerCase());
         }
-        StringBuilder result = new StringBuilder();
-        IntStream.range(0, arr.length).forEach(i -> {
-            if (i != arr.length - 1) {
-                result.append(arr[i]).append("_");
-            } else {
-                result.append(arr[i]);
-            }
-        });
-        return StringUtils.lowerCase(result.toString());
+        matcher.appendTail(sb);
+        if (StringConstant.UNDER_LINE.equals(sb.charAt(0)+"")) {
+            sb.delete(0, 1);
+        }
+        return sb.toString();
     }
 
     /**

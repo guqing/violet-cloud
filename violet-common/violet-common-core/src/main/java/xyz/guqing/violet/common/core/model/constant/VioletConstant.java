@@ -10,11 +10,11 @@ public interface VioletConstant {
     /**
      * 排序规则：降序
      */
-    String ORDER_DESC = "descending";
+    String ORDER_DESC = "desc";
     /**
      * 排序规则：升序
      */
-    String ORDER_ASC = "ascending";
+    String ORDER_ASC = "asc";
 
     /**
      * Gateway请求头TOKEN名称（不要有空格）

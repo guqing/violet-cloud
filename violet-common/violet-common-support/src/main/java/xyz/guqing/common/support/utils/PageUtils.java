@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
+import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.model.support.PageQuery;
+import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import java.util.List;
 import java.util.function.Function;
@@ -26,8 +28,10 @@ public class PageUtils {
         String sortField = pageQuery.getField();
         if(StringUtils.isNotBlank(sortField)) {
             OrderItem orderItem = new OrderItem();
-            orderItem.setAsc("asc".equalsIgnoreCase(pageQuery.getOrder()));
-            orderItem.setColumn(pageQuery.getField());
+            orderItem.setAsc(VioletConstant.ORDER_ASC.equalsIgnoreCase(pageQuery.getOrder()));
+            // 驼峰转下划线
+            String underscoreField = VioletUtil.camelToUnderscore(sortField);
+            orderItem.setColumn(underscoreField);
             page.addOrder(orderItem);
         }
 

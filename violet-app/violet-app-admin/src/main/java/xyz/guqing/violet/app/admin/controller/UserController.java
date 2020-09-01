@@ -36,7 +36,7 @@ public class UserController {
     @GetMapping("/list")
     @PreAuthorize("hasAuthority('user:view')")
     public ResultEntity<PageInfo<UserDTO>> listUserByPage(UserQuery userQuery,
-                                                          QueryRequest queryRequest) {
+                                                          PageQuery queryRequest) {
         userQuery.setQueryRequest(queryRequest);
         log.debug("用户列表查询参数: [{}]", userQuery);
         PageInfo<UserDTO> users = userService.listByPage(userQuery);

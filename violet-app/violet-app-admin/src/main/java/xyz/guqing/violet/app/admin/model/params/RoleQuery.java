@@ -1,7 +1,7 @@
 package xyz.guqing.violet.app.admin.model.params;
 
 import lombok.Data;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 
 /**
  * @author guqing
@@ -13,5 +13,5 @@ public class RoleQuery {
     private String roleName;
     private String remark;
     private String createTime;
-    private QueryRequest queryRequest = new QueryRequest();
+    private PageQuery queryRequest = new PageQuery();
 }

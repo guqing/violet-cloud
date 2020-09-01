@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.gateway.enhance.model.entity.RateLimitLog;
 import xyz.guqing.violet.gateway.enhance.service.RateLimitLogService;
 
@@ -23,7 +23,7 @@ public class RateLimitLogController {
     private final RateLimitLogService rateLimitLogService;
 
     @GetMapping("data")
-    public Flux<RateLimitLog> findUserPages(QueryRequest request, RateLimitLog rateLimitLog) {
+    public Flux<RateLimitLog> findUserPages(PageQuery request, RateLimitLog rateLimitLog) {
         return rateLimitLogService.findPages(request, rateLimitLog);
     }
 

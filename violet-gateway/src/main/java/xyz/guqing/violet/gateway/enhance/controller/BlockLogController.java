@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.gateway.enhance.model.entity.BlockLog;
 import xyz.guqing.violet.gateway.enhance.service.BlockLogService;
 
@@ -23,7 +23,7 @@ public class BlockLogController {
     private final BlockLogService blockLogService;
 
     @GetMapping("data")
-    public Flux<BlockLog> findUserPages(QueryRequest request, BlockLog blockLog) {
+    public Flux<BlockLog> findUserPages(PageQuery request, BlockLog blockLog) {
         return blockLogService.findPages(request, blockLog);
     }
 

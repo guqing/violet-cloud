@@ -5,7 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.gateway.enhance.model.entity.BlackList;
 import xyz.guqing.violet.gateway.enhance.service.BlackListService;
 
@@ -20,7 +20,7 @@ public class BlackListController {
     private final BlackListService blackListService;
 
     @GetMapping("data")
-    public Flux<BlackList> findUserPages(QueryRequest request, BlackList blackList) {
+    public Flux<BlackList> findUserPages(PageQuery request, BlackList blackList) {
         return blackListService.findPages(request, blackList);
     }
 

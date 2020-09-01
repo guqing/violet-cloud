@@ -2,7 +2,7 @@ package xyz.guqing.violet.gateway.enhance.service;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.gateway.enhance.model.entity.BlockLog;
 
 /**
@@ -33,7 +33,7 @@ public interface BlockLogService {
      * @param blockLog blockLog
      * @return 拦截日志分页数据
      */
-    Flux<BlockLog> findPages(QueryRequest request, BlockLog blockLog);
+    Flux<BlockLog> findPages(PageQuery request, BlockLog blockLog);
 
     /**
      * 查找拦截日志分页数据count

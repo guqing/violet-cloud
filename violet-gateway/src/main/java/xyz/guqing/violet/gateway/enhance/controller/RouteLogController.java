@@ -5,7 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.gateway.enhance.model.entity.RouteLog;
 import xyz.guqing.violet.gateway.enhance.model.params.RouteLogQuery;
 import xyz.guqing.violet.gateway.enhance.service.RouteLogService;
@@ -23,7 +23,7 @@ public class RouteLogController {
     private final RouteLogService routeLogService;
 
     @GetMapping("data")
-    public Flux<RouteLog> findRouteLogsPages(QueryRequest request, RouteLogQuery routeLogQuery) {
+    public Flux<RouteLog> findRouteLogsPages(PageQuery request, RouteLogQuery routeLogQuery) {
         return routeLogService.findPages(request, routeLogQuery);
     }
 

@@ -13,7 +13,7 @@ import xyz.guqing.violet.app.admin.mapper.UserLoginLogMapper;
 import xyz.guqing.violet.app.admin.model.params.LoginLogParam;
 import xyz.guqing.violet.app.admin.service.UserLoginLogService;
 import xyz.guqing.common.support.model.entity.system.UserLoginLog;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 
 import java.time.LocalDateTime;
 
@@ -25,7 +25,7 @@ import java.time.LocalDateTime;
 @Service
 public class UserLoginLogServiceImpl extends ServiceImpl<UserLoginLogMapper, UserLoginLog> implements UserLoginLogService {
     @Override
-    public IPage<UserLoginLog> listBy(LoginLogParam loginLogParam, QueryRequest queryRequest) {
+    public IPage<UserLoginLog> listBy(LoginLogParam loginLogParam, PageQuery queryRequest) {
         log.debug("列表查询参数:{}", JSONObject.toJSONString(loginLogParam));
 
         LambdaQueryWrapper<UserLoginLog> queryWrapper = Wrappers.lambdaQuery();

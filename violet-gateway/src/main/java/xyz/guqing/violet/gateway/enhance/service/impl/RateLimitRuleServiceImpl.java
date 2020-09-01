@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.common.core.utils.DateUtil;
 import xyz.guqing.violet.gateway.enhance.model.entity.RateLimitRule;
 import xyz.guqing.violet.gateway.enhance.mapper.RateLimitRuleMapper;
@@ -19,7 +19,6 @@ import xyz.guqing.violet.gateway.enhance.service.RouteEnhanceCacheService;
 import xyz.guqing.violet.gateway.enhance.utils.PageableExecutionUtil;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -54,7 +53,7 @@ public class RateLimitRuleServiceImpl implements RateLimitRuleService {
     }
 
     @Override
-    public Flux<RateLimitRule> findPages(QueryRequest request, RateLimitRule rateLimitRule) {
+    public Flux<RateLimitRule> findPages(PageQuery request, RateLimitRule rateLimitRule) {
         Query query = getQuery(rateLimitRule);
         return PageableExecutionUtil.getPages(query, request, RateLimitRule.class, reactiveMongoTemplate);
     }

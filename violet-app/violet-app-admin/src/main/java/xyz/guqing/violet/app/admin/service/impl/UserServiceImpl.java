@@ -22,10 +22,9 @@ import xyz.guqing.violet.common.core.exception.BadArgumentException;
 import xyz.guqing.violet.common.core.exception.NotFoundException;
 import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 import xyz.guqing.common.support.model.entity.system.UserRole;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.common.support.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
-import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import java.util.Collections;
@@ -50,7 +49,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public PageInfo<UserDTO> listByPage(UserQuery userQuery) {
-        QueryRequest queryRequest = userQuery.getQueryRequest();
+        PageQuery queryRequest = userQuery.getQueryRequest();
         Long current = queryRequest.getCurrent();
         Long pageSize = queryRequest.getPageSize();
 

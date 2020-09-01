@@ -11,7 +11,7 @@ import xyz.guqing.violet.app.admin.service.VioletActionLogService;
 import xyz.guqing.common.support.utils.PageConvert;
 import xyz.guqing.common.support.model.entity.system.VioletActionLog;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
 /**
@@ -25,7 +25,7 @@ public class ActionLogController {
     private final VioletActionLogService actionLogService;
 
     @GetMapping
-    public ResultEntity<PageInfo<ActionLogDTO>> list(ActionLogQuery actionLogQuery, QueryRequest queryRequest) {
+    public ResultEntity<PageInfo<ActionLogDTO>> list(ActionLogQuery actionLogQuery, PageQuery queryRequest) {
         IPage<VioletActionLog> actionLogPage = actionLogService.listBy(actionLogQuery,queryRequest);
         return ResultEntity.ok(convertTo(actionLogPage));
     }

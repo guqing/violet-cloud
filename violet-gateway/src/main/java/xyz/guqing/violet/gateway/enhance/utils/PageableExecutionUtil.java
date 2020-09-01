@@ -8,7 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.core.query.Query;
 import reactor.core.publisher.Flux;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 
 /**
@@ -17,7 +17,7 @@ import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 @Slf4j
 public class PageableExecutionUtil {
 
-    public static <VIOLET> Flux<VIOLET> getPages(Query query, QueryRequest request, Class<VIOLET> clazz,
+    public static <VIOLET> Flux<VIOLET> getPages(Query query, PageQuery request, Class<VIOLET> clazz,
                                                  ReactiveMongoTemplate template) {
         Sort sort = Sort.by("id").descending();
         if (StringUtils.isNotBlank(request.getField()) && StringUtils.isNotBlank(request.getOrder())) {

@@ -15,7 +15,7 @@ import xyz.guqing.violet.app.admin.model.params.RoleQuery;
 import xyz.guqing.violet.app.admin.service.RoleService;
 import xyz.guqing.common.support.utils.PageConvert;
 import xyz.guqing.common.support.model.entity.system.Role;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
@@ -53,7 +53,7 @@ public class RoleController {
 
     @GetMapping("list")
     @PreAuthorize("hasAuthority('role:view')")
-    public ResultEntity<PageInfo<RoleDTO>> listBy(RoleQuery roleQuery, QueryRequest queryRequest) {
+    public ResultEntity<PageInfo<RoleDTO>> listBy(RoleQuery roleQuery, PageQuery queryRequest) {
         roleQuery.setQueryRequest(queryRequest);
         log.debug("角色查询对象：{}", JSONObject.toJSONString(roleQuery));
         Page<Role> pageInfo = roleService.listBy(roleQuery);

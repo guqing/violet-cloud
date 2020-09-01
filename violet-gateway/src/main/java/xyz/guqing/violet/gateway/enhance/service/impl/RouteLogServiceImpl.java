@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.common.core.utils.DateUtil;
 import xyz.guqing.violet.gateway.enhance.model.entity.RouteLog;
 import xyz.guqing.violet.gateway.enhance.mapper.RouteLogMapper;
@@ -57,7 +57,7 @@ public class RouteLogServiceImpl implements RouteLogService {
     }
 
     @Override
-    public Flux<RouteLog> findPages(QueryRequest request, RouteLogQuery routeLog) {
+    public Flux<RouteLog> findPages(PageQuery request, RouteLogQuery routeLog) {
         Query query = getQuery(routeLog);
         return PageableExecutionUtil.getPages(query, request, RouteLog.class, reactiveMongoTemplate);
     }

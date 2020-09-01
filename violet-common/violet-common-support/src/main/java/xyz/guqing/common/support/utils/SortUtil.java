@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 
@@ -23,7 +23,7 @@ public class SortUtil {
      * @param defaultOrder      默认排序规则
      * @param camelToUnderscore 是否开启驼峰转下划线
      */
-    public static void handlePageSort(QueryRequest request, Page<?> page, String defaultSort, String defaultOrder, boolean camelToUnderscore) {
+    public static void handlePageSort(PageQuery request, Page<?> page, String defaultSort, String defaultOrder, boolean camelToUnderscore) {
         page.setCurrent(request.getCurrent());
         page.setSize(request.getPageSize());
         String sortField = request.getField();
@@ -57,7 +57,7 @@ public class SortUtil {
      * @param request QueryRequest
      * @param page    Page
      */
-    public static void handlePageSort(QueryRequest request, Page<?> page) {
+    public static void handlePageSort(PageQuery request, Page<?> page) {
         handlePageSort(request, page, null, null, false);
     }
 
@@ -68,7 +68,7 @@ public class SortUtil {
      * @param page              Page
      * @param camelToUnderscore 是否开启驼峰转下划线
      */
-    public static void handlePageSort(QueryRequest request, Page<?> page, boolean camelToUnderscore) {
+    public static void handlePageSort(PageQuery request, Page<?> page, boolean camelToUnderscore) {
         handlePageSort(request, page, null, null, camelToUnderscore);
     }
 
@@ -81,7 +81,7 @@ public class SortUtil {
      * @param defaultOrder      默认排序规则
      * @param camelToUnderscore 是否开启驼峰转下划线
      */
-    public static void handleWrapperSort(QueryRequest request, QueryWrapper<?> wrapper, String defaultSort, String defaultOrder, boolean camelToUnderscore) {
+    public static void handleWrapperSort(PageQuery request, QueryWrapper<?> wrapper, String defaultSort, String defaultOrder, boolean camelToUnderscore) {
         String sortField = request.getField();
         if (camelToUnderscore) {
             sortField = VioletUtil.camelToUnderscore(sortField);
@@ -113,7 +113,7 @@ public class SortUtil {
      * @param request QueryRequest
      * @param wrapper wrapper
      */
-    public static void handleWrapperSort(QueryRequest request, QueryWrapper<?> wrapper) {
+    public static void handleWrapperSort(PageQuery request, QueryWrapper<?> wrapper) {
         handleWrapperSort(request, wrapper, null, null, false);
     }
 
@@ -124,7 +124,7 @@ public class SortUtil {
      * @param wrapper           wrapper
      * @param camelToUnderscore 是否开启驼峰转下划线
      */
-    public static void handleWrapperSort(QueryRequest request, QueryWrapper<?> wrapper, boolean camelToUnderscore) {
+    public static void handleWrapperSort(PageQuery request, QueryWrapper<?> wrapper, boolean camelToUnderscore) {
         handleWrapperSort(request, wrapper, null, null, camelToUnderscore);
     }
 }

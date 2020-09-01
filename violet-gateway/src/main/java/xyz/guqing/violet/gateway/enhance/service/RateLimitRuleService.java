@@ -2,7 +2,7 @@ package xyz.guqing.violet.gateway.enhance.service;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.gateway.enhance.model.entity.RateLimitRule;
 
 import java.util.List;
@@ -43,7 +43,7 @@ public interface RateLimitRuleService {
      * @param rateLimitRule rateLimitRule
      * @return 限流规则分页数据
      */
-    Flux<RateLimitRule> findPages(QueryRequest request, RateLimitRule rateLimitRule);
+    Flux<RateLimitRule> findPages(PageQuery request, RateLimitRule rateLimitRule);
 
     /**
      * 限流规则分页count

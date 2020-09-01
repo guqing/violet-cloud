@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.common.core.utils.DateUtil;
 import xyz.guqing.violet.gateway.enhance.model.entity.RateLimitLog;
 import xyz.guqing.violet.gateway.enhance.mapper.RateLimitLogMapper;
@@ -52,7 +52,7 @@ public class RateLimitLogServiceImpl implements RateLimitLogService {
     }
 
     @Override
-    public Flux<RateLimitLog> findPages(QueryRequest request, RateLimitLog rateLimitLog) {
+    public Flux<RateLimitLog> findPages(PageQuery request, RateLimitLog rateLimitLog) {
         Query query = getQuery(rateLimitLog);
         return PageableExecutionUtil.getPages(query, request, RateLimitLog.class, template);
     }

@@ -5,7 +5,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.gateway.enhance.model.entity.RouteUser;
 import xyz.guqing.violet.gateway.enhance.model.params.UserParam;
 import xyz.guqing.violet.gateway.enhance.model.params.UserQuery;
@@ -25,7 +25,7 @@ public class RouteUserController {
     private final RouteUserService routeUserService;
 
     @GetMapping("data")
-    public Flux<RouteUser> findUserPages(QueryRequest request, UserQuery userQuery) {
+    public Flux<RouteUser> findUserPages(PageQuery request, UserQuery userQuery) {
         RouteUser routeUser = userQuery.convertTo();
         return routeUserService.findPages(request, routeUser);
     }

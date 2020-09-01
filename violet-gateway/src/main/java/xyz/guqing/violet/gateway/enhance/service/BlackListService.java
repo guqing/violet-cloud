@@ -2,7 +2,7 @@ package xyz.guqing.violet.gateway.enhance.service;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.gateway.enhance.model.entity.BlackList;
 
 /**
@@ -48,7 +48,7 @@ public interface BlackListService {
      * @param blackList blackList
      * @return 黑名单分页数据
      */
-    Flux<BlackList> findPages(QueryRequest request, BlackList blackList);
+    Flux<BlackList> findPages(PageQuery request, BlackList blackList);
 
     /**
      * 黑名单分页count

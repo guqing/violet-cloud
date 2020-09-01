@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.common.core.utils.DateUtil;
 import xyz.guqing.violet.gateway.enhance.model.entity.BlackList;
 import xyz.guqing.violet.gateway.enhance.mapper.BlackListMapper;
@@ -76,7 +76,7 @@ public class BlackListServiceImpl implements BlackListService {
     }
 
     @Override
-    public Flux<BlackList> findPages(QueryRequest request, BlackList blackList) {
+    public Flux<BlackList> findPages(PageQuery request, BlackList blackList) {
         Query query = getQuery(blackList);
         return PageableExecutionUtil.getPages(query, request, BlackList.class, template);
     }

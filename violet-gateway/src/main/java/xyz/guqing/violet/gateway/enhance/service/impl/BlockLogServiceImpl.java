@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.common.core.utils.DateUtil;
 import xyz.guqing.violet.gateway.enhance.model.entity.BlockLog;
 import xyz.guqing.violet.gateway.enhance.mapper.BlockLogMapper;
@@ -52,7 +52,7 @@ public class BlockLogServiceImpl implements BlockLogService {
     }
 
     @Override
-    public Flux<BlockLog> findPages(QueryRequest request, BlockLog blockLog) {
+    public Flux<BlockLog> findPages(PageQuery request, BlockLog blockLog) {
         Query query = getQuery(blockLog);
         return PageableExecutionUtil.getPages(query, request, BlockLog.class, template);
     }

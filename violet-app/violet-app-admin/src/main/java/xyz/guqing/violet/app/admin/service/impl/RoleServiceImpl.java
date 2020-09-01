@@ -14,7 +14,7 @@ import xyz.guqing.violet.app.admin.model.params.RoleQuery;
 import xyz.guqing.violet.app.admin.service.RoleMenuService;
 import xyz.guqing.violet.app.admin.service.RoleService;
 import xyz.guqing.violet.app.admin.service.UserRoleService;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.common.support.model.entity.system.Role;
 import xyz.guqing.common.support.model.entity.system.UserRole;
 
@@ -57,7 +57,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             queryWrapper.like(Role::getRemark, roleQuery.getRemark());
         }
         queryWrapper.orderByAsc(Role::getCreateTime);
-        QueryRequest queryRequest = roleQuery.getQueryRequest();
+        PageQuery queryRequest = roleQuery.getQueryRequest();
         Page<Role> rolePage = new Page<>(queryRequest.getCurrent(),queryRequest.getPageSize());
 
         return page(rolePage, queryWrapper);

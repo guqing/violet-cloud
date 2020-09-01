@@ -2,7 +2,7 @@ package xyz.guqing.violet.gateway.enhance.service;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.gateway.enhance.model.entity.RouteUser;
 
 import java.util.List;
@@ -51,7 +51,7 @@ public interface RouteUserService {
      * @param routeUser routeUser
      * @return 路由用户分页数据
      */
-    Flux<RouteUser> findPages(QueryRequest request, RouteUser routeUser);
+    Flux<RouteUser> findPages(PageQuery request, RouteUser routeUser);
 
     /**
      * 查找路由用户分页数据count

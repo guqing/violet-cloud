@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.violet.app.admin.model.params.LoginLogParam;
 import xyz.guqing.common.support.model.entity.system.UserLoginLog;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 
 /**
  * <p>
@@ -21,5 +21,5 @@ public interface UserLoginLogService extends IService<UserLoginLog> {
      * @param queryRequest 分页参数
      * @return 返回分页查询结果
      */
-    IPage<UserLoginLog> listBy(LoginLogParam loginLogParam, QueryRequest queryRequest);
+    IPage<UserLoginLog> listBy(LoginLogParam loginLogParam, PageQuery queryRequest);
 }

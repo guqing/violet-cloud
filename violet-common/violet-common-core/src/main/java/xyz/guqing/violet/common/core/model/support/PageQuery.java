@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 @Data
 @ToString
-public class QueryRequest implements Serializable {
+public class PageQuery implements Serializable {
 
     private static final long serialVersionUID = -4869594085374385813L;
     /**

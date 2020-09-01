@@ -10,7 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import xyz.guqing.violet.common.core.model.support.QueryRequest;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.common.core.utils.DateUtil;
 import xyz.guqing.violet.gateway.enhance.model.entity.RouteUser;
 import xyz.guqing.violet.gateway.enhance.mapper.RouteUserMapper;
@@ -18,7 +18,6 @@ import xyz.guqing.violet.gateway.enhance.service.RouteUserService;
 import xyz.guqing.violet.gateway.enhance.utils.PageableExecutionUtil;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -71,7 +70,7 @@ public class RouteUserServiceImpl implements RouteUserService {
     }
 
     @Override
-    public Flux<RouteUser> findPages(QueryRequest request, RouteUser routeUser) {
+    public Flux<RouteUser> findPages(PageQuery request, RouteUser routeUser) {
         Query query = getQuery(routeUser);
         return PageableExecutionUtil.getPages(query, request, RouteUser.class, template);
     }

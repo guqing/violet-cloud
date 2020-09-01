@@ -53,8 +53,8 @@ public class RoleController {
 
     @GetMapping("list")
     @PreAuthorize("hasAuthority('role:view')")
-    public ResultEntity<PageInfo<RoleDTO>> listBy(RoleQuery roleQuery, PageQuery queryRequest) {
-        roleQuery.setQueryRequest(queryRequest);
+    public ResultEntity<PageInfo<RoleDTO>> listBy(RoleQuery roleQuery, PageQuery pageQuery) {
+        roleQuery.setPageQuery(pageQuery);
         log.debug("角色查询对象：{}", JSONObject.toJSONString(roleQuery));
         Page<Role> pageInfo = roleService.listBy(roleQuery);
         return ResultEntity.ok(convertTo(pageInfo));

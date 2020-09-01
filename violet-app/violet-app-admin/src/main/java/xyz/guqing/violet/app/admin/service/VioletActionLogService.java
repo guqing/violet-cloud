@@ -36,5 +36,5 @@ public interface VioletActionLogService extends IService<VioletActionLog> {
      * @param logQuery 查询条件
      * @return 返回分页查询结果
      */
-    IPage<VioletActionLog> listBy(ActionLogQuery logQuery, PageQuery queryRequest);
+    IPage<VioletActionLog> listBy(ActionLogQuery logQuery, PageQuery pageQuery);
 }

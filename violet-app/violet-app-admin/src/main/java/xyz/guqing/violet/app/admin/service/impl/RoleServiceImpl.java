@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import xyz.guqing.common.support.utils.PageUtils;
 import xyz.guqing.violet.app.admin.mapper.RoleMapper;
 import xyz.guqing.violet.app.admin.model.dto.RoleDTO;
 import xyz.guqing.violet.app.admin.model.entity.RoleDO;
@@ -57,10 +58,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             queryWrapper.like(Role::getRemark, roleQuery.getRemark());
         }
         queryWrapper.orderByAsc(Role::getCreateTime);
-        PageQuery queryRequest = roleQuery.getQueryRequest();
-        Page<Role> rolePage = new Page<>(queryRequest.getCurrent(),queryRequest.getPageSize());
-
-        return page(rolePage, queryWrapper);
+        PageQuery pageQuery = roleQuery.getPageQuery();
+        return page(PageUtils.convert(pageQuery), queryWrapper);
     }
 
     @Override

@@ -27,9 +27,9 @@ public class LoginLogController {
     private final UserLoginLogService userLoginLogService;
 
     @GetMapping
-    public ResultEntity<PageInfo<UserLoginLogDTO>> list(LoginLogParam loginLogParam, PageQuery queryRequest) {
-        log.debug("登录日志列表参数:[{}]", queryRequest);
-        IPage<UserLoginLog> userLoginLogs = userLoginLogService.listBy(loginLogParam,queryRequest);
+    public ResultEntity<PageInfo<UserLoginLogDTO>> list(LoginLogParam loginLogParam, PageQuery pageQuery) {
+        log.debug("登录日志列表参数:[{}]", pageQuery);
+        IPage<UserLoginLog> userLoginLogs = userLoginLogService.listBy(loginLogParam,pageQuery);
         return ResultEntity.ok(convertTo(userLoginLogs));
     }
 

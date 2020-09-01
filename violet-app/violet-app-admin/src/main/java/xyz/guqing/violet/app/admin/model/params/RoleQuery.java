@@ -13,5 +13,5 @@ public class RoleQuery {
     private String roleName;
     private String remark;
     private String createTime;
-    private PageQuery queryRequest = new PageQuery();
+    private PageQuery pageQuery = new PageQuery();
 }

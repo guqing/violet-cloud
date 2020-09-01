@@ -49,9 +49,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     @Override
     public PageInfo<UserDTO> listByPage(UserQuery userQuery) {
-        PageQuery queryRequest = userQuery.getQueryRequest();
-        Long current = queryRequest.getCurrent();
-        Long pageSize = queryRequest.getPageSize();
+        PageQuery pageQuery = userQuery.getPageQuery();
+        Long current = pageQuery.getCurrent();
+        Long pageSize = pageQuery.getPageSize();
 
         PageInfo<UserDTO> pageInfo = new PageInfo<>();
         pageInfo.setCurrent(current);
@@ -67,7 +67,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         }
 
         // 查询
-        userQuery.setQueryRequest(queryRequest);
+        userQuery.setPageQuery(pageQuery);
         List<UserDO> userByPage = this.baseMapper.findUserBy(userQuery);
         List<UserDTO> userDtoList = userByPage.stream()
                 .map(user -> {

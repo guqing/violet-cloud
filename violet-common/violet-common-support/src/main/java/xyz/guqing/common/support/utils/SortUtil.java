@@ -17,25 +17,25 @@ public class SortUtil {
     /**
      * 处理排序（分页情况下） for mybatis-plus
      *
-     * @param request           QueryRequest
+     * @param pageQuery         分页查询参数
      * @param page              Page
      * @param defaultSort       默认排序的字段
      * @param defaultOrder      默认排序规则
      * @param camelToUnderscore 是否开启驼峰转下划线
      */
-    public static void handlePageSort(PageQuery request, Page<?> page, String defaultSort, String defaultOrder, boolean camelToUnderscore) {
-        page.setCurrent(request.getCurrent());
-        page.setSize(request.getPageSize());
-        String sortField = request.getField();
+    public static void handlePageSort(PageQuery pageQuery, Page<?> page, String defaultSort, String defaultOrder, boolean camelToUnderscore) {
+        page.setCurrent(pageQuery.getCurrent());
+        page.setSize(pageQuery.getPageSize());
+        String sortField = pageQuery.getField();
         if (camelToUnderscore) {
             sortField = VioletUtil.camelToUnderscore(sortField);
             defaultSort = VioletUtil.camelToUnderscore(defaultSort);
         }
-        if (StringUtils.isNotBlank(request.getField())
-                && StringUtils.isNotBlank(request.getOrder())
-                && !StringUtils.equalsIgnoreCase(request.getField(), "null")
-                && !StringUtils.equalsIgnoreCase(request.getOrder(), "null")) {
-            if (StringUtils.equals(request.getOrder(), VioletConstant.ORDER_DESC)) {
+        if (StringUtils.isNotBlank(pageQuery.getField())
+                && StringUtils.isNotBlank(pageQuery.getOrder())
+                && !StringUtils.equalsIgnoreCase(pageQuery.getField(), "null")
+                && !StringUtils.equalsIgnoreCase(pageQuery.getOrder(), "null")) {
+            if (StringUtils.equals(pageQuery.getOrder(), VioletConstant.ORDER_DESC)) {
                 page.addOrder(OrderItem.desc(sortField));
             } else {
                 page.addOrder(OrderItem.asc(sortField));
@@ -54,44 +54,44 @@ public class SortUtil {
     /**
      * 处理排序 for mybatis-plus
      *
-     * @param request QueryRequest
+     * @param pageQuery 分页查询参数
      * @param page    Page
      */
-    public static void handlePageSort(PageQuery request, Page<?> page) {
-        handlePageSort(request, page, null, null, false);
+    public static void handlePageSort(PageQuery pageQuery, Page<?> page) {
+        handlePageSort(pageQuery, page, null, null, false);
     }
 
     /**
      * 处理排序 for mybatis-plus
      *
-     * @param request           QueryRequest
+     * @param pageQuery         分页查询参数
      * @param page              Page
      * @param camelToUnderscore 是否开启驼峰转下划线
      */
-    public static void handlePageSort(PageQuery request, Page<?> page, boolean camelToUnderscore) {
-        handlePageSort(request, page, null, null, camelToUnderscore);
+    public static void handlePageSort(PageQuery pageQuery, Page<?> page, boolean camelToUnderscore) {
+        handlePageSort(pageQuery, page, null, null, camelToUnderscore);
     }
 
     /**
      * 处理排序 for mybatis-plus
      *
-     * @param request           QueryRequest
+     * @param pageQuery         分页查询参数
      * @param wrapper           wrapper
      * @param defaultSort       默认排序的字段
      * @param defaultOrder      默认排序规则
      * @param camelToUnderscore 是否开启驼峰转下划线
      */
-    public static void handleWrapperSort(PageQuery request, QueryWrapper<?> wrapper, String defaultSort, String defaultOrder, boolean camelToUnderscore) {
-        String sortField = request.getField();
+    public static void handleWrapperSort(PageQuery pageQuery, QueryWrapper<?> wrapper, String defaultSort, String defaultOrder, boolean camelToUnderscore) {
+        String sortField = pageQuery.getField();
         if (camelToUnderscore) {
             sortField = VioletUtil.camelToUnderscore(sortField);
             defaultSort = VioletUtil.camelToUnderscore(defaultSort);
         }
-        if (StringUtils.isNotBlank(request.getField())
-                && StringUtils.isNotBlank(request.getOrder())
-                && !StringUtils.equalsIgnoreCase(request.getField(), "null")
-                && !StringUtils.equalsIgnoreCase(request.getOrder(), "null")) {
-            if (StringUtils.equals(request.getOrder(), VioletConstant.ORDER_DESC)) {
+        if (StringUtils.isNotBlank(pageQuery.getField())
+                && StringUtils.isNotBlank(pageQuery.getOrder())
+                && !StringUtils.equalsIgnoreCase(pageQuery.getField(), "null")
+                && !StringUtils.equalsIgnoreCase(pageQuery.getOrder(), "null")) {
+            if (StringUtils.equals(pageQuery.getOrder(), VioletConstant.ORDER_DESC)) {
                 wrapper.orderByDesc(sortField);
             } else {
                 wrapper.orderByAsc(sortField);
@@ -110,21 +110,21 @@ public class SortUtil {
     /**
      * 处理排序 for mybatis-plus
      *
-     * @param request QueryRequest
+     * @param pageQuery 分页查询参数
      * @param wrapper wrapper
      */
-    public static void handleWrapperSort(PageQuery request, QueryWrapper<?> wrapper) {
-        handleWrapperSort(request, wrapper, null, null, false);
+    public static void handleWrapperSort(PageQuery pageQuery, QueryWrapper<?> wrapper) {
+        handleWrapperSort(pageQuery, wrapper, null, null, false);
     }
 
     /**
      * 处理排序 for mybatis-plus
      *
-     * @param request           QueryRequest
+     * @param pageQuery         分页查询参数
      * @param wrapper           wrapper
      * @param camelToUnderscore 是否开启驼峰转下划线
      */
-    public static void handleWrapperSort(PageQuery request, QueryWrapper<?> wrapper, boolean camelToUnderscore) {
-        handleWrapperSort(request, wrapper, null, null, camelToUnderscore);
+    public static void handleWrapperSort(PageQuery pageQuery, QueryWrapper<?> wrapper, boolean camelToUnderscore) {
+        handleWrapperSort(pageQuery, wrapper, null, null, camelToUnderscore);
     }
 }

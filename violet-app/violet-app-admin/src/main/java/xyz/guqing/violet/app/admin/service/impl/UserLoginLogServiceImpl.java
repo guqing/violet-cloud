@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import xyz.guqing.common.support.utils.PageUtils;
 import xyz.guqing.violet.app.admin.mapper.UserLoginLogMapper;
 import xyz.guqing.violet.app.admin.model.params.LoginLogParam;
 import xyz.guqing.violet.app.admin.service.UserLoginLogService;
@@ -25,13 +26,10 @@ import java.time.LocalDateTime;
 @Service
 public class UserLoginLogServiceImpl extends ServiceImpl<UserLoginLogMapper, UserLoginLog> implements UserLoginLogService {
     @Override
-    public IPage<UserLoginLog> listBy(LoginLogParam loginLogParam, PageQuery queryRequest) {
+    public IPage<UserLoginLog> listBy(LoginLogParam loginLogParam, PageQuery pageQuery) {
         log.debug("列表查询参数:{}", JSONObject.toJSONString(loginLogParam));
 
         LambdaQueryWrapper<UserLoginLog> queryWrapper = Wrappers.lambdaQuery();
-
-        Long current = queryRequest.getCurrent();
-        Long pageSize = queryRequest.getPageSize();
 
         String username = loginLogParam.getUsername();
         if (StringUtils.isNotBlank(username)) {
@@ -46,6 +44,6 @@ public class UserLoginLogServiceImpl extends ServiceImpl<UserLoginLogMapper, Use
         }
 
         queryWrapper.orderByDesc(UserLoginLog::getLoginTime);
-        return page(new Page<>(current, pageSize), queryWrapper);
+        return page(PageUtils.convert(pageQuery), queryWrapper);
     }
 }

@@ -20,5 +20,5 @@ public class UserQuery {
     private String groupName;
     private LocalDateTime createTimeFrom;
     private LocalDateTime createTimeTo;
-    private PageQuery queryRequest = new PageQuery();
+    private PageQuery pageQuery = new PageQuery();
 }

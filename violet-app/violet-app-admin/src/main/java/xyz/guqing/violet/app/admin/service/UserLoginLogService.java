@@ -18,8 +18,8 @@ public interface UserLoginLogService extends IService<UserLoginLog> {
     /**
      * 根据条件分页查询用户登录日志
      * @param loginLogParam 查询参数
-     * @param queryRequest 分页参数
+     * @param pageQuery 分页参数
      * @return 返回分页查询结果
      */
-    IPage<UserLoginLog> listBy(LoginLogParam loginLogParam, PageQuery queryRequest);
+    IPage<UserLoginLog> listBy(LoginLogParam loginLogParam, PageQuery pageQuery);
 }

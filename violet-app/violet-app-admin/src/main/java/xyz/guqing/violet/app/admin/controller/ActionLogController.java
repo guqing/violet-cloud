@@ -25,8 +25,8 @@ public class ActionLogController {
     private final VioletActionLogService actionLogService;
 
     @GetMapping
-    public ResultEntity<PageInfo<ActionLogDTO>> list(ActionLogQuery actionLogQuery, PageQuery queryRequest) {
-        IPage<VioletActionLog> actionLogPage = actionLogService.listBy(actionLogQuery,queryRequest);
+    public ResultEntity<PageInfo<ActionLogDTO>> list(ActionLogQuery actionLogQuery, PageQuery pageQuery) {
+        IPage<VioletActionLog> actionLogPage = actionLogService.listBy(actionLogQuery,pageQuery);
         return ResultEntity.ok(convertTo(actionLogPage));
     }
 

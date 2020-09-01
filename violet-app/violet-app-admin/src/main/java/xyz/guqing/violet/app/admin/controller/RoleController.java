@@ -8,12 +8,12 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+import xyz.guqing.common.support.utils.PageUtils;
 import xyz.guqing.violet.app.admin.model.annotation.ControllerEndpoint;
 import xyz.guqing.violet.app.admin.model.dto.RoleDTO;
 import xyz.guqing.violet.app.admin.model.params.RoleParam;
 import xyz.guqing.violet.app.admin.model.params.RoleQuery;
 import xyz.guqing.violet.app.admin.service.RoleService;
-import xyz.guqing.common.support.utils.PageConvert;
 import xyz.guqing.common.support.model.entity.system.Role;
 import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
@@ -83,6 +83,6 @@ public class RoleController {
     }
 
     private PageInfo<RoleDTO> convertTo(IPage<Role> rolePage) {
-        return PageConvert.convertFrom(rolePage, role -> new RoleDTO().convertFrom(role));
+        return PageUtils.convertToPageInfo(rolePage, role -> new RoleDTO().convertFrom(role));
     }
 }

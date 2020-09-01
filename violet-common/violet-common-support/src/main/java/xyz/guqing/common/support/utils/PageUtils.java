@@ -1,9 +1,16 @@
 package xyz.guqing.common.support.utils;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.lang.NonNull;
+import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.model.support.PageQuery;
+
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
  * mybatis plus 分页和排序工具类
@@ -27,5 +34,20 @@ public class PageUtils {
         page.setCurrent(pageQuery.getCurrent());
         page.setSize(pageQuery.getPageSize());
         return page;
+    }
+
+    public static<T, DTO> PageInfo<DTO> convertToPageInfo(@NonNull IPage<T> page, Function<T, DTO> function){
+        List<DTO> collect = page.getRecords()
+                .stream()
+                .map(function)
+                .collect(Collectors.toList());
+
+        PageInfo<DTO> pageInfo = new PageInfo<>();
+        pageInfo.setList(collect);
+        pageInfo.setTotal(page.getTotal());
+        pageInfo.setPages(page.getPages());
+        pageInfo.setCurrent(page.getCurrent());
+        pageInfo.setPageSize(page.getSize());
+        return pageInfo;
     }
 }

@@ -5,10 +5,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import xyz.guqing.common.support.utils.PageUtils;
 import xyz.guqing.violet.app.admin.model.dto.ActionLogDTO;
 import xyz.guqing.violet.app.admin.model.params.ActionLogQuery;
 import xyz.guqing.violet.app.admin.service.VioletActionLogService;
-import xyz.guqing.common.support.utils.PageConvert;
 import xyz.guqing.common.support.model.entity.system.VioletActionLog;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.model.support.PageQuery;
@@ -31,6 +31,6 @@ public class ActionLogController {
     }
 
     private PageInfo<ActionLogDTO> convertTo(IPage<VioletActionLog> actionLogPage) {
-        return PageConvert.convertFrom(actionLogPage, actionLog -> new ActionLogDTO().convertFrom(actionLog));
+        return PageUtils.convertToPageInfo(actionLogPage, actionLog -> new ActionLogDTO().convertFrom(actionLog));
     }
 }

@@ -4,6 +4,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
@@ -17,6 +18,7 @@ import xyz.guqing.violet.common.security.starter.properties.VioletCloudSecurityP
  * @author guqing
  */
 @EnableResourceServer
+@ConditionalOnProperty(value = "violet.cloud.security.enable", havingValue = "true", matchIfMissing = true)
 @EnableAutoConfiguration(exclude = UserDetailsServiceAutoConfiguration.class)
 public class VioletCloudResourceServerConfigure extends ResourceServerConfigurerAdapter {
 

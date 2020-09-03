@@ -37,12 +37,6 @@ public class VioletCloudSecurityAutoconfigure {
     }
 
     @Bean
-    @ConditionalOnMissingBean(value = PasswordEncoder.class)
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    @Bean
     public VioletCloudSecurityInteceptorConfigure violetCloudSecurityInteceptorConfigure() {
         return new VioletCloudSecurityInteceptorConfigure();
     }

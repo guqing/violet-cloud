@@ -2,12 +2,14 @@ package xyz.guqing.violet.common.security.starter.properties;
 
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 import xyz.guqing.violet.common.core.model.constant.EndpointConstant;
 
 /**
  * @author guqing
  */
 @Data
+@Component
 @ConfigurationProperties(prefix = "violet.cloud.security")
 public class VioletCloudSecurityProperties {
     /**

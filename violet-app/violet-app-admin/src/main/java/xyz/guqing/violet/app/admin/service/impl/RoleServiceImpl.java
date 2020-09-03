@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import xyz.guqing.common.support.utils.PageUtils;
@@ -50,12 +51,14 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
             queryWrapper.like(Role::getId, roleQuery.getId());
         }
 
-        if(roleQuery.getRoleName() != null) {
-            queryWrapper.like(Role::getRoleName, roleQuery.getRoleName());
+        String roleName = roleQuery.getRoleName();
+        if(StringUtils.isNotBlank(roleName)) {
+            queryWrapper.like(Role::getRoleName, roleName);
         }
 
-        if(roleQuery.getRemark() != null) {
-            queryWrapper.like(Role::getRemark, roleQuery.getRemark());
+        String remark = roleQuery.getRemark();
+        if(StringUtils.isNotBlank(remark)) {
+            queryWrapper.like(Role::getRemark, remark);
         }
         queryWrapper.orderByAsc(Role::getCreateTime);
         PageQuery pageQuery = roleQuery.getPageQuery();

@@ -34,11 +34,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     @Override
     public List<Menu> listUserMenus(String username) {
-        List<Menu> userMenus = this.baseMapper.findUserMenus(username);
-        if(CollectionUtils.isEmpty(userMenus)) {
-            return Collections.emptyList();
-        }
-        return userMenus;
+        return this.baseMapper.findUserMenus(username);
     }
 
     @Override
@@ -74,6 +70,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         List<Menu> menus = list(queryWrapper);
 
         if (CollectionUtils.isEmpty(menus)) {
+            // 如果非空则返回终止递归
             return;
         }
 

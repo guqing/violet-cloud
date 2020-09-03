@@ -23,11 +23,7 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
     public List<RoleMenu> listByRoleId(Long roleId) {
         LambdaQueryWrapper<RoleMenu> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.eq(RoleMenu::getRoleId, roleId);
-        List<RoleMenu> list = list(queryWrapper);
-        if(CollectionUtils.isEmpty(list)) {
-            return Collections.emptyList();
-        }
-        return list;
+        return list(queryWrapper);
     }
 
     @Override

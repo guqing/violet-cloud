@@ -19,6 +19,7 @@ import xyz.guqing.violet.app.admin.service.UserRoleService;
 import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.common.support.model.entity.system.Role;
 import xyz.guqing.common.support.model.entity.system.UserRole;
+import xyz.guqing.violet.common.core.utils.ServiceUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -36,12 +37,14 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     @Override
     public void saveUserRoles(Long userId, List<Long> roleIds) {
-        roleIds.forEach(roleId -> {
+        List<UserRole> userRoles = ServiceUtils.convertToList(roleIds, roleId -> {
             UserRole userRole = new UserRole();
             userRole.setUserId(userId);
             userRole.setRoleId(roleId);
-            userRoleService.save(userRole);
+            return userRole;
         });
+
+        userRoleService.saveBatch(userRoles);
     }
 
     @Override

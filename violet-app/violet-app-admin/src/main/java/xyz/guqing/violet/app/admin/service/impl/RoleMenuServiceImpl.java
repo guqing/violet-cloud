@@ -8,10 +8,12 @@ import org.springframework.util.CollectionUtils;
 import xyz.guqing.violet.app.admin.mapper.RoleMenuMapper;
 import xyz.guqing.violet.app.admin.service.RoleMenuService;
 import xyz.guqing.common.support.model.entity.system.RoleMenu;
+import xyz.guqing.violet.common.core.utils.ServiceUtils;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * @author guqing
@@ -28,15 +30,17 @@ public class RoleMenuServiceImpl extends ServiceImpl<RoleMenuMapper, RoleMenu> i
 
     @Override
     public void createOrUpdate(Long roleId, Set<Long> menuIds) {
+        // 先删除关系
         removeByRoleId(roleId);
 
-        for(Long menuId : menuIds) {
+        List<RoleMenu> roleMenus = ServiceUtils.convertToList(menuIds, menuId -> {
             RoleMenu roleMenu = new RoleMenu();
             roleMenu.setRoleId(roleId);
             roleMenu.setMenuId(menuId);
-            // 保存
-            save(roleMenu);
-        }
+            return roleMenu;
+        });
+        // 批量保存
+        saveBatch(roleMenus);
     }
 
     @Override

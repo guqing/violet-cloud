@@ -10,6 +10,7 @@ import xyz.guqing.violet.app.admin.mapper.UserGroupMapper;
 import xyz.guqing.violet.app.admin.service.UserGroupService;
 import xyz.guqing.common.support.model.dto.UserGroupTree;
 import xyz.guqing.common.support.model.entity.system.UserGroup;
+import xyz.guqing.violet.common.core.utils.ServiceUtils;
 import xyz.guqing.violet.common.core.utils.TreeUtil;
 
 import java.util.ArrayList;
@@ -40,18 +41,15 @@ public class UserGroupServiceImpl extends ServiceImpl<UserGroupMapper, UserGroup
     }
 
     private List<UserGroupTree> convertTo(List<UserGroup> userGroups) {
-        List<UserGroupTree> trees = new ArrayList<>();
-        userGroups.forEach(userGroup -> {
+        return ServiceUtils.convertToList(userGroups, userGroup -> {
             UserGroupTree tree = new UserGroupTree();
             tree.setId(userGroup.getId().toString());
             tree.setKey(tree.getId());
             tree.setValue(tree.getId());
             tree.setTitle(userGroup.getGroupName());
             tree.setParentId(userGroup.getParentId().toString());
-            trees.add(tree);
+            return tree;
         });
-
-        return trees;
     }
 
     @Override

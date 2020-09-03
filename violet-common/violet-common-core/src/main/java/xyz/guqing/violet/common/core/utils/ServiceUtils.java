@@ -21,6 +21,22 @@ public class ServiceUtils {
     }
 
     /**
+     * convert id to set.
+     *
+     * @param datas           data collection
+     * @param mappingFunction T to R conversion function
+     * @param <T>             source type
+     * @param <R>             target type
+     * @return an R list by T transformation
+     */
+    @NonNull
+    public static <T, R> List<R> convertToList(final Collection<T> datas, Function<T, R> mappingFunction) {
+        return CollectionUtils.isEmpty(datas) ?
+                Collections.emptyList() :
+                datas.stream().map(mappingFunction).collect(Collectors.toList());
+    }
+
+    /**
      * Fetches id to set.
      *
      * @param datas           data collection

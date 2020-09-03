@@ -14,6 +14,7 @@ import xyz.guqing.violet.common.core.model.dto.RouterMeta;
 import xyz.guqing.violet.common.core.model.dto.VueRouter;
 import xyz.guqing.common.support.model.dto.MenuTree;
 import xyz.guqing.common.support.model.entity.system.Menu;
+import xyz.guqing.violet.common.core.utils.ServiceUtils;
 import xyz.guqing.violet.common.core.utils.TreeUtil;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
         List<MenuTree> menuTrees = convertTo(menus);
         if (StringUtils.equals(menu.getType(), MenuType.BUTTON.getValue())) {
-           return menuTrees;
+            return menuTrees;
         } else {
             return TreeUtil.build(menuTrees);
         }
@@ -59,6 +60,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
 
     /**
      * 根据菜单id集合递归删除菜单
+     *
      * @param menuIds 菜单id集合
      */
     private void delete(List<Long> menuIds) {
@@ -82,8 +84,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     }
 
     private List<MenuTree> convertTo(List<Menu> menus) {
-        List<MenuTree> menuTrees = new ArrayList<>();
-        menus.forEach(menu -> {
+        return ServiceUtils.convertToList(menus, menu -> {
             MenuTree tree = new MenuTree();
             tree.setId(menu.getId().toString());
             tree.setValue(tree.getId());
@@ -92,25 +93,24 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
             tree.setTitle(menu.getTitle());
             tree.setIcon(menu.getIcon());
             tree.setType(menu.getType());
-            menuTrees.add(tree);
+            return tree;
         });
-        return menuTrees;
     }
 
     @Override
     public List<VueRouter<Menu>> listUserRouters(String username) {
-        List<VueRouter<Menu>> routes = new ArrayList<>();
         List<Menu> menus = this.listUserMenus(username);
-        menus.forEach(menu -> {
+
+        List<VueRouter<Menu>> routes = ServiceUtils.convertToList(menus, menu -> {
             VueRouter<Menu> route = new VueRouter<>();
             BeanUtils.copyProperties(menu, route);
 
             RouterMeta routerMeta = new RouterMeta();
             BeanUtils.copyProperties(menu, routerMeta);
             route.setMeta(routerMeta);
-
-            routes.add(route);
+            return route;
         });
+
         return TreeUtil.buildVueRouter(routes);
     }
 

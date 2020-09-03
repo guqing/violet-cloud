@@ -25,6 +25,7 @@ import xyz.guqing.common.support.model.entity.system.UserRole;
 import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.common.support.model.entity.system.User;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
+import xyz.guqing.violet.common.core.utils.ServiceUtils;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import java.util.Collections;
@@ -69,14 +70,13 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         // 查询
         userQuery.setPageQuery(pageQuery);
         List<UserDO> userByPage = this.baseMapper.findUserBy(userQuery);
-        List<UserDTO> userDtoList = userByPage.stream()
-                .map(user -> {
-                    UserDTO userDTO = new UserDTO().convertFrom(user);
-                    userDTO.setRoleIds(VioletUtil.commaSeparatedToList(user.getRoleId()));
-                    userDTO.setRoleNames(VioletUtil.commaSeparatedToList(user.getRoleName()));
-                    return userDTO;
-                })
-                .collect(Collectors.toList());
+        List<UserDTO> userDtoList = ServiceUtils.convertToList(userByPage, user -> {
+            UserDTO userDTO = new UserDTO().convertFrom(user);
+            userDTO.setRoleIds(VioletUtil.commaSeparatedToList(user.getRoleId()));
+            userDTO.setRoleNames(VioletUtil.commaSeparatedToList(user.getRoleName()));
+            return userDTO;
+        });
+
         pageInfo.setList(userDtoList);
 
         // 设置分页数

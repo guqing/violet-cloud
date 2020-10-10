@@ -1,15 +1,15 @@
 spring:
   application:
-    name: MicroService-Test
+    name: Violet-App-Test
   cloud:
     nacos:
       config:
-        server-addr: 39.100.41.190:8001
+        server-addr: ${nacos.url}:8001
         group: DEFAULT_GROUP
         prefix: violet-server-test
         file-extension: yaml
       discovery:
-        server-addr: 39.100.41.190:8001
+        server-addr: ${nacos.url}:8001
 
 logging:
   level:

@@ -1,6 +1,8 @@
 language: java
 jdk:
   - openjdk11
+env:
+  - nacos.url=47.104.231.120
 before_install:
   - chmod -R 777 mvnw
   - sudo apt-get install sshpass

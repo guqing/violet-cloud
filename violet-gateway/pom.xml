@@ -13,6 +13,7 @@
 
     <properties>
         <violet-cloud.version>0.0.1-SNAPSHOT</violet-cloud.version>
+        <nacos.url>47.104.231.120</nacos.url>
     </properties>
 
     <dependencies>

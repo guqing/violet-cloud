@@ -4,12 +4,12 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: ${nacos.url}:8001
+        server-addr: 47.104.231.120:8001
         group: DEFAULT_GROUP
         prefix: violet-app-admin
         file-extension: yaml
       discovery:
-        server-addr: ${nacos.url}:8001
+        server-addr: 47.104.231.120:8001
 
 logging:
   level:

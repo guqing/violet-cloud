@@ -39,10 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         this.userService = userService;
         this.menuService = menuService;
     }
-//    private RedisTokenStoreSerializationStrategy serializationStrategy = new JdkSerializationStrategy();
 
-//    @Autowired
-//    private TokenStore redisTokenStore;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         CurrentUser user = userService.loadUserByUsername(username);
@@ -52,7 +49,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         String password = user.getPassword();
         if(StringUtils.equals(loginType, SocialConstant.SOCIAL_LOGIN)) {
-            password = passwordEncoder.encode(SocialConstant.SOCIAL_LOGIN_PASSWORD);
+            password = passwordEncoder.encode(SocialConstant.getSocialLoginPassword());
         }
         String permissions = menuService.findUserPermissions(username);
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils.NO_AUTHORITIES;

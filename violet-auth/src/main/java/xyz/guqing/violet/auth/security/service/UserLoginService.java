@@ -20,11 +20,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import xyz.guqing.violet.auth.config.VioletAuthorizationServerConfig;
+import xyz.guqing.violet.auth.model.constant.SocialConstant;
 import xyz.guqing.violet.auth.model.dto.SocialLoginDTO;
-import xyz.guqing.violet.auth.model.dto.SocialRelationDTO;
 import xyz.guqing.violet.auth.model.params.BindUserParam;
 import xyz.guqing.violet.auth.service.UserRoleService;
 import xyz.guqing.violet.common.core.exception.*;
+import xyz.guqing.violet.common.core.model.constant.StringConstant;
 import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 import xyz.guqing.common.support.model.entity.system.User;
 import xyz.guqing.common.support.model.entity.system.UserConnection;
@@ -33,7 +34,6 @@ import xyz.guqing.violet.auth.service.UserConnectionService;
 import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.model.constant.GrantTypeConstant;
 import xyz.guqing.violet.common.core.model.constant.ParamsConstant;
-import xyz.guqing.violet.common.core.model.constant.SocialConstant;
 import xyz.guqing.common.support.model.entity.system.UserRole;
 import xyz.guqing.common.support.model.enums.GenderEnum;
 import xyz.guqing.common.support.model.enums.UserStatusEnum;
@@ -41,7 +41,6 @@ import xyz.guqing.violet.common.core.utils.VioletUtil;
 import xyz.guqing.violet.common.redis.service.RedisService;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -53,9 +52,6 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class UserLoginService {
-    private static final String USERNAME = "username";
-    private static final String PASSWORD = "password";
-
     private final AuthRequestFactory factory;
     private final ResourceOwnerPasswordTokenGranter granter;
     private final JdbcClientDetailsService jdbcClientDetailsService;
@@ -109,7 +105,7 @@ public class UserLoginService {
         httpServletRequest.setAttribute(ParamsConstant.LOGIN_TYPE, SocialConstant.SOCIAL_LOGIN);
 
         String socialLoginClientId = violetAuthProperties.getSocialLoginClientId();
-        ClientDetails clientDetails = null;
+        ClientDetails clientDetails;
         try {
             clientDetails = jdbcClientDetailsService.loadClientByClientId(socialLoginClientId);
         } catch (Exception e) {
@@ -121,12 +117,12 @@ public class UserLoginService {
         }
 
         Map<String, String> requestParameters = new HashMap<>(3, 1);
-        requestParameters.put(ParamsConstant.GRANT_TYPE, SocialConstant.SOCIAL_LOGIN);
-        requestParameters.put(USERNAME, user.getUsername());
-        requestParameters.put(PASSWORD, SocialConstant.SOCIAL_LOGIN_PASSWORD);
+        requestParameters.put(ParamsConstant.GRANT_TYPE, GrantTypeConstant.PASSWORD);
+        requestParameters.put(SocialConstant.USERNAME, user.getUsername());
+        requestParameters.put(SocialConstant.PASSWORD, SocialConstant.setSocialLoginPassword());
 
         // 准备生成token
-        String grantTypes = String.join(",", clientDetails.getAuthorizedGrantTypes());
+        String grantTypes = String.join(StringConstant.COMMA, clientDetails.getAuthorizedGrantTypes());
         TokenRequest tokenRequest = new TokenRequest(requestParameters, clientDetails.getClientId(), clientDetails.getScope(), grantTypes);
         AuthorizationServerEndpointsConfigurer endpoint = violetAuthorizationServerConfig.getEndpointsConfigurer();
 

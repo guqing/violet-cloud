@@ -155,7 +155,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         return Objects.nonNull(user);
     }
 
-    private User getByUsername(String username) {
+    @Override
+    public User getByUsername(String username) {
         LambdaQueryWrapper<User> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.eq(User::getUsername, username);
         return getOne(queryWrapper);

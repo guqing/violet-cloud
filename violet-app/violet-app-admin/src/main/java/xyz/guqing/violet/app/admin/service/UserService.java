@@ -101,4 +101,11 @@ public interface UserService extends IService<User> {
      * @param newPassword 新密码
      */
     void updatePassword(String username, String oldPassword, String newPassword);
+
+    /**
+     * 根据用户名查询用户
+     * @param username 用户名
+     * @return 如果查询到返回用户信息,查询不到返回null
+     */
+    User getByUsername(String username);
 }

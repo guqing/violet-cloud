@@ -2,6 +2,7 @@ package xyz.guqing.violet.common.core.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.NonNull;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -12,6 +13,7 @@ import xyz.guqing.violet.common.core.model.dto.MyUserDetails;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
+import java.util.Objects;
 
 /**
  * @author guqing
@@ -37,13 +39,12 @@ public class VioletSecurityHelper {
     }
 
     /**
-     * 判断id是否为当前登录用户id
-     * @param id 用户id
-     * @return 判断用户id是否为当前用户，如果是返回{@code true}否则返回{@code false}
+     * 判断username是否为当前登录用户名
+     * @param username 用户名
+     * @return 判断username是否为当前用户，如果是返回{@code true}否则返回{@code false}
      */
-    public static boolean isCurrentUser(Long id) {
-        CurrentUser currentUser = getCurrentUser();
-        return currentUser != null && id.equals(currentUser.getId());
+    public static boolean isCurrentUser(@NonNull String username) {
+        return Objects.equals(username, getCurrentUsername());
     }
 
     /**

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import xyz.guqing.violet.app.admin.model.annotation.ControllerEndpoint;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
 import xyz.guqing.violet.app.admin.model.params.UserProfileParam;
+import xyz.guqing.violet.common.core.exception.BadRequestException;
 import xyz.guqing.violet.common.core.model.dto.CurrentUser;
 import xyz.guqing.violet.common.core.model.support.*;
 import xyz.guqing.common.support.model.enums.UserStatusEnum;
@@ -136,7 +137,7 @@ public class UserController {
     @ControllerEndpoint(operation = "锁定用户帐号", exceptionMessage = "锁定用户帐号失败")
     public ResultEntity<String> lockUser(@PathVariable String username) {
         if(username.equals(VioletSecurityHelper.getCurrentUsername())) {
-            return ResultEntity.accessDenied("无法锁定自己的账号");
+            throw new BadRequestException("无法锁定当前登录帐号");
         }
 
         userService.updateStatus(username, UserStatusEnum.DISABLE);
@@ -147,10 +148,6 @@ public class UserController {
     @PreAuthorize("hasAuthority('user:update')")
     @ControllerEndpoint(operation = "解锁用户帐号", exceptionMessage = "解锁用户帐号失败")
     public ResultEntity<String> unlockUser(@PathVariable String username) {
-        if(username.equals(VioletSecurityHelper.getCurrentUsername())) {
-            return ResultEntity.accessDenied("无法解锁自己的账号");
-        }
-
         userService.updateStatus(username, UserStatusEnum.NORMAL);
         return ResultEntity.ok();
     }

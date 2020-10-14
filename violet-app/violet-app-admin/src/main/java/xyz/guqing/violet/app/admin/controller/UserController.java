@@ -8,6 +8,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import xyz.guqing.violet.app.admin.model.annotation.ControllerEndpoint;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
+import xyz.guqing.violet.app.admin.model.params.ChangePasswordParam;
 import xyz.guqing.violet.app.admin.model.params.UserProfileParam;
 import xyz.guqing.violet.common.core.exception.BadRequestException;
 import xyz.guqing.violet.common.core.model.dto.CurrentUser;
@@ -90,9 +91,9 @@ public class UserController {
 
     @PutMapping("password")
     @ControllerEndpoint(exceptionMessage = "修改密码")
-    public ResultEntity<String> updatePassword(@RequestParam String oldPassword, @RequestParam String newPassword) {
+    public ResultEntity<String> updatePassword(@RequestBody ChangePasswordParam passwordParam) {
         String username = VioletSecurityHelper.getCurrentUsername();
-        userService.updatePassword(username, oldPassword, newPassword);
+        userService.updatePassword(username, passwordParam.getOldPassword(), passwordParam.getNewPassword());
         return ResultEntity.ok();
     }
 

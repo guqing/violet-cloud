@@ -17,5 +17,6 @@
         <module>violet-common-redis-starter</module>
         <module>violet-common-datasource-starter</module>
         <module>violet-common-support</module>
+        <module>oss-spring-boot-starter</module>
     </modules>
 </project>

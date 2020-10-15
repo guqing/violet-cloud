@@ -1,14 +1,10 @@
 FROM openjdk:11
-MAINTAINER guqing 1484563614@qq.com
+MAINTAINER guqing <1484563614@qq.com>
 
-ARG SOURCE_JAR_FILE=./target/violet-auth-0.0.1-SNAPSHOT.jar
-ARG TARGET_JAR_FILE=/violet/violet-auth.jar
+WORKDIR /app
 
-ARG TIME_ZONE=Asia/Shanghai
+COPY target/violet-auth.jar ./
 
-ENV TZ=${TIME_ZONE}
-ENV JAVA_OPTS="-Xms256m -Xmx256m"
+ENTRYPOINT ["java", "-Xmx256m", "-jar", "violet-auth.jar"]
 
-COPY ${SOURCE_JAR_FILE} ${TARGET_JAR_FILE}
-
-ENTRYPOINT ["java", "${JAVA_OPTS}", "-jar", "${TARGET_JAR_FILE}"]
+EXPOSE 8101

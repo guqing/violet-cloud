@@ -171,9 +171,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public boolean isCorrectByPassword(String username, String password) {
         User user = getByUsername(username);
-        // 加密后匹配
-        String encodedPassword = passwordEncoder.encode(password);
-        return passwordEncoder.matches(encodedPassword, user.getPassword());
+        // 直接匹配，无需先加密
+        return passwordEncoder.matches(password, user.getPassword());
     }
 
     @Override

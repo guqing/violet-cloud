@@ -15,10 +15,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import xyz.guqing.violet.common.core.exception.AuthenticationException;
-import xyz.guqing.violet.common.core.exception.BadRequestException;
-import xyz.guqing.violet.common.core.exception.BindSocialAccountException;
-import xyz.guqing.violet.common.core.exception.ForbiddenException;
+import xyz.guqing.violet.common.core.exception.*;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
 
 import java.util.HashMap;
@@ -41,7 +38,7 @@ public class BaseExceptionHandler {
     @ExceptionHandler(value = ForbiddenException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResultEntity<String> handleAccessDeniedException(ForbiddenException e) {
-        log.error("无权访问,{}", e);
+        log.error("访问权限受限异常,{}", e);
         return ResultEntity.accessDenied("没有权限访问该资源");
     }
 
@@ -56,21 +53,28 @@ public class BaseExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResultEntity<String> handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e) {
         String message = "该方法不支持" + StringUtils.substringBetween(e.getMessage(), "'", "'") + "请求方法";
-        log.error(message);
+        log.error("不支持的请求方法异常: {0}", e);
         return ResultEntity.accessDenied(message);
     }
 
     @ExceptionHandler(BindSocialAccountException.class)
     @ResponseStatus(HttpStatus.CONFLICT)
     public ResultEntity<String> handleBindSocialAccountException(BindSocialAccountException e) {
-        log.error("绑定社交帐号出错:{}", e);
+        log.error("绑定社交帐号异常:{}", e);
         return ResultEntity.badArgument(e.getMessage());
     }
 
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResultEntity<String> handleBadRequestException(BadRequestException e) {
-        log.error("Captured an exception：{0}", e);
+        log.error("错误请求：{0}", e);
+        return ResultEntity.badArgument(e.getMessage());
+    }
+
+    @ExceptionHandler(BadArgumentException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResultEntity<String> handleBadArgumentException(BadArgumentException e) {
+        log.error("请求参数异常：{0}", e);
         return ResultEntity.badArgument(e.getMessage());
     }
 
@@ -84,6 +88,7 @@ public class BaseExceptionHandler {
     @ExceptionHandler(InvalidGrantException.class)
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResultEntity<String> handleInvalidGrantException(InvalidGrantException e) {
+        log.error("验证oauth2 grant异常：{0}", e);
         return ResultEntity.authorizedFailed(e.getMessage());
     }
 

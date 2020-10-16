@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  violet-auth:
+    build: ./violet-auth
+    ports:
+      - "8101:8101"
+
+  violet-app-admin:
+    build: ./violet-app/violet-app-admin
+    ports:
+      - "8201:8201"
+
+  violet-gateway:
+    build: ./violet-gateway
+    ports:
+      - "8301:8301"

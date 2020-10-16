@@ -2,20 +2,24 @@ create schema if not exists `violet-cloud` collate utf8mb4_unicode_ci;
 
 create table if not exists menu
 (
-  id          bigint auto_increment comment '菜单/按钮ID'
-    primary key,
-  parent_id   bigint       not null comment '上级菜单ID',
-  menu_name   varchar(50)  not null comment '菜单/按钮名称',
-  path        varchar(255) null comment '对应路由path',
-  component   varchar(255) null comment '对应路由组件component',
-  perms       varchar(50)  null comment '权限标识',
-  icon        varchar(50)  null comment '图标',
-  type        char(2)      not null comment '类型 0菜单 1按钮',
-  order_index double(20)   null comment '排序',
-  create_time datetime     not null comment '创建时间',
-  modify_time datetime     null comment '修改时间'
-)
-  comment '菜单表' charset = utf8;
+    id          bigint auto_increment comment '菜单/按钮ID'
+        primary key,
+    parent_id   bigint           not null comment '上级菜单ID',
+    title       varchar(100)     not null comment '菜单或按钮的标题',
+    name        varchar(50)      null comment '组件名称',
+    path        varchar(255)     null comment '对应路由path',
+    redirect    varchar(150)     null comment '重定向到路径',
+    component   varchar(255)     null comment '对应路由组件component',
+    icon        varchar(50)      null comment '图标',
+    keep_alive  int              null,
+    hidden      int    default 1 null comment '控制路由和子路由是否显示在 sidebar',
+    perms       varchar(50)      null comment '权限标识',
+    type        char(2)          not null comment '类型 0菜单 1按钮',
+    sort_index  bigint default 0 null comment '排序',
+    create_time datetime         not null comment '创建时间',
+    modify_time datetime         null comment '修改时间'
+) comment '菜单表' charset = utf8;
+
 create index menu_id
   on menu (id);
 create index menu_parent_id
@@ -39,15 +43,15 @@ create table if not exists oauth_client_details
 
 create table if not exists role
 (
-  id          bigint auto_increment comment '角色ID'
-    primary key,
-  role_name   varchar(10)   not null comment '角色名称',
-  remark      varchar(100)  null comment '角色描述',
-  deleted     int default 0 null comment '删除状态',
-  create_time datetime      not null comment '创建时间',
-  modify_time datetime      null comment '修改时间'
-)
-  comment '角色表' charset = utf8;
+    id          bigint auto_increment comment '角色ID'
+        primary key,
+    role_name   varchar(10)   not null comment '角色名称',
+    remark      varchar(100)  null comment '角色描述',
+    is_default  int default 0 not null comment '是否是默认角色',
+    deleted     int default 0 null comment '删除状态',
+    create_time datetime      not null comment '创建时间',
+    modify_time datetime      null comment '修改时间'
+) comment '角色表' charset = utf8;
 
 create table if not exists role_menu
 (
@@ -65,30 +69,34 @@ create index role_menu_role_id
 
 create table if not exists user
 (
-  id              bigint auto_increment comment '用户ID'
-    primary key,
-  username        varchar(50)   not null comment '用户名',
-  password        varchar(128)  not null comment '密码',
-  group_id        bigint        null comment '用户组',
-  email           varchar(128)  null comment '邮箱',
-  mobile          varchar(20)   null comment '联系电话',
-  gender          int           null comment '性别 0男 1女 2保密',
-  is_tab          int           null comment '是否开启tab，0关闭 1开启',
-  theme           varchar(10)   null comment '主题',
-  avatar          varchar(100)  null comment '头像',
-  description     varchar(100)  null comment '描述',
-  last_login_time datetime      null comment '最近访问时间',
-  status          int           not null comment '状态 0锁定 1有效',
-  deleted         int default 0 null comment '删除状态，0正常，1已删除',
-  create_time     datetime      not null comment '创建时间',
-  modify_time     datetime      null comment '修改时间'
-)
-  comment '用户表' charset = utf8;
+    id              bigint auto_increment comment '用户ID'
+        primary key,
+    username        varchar(50)             not null comment '用户名',
+    password        varchar(128)            not null comment '密码',
+    nickname        varchar(100) default '' null comment '昵称',
+    group_id        bigint                  null comment '用户组',
+    email           varchar(128)            null comment '邮箱',
+    mobile          varchar(20)             null comment '联系电话',
+    gender          int                     null comment '性别 0男 1女 2保密',
+    is_tab          int                     null comment '是否开启tab，0关闭 1开启',
+    theme           varchar(10)             null comment '主题',
+    avatar          varchar(100)            null comment '头像',
+    description     varchar(150)            null comment '描述',
+    last_login_time datetime                null comment '最近访问时间',
+    status          int                     not null comment '状态 0锁定 1有效',
+    deleted         int          default 0  null comment '删除状态，0正常，1已删除',
+    create_time     datetime                not null comment '创建时间',
+    modify_time     datetime                null comment '修改时间',
+    constraint rms_user_mobile
+        unique (mobile),
+    constraint user_email_uindex
+        unique (email)
+) comment '用户表' charset = utf8;
 
-create index rms_user_mobile
+create index user_mobile
   on user (mobile);
 
-create index rms_user_username
+create index user_username
   on user (username);
 
 create table if not exists user_connection
@@ -171,3 +179,14 @@ create table if not exists violet_action_log
 create index violet_action_log_create_time
   on violet_action_log (create_time);
 
+create table setting_option
+(
+    id           bigint auto_increment
+        primary key,
+    option_key   varchar(100) not null comment 'key名称',
+    option_value varchar(100) not null comment '值',
+    create_time  datetime     not null comment '创建时间',
+    modify_time  datetime     not null comment '修改时间',
+    constraint setting_option_option_key_uindex
+        unique (option_key)
+);

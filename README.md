@@ -16,12 +16,12 @@
 > https://github.com/guqing/violet-cloud-web
 
 ### 预览图
-![Workplace](./document/screenshot/workplace.png)
-![RoleList](./document/screenshot/role_list.png)
-![MenuList](./document/screenshot/menu_list.png)
-![ActiveLog](./document/screenshot/active_log.png)
-![GatewayUser](./document/screenshot/gateway_user.png)
-![Profile](./document/screenshot/profile.png)
+![Workplace](documents/screenshot/workplace.png)
+![RoleList](documents/screenshot/role_list.png)
+![MenuList](documents/screenshot/menu_list.png)
+![ActiveLog](documents/screenshot/active_log.png)
+![GatewayUser](documents/screenshot/gateway_user.png)
+![Profile](documents/screenshot/profile.png)
 
 
 ### 技术选型

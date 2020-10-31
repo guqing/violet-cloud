@@ -84,7 +84,7 @@ db.getCollection("routeUser").drop();
 db.createCollection("routeUser");
 
 // ----------------------------
-// Documents of routeUser
+// Documents of routeUser，password: 123456
 // ----------------------------
 db.getCollection("routeUser").insert([ {
     _id: ObjectId("5e1d2ee055165e6516c23057"),

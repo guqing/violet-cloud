@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 /**
  * @author guqing
@@ -158,10 +157,6 @@ public class VioletUtil {
                 "端口号：" + environment.getProperty("server.port") + "\n" +
                 "-----------------------------------------";
         System.out.println(banner);
-    }
-
-    public static Long getStartPage(Long current, Long pageSize) {
-        return (current - 1) * pageSize;
     }
 
     public static Long getPageTotal(Long pageSize, Long total) {

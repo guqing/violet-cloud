@@ -3,7 +3,7 @@ package xyz.guqing.violet.auth.model.constant;
 /**
  * 认证类型常量类
  *
- * @author MrBird
+ * @author guqing
  */
 public interface GrantTypeConstant {
 

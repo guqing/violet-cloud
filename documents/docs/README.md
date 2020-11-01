@@ -4,9 +4,29 @@
 
 ### 环境准备
 
-待补充
+1. IDE：[IntelliJ IDEA](https://www.jetbrains.com/idea/download/) 或者 [STS](https://spring.io/tools)（Spring Tools Suite）
+2. 请使用`JDK8`及以上版本
+3. 构建工具使用 Maven
+
+4. 本项目使用了`Lombok`，所以请确保IDEA安装了Lombok插件
+
+> 如果使用的 `IDE` 是 `IntelliJ IDEA`，请在设置中启用 `Build, Execution, Deployment/Annotation Processors` 的 `Enable annotation processing`
+
+5. 安装Redis，可以使用`docker`安装
+```shell
+docker run --name redis -p 6379:6379 -d redis redis-server
+```
+更多内容参考: [Docker Hub Redis](https://hub.docker.com/_/redis)
+6. 安装Mysql，本项目使用的mysql驱动版本是`8.0.19`, 所以可以默认安装mysql最新版，如果是低版本没有测试过不知道是否支持
+7. 对于前端项目还需要`Nodejs`环境，编辑器推荐`Vscode`
 
 ### 后端项目
+
+#### 克隆项目到本地
+
+```
+git clone https://github.com/guqing/violet-cloud.git
+```
 
 #### 配置`Nacos`
 
@@ -88,9 +108,63 @@ http://localhost:8001/nacos
 
 #### 运行项目
 
-待补充
+使用IDEA打开项目，分别启动这三个模块
+
+```
+项目后台接口：violet-app-admin
+认证中心： violet-auth
+服务网关: violet-gateway
+```
+
+![image-20201101151827192](assets/image-20201101151827192.png)
+
+启动时检查启动日志是否有报错，根据错误日志检查相应配置
+
+![image-20201101152209895](assets/image-20201101152209895.png)
 
 ### 前端项目
 
-补充中
+#### 克隆项目
+
+```shell
+git clone https://github.com/guqing/violet-cloud-web.git
+```
+
+#### 检查api路径
+
+由于我使用`travsi ci`自动部署预览项目到服务器所以`api`地址，如果是本地启动需要修改如下文件
+
+![image-20201101154403315](assets/image-20201101154403315.png)
+
+中的`VUE_APP_API_BASE_URL`为网关模块`violet-gateway`的地址本地启动则是`http://127.0.0.1:8301`
+
+![image-20201101154508723](assets/image-20201101154508723.png)
+
+#### 安装依赖
+
+切换到项目文件夹
+
+使用`yarn`安装或`npm`安装都可以，前提是安装了`Nodejs`
+
+使用**yarn**方式
+
+```shell
+# 安装
+yarn install
+# 启动
+yarn run serve
+```
+
+或者使用**npm**方式
+
+```shell
+# 安装
+npm install
+# 启动
+npm run serve
+```
+
+启动成功即可看到
+
+![image-20201101154818718](assets/image-20201101154818718.png)
 

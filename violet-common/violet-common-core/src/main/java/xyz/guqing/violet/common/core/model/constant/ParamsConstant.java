@@ -3,7 +3,7 @@ package xyz.guqing.violet.common.core.model.constant;
 /**
  * 请求参数常量
  *
- * @author MrBird
+ * @author guqing
  */
 public interface ParamsConstant {
 

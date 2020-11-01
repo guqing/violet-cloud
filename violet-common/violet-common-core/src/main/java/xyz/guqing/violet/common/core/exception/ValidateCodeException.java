@@ -3,7 +3,7 @@ package xyz.guqing.violet.common.core.exception;
 /**
  * 验证码类型异常
  *
- * @author MrBird
+ * @author guqing
  */
 public class ValidateCodeException extends Exception {
 

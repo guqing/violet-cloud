@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Vue路由 Meta
  *
- * @author MrBird
+ * @author guqing
  */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)

@@ -8,6 +8,7 @@
         <module>violet-auth</module>
         <module>violet-gateway</module>
         <module>violet-app</module>
+        <module>violet-apm</module>
     </modules>
 
     <parent>
@@ -38,7 +39,7 @@
 
         <mysql-version>8.0.20</mysql-version>
         <p6spy.version>3.9.0</p6spy.version>
-        <spring-boot-admin.version>2.2.3</spring-boot-admin.version>
+        <spring-boot-admin.version>2.2.0</spring-boot-admin.version>
         <logstash-logback-encoder.version>6.1</logstash-logback-encoder.version>
         <justauth.version>1.1.0</justauth.version>
         <jjwt.version>0.9.1</jjwt.version>

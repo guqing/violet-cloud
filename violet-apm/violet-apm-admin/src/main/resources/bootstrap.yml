@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: Violet-Apm-Admin
+  cloud:
+    nacos:
+      config:
+        server-addr: 47.104.231.120:8001
+        group: DEFAULT_GROUP
+        prefix: violet-apm-admin
+        file-extension: yaml
+
+logging:
+  level:
+    com:
+      alibaba:
+        cloud:
+          nacos:
+            client:
+              NacosPropertySourceBuilder: error

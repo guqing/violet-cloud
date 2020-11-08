@@ -28,15 +28,13 @@ public class RouteLoginController {
     @GetMapping("login")
     public Mono<ResultEntity<String>> login(String username, String password) {
         Mono<RouteUser> routeUserMono = routeUserService.findByUsername(username);
-        if (routeUserMono == null) {
-            throw new AuthenticationException("用户不存在");
-        }
-        return routeUserMono.map(u -> {
-            boolean matches = passwordEncoder.matches(password, u.getPassword());
-            if (!matches) {
-                throw new AuthenticationException("认证失败，用户名或密码错误");
-            }
-            return ResultEntity.ok(tokenHelper.generateToken(u));
-        });
+        return routeUserMono.switchIfEmpty(Mono.error(new AuthenticationException("用户不存在")))
+                .map(u -> {
+                    boolean matches = passwordEncoder.matches(password, u.getPassword());
+                    if (!matches) {
+                        throw new AuthenticationException("认证失败，用户名或密码错误");
+                    }
+                    return ResultEntity.ok(tokenHelper.generateToken(u));
+                });
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import xyz.guqing.violet.app.admin.mapper.MenuMapper;
 import xyz.guqing.violet.app.admin.model.enums.MenuType;
+import xyz.guqing.violet.app.admin.model.params.MenuQuery;
 import xyz.guqing.violet.app.admin.service.MenuService;
 import xyz.guqing.violet.common.core.model.dto.RouterMeta;
 import xyz.guqing.violet.common.core.model.dto.VueRouter;
@@ -39,13 +40,16 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     }
 
     @Override
-    public List<MenuTree> listTreeMenus(Menu menu) {
+    public List<MenuTree> listTreeMenus(MenuQuery menuQuery) {
         LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
+        if(StringUtils.isNotBlank(menuQuery.getTitle())) {
+            queryWrapper.like(Menu::getTitle, menuQuery.getTitle());
+        }
         queryWrapper.orderByAsc(Menu::getSortIndex);
-        List<Menu> menus = baseMapper.selectList(queryWrapper);
+        List<Menu> menus = list(queryWrapper);
 
         List<MenuTree> menuTrees = convertTo(menus);
-        if (StringUtils.equals(menu.getType(), MenuType.BUTTON.getValue())) {
+        if (StringUtils.equals(menuQuery.getType(), MenuType.BUTTON.getValue())) {
             return menuTrees;
         } else {
             return TreeUtil.build(menuTrees);

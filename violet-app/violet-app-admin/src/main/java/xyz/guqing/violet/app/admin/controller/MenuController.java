@@ -57,8 +57,7 @@ public class MenuController {
     @GetMapping
     @PreAuthorize("hasAuthority('menu:view')")
     public ResultEntity<List<MenuTree>> listMenuTree(MenuQuery menuQuery) {
-        Menu menu = menuQuery.convertTo();
-        List<MenuTree> menuTrees = this.menuService.listTreeMenus(menu);
+        List<MenuTree> menuTrees = this.menuService.listTreeMenus(menuQuery);
         return ResultEntity.ok(menuTrees);
     }
 

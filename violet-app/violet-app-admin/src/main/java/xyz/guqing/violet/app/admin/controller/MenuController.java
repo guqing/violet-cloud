@@ -8,6 +8,7 @@ import xyz.guqing.violet.app.admin.model.dto.MenuDTO;
 import xyz.guqing.violet.app.admin.model.params.MenuParam;
 import xyz.guqing.violet.app.admin.model.params.MenuQuery;
 import xyz.guqing.violet.app.admin.service.MenuService;
+import xyz.guqing.violet.common.core.exception.BadArgumentException;
 import xyz.guqing.violet.common.core.model.dto.VueRouter;
 import xyz.guqing.common.support.model.dto.MenuTree;
 import xyz.guqing.common.support.model.entity.system.Menu;
@@ -66,6 +67,9 @@ public class MenuController {
     @ControllerEndpoint(operation = "保存菜单/按钮", exceptionMessage = "保存菜单/按钮失败")
     public ResultEntity<String> createOrUpdate(@RequestBody @Valid MenuParam menuParam) {
         Menu menu = menuParam.convertTo();
+        if(menu.getParentId().equals(menu.getId())) {
+            throw new BadArgumentException("上级菜单不能为当前菜单");
+        }
         menuService.saveOrUpdate(menu);
         return ResultEntity.ok();
     }

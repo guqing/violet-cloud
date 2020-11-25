@@ -46,7 +46,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     public List<MenuTree> listTreeMenus(MenuQuery menuQuery) {
         LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
-        if(StringUtils.isNotBlank(menuQuery.getTitle())) {
+        if (StringUtils.isNotBlank(menuQuery.getTitle())) {
             queryWrapper.like(Menu::getTitle, menuQuery.getTitle());
         }
         queryWrapper.orderByAsc(Menu::getSortIndex);
@@ -63,6 +63,9 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteMenus(List<Long> menuIds) {
+        if (CollectionUtils.isEmpty(menuIds)) {
+            return;
+        }
         delete(menuIds);
         roleMenuService.deleteByMenuIds(menuIds);
     }

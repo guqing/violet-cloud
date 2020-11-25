@@ -2,6 +2,7 @@ package xyz.guqing.violet.app.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import xyz.guqing.violet.app.admin.mapper.MenuMapper;
 import xyz.guqing.violet.app.admin.model.enums.MenuType;
 import xyz.guqing.violet.app.admin.model.params.MenuQuery;
 import xyz.guqing.violet.app.admin.service.MenuService;
+import xyz.guqing.violet.app.admin.service.RoleMenuService;
 import xyz.guqing.violet.common.core.model.dto.RouterMeta;
 import xyz.guqing.violet.common.core.model.dto.VueRouter;
 import xyz.guqing.common.support.model.dto.MenuTree;
@@ -32,7 +34,9 @@ import java.util.stream.Collectors;
  * @since 2020-05-21
  */
 @Service
+@RequiredArgsConstructor
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {
+    private final RoleMenuService roleMenuService;
 
     @Override
     public List<Menu> listUserMenus(String username) {
@@ -60,6 +64,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Transactional(rollbackFor = Exception.class)
     public void deleteMenus(List<Long> menuIds) {
         delete(menuIds);
+        roleMenuService.deleteByMenuIds(menuIds);
     }
 
     /**

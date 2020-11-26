@@ -88,7 +88,7 @@ create table violet_cloud.menu
     component   varchar(255)     null comment '对应路由组件component',
     icon        varchar(50)      null comment '图标',
     keep_alive  int              null,
-    hidden      int    default 1 null comment '控制路由和子路由是否显示在 sidebar',
+    hidden      int    default 0 null comment '控制路由和子路由是否显示在 sidebar',
     perms       varchar(50)      null comment '权限标识',
     type        char(2)          not null comment '类型 0菜单 1按钮',
     sort_index  bigint default 0 null comment '排序',
@@ -150,16 +150,14 @@ create table violet_cloud.role
         primary key,
     role_name   varchar(10)   not null comment '角色名称',
     remark      varchar(100)  null comment '角色描述',
-    is_default  int default 0 not null comment '是否是默认角色',
-    deleted     int default 0 null comment '删除状态',
     create_time datetime      not null comment '创建时间',
     modify_time datetime      null comment '修改时间'
 );
 comment '角色表' charset = utf8;
 
 -- 角色表数据
-INSERT INTO violet_cloud.role (id, role_name, remark, is_default, deleted, create_time, modify_time) VALUES (1, '普通用户', '用户注册默认角色', 1, 0, '2020-05-28 16:25:39', '2020-07-23 18:27:45');
-INSERT INTO violet_cloud.role (id, role_name, remark, is_default, deleted, create_time, modify_time) VALUES (2, '管理员', '管理员', 0, 0, '2020-06-04 10:23:29', '2020-07-23 18:28:00');
+INSERT INTO violet_cloud.role (id, role_name, remark, create_time, modify_time) VALUES (1, '普通用户', '用户注册默认角色', '2020-05-28 16:25:39', '2020-07-23 18:27:45');
+INSERT INTO violet_cloud.role (id, role_name, remark, create_time, modify_time) VALUES (2, '管理员', '管理员', '2020-06-04 10:23:29', '2020-07-23 18:28:00');
 
 -- 角色菜单关联表
 create table violet_cloud.role_menu

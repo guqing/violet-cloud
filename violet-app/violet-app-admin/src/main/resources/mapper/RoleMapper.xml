@@ -6,8 +6,6 @@
         <id property="id" column="id"/>
         <result property="roleName" column="role_name"/>
         <result property="remark" column="remark"/>
-        <result property="isDefault" column="is_default"/>
-        <result property="deleted" column="deleted"/>
         <result property="createTime" column="create_time"/>
         <result property="modifyTime" column="modify_time"/>
         <!-- 多表关联映射 -->
@@ -22,8 +20,6 @@
             role.id,
             role.role_name,
             role.remark,
-            role.is_default,
-            role.deleted,
             role.create_time,
             role.modify_time,
             rm.menu_id menu_id

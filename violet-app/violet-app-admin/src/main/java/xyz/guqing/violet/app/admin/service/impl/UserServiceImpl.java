@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 import xyz.guqing.violet.app.admin.mapper.UserMapper;
 import xyz.guqing.violet.app.admin.mapper.UserRoleMapper;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
@@ -160,6 +161,18 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         LambdaQueryWrapper<User> queryWrapper = Wrappers.lambdaQuery();
         queryWrapper.eq(User::getUsername, username);
         return getOne(queryWrapper);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void clearUserGroupByGroupIds(List<Long> groupIds) {
+        if(CollectionUtils.isEmpty(groupIds)) {
+            return;
+        }
+        LambdaUpdateWrapper<User> updateWrapper = Wrappers.lambdaUpdate();
+        updateWrapper.set(User::getGroupId, null)
+                .in(User::getGroupId, groupIds);
+        update(updateWrapper);
     }
 
     private User getByEmail(String email) {

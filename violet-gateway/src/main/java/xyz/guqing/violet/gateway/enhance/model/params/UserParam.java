@@ -1,10 +1,13 @@
 package xyz.guqing.violet.gateway.enhance.model.params;
 
 import lombok.Data;
+import xyz.guqing.violet.common.core.model.support.CreateCheck;
 import xyz.guqing.violet.common.core.model.support.InputConverter;
+import xyz.guqing.violet.common.core.model.support.UpdateCheck;
 import xyz.guqing.violet.gateway.enhance.model.entity.RouteUser;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
@@ -13,16 +16,17 @@ import javax.validation.constraints.Size;
  */
 @Data
 public class UserParam implements InputConverter<RouteUser> {
+    @NotNull(groups = UpdateCheck.class)
     private String id;
 
-    @NotBlank(message = "用户名不能为空")
+    @NotBlank(message = "用户名不能为空", groups = {CreateCheck.class, UpdateCheck.class})
     @Size(min = 3, max = 50, message = "用户名字符长度必须在 {min}-{max} 之间")
     private String username;
 
-    @NotBlank(message = "密码不能为空")
+    @NotBlank(message = "密码不能为空", groups = CreateCheck.class)
     @Size(min = 3, max = 16, message = "密码字符长度必须在 {min}-{max} 之间")
     private String password;
 
-    @NotBlank(message = "角色不能为空")
+    @NotBlank(message = "角色不能为空", groups = CreateCheck.class)
     private String roles;
 }

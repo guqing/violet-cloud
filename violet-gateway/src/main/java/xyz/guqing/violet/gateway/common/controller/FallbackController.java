@@ -18,9 +18,9 @@ public class FallbackController {
 
     @RequestMapping("fallback/{name}")
     @ResponseStatus(HttpStatus.REQUEST_TIMEOUT)
-    public Mono<ResultEntity> systemFallback(@PathVariable String name) {
+    public Mono<ResultEntity<String>> systemFallback(@PathVariable String name) {
         String response = "服务访问超时，请稍后再试";
-        log.error("{}，目标微服务：{}", response, name);
+        log.error("[{}]，目标微服务：[{}]", response, name);
         return Mono.just(ResultEntity.executionTimeout(response));
     }
 

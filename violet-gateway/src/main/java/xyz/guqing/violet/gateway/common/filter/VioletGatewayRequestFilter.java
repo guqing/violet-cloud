@@ -25,11 +25,11 @@ public class VioletGatewayRequestFilter implements GlobalFilter {
 
     private final RouteEnhanceService routeEnhanceService;
     @Value("${violet.gateway.enhance:false}")
-    private Boolean routeEhance;
+    private Boolean routeEnhance;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        if (routeEhance) {
+        if (routeEnhance) {
             Mono<Void> balckListResult = routeEnhanceService.filterBlackList(exchange);
             if (balckListResult != null) {
                 routeEnhanceService.saveBlockLogs(exchange);

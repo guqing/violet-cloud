@@ -37,14 +37,14 @@ public class GatewayExceptionHandler {
     @ExceptionHandler(value = ForbiddenException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public Mono<ResultEntity<String>> handleAccessDeniedException(ForbiddenException e) {
-        log.error("无权访问,{}", e);
+        log.error("无权访问,{0}", e);
         return Mono.just(ResultEntity.accessDenied("没有权限访问该资源"));
     }
 
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Mono<ResultEntity<String>> handleBadRequestException(BadRequestException e) {
-        log.error("Captured an exception：{0}", e);
+        log.error("捕获到异常：{0}", e);
         return Mono.just(ResultEntity.badArgument(e.getMessage()));
     }
 
@@ -96,7 +96,7 @@ public class GatewayExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Mono<ResultEntity<String>> handleException(Exception e) {
-        log.error("系统内部异常，{}",e);
+        log.error("系统内部异常，{0}",e);
         return Mono.just(ResultEntity.serverError(e.getMessage()));
     }
 }

@@ -25,7 +25,7 @@ public class JwtTokenHelper implements Serializable {
     private String secret;
 
     @Value("${violet.gateway.jwt.expiration}")
-    private String expirationTime;
+    private Long expirationTime;
 
     public Claims getAllClaimsFromToken(String token) {
         return Jwts.parser()
@@ -48,16 +48,14 @@ public class JwtTokenHelper implements Serializable {
     }
 
     public String generateToken(RouteUser routeUser) {
-        Map<String, Object> claims = new HashMap<>(1);
+        Map<String, Object> claims = new HashMap<>(1, 1);
         claims.put("permission", routeUser.getRoles());
         return doGenerateToken(claims, routeUser.getUsername());
     }
 
     private String doGenerateToken(Map<String, Object> claims, String username) {
-        long expirationTimeLong = Long.parseLong(expirationTime);
-
         final Date createdDate = new Date();
-        final Date expirationDate = new Date(createdDate.getTime() + expirationTimeLong * 1000);
+        final Date expirationDate = new Date(createdDate.getTime() + expirationTime * 1000);
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(username)

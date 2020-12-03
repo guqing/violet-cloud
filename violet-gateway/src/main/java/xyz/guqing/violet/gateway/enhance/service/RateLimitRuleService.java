@@ -68,4 +68,12 @@ public interface RateLimitRuleService {
      * @return 被删除的限流规则
      */
     Flux<RateLimitRule> delete(List<String> ids);
+
+    /**
+     * 根据id查询
+     *
+     * @param id 限流规则id
+     * @return 返回限流规则记录
+     */
+    Mono<RateLimitRule> getById(String id);
 }

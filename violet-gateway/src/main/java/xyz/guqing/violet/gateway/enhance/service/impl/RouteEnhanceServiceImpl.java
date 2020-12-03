@@ -186,7 +186,7 @@ public class RouteEnhanceServiceImpl implements RouteEnhanceService {
 
     private Mono<Void> doRateLimitCheck(AtomicBoolean limit, RateLimitRule rule, URI uri,
                                         String requestIp, String requestMethod, ServerHttpResponse response) {
-        boolean isRateLimitRuleHit = RateLimitRule.OPEN.equals(rule.getStatus())
+        boolean isRateLimitRuleHit = rule.getStatus()
                 && (RateLimitRule.METHOD_ALL.equalsIgnoreCase(rule.getRequestMethod())
                 || StringUtils.equalsIgnoreCase(requestMethod, rule.getRequestMethod()));
         if (isRateLimitRuleHit) {

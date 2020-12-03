@@ -96,7 +96,7 @@ public class RateLimitRuleServiceImpl implements RateLimitRuleService {
         if (StringUtils.isNotBlank(rateLimitRule.getRequestUri())) {
             criteria.and("requestUri").is(rateLimitRule.getRequestUri());
         }
-        if (StringUtils.isNotBlank(rateLimitRule.getStatus())) {
+        if (rateLimitRule.getStatus() != null) {
             criteria.and("status").is(rateLimitRule.getStatus());
         }
         query.addCriteria(criteria);

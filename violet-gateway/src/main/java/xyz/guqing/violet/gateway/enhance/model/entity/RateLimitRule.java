@@ -17,10 +17,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RateLimitRule {
-
-    public static final String CLOSE = "0";
-    public static final String OPEN = "1";
-
     public static final String METHOD_ALL = "all";
 
     @Id
@@ -50,9 +46,9 @@ public class RateLimitRule {
      */
     private String intervalSec;
     /**
-     * 状态，0关闭，1开启
+     * 状态，false关闭，true开启
      */
-    private String status;
+    private Boolean status;
     /**
      * 规则创建时间
      */

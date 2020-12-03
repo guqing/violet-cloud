@@ -24,7 +24,7 @@ public class RateLimitRuleParam implements InputConverter<RateLimitRule> {
 
     private String intervalSec;
 
-    private String status;
+    private Boolean status;
 
     /**
      * 限制时间起

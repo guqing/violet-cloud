@@ -2,7 +2,6 @@ package xyz.guqing.violet.auth.security.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.User;
@@ -16,7 +15,6 @@ import xyz.guqing.violet.auth.service.MenuService;
 import xyz.guqing.violet.common.core.model.dto.CurrentUser;
 import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.model.constant.ParamsConstant;
-import xyz.guqing.violet.common.core.model.dto.MyUserDetails;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import javax.servlet.http.HttpServletRequest;

@@ -10,7 +10,6 @@ import xyz.guqing.violet.gateway.enhance.model.entity.RateLimitRule;
  */
 @Data
 public class RateLimitRuleParam implements InputConverter<RateLimitRule> {
-    private String id;
     /**
      * 请求URI
      */
@@ -24,7 +23,7 @@ public class RateLimitRuleParam implements InputConverter<RateLimitRule> {
 
     private String intervalSec;
 
-    private String status;
+    private Boolean status;
 
     /**
      * 限制时间起

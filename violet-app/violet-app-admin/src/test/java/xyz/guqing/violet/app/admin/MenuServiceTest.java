@@ -25,7 +25,6 @@ class MenuServiceTest {
     void test() {
         MenuQuery menuQuery = new MenuQuery();
         menuQuery.setType(MenuType.MENU.getValue());
-        Menu menu = menuQuery.convertTo();
-        List<MenuTree> menuTrees = menuService.listTreeMenus(menu);
+        List<MenuTree> menuTrees = menuService.listTreeMenus(menuQuery);
     }
 }

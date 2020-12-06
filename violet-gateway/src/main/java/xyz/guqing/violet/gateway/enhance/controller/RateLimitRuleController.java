@@ -48,11 +48,15 @@ public class RateLimitRuleController {
         return rateLimitRuleService.create(rateLimitRule);
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('admin')")
-    public Mono<RateLimitRule> updateRateLimitRule(@RequestBody @Valid RateLimitRuleParam rateLimitRuleParam) {
-        RateLimitRule rateLimitRule = rateLimitRuleParam.convertTo();
-        return rateLimitRuleService.update(rateLimitRule);
+    public Mono<RateLimitRule> updateRateLimitRule(@PathVariable String id,
+                                                   @RequestBody @Valid RateLimitRuleParam rateLimitRuleParam) {
+        return rateLimitRuleService.getById(id)
+                .flatMap(rateLimitRuleToUpdate -> {
+                    rateLimitRuleParam.update(rateLimitRuleToUpdate);
+                    return rateLimitRuleService.update(rateLimitRuleToUpdate);
+                });
     }
 
     @DeleteMapping

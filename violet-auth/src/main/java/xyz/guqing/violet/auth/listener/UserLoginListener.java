@@ -45,18 +45,20 @@ public class UserLoginListener implements ApplicationListener<UserLoginEvent> {
         UserLoginLog loginLog = new UserLoginLog();
         loginLog.setLoginTime(LocalDateTime.now());
         loginLog.setUsername(username);
+        try {
+            String ip = VioletUtil.getRequestIpAddress();
+            loginLog.setIp(ip);
+            loginLog.setLocation(RegionAddressUtils.getCityInfo(ip));
 
-        String ip = VioletUtil.getRequestIpAddress();
-        loginLog.setIp(ip);
-        loginLog.setLocation(RegionAddressUtils.getCityInfo(ip));
+            HttpServletRequest servletRequest = VioletUtil.getHttpServletRequest();
+            String userAgent = servletRequest.getHeader("user-agent");
+            Map<String, String> systemBrowser = VioletUtil.getSystemBrowserInfoByUserAgent(userAgent);
 
-        HttpServletRequest servletRequest = VioletUtil.getHttpServletRequest();
-        String userAgent = servletRequest.getHeader("user-agent");
-        Map<String, String> systemBrowser = VioletUtil.getSystemBrowserInfoByUserAgent(userAgent);
-
-        loginLog.setSystem(systemBrowser.get("system"));
-        loginLog.setBrowser(systemBrowser.get("browser"));
-
+            loginLog.setSystem(systemBrowser.get("system"));
+            loginLog.setBrowser(systemBrowser.get("browser"));
+        } catch (Exception e) {
+            // ignore this exception
+        }
         return loginLog;
     }
 }

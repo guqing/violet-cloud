@@ -2,10 +2,13 @@ package xyz.guqing.violet.gateway.enhance.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import xyz.guqing.violet.common.core.model.support.CreateCheck;
 import xyz.guqing.violet.common.core.model.support.PageQuery;
+import xyz.guqing.violet.common.core.model.support.UpdateCheck;
 import xyz.guqing.violet.gateway.enhance.model.entity.RouteUser;
 import xyz.guqing.violet.gateway.enhance.model.params.UserParam;
 import xyz.guqing.violet.gateway.enhance.model.params.UserQuery;
@@ -43,14 +46,14 @@ public class RouteUserController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('admin')")
-    public Mono<RouteUser> createRouteUser(@RequestBody @Valid UserParam userParam) {
+    public Mono<RouteUser> createRouteUser(@RequestBody @Validated(CreateCheck.class) UserParam userParam) {
         RouteUser routeUser = userParam.convertTo();
         return routeUserService.create(routeUser);
     }
 
     @PutMapping
     @PreAuthorize("hasAuthority('admin')")
-    public Mono<RouteUser> updateRouteUser(@RequestBody @Valid UserParam userParam) {
+    public Mono<RouteUser> updateRouteUser(@RequestBody @Validated(UpdateCheck.class) UserParam userParam) {
         RouteUser routeUser = userParam.convertTo();
         return routeUserService.update(routeUser);
     }

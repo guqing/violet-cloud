@@ -1,6 +1,7 @@
 package xyz.guqing.violet.app.admin.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import xyz.guqing.violet.app.admin.model.params.MenuQuery;
 import xyz.guqing.violet.common.core.model.dto.VueRouter;
 import xyz.guqing.common.support.model.dto.MenuTree;
 import xyz.guqing.common.support.model.entity.system.Menu;
@@ -34,10 +35,10 @@ public interface MenuService extends IService<Menu> {
 
     /**
      * 根据条件查询菜单树
-     * @param menu 查询条件
+     * @param menuQuery 查询条件
      * @return 返回查询到的菜单树
      */
-    List<MenuTree> listTreeMenus(Menu menu);
+    List<MenuTree> listTreeMenus(MenuQuery menuQuery);
 
     /**
      * 根据id集合批量递归删除菜单

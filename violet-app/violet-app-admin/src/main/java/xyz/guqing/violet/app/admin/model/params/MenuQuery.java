@@ -9,7 +9,8 @@ import xyz.guqing.violet.common.core.model.support.InputConverter;
  * @date 2020-06-04
  */
 @Data
-public class MenuQuery implements InputConverter<Menu> {
+public class MenuQuery {
     private Long orderIndex;
     private String type;
+    private String title;
 }

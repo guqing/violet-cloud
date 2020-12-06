@@ -108,4 +108,10 @@ public interface UserService extends IService<User> {
      * @return 如果查询到返回用户信息,查询不到返回null
      */
     User getByUsername(String username);
+
+    /**
+     * 清空用户组所属关系
+     * @param groupIds 分组id集合
+     */
+    void clearUserGroupByGroupIds(List<Long> groupIds);
 }

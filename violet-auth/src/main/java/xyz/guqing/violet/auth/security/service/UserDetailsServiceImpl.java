@@ -2,9 +2,9 @@ package xyz.guqing.violet.auth.security.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,7 +15,6 @@ import xyz.guqing.violet.auth.service.MenuService;
 import xyz.guqing.violet.common.core.model.dto.CurrentUser;
 import xyz.guqing.violet.auth.service.UserService;
 import xyz.guqing.violet.common.core.model.constant.ParamsConstant;
-import xyz.guqing.violet.common.core.model.dto.MyUserDetails;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,7 +47,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         String loginType = (String) httpServletRequest.getAttribute(ParamsConstant.LOGIN_TYPE);
 
         String password = user.getPassword();
-        if(StringUtils.equals(loginType, SocialConstant.SOCIAL_LOGIN)) {
+        if (StringUtils.equals(loginType, SocialConstant.SOCIAL_LOGIN)) {
             password = passwordEncoder.encode(SocialConstant.getSocialLoginPassword());
         }
         String permissions = menuService.findUserPermissions(username);
@@ -57,22 +56,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(permissions);
         }
 
-        MyUserDetails myUserDetails = new MyUserDetails(
-                username,
-                password,
-                true,
-                true,
-                true,
-                true,
-                grantedAuthorities
-        );
-
-        BeanUtils.copyProperties(user, myUserDetails);
-        myUserDetails.setRoleIds(VioletUtil.commaSeparatedToList(user.getRoleId()));
-        myUserDetails.setRoleNames(VioletUtil.commaSeparatedToList(user.getRoleName()));
-
-        // 返回自定义的 MyUserDetails
-        return myUserDetails;
+        return new User(username, password, grantedAuthorities);
     }
 
 

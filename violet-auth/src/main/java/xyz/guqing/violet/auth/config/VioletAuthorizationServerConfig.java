@@ -73,7 +73,7 @@ public class VioletAuthorizationServerConfig extends AuthorizationServerConfigur
                 .authenticationManager(authenticationManager)
                 .tokenEnhancer(enhancerChain)
                 .accessTokenConverter(jwtAccessTokenConverter)
-                .exceptionTranslator(webResponseExceptionTranslator);;
+                .exceptionTranslator(webResponseExceptionTranslator);
         this.endpointsConfigurer = endpoints;
     }
 

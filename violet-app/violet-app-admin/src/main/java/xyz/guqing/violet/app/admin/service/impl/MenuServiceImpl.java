@@ -2,6 +2,7 @@ package xyz.guqing.violet.app.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -9,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import xyz.guqing.violet.app.admin.mapper.MenuMapper;
 import xyz.guqing.violet.app.admin.model.enums.MenuType;
+import xyz.guqing.violet.app.admin.model.params.MenuQuery;
 import xyz.guqing.violet.app.admin.service.MenuService;
+import xyz.guqing.violet.app.admin.service.RoleMenuService;
 import xyz.guqing.violet.common.core.model.dto.RouterMeta;
 import xyz.guqing.violet.common.core.model.dto.VueRouter;
 import xyz.guqing.common.support.model.dto.MenuTree;
@@ -31,7 +34,9 @@ import java.util.stream.Collectors;
  * @since 2020-05-21
  */
 @Service
+@RequiredArgsConstructor
 public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements MenuService {
+    private final RoleMenuService roleMenuService;
 
     @Override
     public List<Menu> listUserMenus(String username) {
@@ -39,13 +44,16 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     }
 
     @Override
-    public List<MenuTree> listTreeMenus(Menu menu) {
+    public List<MenuTree> listTreeMenus(MenuQuery menuQuery) {
         LambdaQueryWrapper<Menu> queryWrapper = new LambdaQueryWrapper<>();
+        if (StringUtils.isNotBlank(menuQuery.getTitle())) {
+            queryWrapper.like(Menu::getTitle, menuQuery.getTitle());
+        }
         queryWrapper.orderByAsc(Menu::getSortIndex);
-        List<Menu> menus = baseMapper.selectList(queryWrapper);
+        List<Menu> menus = list(queryWrapper);
 
         List<MenuTree> menuTrees = convertTo(menus);
-        if (StringUtils.equals(menu.getType(), MenuType.BUTTON.getValue())) {
+        if (StringUtils.equals(menuQuery.getType(), MenuType.BUTTON.getValue())) {
             return menuTrees;
         } else {
             return TreeUtil.build(menuTrees);
@@ -55,7 +63,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void deleteMenus(List<Long> menuIds) {
+        if (CollectionUtils.isEmpty(menuIds)) {
+            return;
+        }
         delete(menuIds);
+        roleMenuService.deleteByMenuIds(menuIds);
     }
 
     /**

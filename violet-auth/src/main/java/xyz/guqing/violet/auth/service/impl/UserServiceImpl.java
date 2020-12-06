@@ -76,7 +76,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
 
     private UserInfoDTO convertTo(CurrentUser currentUser) {
         UserInfoDTO userInfoDTO = new UserInfoDTO();
-        BeanUtils.copyProperties(currentUser,userInfoDTO);
+        BeanUtils.copyProperties(currentUser, userInfoDTO);
         userInfoDTO.setRoleIds(VioletUtil.commaSeparatedToList(currentUser.getRoleId()));
         userInfoDTO.setRoleNames(VioletUtil.commaSeparatedToList(currentUser.getRoleName()));
         return userInfoDTO;

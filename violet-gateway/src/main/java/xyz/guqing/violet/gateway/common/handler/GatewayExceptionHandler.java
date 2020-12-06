@@ -44,7 +44,7 @@ public class GatewayExceptionHandler {
     @ExceptionHandler(BadRequestException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Mono<ResultEntity<String>> handleBadRequestException(BadRequestException e) {
-        log.error("Captured an exception：{0}", e);
+        log.error("捕获到异常：{0}", e);
         return Mono.just(ResultEntity.badArgument(e.getMessage()));
     }
 

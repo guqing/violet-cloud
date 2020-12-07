@@ -19,7 +19,7 @@ import xyz.guqing.violet.gateway.enhance.service.RouteUserService;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("route")
+@RequestMapping("/route")
 public class RouteLoginController {
     private final JwtTokenHelper tokenHelper;
     private final PasswordEncoder passwordEncoder;

@@ -22,25 +22,25 @@ import java.util.List;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("route/auth/user")
+@RequestMapping("/route/auth/users")
 public class RouteUserController {
 
     private final RouteUserService routeUserService;
 
     @GetMapping("data")
-    public Flux<RouteUser> findUserPages(PageQuery request, UserQuery userQuery) {
+    public Flux<RouteUser> listUserByPage(PageQuery request, UserQuery userQuery) {
         RouteUser routeUser = userQuery.convertTo();
         return routeUserService.findPages(request, routeUser);
     }
 
     @GetMapping("count")
-    public Mono<Long> findUserCount(UserQuery userQuery) {
+    public Mono<Long> countUsers(UserQuery userQuery) {
         RouteUser routeUser = userQuery.convertTo();
         return routeUserService.findCount(routeUser);
     }
 
     @GetMapping("{username}")
-    public Mono<RouteUser> findByUsername(@PathVariable String username) {
+    public Mono<RouteUser> listByUsername(@PathVariable String username) {
         return routeUserService.findByUsername(username);
     }
 

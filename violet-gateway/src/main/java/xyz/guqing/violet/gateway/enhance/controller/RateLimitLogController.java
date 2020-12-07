@@ -17,7 +17,7 @@ import xyz.guqing.violet.gateway.enhance.service.RateLimitLogService;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("route/auth/rateLimitLog")
+@RequestMapping("/route/auth/rate/limit/logs")
 public class RateLimitLogController {
 
     private final RateLimitLogService rateLimitLogService;

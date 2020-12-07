@@ -19,7 +19,7 @@ import java.util.List;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("route/auth/rateLimitRule")
+@RequestMapping("/route/auth/rate/limit/rules")
 public class RateLimitRuleController {
 
     private final RateLimitRuleService rateLimitRuleService;

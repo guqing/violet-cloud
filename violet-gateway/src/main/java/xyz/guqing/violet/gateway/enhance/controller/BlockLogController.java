@@ -25,12 +25,12 @@ public class BlockLogController {
     private final BlockLogService blockLogService;
 
     @GetMapping("data")
-    public Flux<BlockLog> listUserByPage(PageQuery request, BlockLog blockLog) {
+    public Flux<BlockLog> listByPage(PageQuery request, BlockLog blockLog) {
         return blockLogService.findPages(request, blockLog);
     }
 
     @GetMapping("count")
-    public Mono<Long> countUsers(BlockLog blockLog) {
+    public Mono<Long> countBlockLogs(BlockLog blockLog) {
         return blockLogService.findCount(blockLog);
     }
 

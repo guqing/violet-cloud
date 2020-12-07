@@ -22,12 +22,12 @@ public class BlackListController {
     private final BlackListService blackListService;
 
     @GetMapping("data")
-    public Flux<BlackList> listUserByPage(PageQuery request, BlackList blackList) {
+    public Flux<BlackList> listByPage(PageQuery request, BlackList blackList) {
         return blackListService.findPages(request, blackList);
     }
 
     @GetMapping("count")
-    public Mono<Long> countUsers(BlackList blackList) {
+    public Mono<Long> countBlacklist(BlackList blackList) {
         return blackListService.findCount(blackList);
     }
 

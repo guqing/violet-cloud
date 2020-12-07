@@ -23,12 +23,12 @@ public class RateLimitLogController {
     private final RateLimitLogService rateLimitLogService;
 
     @GetMapping("data")
-    public Flux<RateLimitLog> findUserPages(PageQuery request, RateLimitLog rateLimitLog) {
+    public Flux<RateLimitLog> listByPages(PageQuery request, RateLimitLog rateLimitLog) {
         return rateLimitLogService.findPages(request, rateLimitLog);
     }
 
     @GetMapping("count")
-    public Mono<Long> findUserCount(RateLimitLog rateLimitLog) {
+    public Mono<Long> countRateLimitLogs(RateLimitLog rateLimitLog) {
         return rateLimitLogService.findCount(rateLimitLog);
     }
 

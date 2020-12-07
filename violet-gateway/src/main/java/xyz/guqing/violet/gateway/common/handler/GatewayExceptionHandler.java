@@ -52,18 +52,19 @@ public class GatewayExceptionHandler {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public Mono<ResultEntity<String>> handleAuthFailException(AuthenticationException e) {
         log.error("认证失败，错误信息：{0}", e);
-        return Mono.just(ResultEntity.authorizedFailed("认证失败:" + e.getMessage()));
+        return Mono.just(ResultEntity.authorizedFailed(e.getMessage()));
     }
 
     /**
      * 当使用@Valid不带@RequestBody request参数时:
      * 对象验证失败，验证将引发BindException而不是MethodArgumentNotValidException
+     *
      * @param e 参数绑定异常
      * @return 返回参数校验失败的错误信息
      */
     @ExceptionHandler(BindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Mono<ResultEntity<String>> validExceptionHandler(BindException e){
+    public Mono<ResultEntity<String>> validExceptionHandler(BindException e) {
         // 将错误的参数的详细信息封装到统一的返回实体
         return Mono.just(validParam(e.getBindingResult()));
     }
@@ -71,12 +72,13 @@ public class GatewayExceptionHandler {
     /**
      * 使用@Valid并且带有@RequestBody request参数时
      * 参数教研失败将抛出MethodArgumentNotValidException异常，由此方法捕获处理
+     *
      * @param e 方法参数校验失败的异常
      * @return 返回校验失败错误信息
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Mono<ResultEntity<String>> validExceptionHandler(MethodArgumentNotValidException e){
+    public Mono<ResultEntity<String>> validExceptionHandler(MethodArgumentNotValidException e) {
         return Mono.just(validParam(e.getBindingResult()));
     }
 
@@ -96,7 +98,7 @@ public class GatewayExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public Mono<ResultEntity<String>> handleException(Exception e) {
-        log.error("系统内部异常，{0}",e);
+        log.error("系统内部异常，{0}", e);
         return Mono.just(ResultEntity.serverError(e.getMessage()));
     }
 }

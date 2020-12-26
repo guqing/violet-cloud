@@ -168,3 +168,45 @@ npm run serve
 
 ![image-20201101154818718](assets/image-20201101154818718.png)
 
+## 进阶
+### 网关使用说明
+网关管理模块包括:网关用户、网关日志、限流规则、黑名单管理和拦截日志,如果要使用这些功能需要开启网关增强。
+#### 安装mongodb数据库
+对于Linux或Mac用户可以使用docker安装方式，执行以下步骤时请确保你已安装`docker`
+```shell
+docker run --name mongo -p 27017:27017 -v $PWD/db:/data/db -d mongo
+```
+查看容器
+```shell
+docker ps
+# 结果如下示例
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                               NAMES
+7b4a174525d3        mongo               "docker-entrypoint..."   24 minutes ago      Up 24 minutes       0.0.0.0:27017->27017/tcp            mongo
+```
+复制`CONTAINER ID`（容器id）执行如下命令
+```shell
+docker exec -it 容器id /bin/bash
+```
+再依次执行以下命令
+```shell
+mongo
+
+use violet_cloud_route
+
+db.createUser({ user:'guqing',pwd:'12345678',roles:[ { role:'readWrite', db: 'violet_cloud_route'}]});
+```
+结果如下图所示
+
+![mongodb创建用户](./assets/img.png)
+
+执行完后别着急退出，继续执行如下图脚本里的内容
+![img.png](assets/img1231231313.png)
+
+#### 配置网关增强
+在`nacos`控制台修改`violet-gateway.yaml`如下图所示，注释`MongoAutoConfiguration`并配置mongodb连接就完成啦
+```yaml
+autoconfigure:
+  exclude: org.springframework.boot.autoconfigure.mongo.MongoReactiveAutoConfiguration,org.springframework.boot.autoconfigure.data.mongo.MongoReactiveRepositoriesAutoConfiguration,org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+```
+
+![img.png](assets/img51231231313113.png)

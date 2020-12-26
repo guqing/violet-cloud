@@ -17,18 +17,18 @@ import java.util.List;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("route/auth/log")
+@RequestMapping("/route/auth/logs")
 public class RouteLogController {
 
     private final RouteLogService routeLogService;
 
     @GetMapping("data")
-    public Flux<RouteLog> findRouteLogsPages(PageQuery request, RouteLogQuery routeLogQuery) {
+    public Flux<RouteLog> listRouteLogsByPage(PageQuery request, RouteLogQuery routeLogQuery) {
         return routeLogService.findPages(request, routeLogQuery);
     }
 
     @GetMapping("count")
-    public Mono<Long> findRouteLogsCount(RouteLogQuery routeLogQuery) {
+    public Mono<Long> countRouteLogs(RouteLogQuery routeLogQuery) {
         return routeLogService.findCount(routeLogQuery);
     }
 

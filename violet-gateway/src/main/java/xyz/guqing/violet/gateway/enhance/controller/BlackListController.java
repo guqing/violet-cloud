@@ -10,27 +10,29 @@ import xyz.guqing.violet.gateway.enhance.model.entity.BlackList;
 import xyz.guqing.violet.gateway.enhance.service.BlackListService;
 
 /**
+ * 黑名单
+ *
  * @author guqing
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("route/auth/blackList")
+@RequestMapping("/route/auth/blacklist")
 public class BlackListController {
 
     private final BlackListService blackListService;
 
     @GetMapping("data")
-    public Flux<BlackList> findUserPages(PageQuery request, BlackList blackList) {
+    public Flux<BlackList> listByPage(PageQuery request, BlackList blackList) {
         return blackListService.findPages(request, blackList);
     }
 
     @GetMapping("count")
-    public Mono<Long> findUserCount(BlackList blackList) {
+    public Mono<Long> countBlacklist(BlackList blackList) {
         return blackListService.findCount(blackList);
     }
 
     @GetMapping("exist")
-    public Flux<BlackList> findByCondition(String ip, String requestUri, String requestMethod) {
+    public Flux<BlackList> listByCondition(String ip, String requestUri, String requestMethod) {
         return blackListService.findByCondition(ip, requestUri, requestMethod);
     }
 

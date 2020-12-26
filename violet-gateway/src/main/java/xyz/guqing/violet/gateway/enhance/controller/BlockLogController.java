@@ -13,22 +13,24 @@ import xyz.guqing.violet.gateway.enhance.model.entity.BlockLog;
 import xyz.guqing.violet.gateway.enhance.service.BlockLogService;
 
 /**
+ * 拦截日志
+ *
  * @author guqing
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("route/auth/blockLog")
+@RequestMapping("/route/auth/block/logs")
 public class BlockLogController {
 
     private final BlockLogService blockLogService;
 
     @GetMapping("data")
-    public Flux<BlockLog> findUserPages(PageQuery request, BlockLog blockLog) {
+    public Flux<BlockLog> listByPage(PageQuery request, BlockLog blockLog) {
         return blockLogService.findPages(request, blockLog);
     }
 
     @GetMapping("count")
-    public Mono<Long> findUserCount(BlockLog blockLog) {
+    public Mono<Long> countBlockLogs(BlockLog blockLog) {
         return blockLogService.findCount(blockLog);
     }
 

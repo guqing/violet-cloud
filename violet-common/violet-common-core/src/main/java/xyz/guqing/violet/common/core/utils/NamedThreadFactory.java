@@ -38,7 +38,7 @@ public class NamedThreadFactory implements ThreadFactory {
 
     @Override
     public Thread newThread(@NonNull Runnable r) {
-        Thread t = new Thread(this.group, r, String.format("%s%s", this.prefix, this.threadNumber.getAndIncrement()));
+        Thread t = new Thread(this.group, r, String.format("%s-%s", this.prefix, this.threadNumber.getAndIncrement()));
         if (!t.isDaemon()) {
             if (this.isDeamon) {
                 t.setDaemon(true);

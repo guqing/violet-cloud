@@ -27,7 +27,7 @@ public class ThreadPoolConfig {
         LinkedBlockingDeque<Runnable> runnableLinkedBlockingDeque = new LinkedBlockingDeque<>(poolProperties.getQueueSize());
 
         // 创建带名字的线程工厂,使新创建的线程都有名字
-        ThreadFactory namedThreadFactory = new NamedThreadFactory("violet-app-admin-pool-%d", false);
+        ThreadFactory namedThreadFactory = new NamedThreadFactory("violet-app-admin", false);
 
         // 创建线程池
         return new ThreadPoolExecutor(poolProperties.getCorePoolSize(),

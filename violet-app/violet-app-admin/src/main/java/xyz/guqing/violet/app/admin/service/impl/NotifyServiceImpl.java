@@ -32,7 +32,7 @@ public class NotifyServiceImpl implements NotifyService {
         String captcha = generateCaptcha();
         param.put("captcha", captcha);
 
-        log.debug("一次性邮箱验证码为:", captcha);
+        log.debug("一次性邮箱验证码为:{}", captcha);
 
         // 设置缓存
         redisService.set(VioletConstant.CAPTCHA_PREFIX + email, captcha, VioletConstant.CAPTCHA_EXPIRE);

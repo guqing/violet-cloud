@@ -1,11 +1,11 @@
 package xyz.guqing.violet.auth.config;
 
-import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import xyz.guqing.violet.common.core.model.constant.VioletConstant;
 import xyz.guqing.violet.common.core.model.properties.ThreadPoolProperties;
+import xyz.guqing.violet.common.core.utils.NamedThreadFactory;
 
 import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ThreadFactory;
@@ -27,13 +27,12 @@ public class ThreadPoolConfig {
         LinkedBlockingDeque<Runnable> runnableLinkedBlockingDeque = new LinkedBlockingDeque<>(poolProperties.getQueueSize());
 
         // 创建带名字的线程工厂,使新创建的线程都有名字
-        ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
-                .setNameFormat("violet-auth-pool-%d").build();
+        ThreadFactory namedThreadFactory = new NamedThreadFactory("violet-auth-pool-%d", false);
 
         // 创建线程池
         return new ThreadPoolExecutor(poolProperties.getCorePoolSize(),
                 poolProperties.getMaximumPoolSize(),
-                poolProperties.getKeepAliveTime(), TimeUnit.MINUTES,
+                poolProperties.getKeepAliveTime(), TimeUnit.SECONDS,
                 runnableLinkedBlockingDeque, namedThreadFactory);
     }
 }

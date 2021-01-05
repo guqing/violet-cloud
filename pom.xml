@@ -32,7 +32,6 @@
 
         <xml-api.version>1.4.01</xml-api.version>
         <ip2region.version>1.7</ip2region.version>
-        <guava.version>27.0-jre</guava.version>
 
         <mybatis-plus.version>3.3.1.tmp</mybatis-plus.version>
         <dynamic-datasource.version>3.1.0</dynamic-datasource.version>

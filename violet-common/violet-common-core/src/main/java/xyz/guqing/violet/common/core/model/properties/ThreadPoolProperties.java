@@ -11,7 +11,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "violet.thread.pool")
 public class ThreadPoolProperties {
     private Integer corePoolSize = 8;
-    private Integer maximumPoolSize = 100;
-    private Integer queueSize = 100000;
-    private Integer keepAliveTime = 10;
+    private Integer maximumPoolSize = 20;
+    private Integer queueSize = 100;
+    private Integer keepAliveTime = 30;
 }

@@ -6,12 +6,12 @@ spring:
   cloud:
     nacos:
       config:
-        server-addr: 47.104.231.120:8001
+        server-addr: ${nacos.url}
         group: DEFAULT_GROUP
         prefix: violet-gateway
         file-extension: yaml
       discovery:
-        server-addr: 47.104.231.120:8001
+        server-addr: ${nacos.url}
   boot:
     admin:
       client:

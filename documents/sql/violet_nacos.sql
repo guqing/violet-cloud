@@ -2,6 +2,8 @@
 /*   数据库全名 = nacos_config   */
 /*   表名称 = config_info   */
 /******************************************/
+use violet_nacos;
+
 CREATE TABLE `config_info`
 (
     `id`           bigint(20)   NOT NULL AUTO_INCREMENT COMMENT 'id',
@@ -70,8 +72,8 @@ spring:
         use404: true
       default-filters:
         - StripPrefix=1
-  # autoconfigure:
-  #  exclude: org.springframework.boot.autoconfigure.mongo.MongoReactiveAutoConfiguration,org.springframework.boot.autoconfigure.data.mongo.MongoReactiveRepositoriesAutoConfiguration,org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
+  autoconfigure:
+    exclude: org.springframework.boot.autoconfigure.mongo.MongoReactiveAutoConfiguration,org.springframework.boot.autoconfigure.data.mongo.MongoReactiveRepositoriesAutoConfiguration,org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration
 
 # 网关增强配置
   data:
@@ -136,7 +138,7 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/violet_cloud?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+    url: jdbc:mysql://${MYSQL_URL}/violet_cloud?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
     hikari:
       connection-timeout: 30000
       max-lifetime: 1800000
@@ -255,7 +257,7 @@ spring:
     username: root
     password: 123456
     driver-class-name: com.p6spy.engine.spy.P6SpyDriver #com.mysql.cj.jdbc.Driver
-    url: jdbc:p6spy:mysql://127.0.0.1:3306/violet_cloud?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+    url: jdbc:p6spy:mysql://${MYSQL_URL}/violet_cloud?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
   redis:
     database: 0
     host: 127.0.0.1

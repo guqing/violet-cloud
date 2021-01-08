@@ -22,6 +22,8 @@ jobs:
         java-version: 11
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+      env:
+        nacos.url: ${{ secrets.NACOS_URL }}
 #    - name: Before Deploy
 #      run: chmod -R 777 mvnw & sudo apt-get install sshpass
 #    - name: Deploy

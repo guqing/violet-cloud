@@ -5,7 +5,7 @@ before_install:
   - chmod -R 777 mvnw
   - sudo apt-get install sshpass
 script:
-  - ./mvnw clean install
+  - ./mvnw clean install -Dnacos.url=$NACOS_URL
 deploy:
   - provider: script
     script: bash ./scripts/deploy.sh $SERVER $PASSWORD

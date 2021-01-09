@@ -5,6 +5,6 @@ COPY ./target/violet-gateway.jar /app/violet-gateway.jar
 ENV JVM_XMS=256m JVM_XMX=256m
 ENV NACOS_URL=127.0.0.1:8848
 
-CMD java -Xms$JVM_XMS -Xmx$JVM_XMX -jar /app/violet-gateway.jar -Dnacos.url=$NACOS_URL
+CMD java -Xms$JVM_XMS -Xmx$JVM_XMX -jar -Dnacos.url=$NACOS_URL /app/violet-gateway.jar
 
 EXPOSE 8301

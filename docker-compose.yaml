@@ -17,7 +17,7 @@ services:
 
   nacos:
     image: nacos/nacos-server:1.4.0
-    container_name: nacos-standalone-mysql
+    container_name: nacos-standalone
     environment:
       - "PREFER_HOST_MODE=hostname"
       - "MODE=standalone"
@@ -27,6 +27,8 @@ services:
       - "MYSQL_SERVICE_PORT=3306"
       - "MYSQL_SERVICE_USER=root"
       - "MYSQL_SERVICE_PASSWORD=123456"
+      - "JVM_XMS=256m"
+      - "JVM_XMX=256m"
     volumes:
       - ~/violet/nacos/standalone-logs/:/home/nacos/logs
     ports:
@@ -34,55 +36,60 @@ services:
       - "9555:9555"
     depends_on:
       - mysql
-#    restart: on-failure
+    restart: on-failure
 
-#  redis:
-#    image: redis:4.0.14
-#    container_name: redis
-#    command: redis-server /usr/local/etc/redis/redis.conf --appendonly yes
-#    volumes:
-#      - ~/violet/redis/data:/data #挂载 Redis数据
-#      - ~/violet/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf #挂载 Redis配置
-#    ports:
-#      - 6379:6379
+  redis:
+    image: redis:4.0.14
+    container_name: redis
+    command: redis-server /usr/local/etc/redis/redis.conf --appendonly yes
+    volumes:
+      - ~/violet/redis/data:/data #挂载 Redis数据
+      - ~/violet/redis/conf/redis.conf:/usr/local/etc/redis/redis.conf #挂载 Redis配置
+    ports:
+      - 6379:6379
 
   violet-auth:
     build: ./violet-auth
-    command:
-      - "--nacos.url=nacos"
+    container_name: violet-auth
     environment:
       - "TZ=Asia/Shanghai"
       - "NACOS_URL=nacos"
       - "MYSQL_URL=mysql"
+      - "REDIS_URL=redis"
     ports:
       - "8101:8101"
     depends_on:
       - mysql
       - nacos
-#    restart: on-failure
-
-#  violet-app-admin:
-#    build: ./violet-app/violet-app-admin
-#    command:
-#      - "--nacos.url=nacos"
-#    environment:
-#      - "TZ=Asia/Shanghai"
-#    ports:
-#      - "8201:8201"
-#    depends_on:
-#      - mysql
-#      - nacos
-##    restart: on-failure
+      - redis
+    restart: on-failure
 #
-#  violet-gateway:
-#    build: ./violet-gateway
-#    command:
-#      - "--nacos.url=nacos"
-#    environment:
-#      - "TZ=Asia/Shanghai"
-#    ports:
-#      - "8301:8301"
-#    depends_on:
-#      - mysql
-#      - nacos
-#    restart: on-failure
+  violet-app-admin:
+    build: ./violet-app/violet-app-admin
+    container_name: violet-app-admin
+    environment:
+      - "TZ=Asia/Shanghai"
+      - "NACOS_URL=nacos"
+      - "MYSQL_URL=mysql"
+      - "REDIS_URL=redis"
+    ports:
+      - "8201:8201"
+    depends_on:
+      - mysql
+      - nacos
+      - redis
+    restart: on-failure
+
+  violet-gateway:
+    build: ./violet-gateway
+    container_name: violet-gateway
+    environment:
+      - "TZ=Asia/Shanghai"
+      - "NACOS_URL=nacos"
+      - "REDIS_URL=redis"
+    ports:
+      - "8301:8301"
+    depends_on:
+      - nacos
+      - redis
+    restart: on-failure

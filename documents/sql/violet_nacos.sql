@@ -83,7 +83,7 @@ spring:
       database: violet_cloud_route
   redis:
     database: 3
-    host: 192.168.1.12
+    host: ${REDIS_URL}
     port: 6379
     lettuce:
       pool:
@@ -93,10 +93,12 @@ spring:
         max-wait: 10000
     timeout: 5000
 
-# 网关增强配置
+# 网关配置
 violet:
   gateway:
-    enhance: true
+    # 是否启用网关增强默认true
+    # 使用网关增强时注释spring.autoconfigure.exclude并配置mongodb
+    enhance: false
     jwt:
       secret: 1234567
       expiration: 36000
@@ -148,7 +150,7 @@ spring:
       pool-name: VioletHikariCP
   redis:
     database: 0
-    host: 127.0.0.1
+    host: ${REDIS_URL}
     port: 6379
     lettuce:
       pool:
@@ -301,7 +303,7 @@ violet:
       anon-uris: /test/**,/user/check/**,/mail/captcha
 oss:
   # 是否开启oss对象存储
-  enable: false
+  enable: true
   # 开启end point接口
   info: true
   #使用云OSS需要将此设置为false

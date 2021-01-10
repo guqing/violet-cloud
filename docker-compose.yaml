@@ -36,7 +36,7 @@ services:
       - "9555:9555"
     depends_on:
       - mysql
-    restart: on-failure
+#    restart: on-failure
 
   redis:
     image: redis:4.0.14
@@ -62,8 +62,8 @@ services:
       - mysql
       - nacos
       - redis
-    restart: on-failure
-#
+#    restart: on-failure
+
   violet-app-admin:
     build: ./violet-app/violet-app-admin
     container_name: violet-app-admin
@@ -78,7 +78,7 @@ services:
       - mysql
       - nacos
       - redis
-    restart: on-failure
+#    restart: on-failure
 
   violet-gateway:
     build: ./violet-gateway
@@ -92,4 +92,16 @@ services:
     depends_on:
       - nacos
       - redis
-    restart: on-failure
+#    restart: on-failure
+
+  violet-app-test:
+    build: ./violet-app/violet-app-test
+    container_name: violet-app-test
+    environment:
+      - "TZ=Asia/Shanghai"
+      - "NACOS_URL=nacos"
+    ports:
+      - "8202:8202"
+    depends_on:
+      - nacos
+#    restart: on-failure

@@ -11,8 +11,8 @@ import xyz.guqing.violet.common.security.starter.annotation.EnableVioletCloudRes
  */
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @EnableVioletCloudResourceServer
-public class MicroTestApplication {
+public class TestApplication {
     public static void main(String[] args) {
-        SpringApplication.run(MicroTestApplication.class, args);
+        SpringApplication.run(TestApplication.class, args);
     }
 }

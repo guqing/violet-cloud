@@ -14,6 +14,10 @@ services:
       - ./scripts/mysql:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
+    healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
 
   nacos:
     image: nacos/nacos-server:1.4.0
@@ -35,8 +39,9 @@ services:
       - "8001:8848"
       - "9555:9555"
     depends_on:
-      - mysql
-    restart: on-failure
+      mysql:
+        condition: service_healthy
+  #    restart: on-failure
 
   redis:
     image: redis:4.0.14
@@ -59,11 +64,9 @@ services:
     ports:
       - "8101:8101"
     depends_on:
-      - mysql
       - nacos
-      - redis
-    restart: on-failure
-#
+#    restart: on-failure
+
   violet-app-admin:
     build: ./violet-app/violet-app-admin
     container_name: violet-app-admin
@@ -75,10 +78,8 @@ services:
     ports:
       - "8201:8201"
     depends_on:
-      - mysql
       - nacos
-      - redis
-    restart: on-failure
+#    restart: on-failure
 
   violet-gateway:
     build: ./violet-gateway
@@ -91,5 +92,16 @@ services:
       - "8301:8301"
     depends_on:
       - nacos
-      - redis
-    restart: on-failure
+#    restart: on-failure
+
+  violet-app-test:
+    build: ./violet-app/violet-app-test
+    container_name: violet-app-test
+    environment:
+      - "TZ=Asia/Shanghai"
+      - "NACOS_URL=nacos"
+    ports:
+      - "8202:8202"
+    depends_on:
+      - nacos
+#    restart: on-failure

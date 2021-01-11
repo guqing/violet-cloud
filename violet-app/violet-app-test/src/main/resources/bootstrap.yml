@@ -6,7 +6,7 @@ spring:
       config:
         server-addr: ${nacos.url}
         group: DEFAULT_GROUP
-        prefix: violet-server-test
+        prefix: violet-app-test
         file-extension: yaml
       discovery:
         server-addr: ${nacos.url}

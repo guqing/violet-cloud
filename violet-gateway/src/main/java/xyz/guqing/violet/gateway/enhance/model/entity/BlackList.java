@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.redis.core.RedisHash;
 
 /**
  * @author guqing
@@ -16,7 +15,6 @@ import org.springframework.data.redis.core.RedisHash;
 @Document
 @NoArgsConstructor
 @AllArgsConstructor
-@RedisHash("black_list")
 public class BlackList {
 
     public static final String CLOSE = "0";

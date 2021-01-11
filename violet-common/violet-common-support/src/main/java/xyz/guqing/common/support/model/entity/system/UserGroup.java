@@ -3,6 +3,7 @@ package xyz.guqing.common.support.model.entity.system;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
+import xyz.guqing.common.support.model.entity.BaseEntity;
 
 /**
  * <p>

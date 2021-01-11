@@ -1,4 +1,4 @@
-package xyz.guqing.common.support.model.entity.system;
+package xyz.guqing.common.support.model.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;

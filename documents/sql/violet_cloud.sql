@@ -13,8 +13,6 @@ create table user
     email           varchar(128)            null comment '邮箱',
     mobile          varchar(20)             null comment '联系电话',
     gender          int                     null comment '性别 0男 1女 2保密',
-    is_tab          int                     null comment '是否开启tab，0关闭 1开启',
-    theme           varchar(10)             null comment '主题',
     avatar          varchar(100)            null comment '头像',
     description     varchar(150)            null comment '描述',
     last_login_time datetime                null comment '最近访问时间',

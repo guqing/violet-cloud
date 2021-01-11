@@ -60,16 +60,6 @@ public class CurrentUser implements Serializable {
     private Integer gender;
 
     /**
-     * 是否开启tab，0关闭 1开启
-     */
-    private Integer isTab;
-
-    /**
-     * 主题
-     */
-    private String theme;
-
-    /**
      * 头像
      */
     private String avatar;

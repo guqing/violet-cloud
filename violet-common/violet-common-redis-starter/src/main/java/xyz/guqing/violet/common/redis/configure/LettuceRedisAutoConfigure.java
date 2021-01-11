@@ -5,17 +5,15 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
-import xyz.guqing.violet.common.redis.properties.FebsLettuceRedisProperties;
+import xyz.guqing.violet.common.redis.properties.LettuceRedisProperties;
 import xyz.guqing.violet.common.redis.service.RedisService;
 
 /**
@@ -23,9 +21,9 @@ import xyz.guqing.violet.common.redis.service.RedisService;
  *
  * @author guqing
  */
-@EnableConfigurationProperties(FebsLettuceRedisProperties.class)
+@EnableConfigurationProperties(LettuceRedisProperties.class)
 @ConditionalOnProperty(value = "violet.lettuce.redis.enable", havingValue = "true", matchIfMissing = true)
-public class FebsLettuceRedisAutoConfigure {
+public class LettuceRedisAutoConfigure {
 
     @Bean(name = "myRedisTemplate")
     @ConditionalOnClass(RedisOperations.class)

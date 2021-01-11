@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @author guqing
  */
 @ConfigurationProperties(prefix = "violet.lettuce.redis")
-public class FebsLettuceRedisProperties {
+public class LettuceRedisProperties {
 
     /**
      * 是否开启Lettuce Redis

@@ -1,6 +1,9 @@
 package xyz.guqing.violet.app.admin.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.lang.NonNull;
 import xyz.guqing.violet.app.admin.model.entity.UserDO;
 import xyz.guqing.violet.app.admin.model.params.UserQuery;
 import xyz.guqing.common.support.model.entity.system.User;
@@ -18,15 +21,10 @@ import java.util.List;
 public interface UserMapper extends BaseMapper<User> {
     /**
      * 根据条件查询用户信息
+     *
      * @param userQuery 查询条件
-     * @return 返回查询结果，查询不到数据返回{@code null}
+     * @param page      分页
+     * @return 返回分页page对象
      */
-    List<UserDO> findUserBy(UserQuery userQuery);
-
-    /**
-     * 根据条件统计用户数量
-     * @param userQuery 查询条件
-     * @return 返回用户数量，没有数据返回 0
-     */
-    Long countUserBy(UserQuery userQuery);
+    Page<UserDO> findUserBy(@Param("q") UserQuery userQuery, Page<UserDO> page);
 }

@@ -3,12 +3,14 @@ package xyz.guqing.violet.app.admin.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
+import xyz.guqing.common.support.utils.PageUtils;
 import xyz.guqing.violet.app.admin.mapper.UserMapper;
 import xyz.guqing.violet.app.admin.mapper.UserRoleMapper;
 import xyz.guqing.violet.app.admin.model.dto.UserDTO;
@@ -29,10 +31,8 @@ import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.utils.ServiceUtils;
 import xyz.guqing.violet.common.core.utils.VioletUtil;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -50,45 +50,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private final PasswordEncoder passwordEncoder;
 
     @Override
-    public PageInfo<UserDTO> listByPage(UserQuery userQuery) {
-        PageQuery pageQuery = userQuery.getPageQuery();
-        Long current = pageQuery.getCurrent();
-        Long pageSize = pageQuery.getPageSize();
-
-        PageInfo<UserDTO> pageInfo = new PageInfo<>();
-        pageInfo.setCurrent(current);
-        pageInfo.setPageSize(pageSize);
-
-        // 没有数据返回空集合分页对象
-        Long userCount = countUserBy(userQuery);
-        pageInfo.setTotal(userCount);
-        if(userCount == 0) {
-            pageInfo.setPages(1L);
-            pageInfo.setList(Collections.emptyList());
-            return pageInfo;
-        }
-
-        // 查询
-        userQuery.setPageQuery(pageQuery);
-        List<UserDO> userByPage = this.baseMapper.findUserBy(userQuery);
-        List<UserDTO> userDtoList = ServiceUtils.convertToList(userByPage, user -> {
+    public PageInfo<UserDTO> listByPage(UserQuery userQuery, PageQuery pageQuery) {
+        Page<UserDO> userByPage = this.baseMapper.findUserBy(userQuery, PageUtils.convert(pageQuery));
+        List<UserDTO> userDtoList = ServiceUtils.convertToList(userByPage.getRecords(), user -> {
             UserDTO userDTO = new UserDTO().convertFrom(user);
             userDTO.setRoleIds(VioletUtil.commaSeparatedToList(user.getRoleId()));
             userDTO.setRoleNames(VioletUtil.commaSeparatedToList(user.getRoleName()));
             return userDTO;
         });
 
-        pageInfo.setList(userDtoList);
-
-        // 设置分页数
-        Long pageTotal = VioletUtil.getPageTotal(pageSize, userCount);
-        pageInfo.setPages(pageTotal);
-        return pageInfo;
-    }
-
-    @Override
-    public Long countUserBy(UserQuery userQuery) {
-        return this.baseMapper.countUserBy(userQuery);
+        return PageUtils.convertTo(userByPage, userDtoList);
     }
 
     @Override
@@ -115,7 +86,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         User user = userParam.convertTo();
         // 加密密码
         String password = user.getPassword();
-        if(password != null) {
+        if (password != null) {
             user.setPassword(passwordEncoder.encode(password));
         }
 
@@ -166,7 +137,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void clearUserGroupByGroupIds(List<Long> groupIds) {
-        if(CollectionUtils.isEmpty(groupIds)) {
+        if (CollectionUtils.isEmpty(groupIds)) {
             return;
         }
         LambdaUpdateWrapper<User> updateWrapper = Wrappers.lambdaUpdate();
@@ -192,7 +163,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Transactional(rollbackFor = Exception.class)
     public void resetPassword(String username) {
         User user = getByUsername(username);
-        if(user == null) {
+        if (user == null) {
             throw new NotFoundException("用户不存在");
         }
         String defaultPassword = passwordEncoder.encode(VioletConstant.DEFAULT_PASSWORD);
@@ -205,7 +176,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Transactional(rollbackFor = Exception.class)
     public void updateStatus(String username, UserStatusEnum status) {
         User user = getByUsername(username);
-        if(user == null) {
+        if (user == null) {
             throw new NotFoundException("用户不存在");
         }
         user.setStatus(status.getValue());
@@ -223,7 +194,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Override
     public void updatePassword(String username, String oldPassword, String newPassword) {
         boolean correctByPassword = isCorrectByPassword(username, oldPassword);
-        if(!correctByPassword) {
+        if (!correctByPassword) {
             throw new BadArgumentException("原始密码不正确");
         }
         // 修改密码

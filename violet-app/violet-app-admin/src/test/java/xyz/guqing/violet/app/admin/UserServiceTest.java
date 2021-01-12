@@ -9,6 +9,7 @@ import xyz.guqing.violet.app.admin.model.dto.UserDTO;
 import xyz.guqing.violet.app.admin.model.params.UserQuery;
 import xyz.guqing.violet.app.admin.service.UserService;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
+import xyz.guqing.violet.common.core.model.support.PageQuery;
 
 /**
  * @author guqing
@@ -25,7 +26,7 @@ class UserServiceTest {
     void testListByPage() {
         UserQuery userQuery = new UserQuery();
         userQuery.setUsername("guqing");
-        PageInfo<UserDTO> pageInfo = userService.listByPage(userQuery);
+        PageInfo<UserDTO> pageInfo = userService.listByPage(userQuery, new PageQuery());
         System.out.println(pageInfo);
     }
 

@@ -29,73 +29,33 @@
             LEFT JOIN role r ON (r.id = ur.role_id)
         WHERE
             u.deleted=0
-        <if test="username != null and username != ''">
-            AND u.username = #{username}
+        <if test="q.username != null and q.username != ''">
+            AND u.username = #{q.username}
         </if>
-        <if test="groupId != null and groupId != ''">
-            AND g.id = #{groupId}
+        <if test="q.groupId != null and q.groupId != ''">
+            AND g.id = #{q.groupId}
         </if>
-        <if test="gender != null and gender != ''">
-            AND u.gender = #{gender}
+        <if test="q.gender != null and q.gender != ''">
+            AND u.gender = #{q.gender}
         </if>
-        <if test="status != null and status != ''">
-            AND u.status = #{status}
+        <if test="q.status != null and q.status != ''">
+            AND u.status = #{q.status}
         </if>
-        <if test="mobile != null and mobile != ''">
-            AND u.mobile = #{mobile}
+        <if test="q.mobile != null and q.mobile != ''">
+            AND u.mobile = #{q.mobile}
         </if>
-        <if test="groupName != null and groupName != ''">
-            AND g.group_name like CONCAT('%',#{groupName},'%')
+        <if test="q.groupName != null and q.groupName != ''">
+            AND g.group_name like CONCAT('%',#{q.groupName},'%')
         </if>
-        <if test="createTimeFrom != null">
-            And u.create_time &gt; #{createTimeFrom}
+        <if test="q.createTimeFrom != null">
+            And u.create_time &gt; #{q.createTimeFrom}
         </if>
-        <if test="createTimeTo!= null">
-            And u.create_time &lt; #{createTimeTo}
+        <if test="q.createTimeTo!= null">
+            And u.create_time &lt; #{q.createTimeTo}
         </if>
         group by u.username,u.id,u.email,u.mobile,u.status,u.create_time,u.gender,
         u.group_id,u.last_login_time,u.modify_time,u.description,
         u.avatar
-        order by u.create_time desc
-        limit ${pageQuery.pageSize * (pageQuery.current-1)},
-         #{pageQuery.pageSize}
-    </select>
-
-    <select id="countUserBy"
-            parameterType="xyz.guqing.violet.app.admin.model.params.UserQuery"
-            resultType="java.lang.Long">
-        SELECT
-          count(*)
-        from
-          `user` u
-        WHERE
-            u.deleted=0
-        <if test="username != null and username != ''">
-            AND u.username = #{username}
-        </if>
-        <if test="nickname != null and nickname != ''">
-            AND u.nickname = #{nickname}
-        </if>
-        <if test="groupId != null and groupId != ''">
-            AND g.id = #{groupId}
-        </if>
-        <if test="gender != null and gender != ''">
-            AND u.gender = #{gender}
-        </if>
-        <if test="status != null and status != ''">
-            AND u.status = #{status}
-        </if>
-        <if test="mobile != null and mobile != ''">
-            AND u.mobile = #{mobile}
-        </if>
-        <if test="groupName != null and groupName != ''">
-            AND g.group_name like CONCAT('%',#{groupName},'%')
-        </if>
-        <if test="createTimeFrom != null">
-            And u.create_time &gt; #{createTimeFrom}
-        </if>
-        <if test="createTimeTo!= null">
-            And u.create_time &lt; #{createTimeTo}
-        </if>
+        order by u.create_time desc, u.id
     </select>
 </mapper>

@@ -42,9 +42,7 @@ public class UserController {
     @PreAuthorize("hasAuthority('user:view')")
     public ResultEntity<PageInfo<UserDTO>> listUserByPage(UserQuery userQuery,
                                                           PageQuery pageQuery) {
-        userQuery.setPageQuery(pageQuery);
-        log.debug("用户列表查询参数: [{}]", userQuery);
-        PageInfo<UserDTO> users = userService.listByPage(userQuery);
+        PageInfo<UserDTO> users = userService.listByPage(userQuery, pageQuery);
         return ResultEntity.ok(users);
     }
 

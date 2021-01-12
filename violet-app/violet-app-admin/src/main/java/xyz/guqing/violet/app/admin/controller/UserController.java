@@ -67,13 +67,8 @@ public class UserController {
     @PutMapping("profile")
     @ControllerEndpoint(operation="修改个人信息", exceptionMessage = "修改个人信息失败")
     public ResultEntity<String> updateProfile(@RequestBody @Valid UserProfileParam userParam) {
-        log.debug("当前用户信息:[{}]", VioletSecurityHelper.getCurrentUser());
-        String username = VioletSecurityHelper.getCurrentUsername();
-        if(!VioletSecurityHelper.isCurrentUser(username)) {
-            throw new AccessDeniedException("无权修改别人的信息");
-        }
         // 根据用户名查询
-        User user = userService.getByUsername(username);
+        User user = userService.getByUsername(VioletSecurityHelper.getCurrentUsername());
         // 使用参数更新 user
         userParam.update(user);
         // 更新

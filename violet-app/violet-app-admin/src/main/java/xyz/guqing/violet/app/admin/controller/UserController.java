@@ -86,7 +86,7 @@ public class UserController {
 
     @PutMapping("password")
     @ControllerEndpoint(exceptionMessage = "修改密码")
-    public ResultEntity<String> updatePassword(@RequestBody ChangePasswordParam passwordParam) {
+    public ResultEntity<String> updatePassword(@RequestBody @Valid ChangePasswordParam passwordParam) {
         String username = VioletSecurityHelper.getCurrentUsername();
         userService.updatePassword(username, passwordParam.getOldPassword(), passwordParam.getNewPassword());
         return ResultEntity.ok();

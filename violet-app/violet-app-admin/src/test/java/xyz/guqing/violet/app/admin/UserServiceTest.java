@@ -31,15 +31,7 @@ class UserServiceTest {
     }
 
     @Test
-    void testCountUserBy() {
-        UserQuery userQuery = new UserQuery();
-        userQuery.setUsername("guqing");
-        Long count = userService.countUserBy(userQuery);
-        System.out.println(count);
-    }
-
-    @Test
-    void testEncoder() {
+    void testPasswordMatches() {
         boolean matches = passwordEncoder.matches("123456", "$2a$10$I/drteyoz3K8ncdS0gw1ve.wDPgfz4p4eZiUWJ4M0948d2Eogc6lG");
         Assert.isTrue(matches, "加密验证不匹配");
     }

@@ -352,6 +352,19 @@ security:
       jwt:
         key-uri:  http://47.103.195.246:8301/auth/oauth/token_key
         key-value: violet', 'f398169f9a1ad63cf8c0bcd7a865f071', '2021-01-10 08:19:54', '2021-01-10 08:20:10', null, '172.20.0.1', '', '', '', '', '', 'yaml', '');
+INSERT INTO violet_nacos.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema) VALUES (5, 'violet-apm-admin', 'DEFAULT_GROUP', 'server:
+  port: 8401
+
+spring:
+  security:
+    user:
+      name: violet
+      password: 123456
+  boot:
+    admin:
+      ui:
+        title: ${spring.application.name}', '071ef5f4adf9993faef503551cfe195a', '2020-11-01 08:29:45', '2020-11-01 08:29:45', null, '113.116.131.116', '', '', 'spring boot admin监控配置', null, null, 'yaml', null);
+
 
 /******************************************/
 /*   数据库全名 = nacos_config   */

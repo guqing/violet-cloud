@@ -8,9 +8,7 @@
 2. 请使用`JDK8`及以上版本
 3. 构建工具使用 Maven
 
-4. 本项目使用了`Lombok`，所以请确保IDEA安装了Lombok插件
-
-> 如果使用的 `IDE` 是 `IntelliJ IDEA`，请在设置中启用 `Build, Execution, Deployment/Annotation Processors` 的 `Enable annotation processing`
+4. 本项目使用了`Lombok`，所以请确保IDEA安装了Lombok插件,对于`IDEA 2020.3`及以上版本已默认内置Lombok插件无需安装,低版本`IDEA`安装Lombok插件后请在设置中启用 `Build, Execution, Deployment/Annotation Processors` 的 `Enable annotation processing`
 
 5. 安装Redis，可以使用`docker`安装
 ```shell
@@ -82,14 +80,14 @@ sh bin/startup.sh -m standalone
 http://localhost:8001/nacos
 ```
 
-即可看到登陆页面，登陆账号如下:
+即可看到登录页面，登录账号如下:
 
 ```
 用户名：violet
 密码: 123456
 ```
 
-登陆成功后就可以看到项目配置列表了，根据需要将这三个配置文件中`127.0.0.1`修改为自己对应的`ip`地址
+登录成功后就可以看到项目配置列表了，根据需要将这三个配置文件中`127.0.0.1`修改为自己对应的`ip`地址
 
 ![image-20201101000153237](assets/image-20201101000153237.png)
 
@@ -108,19 +106,51 @@ http://localhost:8001/nacos
 
 #### 运行项目
 
-使用IDEA打开项目，分别启动这三个模块
+使用IDEA打开项目，并**分别**给以下三个模块设置运行环境变量指定`nacos`连接地址
 
 ```
 项目后台接口：violet-app-admin
 认证中心： violet-auth
 服务网关: violet-gateway
+服务监控: violet-apm-admin
 ```
 
-![image-20201101151827192](assets/image-20201101151827192.png)
+![image-20210113151530591](assets/image-20210113151530591.png)
 
-启动时检查启动日志是否有报错，根据错误日志检查相应配置
+同时在`IDEA`的`File->Settings`菜单中配置Maven运行环境变量否则`package`时会报错
+
+![maven-build-env](assets/maven-build-env.png)
+
+做好以上准备即可启动Violet服务:
 
 ![image-20201101152209895](assets/image-20201101152209895.png)
+
+#### 服务状态监控
+
+1. 启动成功后可到`Nacos`控制到查看服务状态
+
+![image-20210113152809329](assets/image-20210113152809329.png)
+
+2. 也可以启动`violet-apm-admin`模块监控实例状态
+
+启动成功后访问`ip:8401`
+
+![image-20210113153404712](assets/image-20210113153404712.png)
+
+输入以下账号密码即可成功登录
+
+```
+账号: violet
+密码: 123456
+```
+登录成功后效果如下
+
+![image-20210113153505418](assets/image-20210113153505418.png)
+
+`violet-apm-admin`的账号密码可以在`nacos`中找到`Data Id`为`violet-apm-admin`的配置修改
+
+![image-20210113153323178](assets/image-20210113153323178.png)
+
 
 ### 前端项目
 
@@ -168,10 +198,9 @@ npm run serve
 
 ![image-20201101154818718](assets/image-20201101154818718.png)
 
-## 进阶
-### 网关使用说明
+## 配置网关增强
 网关管理模块包括:网关用户、网关日志、限流规则、黑名单管理和拦截日志,如果要使用这些功能需要开启网关增强。
-#### 安装mongodb数据库
+### 安装mongodb数据库
 对于Linux或Mac用户可以使用docker安装方式，执行以下步骤时请确保你已安装`docker`
 ```shell
 docker run --name mongo -p 27017:27017 -v $PWD/db:/data/db -d mongo
@@ -202,7 +231,7 @@ db.createUser({ user:'guqing',pwd:'12345678',roles:[ { role:'readWrite', db: 'vi
 执行完后别着急退出，继续执行如下图脚本里的内容
 ![img.png](assets/img1231231313.png)
 
-#### 配置网关增强
+### 启用网关增强
 在`nacos`控制台修改`violet-gateway.yaml`如下图所示，注释`MongoAutoConfiguration`并配置mongodb连接就完成啦
 ```yaml
 autoconfigure:

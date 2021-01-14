@@ -1,9 +1,7 @@
 package xyz.guqing.common.support.model.entity.system;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
-import xyz.guqing.common.support.model.entity.BaseEntity;
 
 /**
  * <p>
@@ -14,9 +12,8 @@ import xyz.guqing.common.support.model.entity.BaseEntity;
  * @since 2021-01-14
  */
 @Data
-@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
-public class OauthClientDetails extends BaseEntity {
+public class OauthClientDetails {
 
     private static final long serialVersionUID = 1L;
 

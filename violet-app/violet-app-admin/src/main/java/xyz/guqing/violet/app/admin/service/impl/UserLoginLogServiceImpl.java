@@ -43,6 +43,6 @@ public class UserLoginLogServiceImpl extends ServiceImpl<UserLoginLogMapper, Use
         }
 
         queryWrapper.orderByDesc(UserLoginLog::getLoginTime);
-        return page(PageUtils.convert(pageQuery), queryWrapper);
+        return page(PageUtils.convertFrom(pageQuery), queryWrapper);
     }
 }

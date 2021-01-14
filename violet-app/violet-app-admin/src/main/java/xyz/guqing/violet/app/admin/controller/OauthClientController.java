@@ -25,8 +25,8 @@ public class OauthClientController {
 
     @GetMapping
     public ResultEntity<PageInfo<OauthClientDTO>> listBy(String clientId, PageQuery pageQuery) {
-        Page<OauthClientDetails> clientDetailsPage = oauthClientService.listBy(clientId, PageUtils.convert(pageQuery));
-        PageInfo<OauthClientDTO> pageInfo = PageUtils.convertToPageInfo(clientDetailsPage, client -> new OauthClientDTO().convertFrom(client));
+        Page<OauthClientDetails> clientDetailsPage = oauthClientService.listBy(clientId, PageUtils.convertFrom(pageQuery));
+        PageInfo<OauthClientDTO> pageInfo = PageUtils.convertTo(clientDetailsPage, client -> new OauthClientDTO().convertFrom(client));
         return ResultEntity.ok(pageInfo);
     }
 }

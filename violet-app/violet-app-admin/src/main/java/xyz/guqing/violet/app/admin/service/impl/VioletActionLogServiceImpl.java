@@ -89,7 +89,7 @@ public class VioletActionLogServiceImpl extends ServiceImpl<VioletActionLogMappe
 
         // 按照创建时间降序排列，最近的显示在最前面
         queryWrapper.orderByDesc(VioletActionLog::getCreateTime);
-        return page(PageUtils.convert(pageQuery), queryWrapper);
+        return page(PageUtils.convertFrom(pageQuery), queryWrapper);
     }
 
     private StringBuilder handleParams(StringBuilder params, Object[] args, List paramNames) {

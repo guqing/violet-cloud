@@ -34,6 +34,6 @@ public class LoginLogController {
     }
 
     private PageInfo<UserLoginLogDTO> convertTo(IPage<UserLoginLog> userLoginLogs) {
-        return PageUtils.convertToPageInfo(userLoginLogs,userLoginLog -> new UserLoginLogDTO().convertFrom(userLoginLog));
+        return PageUtils.convertTo(userLoginLogs, userLoginLog -> new UserLoginLogDTO().convertFrom(userLoginLog));
     }
 }

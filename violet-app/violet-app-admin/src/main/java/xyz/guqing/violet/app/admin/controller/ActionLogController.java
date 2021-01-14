@@ -31,6 +31,6 @@ public class ActionLogController {
     }
 
     private PageInfo<ActionLogDTO> convertTo(IPage<VioletActionLog> actionLogPage) {
-        return PageUtils.convertToPageInfo(actionLogPage, actionLog -> new ActionLogDTO().convertFrom(actionLog));
+        return PageUtils.convertTo(actionLogPage, actionLog -> new ActionLogDTO().convertFrom(actionLog));
     }
 }

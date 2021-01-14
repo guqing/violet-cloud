@@ -24,7 +24,7 @@ public class PageUtils {
     private PageUtils() {
     }
 
-    public static <T> Page<T> convert(PageQuery pageQuery) {
+    public static <T> Page<T> convertFrom(PageQuery pageQuery) {
         Page<T> page = new Page<>();
 
         String sortField = pageQuery.getField();
@@ -42,7 +42,7 @@ public class PageUtils {
         return page;
     }
 
-    public static <T, DTO> PageInfo<DTO> convertToPageInfo(@NonNull IPage<T> page, Function<T, DTO> function) {
+    public static <T, DTO> PageInfo<DTO> convertTo(@NonNull IPage<T> page, Function<T, DTO> function) {
         List<DTO> records = page.getRecords()
                 .stream()
                 .map(function)

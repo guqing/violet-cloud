@@ -65,7 +65,7 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         }
         queryWrapper.orderByAsc(Role::getCreateTime);
         PageQuery pageQuery = roleQuery.getPageQuery();
-        return page(PageUtils.convert(pageQuery), queryWrapper);
+        return page(PageUtils.convertFrom(pageQuery), queryWrapper);
     }
 
     @Override

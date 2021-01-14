@@ -83,6 +83,6 @@ public class RoleController {
     }
 
     private PageInfo<RoleDTO> convertTo(IPage<Role> rolePage) {
-        return PageUtils.convertToPageInfo(rolePage, role -> new RoleDTO().convertFrom(role));
+        return PageUtils.convertTo(rolePage, role -> new RoleDTO().convertFrom(role));
     }
 }

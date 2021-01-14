@@ -1,6 +1,6 @@
 <h1 align="center">Violet Cloud</h1>
 <div align="center">
-一个基于spring cloud的微服务后台管理系统，可方便的接入自己的微服务
+spring cloud的微服务前后端开发脚手架，提供网关、认证、权限、服务发现、服务监控等功能，轻松上手，简化开发。
 </div>
 
 <div align="center">

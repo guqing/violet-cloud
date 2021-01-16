@@ -2,16 +2,17 @@ package xyz.guqing.violet.app.admin.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import xyz.guqing.common.support.model.entity.system.OauthClientDetails;
 import xyz.guqing.common.support.utils.PageUtils;
 import xyz.guqing.violet.app.admin.model.dto.OauthClientDTO;
+import xyz.guqing.violet.app.admin.model.params.OauthClientParam;
 import xyz.guqing.violet.app.admin.service.OauthClientService;
 import xyz.guqing.violet.common.core.model.support.PageInfo;
 import xyz.guqing.violet.common.core.model.support.PageQuery;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
+
+import javax.validation.Valid;
 
 /**
  * @author guqing
@@ -28,5 +29,12 @@ public class OauthClientController {
         Page<OauthClientDetails> clientDetailsPage = oauthClientService.listBy(clientId, PageUtils.convertFrom(pageQuery));
         PageInfo<OauthClientDTO> pageInfo = PageUtils.convertTo(clientDetailsPage, client -> new OauthClientDTO().convertFrom(client));
         return ResultEntity.ok(pageInfo);
+    }
+
+    @PostMapping
+    public ResultEntity<String> create(@RequestBody @Valid OauthClientParam oauthClientParam) {
+        OauthClientDetails oauthClientDetails = oauthClientParam.convertTo();
+        oauthClientService.createBy(oauthClientDetails);
+        return ResultEntity.ok();
     }
 }

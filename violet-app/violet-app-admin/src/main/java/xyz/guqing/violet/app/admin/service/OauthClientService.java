@@ -17,4 +17,12 @@ public interface OauthClientService extends IService<OauthClientDetails> {
      * @return 返回客户端数据列表
      */
     Page<OauthClientDetails> listBy(String clientId, Page<OauthClientDetails> page);
+
+    /**
+     * 添加oauth客户端数据
+     * 需要先对客户端密钥进行加密在保存
+     *
+     * @param oauthClientDetails 客户端参数
+     */
+    void createBy(OauthClientDetails oauthClientDetails);
 }

@@ -37,6 +37,12 @@ public class OauthClientController {
         return ResultEntity.ok(new OauthClientDTO().convertFrom(oauthClientDetails));
     }
 
+    @GetMapping("/check/{clientId}")
+    public ResultEntity<Boolean> checkExistByClientId(@PathVariable String clientId) {
+        boolean exist = oauthClientService.existByClientId(clientId);
+        return ResultEntity.ok(exist);
+    }
+
     @PostMapping
     public ResultEntity<String> create(@RequestBody @Valid OauthClientParam oauthClientParam) {
         OauthClientDetails oauthClientDetails = oauthClientParam.convertTo();

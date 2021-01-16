@@ -25,4 +25,12 @@ public interface OauthClientService extends IService<OauthClientDetails> {
      * @param oauthClientDetails 客户端参数
      */
     void createBy(OauthClientDetails oauthClientDetails);
+
+    /**
+     * 根据客户端id查询客户端id是否被占用
+     *
+     * @param clientId 客户端id
+     * @return 如果客户端id已经存在返回 {@code true},否则返回{@code false}
+     */
+    boolean existByClientId(String clientId);
 }

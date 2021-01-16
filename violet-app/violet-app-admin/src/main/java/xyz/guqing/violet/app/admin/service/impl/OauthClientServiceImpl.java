@@ -37,4 +37,10 @@ public class OauthClientServiceImpl extends ServiceImpl<OauthClientDetailsMapper
         oauthClientDetails.setClientSecret(encodedSecret);
         save(oauthClientDetails);
     }
+
+    @Override
+    public boolean existByClientId(String clientId) {
+        OauthClientDetails oauthClientDetails = getById(clientId);
+        return oauthClientDetails != null;
+    }
 }

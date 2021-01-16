@@ -1,5 +1,7 @@
 package xyz.guqing.common.support.model.entity.system;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -17,6 +19,7 @@ public class OauthClientDetails {
 
     private static final long serialVersionUID = 1L;
 
+    @TableId(type = IdType.INPUT)
     private String clientId;
 
     private String resourceIds;

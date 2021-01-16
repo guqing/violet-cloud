@@ -31,6 +31,12 @@ public class OauthClientController {
         return ResultEntity.ok(pageInfo);
     }
 
+    @GetMapping("/{clientId}")
+    public ResultEntity<OauthClientDTO> getByClientId(@PathVariable String clientId) {
+        OauthClientDetails oauthClientDetails = oauthClientService.getById(clientId);
+        return ResultEntity.ok(new OauthClientDTO().convertFrom(oauthClientDetails));
+    }
+
     @PostMapping
     public ResultEntity<String> create(@RequestBody @Valid OauthClientParam oauthClientParam) {
         OauthClientDetails oauthClientDetails = oauthClientParam.convertTo();

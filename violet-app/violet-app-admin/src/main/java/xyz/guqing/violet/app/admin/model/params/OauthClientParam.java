@@ -23,7 +23,7 @@ public class OauthClientParam implements InputConverter<OauthClientDetails> {
     @NotBlank(message = "Scope权限范围不能为空")
     private String scope;
 
-    @NotBlank(message = "授权方式不能为空")
+    @NotNull(message = "授权方式不能为空")
     private List<String> authorizedGrantTypes;
 
     @NotNull(message = "access token过期时间不能为空")

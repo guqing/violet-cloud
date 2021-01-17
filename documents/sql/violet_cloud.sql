@@ -133,6 +133,9 @@ INSERT INTO menu (id, parent_id, title, name, path, redirect, component, icon, k
 INSERT INTO menu (id, parent_id, title, name, path, redirect, component, icon, keep_alive, hidden, perms, type, sort_index, create_time, modify_time) VALUES (38, 11, '查看', 'roleView', null, null, null, null, 0, 1, 'role:view', '1', 37, '2020-07-23 18:24:03', '2020-07-23 18:24:06');
 INSERT INTO menu (id, parent_id, title, name, path, redirect, component, icon, keep_alive, hidden, perms, type, sort_index, create_time, modify_time) VALUES (39, 12, '查看', 'menuView', null, null, null, null, 0, 1, 'menu:view', '1', 38, '2020-07-23 18:24:45', '2020-07-23 18:24:49');
 INSERT INTO menu (id, parent_id, title, name, path, redirect, component, icon, keep_alive, hidden, perms, type, sort_index, create_time, modify_time) VALUES (40, 13, '查看', 'groupView', null, null, null, null, 0, 1, 'group:view', '1', 39, '2020-07-23 18:25:01', '2020-07-23 18:24:58');
+INSERT INTO menu (id, parent_id, title, name, path, redirect, component, icon, keep_alive, hidden, perms, type, sort_index, create_time, modify_time) VALUES (41, 9, '客户端管理', 'oauthClient', '/ram/client', null, 'client', null, 1, 0, '', '0', 41, '2020-11-25 15:54:42', '2020-11-25 16:18:25');
+INSERT INTO menu (id, parent_id, title, name, path, redirect, component, icon, keep_alive, hidden, perms, type, sort_index, create_time, modify_time) VALUES (42, 41, '查看', 'ClientView', null, null, null, null, 0, 0, 'oauthClient:view', '1', 42, '2021-01-17 00:24:23', '2021-01-17 00:24:25');
+INSERT INTO menu (id, parent_id, title, name, path, redirect, component, icon, keep_alive, hidden, perms, type, sort_index, create_time, modify_time) VALUES (43, 41, '新增', 'ClientAdd', null, null, null, null, 0, 0, 'oauthClient:add', '1', 43, '2021-01-17 00:24:23', '2021-01-17 00:24:25');
 
 -- 角色表
 create table role
@@ -192,6 +195,8 @@ INSERT INTO role_menu (role_id, menu_id) VALUES (1, 37);
 INSERT INTO role_menu (role_id, menu_id) VALUES (1, 38);
 INSERT INTO role_menu (role_id, menu_id) VALUES (1, 39);
 INSERT INTO role_menu (role_id, menu_id) VALUES (1, 40);
+INSERT INTO role_menu (role_id, menu_id) VALUES (1, 41);
+INSERT INTO role_menu (role_id, menu_id) VALUES (1, 42);
 INSERT INTO role_menu (role_id, menu_id) VALUES (2, 2);
 INSERT INTO role_menu (role_id, menu_id) VALUES (2, 3);
 INSERT INTO role_menu (role_id, menu_id) VALUES (2, 4);
@@ -230,6 +235,9 @@ INSERT INTO role_menu (role_id, menu_id) VALUES (2, 37);
 INSERT INTO role_menu (role_id, menu_id) VALUES (2, 38);
 INSERT INTO role_menu (role_id, menu_id) VALUES (2, 39);
 INSERT INTO role_menu (role_id, menu_id) VALUES (2, 40);
+INSERT INTO role_menu (role_id, menu_id) VALUES (2, 41);
+INSERT INTO role_menu (role_id, menu_id) VALUES (2, 42);
+INSERT INTO role_menu (role_id, menu_id) VALUES (2, 43);
 
 -- 用户和角色关联表
 create table user_role

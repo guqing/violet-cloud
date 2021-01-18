@@ -3,6 +3,7 @@ package xyz.guqing.violet.app.admin.controller;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import xyz.guqing.common.support.model.entity.system.OauthClientDetails;
 import xyz.guqing.common.support.utils.PageUtils;
@@ -11,11 +12,7 @@ import xyz.guqing.violet.app.admin.model.dto.OauthClientDTO;
 import xyz.guqing.violet.app.admin.model.params.OauthClientParam;
 import xyz.guqing.violet.app.admin.service.OauthClientService;
 import xyz.guqing.violet.common.core.exception.NotFoundException;
-import xyz.guqing.violet.common.core.model.support.PageInfo;
-import xyz.guqing.violet.common.core.model.support.PageQuery;
-import xyz.guqing.violet.common.core.model.support.ResultEntity;
-
-import javax.validation.Valid;
+import xyz.guqing.violet.common.core.model.support.*;
 
 /**
  * @author guqing
@@ -55,9 +52,18 @@ public class OauthClientController {
     @PostMapping
     @PreAuthorize("hasAuthority('oauthClient:add')")
     @ControllerEndpoint(operation = "新增Oauth客户端", exceptionMessage = "添加Oauth客户端失败")
-    public ResultEntity<String> create(@RequestBody @Valid OauthClientParam oauthClientParam) {
+    public ResultEntity<String> create(@RequestBody @Validated(CreateCheck.class) OauthClientParam oauthClientParam) {
         OauthClientDetails oauthClientDetails = oauthClientParam.convertTo();
         oauthClientService.createBy(oauthClientDetails);
+        return ResultEntity.ok();
+    }
+
+    @PutMapping("/{clientId}")
+    @PreAuthorize("hasAuthority('oauthClient:update')")
+    @ControllerEndpoint(operation = "修改Oauth客户端", exceptionMessage = "修改Oauth客户端失败")
+    public ResultEntity<String> updateBy(@PathVariable String clientId,
+                                         @RequestBody @Validated(UpdateCheck.class) OauthClientParam oauthClientParam) {
+        oauthClientService.updateBy(clientId, oauthClientParam);
         return ResultEntity.ok();
     }
 }

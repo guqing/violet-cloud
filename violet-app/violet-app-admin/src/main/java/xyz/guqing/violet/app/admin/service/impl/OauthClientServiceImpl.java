@@ -10,7 +10,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import xyz.guqing.common.support.model.entity.system.OauthClientDetails;
 import xyz.guqing.violet.app.admin.mapper.OauthClientDetailsMapper;
+import xyz.guqing.violet.app.admin.model.params.OauthClientParam;
 import xyz.guqing.violet.app.admin.service.OauthClientService;
+import xyz.guqing.violet.common.core.exception.NotFoundException;
 
 /**
  * @author guqing
@@ -42,5 +44,15 @@ public class OauthClientServiceImpl extends ServiceImpl<OauthClientDetailsMapper
     public boolean existByClientId(String clientId) {
         OauthClientDetails oauthClientDetails = getById(clientId);
         return oauthClientDetails != null;
+    }
+
+    @Override
+    public void updateBy(String clientId, OauthClientParam oauthClientParam) {
+        OauthClientDetails oauthClientDetails = getById(clientId);
+        if(oauthClientDetails == null) {
+            throw new NotFoundException("客户端数据不存在");
+        }
+        oauthClientParam.update(oauthClientDetails);
+        updateById(oauthClientDetails);
     }
 }

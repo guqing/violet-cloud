@@ -3,6 +3,7 @@ package xyz.guqing.violet.app.admin.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import xyz.guqing.common.support.model.entity.system.OauthClientDetails;
+import xyz.guqing.violet.app.admin.model.params.OauthClientParam;
 
 /**
  * @author guqing
@@ -33,4 +34,12 @@ public interface OauthClientService extends IService<OauthClientDetails> {
      * @return 如果客户端id已经存在返回 {@code true},否则返回{@code false}
      */
     boolean existByClientId(String clientId);
+
+    /**
+     * 根据客户端id更新oauth客户端信息,密钥不允许被修改
+     *
+     * @param clientId         客户端id
+     * @param oauthClientParam 客户端修改参数
+     */
+    void updateBy(String clientId, OauthClientParam oauthClientParam);
 }

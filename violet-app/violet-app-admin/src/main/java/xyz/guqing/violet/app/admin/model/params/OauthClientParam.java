@@ -52,8 +52,9 @@ public class OauthClientParam implements InputConverter<OauthClientDetails> {
 
     @Override
     public void update(OauthClientDetails oauthClientDetails) {
-        // 将密钥置空防止被修改
         this.clientId = null;
+        // 将密钥置空防止被修改
+        this.clientSecret = null;
         InputConverter.super.update(oauthClientDetails);
         convertType(oauthClientDetails);
     }

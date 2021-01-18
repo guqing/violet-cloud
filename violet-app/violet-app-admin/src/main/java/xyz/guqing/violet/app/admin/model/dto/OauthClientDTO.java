@@ -1,8 +1,14 @@
 package xyz.guqing.violet.app.admin.model.dto;
 
 import lombok.Data;
+import org.springframework.beans.BeanUtils;
+import org.springframework.lang.NonNull;
 import xyz.guqing.common.support.model.entity.system.OauthClientDetails;
+import xyz.guqing.violet.common.core.model.constant.StringConstant;
 import xyz.guqing.violet.common.core.model.support.OutputConverter;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * @author guqing
@@ -16,7 +22,7 @@ public class OauthClientDTO implements OutputConverter<OauthClientDTO, OauthClie
 
     private String scope;
 
-    private String authorizedGrantTypes;
+    private List<String> authorizedGrantTypes;
 
     private String webServerRedirectUri;
 
@@ -28,5 +34,18 @@ public class OauthClientDTO implements OutputConverter<OauthClientDTO, OauthClie
 
     private String additionalInformation;
 
-    private String autoapprove;
+    private Boolean autoapprove;
+
+    @Override
+    @NonNull
+    public <T extends OauthClientDTO> T convertFrom(@NonNull OauthClientDetails oauthClientDetails) {
+        BeanUtils.copyProperties(oauthClientDetails, this);
+        String authorizedGrantTypes = oauthClientDetails.getAuthorizedGrantTypes();
+        if(authorizedGrantTypes == null) {
+            authorizedGrantTypes = "";
+        }
+        this.authorizedGrantTypes = Arrays.asList(authorizedGrantTypes.split(StringConstant.COMMA));
+        this.autoapprove = Boolean.valueOf(oauthClientDetails.getAutoapprove());
+        return (T)this;
+    }
 }

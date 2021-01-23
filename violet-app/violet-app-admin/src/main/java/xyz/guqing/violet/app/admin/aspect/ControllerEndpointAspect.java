@@ -28,7 +28,8 @@ public class ControllerEndpointAspect extends AbstractAspectSupport {
 
     private final VioletActionLogService violetActionLogService;
 
-    @Pointcut("@annotation(xyz.guqing.violet.app.admin.model.annotation.ControllerEndpoint)")
+    @Pointcut("execution(* xyz.guqing.violet.app.admin.controller.*.*(..)) && " +
+            "@annotation(xyz.guqing.violet.app.admin.model.annotation.ControllerEndpoint)")
     public void pointcut() {
     }
 

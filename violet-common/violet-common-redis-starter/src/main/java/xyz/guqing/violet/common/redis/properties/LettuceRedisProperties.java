@@ -23,7 +23,7 @@ public class LettuceRedisProperties {
 
     @Override
     public String toString() {
-        return "FebsLettuceRedisProperties{" +
+        return "LettuceRedisProperties{" +
                 "enable=" + enable +
                 '}';
     }

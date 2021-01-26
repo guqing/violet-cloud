@@ -31,14 +31,6 @@ jobs:
 #       SERVER: ${{ secrets.SERVER_IP }}
 #       PASSWORD: ${{ secrets.PASSWORD }}
 #      run: bash ./scripts/deploy.sh $SERVER $PASSWORD
-    - name: Archive violet jar
-      run: |
-        mkdir target
-        cp violet-gateway/target/*.jar ./target
-        cp violet-auth/target/*.jar ./target
-        cp violet-app/violet-app-admin/target/*.jar ./target
-        pwd
-        ls target
 
   docker-build:
     runs-on: ubuntu-latest
@@ -63,11 +55,12 @@ jobs:
         name: Build and push gateway
         uses: docker/build-push-action@v2
         with:
-          context: ./violet-gateway/
+          context: violet-gateway
           file: ./violet-gateway/Dockerfile 
           platforms: linux/amd64,linux/arm64
           push: true
           tags: guqing/violet-gateway:latest
+          run: pwd
       -
         name: Build and push auth
         uses: docker/build-push-action@v2

@@ -37,4 +37,4 @@ jobs:
       env:
         DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
         DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
-      run: bash ./scripts/docker-build.sh
+      run: bash ./scripts/docker-build.sh $DOCKERHUB_USERNAME $DOCKERHUB_TOKEN latest

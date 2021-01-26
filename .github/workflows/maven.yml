@@ -33,9 +33,10 @@ jobs:
 #      run: bash ./scripts/deploy.sh $SERVER $PASSWORD
     - name: Archive violet jar
       run: |
-        cp ./violet-gateway/*.jar ./target
-        cp ./violet-auth/*.jar ./target
-        cp ./violet-app/violet-app-admin/*.jar ./target
+        mkdir target
+        violet-gateway/target/*.jar ./target
+        violet-auth/target/*.jar ./target
+        violet-app/violet-app-admin/target/*.jar ./target
 
   docker-build:
     runs-on: ubuntu-latest

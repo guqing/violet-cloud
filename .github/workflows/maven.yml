@@ -63,8 +63,7 @@ jobs:
         name: Build and push gateway
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./violet-gateway/Dockerfile
+          context: ./violet-gateway/
           platforms: linux/amd64,linux/arm64
           push: true
           tags: guqing/violet-gateway:latest
@@ -72,8 +71,7 @@ jobs:
         name: Build and push auth
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./violet-auth/Dockerfile
+          context: ./violet-auth
           platforms: linux/amd64,linux/arm64
           push: true
           tags: guqing/violet-auth:latest
@@ -81,8 +79,7 @@ jobs:
         name: Build and push app admin
         uses: docker/build-push-action@v2
         with:
-          context: .
-          file: ./violet-app/violet-app-admin/Dockerfile
+          context: ./violet-app/violet-app-admin
           platforms: linux/amd64,linux/arm64
           push: true
           tags: guqing/violet-app-admin:latest

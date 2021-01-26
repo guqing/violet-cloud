@@ -1,13 +1,13 @@
 #!/bin/bash
-gateway_dir="../violet-gateway"
-auth_dir="../violet-auth"
-app_admin_dir="../violet-auth"
-
-#echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+image_version=${VERSION:latest}
+#echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
 # build violet-gateway
-docker build --build-arg JAR_FILE=${gateway_dir}/target/violet-gateway.jar -t guching/violet-gateway ${gateway_dir}
+docker build -f violet-gateway/Dockerfile  -t "$DOCKERHUB_USERNAME"/violet-gateway:"$image_version" ./violet-gateway
+
 # build violet-auth
-docker build --build-arg JAR_FILE=${auth_dir}/target/violet-auth.jar -t guching/violet-auth ${auth_dir}
+docker build -f violet-auth/Dockerfile  -t "$DOCKERHUB_USERNAME"/violet-auth:"$image_version" ./violet-auth
+
 #build violet-app-admin
-docker build --build-arg JAR_FILE=${app_admin_dir}/target/violet-app-admin.jar -t guching/violet-app-admin ${app_admin_dir}
-docker images
+violet_app_admin="violet-app/violet-app-admin"
+docker build -f $violet_app_admin/Dockerfile -t "$DOCKERHUB_USERNAME"/violet-app-admin:"$image_version" $violet_app_admin
+

@@ -64,7 +64,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./violet-gateway/
-          file: ./Dockerfile 
+          file: ./violet-gateway/Dockerfile 
           platforms: linux/amd64,linux/arm64
           push: true
           tags: guqing/violet-gateway:latest
@@ -73,7 +73,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./violet-auth
-          file: ./Dockerfile
+          file: ./violet-auth/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: guqing/violet-auth:latest

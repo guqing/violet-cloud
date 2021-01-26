@@ -37,9 +37,6 @@ jobs:
     needs: build
     steps:
       -
-        name: Checkout
-        uses: actions/checkout@v2
-      -
         name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       -
@@ -60,7 +57,6 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: guqing/violet-gateway:latest
-          run: pwd
       -
         name: Build and push auth
         uses: docker/build-push-action@v2

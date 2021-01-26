@@ -55,8 +55,10 @@ jobs:
         name: Build and push gateway
         uses: docker/build-push-action@v2
         with:
-          context: ./violet-gateway/
-          file: ./Dockerfile
+          context: .
+          build-args: 
+            JAR_FILE=./violet-gateway/target/violet-gateway.jar
+          file: ./violet-gateway/Dockerfile
           platforms: linux/amd64,linux/arm64
           push: true
           tags: guqing/violet-gateway:latest

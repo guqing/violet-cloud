@@ -1,29 +1,9 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : localhost
- Source Server Type    : MongoDB
- Source Server Version : 40202
- Source Host           : localhost:27017
- Source Schema         : violet_cloud_route
-
- Target Server Type    : MongoDB
- Target Server Version : 40202
- File Encoding         : 65001
-
- Date: 17/07/2020 19:22:28
-*/
-
-
 // ----------------------------
-// Collection structure for blackList
+// 黑名单管理
 // ----------------------------
 db.getCollection("blackList").drop();
 db.createCollection("blackList");
 
-// ----------------------------
-// Documents of blackList
-// ----------------------------
 db.getCollection("blackList").insert([ {
     _id: ObjectId("5e1425e7a548e77106e43b40"),
     ip: "",
@@ -38,26 +18,23 @@ db.getCollection("blackList").insert([ {
 } ]);
 
 // ----------------------------
-// Collection structure for blockLog
+// 拦截日志
 // ----------------------------
 db.getCollection("blockLog").drop();
 db.createCollection("blockLog");
 
 // ----------------------------
-// Collection structure for rateLimitLog
+// 限流日志
 // ----------------------------
 db.getCollection("rateLimitLog").drop();
 db.createCollection("rateLimitLog");
 
 // ----------------------------
-// Collection structure for rateLimitRule
+// 限流规则
 // ----------------------------
 db.getCollection("rateLimitRule").drop();
 db.createCollection("rateLimitRule");
 
-// ----------------------------
-// Documents of rateLimitRule
-// ----------------------------
 db.getCollection("rateLimitRule").insert([ {
     _id: ObjectId("5e1abc9ef51708123d94b1f8"),
     requestUri: "/auth/captcha",
@@ -72,19 +49,19 @@ db.getCollection("rateLimitRule").insert([ {
 } ]);
 
 // ----------------------------
-// Collection structure for routeLog
+// 访问日志
 // ----------------------------
 db.getCollection("routeLog").drop();
 db.createCollection("routeLog");
 
 // ----------------------------
-// Collection structure for routeUser
+// 网关用户
 // ----------------------------
 db.getCollection("routeUser").drop();
 db.createCollection("routeUser");
 
 // ----------------------------
-// Documents of routeUser，password: 123456
+// 网关用户基础数据 password: 123456
 // ----------------------------
 db.getCollection("routeUser").insert([ {
     _id: ObjectId("5e1d2ee055165e6516c23057"),

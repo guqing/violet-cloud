@@ -34,9 +34,9 @@ jobs:
     - name: Archive violet jar
       run: |
         mkdir target
-        violet-gateway/target/*.jar ./target
-        violet-auth/target/*.jar ./target
-        violet-app/violet-app-admin/target/*.jar ./target
+        cp violet-gateway/target/*.jar target
+        cp violet-auth/target/*.jar target
+        cp violet-app/violet-app-admin/target/*.jar target
 
   docker-build:
     runs-on: ubuntu-latest

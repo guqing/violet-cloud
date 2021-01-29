@@ -28,9 +28,6 @@ public class VioletAuthenticationSuccessHandler extends SavedRequestAwareAuthent
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-        response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
-        response.setContentType("application/json;charset=utf-8");
-
         SavedRequest savedRequest = requestCache.getRequest(request, response);
         HttpSession session = request.getSession(false);
         if (session != null) {
@@ -39,6 +36,8 @@ public class VioletAuthenticationSuccessHandler extends SavedRequestAwareAuthent
         }
 
         if (isAjaxRequest(request)) {
+            response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
+            response.setContentType("application/json;charset=utf-8");
             if (savedRequest == null) {
                 ResultEntity<String> resultEntity = ResultEntity.accessDenied("请通过授权码模式跳转到该页面");
                 response.getWriter().write(JSONObject.toJSONString(resultEntity));

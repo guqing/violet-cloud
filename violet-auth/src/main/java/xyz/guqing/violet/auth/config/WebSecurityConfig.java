@@ -30,13 +30,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin()
+        http.authorizeRequests()
+                .antMatchers(EndpointConstant.OAUTH_ALL, EndpointConstant.LOGIN).authenticated()
+                .and()
+                .formLogin()
                 .successHandler(authenticationSuccessHandler)
                 .failureHandler(authenticationFailureHandler)
-                .and()
-                .authorizeRequests()
-                .antMatchers(EndpointConstant.OAUTH_ALL).permitAll();
+                .permitAll()
+                .and().csrf().disable()
+                .httpBasic().disable();
     }
-
 
 }

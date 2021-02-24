@@ -9,6 +9,7 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Component;
 import xyz.guqing.violet.common.core.model.support.ResultEntity;
+import xyz.guqing.violet.common.core.utils.VioletUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +36,7 @@ public class VioletAuthenticationSuccessHandler extends SavedRequestAwareAuthent
             log.info("跳转到登录页的地址为: {}", attribute);
         }
 
-        if (isAjaxRequest(request)) {
+        if (VioletUtil.isAjaxRequest(request)) {
             response.setCharacterEncoding(StandardCharsets.UTF_8.toString());
             response.setContentType("application/json;charset=utf-8");
             if (savedRequest == null) {
@@ -55,8 +56,4 @@ public class VioletAuthenticationSuccessHandler extends SavedRequestAwareAuthent
         }
     }
 
-    private static boolean isAjaxRequest(HttpServletRequest request) {
-        return (request.getHeader("X-Requested-With") != null
-                && "XMLHttpRequest".equals(request.getHeader("X-Requested-With")));
-    }
 }

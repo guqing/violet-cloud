@@ -17,7 +17,6 @@ import xyz.guqing.violet.common.core.utils.VioletSecurityHelper;
  */
 @Slf4j
 @RestController
-@RequestMapping("/oauth")
 public class OauthController {
     private final UserService userService;
 
@@ -26,13 +25,13 @@ public class OauthController {
         this.userService = userService;
     }
 
-    @GetMapping("/login/page")
+    @GetMapping("/login")
     public ModelAndView login(ModelAndView modelAndView) {
         modelAndView.setViewName("login");
         return modelAndView;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/oauth/user")
     public ResultEntity<UserInfoDTO> getUserInfo() {
         String username = VioletSecurityHelper.getCurrentUsername();
         return ResultEntity.ok(userService.getUserInfo(username));

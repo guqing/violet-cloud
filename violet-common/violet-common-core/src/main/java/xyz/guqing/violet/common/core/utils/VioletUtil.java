@@ -261,4 +261,9 @@ public class VioletUtil {
         }
         return map;
     }
+
+    public static boolean isAjaxRequest(HttpServletRequest request) {
+        return (request.getHeader("X-Requested-With") != null
+                && "XMLHttpRequest".equals(request.getHeader("X-Requested-With")));
+    }
 }

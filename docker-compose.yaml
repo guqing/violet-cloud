@@ -67,18 +67,18 @@ services:
       - nacos
 #    restart: on-failure
 
-  violet-app-admin:
-    build: ./violet-app/violet-app-admin
-    container_name: violet-app-admin
-    environment:
-      - "TZ=Asia/Shanghai"
-      - "NACOS_URL=nacos"
-      - "MYSQL_URL=mysql"
-      - "REDIS_URL=redis"
-    ports:
-      - "8201:8201"
-    depends_on:
-      - nacos
+#  violet-app-admin:
+#    build: ./violet-app/violet-app-admin
+#    container_name: violet-app-admin
+#    environment:
+#      - "TZ=Asia/Shanghai"
+#      - "NACOS_URL=nacos"
+#      - "MYSQL_URL=mysql"
+#      - "REDIS_URL=redis"
+#    ports:
+#      - "8201:8201"
+#    depends_on:
+#      - nacos
 #    restart: on-failure
 
   violet-gateway:

@@ -27,7 +27,7 @@ CREATE TABLE `config_info`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8
   COLLATE = utf8_bin COMMENT ='config_info';
-INSERT INTO violet_nacos.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema) VALUES (1, 'violet-gateway', 'DEFAULT_GROUP', 'server:
+INSERT INTO config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema) VALUES (1, 'violet-gateway', 'DEFAULT_GROUP', 'server:
   port: 8301
 spring:
   cloud:
@@ -141,7 +141,7 @@ logging:
     xyz.guqing.violet.gateway: debug
 
 ', '1a68c652131cea6ceafa0c6981ee6380', '2020-10-31 15:52:43', '2021-01-10 08:22:31', null, '172.20.0.1', '', '', '', '', '', 'yaml', '');
-INSERT INTO violet_nacos.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema) VALUES (2, 'violet-auth', 'DEFAULT_GROUP', 'server:
+INSERT INTO config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema) VALUES (2, 'violet-auth', 'DEFAULT_GROUP', 'server:
   port: 8101
 spring:
   datasource:
@@ -248,7 +248,7 @@ security:
       jwt:
         key-uri:  http://127.0.0.1:8301/auth/oauth/token_key
         key-value: violet', '370822274b1002cbcf6cef19e7b13c22', '2020-10-31 15:52:43', '2020-10-31 15:58:34', null, '0:0:0:0:0:0:0:1', '', '', '', '', '', 'yaml', '');
-INSERT INTO violet_nacos.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema) VALUES (3, 'violet-app-admin', 'DEFAULT_GROUP', 'server:
+INSERT INTO config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema) VALUES (3, 'violet-app-admin', 'DEFAULT_GROUP', 'server:
   port: 8201
 spring:
   aop:
@@ -333,7 +333,7 @@ mybatis-plus:
 logging:
   level:
     xyz.guqing.violet.app.admin: debug', '8223ca023d218e65ed12496ca6fd0ad8', '2020-10-31 15:52:43', '2020-10-31 16:01:28', null, '0:0:0:0:0:0:0:1', '', '', '', '', '', 'yaml', '');
-INSERT INTO violet_nacos.config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema) VALUES (4, 'violet-app-test', 'DEFAULT_GROUP', 'server:
+INSERT INTO config_info (id, data_id, group_id, content, md5, gmt_create, gmt_modified, src_user, src_ip, app_name, tenant_id, c_desc, c_use, effect, type, c_schema) VALUES (4, 'violet-app-test', 'DEFAULT_GROUP', 'server:
   port: 8202
 violet:
   cloud:

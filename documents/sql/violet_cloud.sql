@@ -26,7 +26,7 @@ create index user_username_idx
     on user (username);
 
 -- 用户表数据
-INSERT INTO user (id, username, password, nickname, group_id, email, mobile, gender, is_tab, theme, avatar, description, last_login_time, status, deleted, create_time, modify_time) VALUES (1, 'guqing', '$2a$10$x5ukrWFGEz1Wu4TzqJFh8espSkNXcYVpvsko44zJHSJeoJC2A/zvm', '聽見下雨的聲音', 1, '14845636141@qq.com', '12345678901', 0, 0, null, 'https://violet-cloud.oss-cn-hangzhou.aliyuncs.com/8e80f601-4001-4d6f-846f-ca0938c76bf8', '毕生所求无它，爱与自由而已', '2020-10-31 22:31:43', 0, 0, '2020-05-25 18:06:52', '2020-05-25 18:06:52');
+INSERT INTO user (id, username, password, nickname, group_id, email, mobile, gender, avatar, description, last_login_time, status, deleted, create_time, modify_time) VALUES (1, 'guqing', '$2a$10$x5ukrWFGEz1Wu4TzqJFh8espSkNXcYVpvsko44zJHSJeoJC2A/zvm', '聽見下雨的聲音', 1, '14845636141@qq.com', '12345678901', 0,  'https://violet-cloud.oss-cn-hangzhou.aliyuncs.com/8e80f601-4001-4d6f-846f-ca0938c76bf8', '毕生所求无它，爱与自由而已', '2020-10-31 22:31:43', 0, 0, '2020-05-25 18:06:52', '2020-05-25 18:06:52');
 
 -- 用户社交关系账号表
 create table user_connection

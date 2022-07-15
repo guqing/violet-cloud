@@ -15,7 +15,7 @@
     <description>兼容S3 协议的通用文件存储起动器</description>
 
     <properties>
-        <aws.version>1.11.820</aws.version>
+        <aws.version>1.12.261</aws.version>
         <mica.auto.version>1.2.3</mica.auto.version>
         <spring.checkstyle.plugin>0.0.23</spring.checkstyle.plugin>
     </properties>
